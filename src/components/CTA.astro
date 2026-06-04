@@ -1,0 +1,36 @@
+---
+// src/components/CTA.astro
+// The "Ready to Book?" contact block that closes most pages. Structure
+// and classes are verbatim from the legacy markup; only the sub-tagline
+// differs per page, so it is a prop. NAP/booking come from business.ts.
+import { BUSINESS } from '../data/business.ts';
+
+interface Props {
+  heading?: string;
+  /** Per-page benefits line, e.g. "Weekly rates from $588 · Free hot breakfast · …" */
+  tagline: string;
+}
+const { heading = 'Ready to Book?', tagline } = Astro.props;
+---
+
+<div class="cta-contact">
+  <h2>{heading}</h2>
+  <p>{tagline}</p>
+  <div class="contact-options">
+    <a href={`tel:${BUSINESS.phoneTel}`} class="contact-opt">
+      <span class="icon">📞</span>
+      <span class="lbl">Call Directly</span>
+      <span class="val">{BUSINESS.phoneDisplay}</span>
+    </a>
+    <a href={`mailto:${BUSINESS.email}`} class="contact-opt">
+      <span class="icon">✉️</span>
+      <span class="lbl">Email</span>
+      <span class="val">Send a Message</span>
+    </a>
+    <a href={BUSINESS.bookingUrl} target="_blank" class="contact-opt book">
+      <span class="icon">🔒</span>
+      <span class="lbl">Book Online</span>
+      <span class="val">Reserve Now</span>
+    </a>
+  </div>
+</div>

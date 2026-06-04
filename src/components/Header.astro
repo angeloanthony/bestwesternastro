@@ -1,0 +1,55 @@
+---
+// src/components/Header.astro
+// Shared top navigation + mobile slide menu. Markup is lifted verbatim
+// from the legacy pages. The only legacy variation is on the home page,
+// where the logo links to "#" and the Home link carries .nav-active;
+// subpages link the logo and Home to index.html. The isHome prop
+// reproduces that exactly.
+import { BUSINESS } from '../data/business.ts';
+
+interface Props {
+  isHome?: boolean;
+}
+const { isHome = false } = Astro.props;
+
+const logoHref = isHome ? '#' : '/';
+const homeClass = isHome ? 'nav-drop-trigger nav-active' : 'nav-drop-trigger';
+---
+
+<nav id="nav">
+  <a class="nav-logo" href={logoHref}>
+    <!-- TODO: Replace image asset -->
+    <img src="images/logo.webp" alt="Best Western Vernal Inn" class="nav-logo-img" />
+    Best Western · Vernal
+  </a>
+  <ul class="nav-links">
+    <li class="nav-drop-wrap">
+      <a href="/" class={homeClass}>Home ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="/#rooms">🛏️ Rooms</a></li>
+        <li><a href="/#gallery">🖼️ Gallery</a></li>
+        <li><a href="/#amenities">✨ Amenities</a></li>
+        <li><a href="/#location">📍 Location</a></li>
+      </ul>
+    </li>
+    <li><a href="explore.html">Explore Vernal</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="video.html">▶ Our Story</a></li>
+  </ul>
+  <a class="nav-phone" href={`tel:${BUSINESS.phoneTel}`}><strong>Book Directly</strong>📞 {BUSINESS.phoneDisplay}</a>
+  <a class="nav-cta" href={BUSINESS.bookingUrl} target="_blank">Book Now</a>
+  <button class="burger" id="burger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mmenu" id="mm">
+  <a href="/" onclick="cm()">Home</a>
+  <a href="/#rooms" onclick="cm()">Rooms</a>
+  <a href="explore.html" onclick="cm()">Explore Vernal</a>
+  <a href="things-to-do-vernal-utah.html" onclick="cm()">Things to Do</a>
+  <a href="faq.html" style="color:var(--gold)">FAQ</a>
+  <a href="video.html" style="color:var(--gold)">▶ Our Story</a>
+  <a href={BUSINESS.bookingUrl} target="_blank" style="color:var(--gold)">Book Now →</a>
+  <a href={`tel:${BUSINESS.phoneTel}`} style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 {BUSINESS.phoneDisplay}</a>
+</div>

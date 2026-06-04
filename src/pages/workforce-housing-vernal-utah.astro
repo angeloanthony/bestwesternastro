@@ -1,0 +1,173 @@
+---
+// src/pages/workforce-housing-vernal-utah.astro
+// MIGRATION of /workforce-housing-vernal-utah.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+   {"@type":"Question","name":"Do you offer workforce housing rates?","acceptedAnswer":{"@type":"Answer","text":"Yes. Weekly rates start at $588 for a Standard Queen and $660 for a Double Queen. Monthly rates are available by phone. Rates are designed to align with GSA per diem for Uintah County."}},
+    {"@type":"Question","name":"How close is the hotel to Vernal Airport?","acceptedAnswer":{"@type":"Answer","text":"0.6 miles from the Vernal Regional Airport terminal — the closest hotel to VEL."}},
+    {"@type":"Question","name":"Can you accommodate crew groups?","acceptedAnswer":{"@type":"Answer","text":"Yes. Call (435) 789-6625 for group rates on 3+ rooms. We can block adjacent rooms to keep crews together."}},
+    {"@type":"Question","name":"Do rooms have kitchens?","acceptedAnswer":{"@type":"Answer","text":"Select rooms have full kitchenettes with a refrigerator, microwave, stovetop, and basic cookware. Specify when booking."}},
+    {"@type":"Question","name":"Is there parking for work trucks and trailers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free parking for all vehicles including oversized trucks, trailers, and fleet vehicles."}}
+  ]
+ }
+ </script>`;
+const bodyContent = `<section class="page-hero">
+ <div class="page-hero-cnt">
+ <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">Workforce Housing — Uintah Basin Crews Welcome</p>
+ <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Workforce Housing<br>in Vernal, Utah</h1>
+ <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Best Western Vernal Inn provides reliable workforce housing for oilfield crews, pipeline contractors, construction teams, and government personnel working in the Uintah Basin. Weekly rates from $588, kitchenettes, free breakfast, and the closest location to Vernal Regional Airport at just 0.6 miles.</p>
+ <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">Book Your Stay</a>
+  <a href="tel:4357896625" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+ </div>
+ </div>
+</section>
+<div class="distance-bar">👷 WEEKLY FROM $588 · 0.6 MI FROM AIRPORT · KITCHENETTES · CREW-READY</div>
+<div class="content-wrap">
+<div class="intro-pull"><strong>The Uintah Basin runs on workers who need a reliable place to stay.</strong> Best Western Vernal Inn is built for exactly that — weekly and monthly rates that fit per diem budgets, kitchenettes so crews can cook instead of eating out every meal, free hot breakfast every morning before shift, and a location just 0.6 miles from Vernal Regional Airport for easy crew rotations. We've hosted oilfield teams, pipeline contractors, BLM surveyors, and utility crews for years. The rooms are clean, the rates are fair, and the front desk knows how shift work operates.</div>
+<div class="content-section">
+ <h2>Why Crews Choose Best Western Vernal Inn</h2>
+<p>Workforce housing in Vernal usually means one of two options: a bare-bones motel with no kitchen and no breakfast, or an overpriced chain that doesn't understand per diem budgets. Best Western Vernal Inn sits in the middle — full-service rooms with kitchenettes, free hot breakfast, and weekly rates starting at $588 that align with GSA per diem guidelines for Uintah County. We're 0.6 miles from the airport for crew rotations, and we have the parking to handle work trucks, trailers, and company vehicles.</p>
+<ul class="feat-list">
+ <li>Weekly rates from $588 — fits GSA per diem budgets</li>
+ <li>Monthly rates available — call (435) 789-6625</li>
+ <li>0.6 miles from Vernal Regional Airport (VEL)</li>
+ <li>Full kitchenettes — cook real meals, save per diem</li>
+ <li>Free hot breakfast daily starting at 6 AM</li>
+ <li>Free parking for work trucks, trailers, and fleet vehicles</li>
+ <li>Free on-site laundry — no trips across town</li>
+ <li>24-hour front desk — shift-friendly check-in/check-out</li>
+ <li>Pet friendly — for workers who travel with dogs</li>
+</ul>
+</div>
+<div class="content-section">
+ <h2>Industries We Serve</h2>
+<p>The Uintah Basin's economy is driven by energy, infrastructure, and public land management. Our extended-stay guests reflect that — the same industries that keep Vernal working are the ones that fill our rooms week after week. We understand rotating schedules, early morning departures, late-night arrivals, and the need for a room that's more than just a bed.</p>
+<ul class="feat-list">
+ <li>Oil and gas — drilling, completion, and production crews</li>
+ <li>Pipeline construction and maintenance teams</li>
+ <li>Utility and power line contractors</li>
+ <li>BLM, Forest Service, and government field staff</li>
+ <li>Road construction and heavy equipment operators</li>
+ <li>Traveling healthcare workers at Ashley Regional Medical Center</li>
+ <li>Environmental and geological survey teams</li>
+</ul>
+</div>
+<div class="pro-tip"><p><strong>Crew Booking Tip:</strong> For groups of 3+ rooms or stays of 14+ nights, call (435) 789-6625 directly. We offer group and bulk pricing that isn't available through online booking platforms, and we can block rooms to keep your crew together.</p></div>
+<div class="content-section">
+ <h2>Frequently Asked Questions</h2>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do you offer workforce housing rates?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Weekly rates start at $588 for a Standard Queen and $660 for a Double Queen. Monthly rates are available by phone. Rates are designed to align with GSA per diem for Uintah County.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How close is the hotel to Vernal Airport?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">0.6 miles from the Vernal Regional Airport terminal — the closest hotel to VEL.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Can you accommodate crew groups?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Call (435) 789-6625 for group rates on 3+ rooms. We can block adjacent rooms to keep crews together.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do rooms have kitchens?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Select rooms have full kitchenettes with a refrigerator, microwave, stovetop, and basic cookware. Specify when booking.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is there parking for work trucks and trailers?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Free parking for all vehicles including oversized trucks, trailers, and fleet vehicles.</p>
+ </details>
+</div>
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+</div>
+<div class="cta-contact">
+ <h2>Ready to Book?</h2>
+ <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
+ <div class="contact-options">
+  <a href="tel:4357896625" class="contact-opt">
+   <span class="icon">📞</span>
+   <span class="lbl">Call Directly</span>
+   <span class="val">(435) 789-6625</span>
+  </a>
+  <a href="mailto:surestayplus53027@gmail.com" class="contact-opt">
+   <span class="icon">✉️</span>
+   <span class="lbl">Email</span>
+   <span class="val">Send a Message</span>
+  </a>
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book">
+   <span class="icon">🔒</span>
+   <span class="lbl">Book Online</span>
+   <span class="val">Reserve Now</span>
+  </a>
+ </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Workforce Housing in Vernal, Utah | Best Western Vernal Inn — Weekly from $588`
+  description=`Best Western Vernal Inn — workforce housing for Vernal and the Uintah Basin. Weekly from $588, monthly available. Kitchenettes, free breakfast, 0.6 miles from VEL airport. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/workforce-housing-vernal-utah`
+  ogTitle=`Workforce Housing in Vernal, Utah | Best Western Vernal Inn — Weekly from $588`
+  ogDescription=`Best Western Vernal Inn — workforce housing for Vernal and the Uintah Basin. Weekly from $588, monthly available. Kitchenettes, free breakfast, 0.6 miles from VEL airport. Call (435) 789-6625.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Workforce Housing in Vernal, Utah | Best Western Vernal Inn — Weekly from $588`
+  twitterDescription=`Best Western Vernal Inn — workforce housing for Vernal and the Uintah Basin. Weekly from $588, monthly available. Kitchenettes, free breakfast, 0.6 miles from VEL airport. Call (435) 789-6625.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

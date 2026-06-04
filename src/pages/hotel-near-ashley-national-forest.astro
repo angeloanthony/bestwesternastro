@@ -1,0 +1,166 @@
+---
+// src/pages/hotel-near-ashley-national-forest.astro
+// MIGRATION of /hotel-near-ashley-national-forest.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+   {"@type":"Question","name":"How close is the hotel to Ashley National Forest?","acceptedAnswer":{"@type":"Answer","text":"The forest boundary is approximately 15 miles north. Drive time to popular trailheads ranges from 20 minutes to about an hour depending on destination."}},
+    {"@type":"Question","name":"Is this a good hotel for hunters?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many fall guests are elk and deer hunters. We offer weekly rates from $588, early breakfast starting at 6 AM, free truck and trailer parking, and kitchenettes."}},
+    {"@type":"Question","name":"Can I park a horse trailer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free parking accommodates trucks, horse trailers, ATV trailers, and oversized vehicles."}},
+    {"@type":"Question","name":"Are dogs allowed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pet friendly with a small pet fee. Ground-floor rooms are available."}}
+  ]
+ }
+ </script>`;
+const bodyContent = `<section class="page-hero">
+ <div class="page-hero-cnt">
+ <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">Gateway to 1.3 Million Acres of Wilderness</p>
+ <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Hotel Near<br>Ashley National Forest</h1>
+ <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Ashley National Forest begins just 15 miles north of Vernal and stretches across 1.3 million acres of the Uinta Mountains. Best Western Vernal Inn is your last-stop basecamp — weekly rates from $588, free breakfast, and kitchenettes for packing trail food.</p>
+ <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">Book Your Stay</a>
+  <a href="tel:4357896625" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+ </div>
+ </div>
+</section>
+<div class="distance-bar">📍 FOREST BOUNDARY BEGINS APPROXIMATELY 15 MILES NORTH OF VERNAL</div>
+<div class="content-wrap">
+<div class="intro-pull"><strong>Ashley National Forest is in Vernal's backyard.</strong> The forest boundary starts approximately 15 miles north of Best Western Vernal Inn along Highway 191. Whether you're here for elk hunting season, backpacking the High Uintas, fly fishing mountain streams, or riding ATV trails through forest roads, our hotel is the last full-service lodging before you head into the backcountry. Stock up in town, sleep in a real bed, and hit the trailhead fresh. Rates start at $84/night, or $588 for a full week.</div>
+<div class="content-section">
+ <h2>Your Basecamp for the Uintas</h2>
+<p>From Best Western Vernal Inn, the Ashley National Forest boundary is approximately 15 miles north on Highway 191. From there, access roads lead to trailheads, campgrounds, fishing streams, and some of the most remote wilderness in the lower 48 — the High Uintas Wilderness Area, home to Kings Peak, Utah's highest point at 13,528 feet. Vernal is the last town with hotels, groceries, gas, and outfitters before you enter the forest.</p>
+<ul class="feat-list">
+ <li>~15 miles to the forest boundary via Hwy 191</li>
+ <li>Access to High Uintas Wilderness trailheads</li>
+ <li>Free hot breakfast — fuel up before trailhead drives</li>
+ <li>Kitchenettes — pack lunches and prep camp meals</li>
+ <li>Pet friendly — bring your hunting or hiking dog</li>
+ <li>Free parking for trucks, trailers, ATVs, and horse trailers</li>
+ <li>Weekly rates from $588 — ideal for hunting season</li>
+</ul>
+</div>
+<div class="content-section">
+ <h2>What Brings Guests to Ashley National Forest</h2>
+<p>Ashley National Forest draws visitors year-round. The biggest draws are fall hunting season — elk, mule deer, and moose tags bring thousands to the Uintah Basin every September and October — and summer backpacking in the High Uintas. The forest also offers hundreds of miles of ATV and OHV trails, mountain lake fishing for brook, brown, and cutthroat trout, and horseback pack trips into some of the most pristine alpine terrain in Utah.</p>
+<ul class="feat-list">
+ <li>Elk, mule deer, and moose hunting — fall season</li>
+ <li>High Uintas Wilderness backpacking</li>
+ <li>Kings Peak summit — Utah's highest point at 13,528 ft</li>
+ <li>Mountain lake fishing — brook, brown, cutthroat trout</li>
+ <li>ATV and OHV trail riding on forest roads</li>
+ <li>Horseback riding and pack trips</li>
+ <li>Snowmobiling and cross-country skiing in winter</li>
+</ul>
+</div>
+<div class="pro-tip"><p><strong>Pro Tip:</strong> During September and October elk season, Vernal hotels fill up fast. Book early and lock in a weekly rate — hunters who stay the full rifle season save hundreds at $588/week compared to nightly pricing, and our free breakfast means one less meal to worry about before dawn.</p></div>
+<div class="content-section">
+ <h2>Frequently Asked Questions</h2>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How close is the hotel to Ashley National Forest?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The forest boundary is approximately 15 miles north. Drive time to popular trailheads ranges from 20 minutes to about an hour depending on destination.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is this a good hotel for hunters?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Many fall guests are elk and deer hunters. We offer weekly rates from $588, early breakfast starting at 6 AM, free truck and trailer parking, and kitchenettes.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Can I park a horse trailer?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Free parking accommodates trucks, horse trailers, ATV trailers, and oversized vehicles.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Are dogs allowed?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Pet friendly with a small pet fee. Ground-floor rooms are available.</p>
+ </details>
+</div>
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+</div>
+<div class="cta-contact">
+ <h2>Ready to Book?</h2>
+ <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
+ <div class="contact-options">
+  <a href="tel:4357896625" class="contact-opt">
+   <span class="icon">📞</span>
+   <span class="lbl">Call Directly</span>
+   <span class="val">(435) 789-6625</span>
+  </a>
+  <a href="mailto:surestayplus53027@gmail.com" class="contact-opt">
+   <span class="icon">✉️</span>
+   <span class="lbl">Email</span>
+   <span class="val">Send a Message</span>
+  </a>
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book">
+   <span class="icon">🔒</span>
+   <span class="lbl">Book Online</span>
+   <span class="val">Reserve Now</span>
+  </a>
+ </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Hotel Near Ashley National Forest | Best Western Vernal Inn — From $84/Night`
+  description=`Best Western Vernal Inn — closest hotel to Ashley National Forest. Hiking, fishing, hunting base camp. 15 miles to the forest boundary. Weekly rates from $588, free breakfast. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/hotel-near-ashley-national-forest`
+  ogTitle=`Hotel Near Ashley National Forest | Best Western Vernal Inn — From $84/Night`
+  ogDescription=`Best Western Vernal Inn — closest hotel to Ashley National Forest. Hiking, fishing, hunting base camp. 15 miles to the forest boundary. Weekly rates from $588, free breakfast. Call (435) 789-6625.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Hotel Near Ashley National Forest | Best Western Vernal Inn — From $84/Night`
+  twitterDescription=`Best Western Vernal Inn — closest hotel to Ashley National Forest. Hiking, fishing, hunting base camp. 15 miles to the forest boundary. Weekly rates from $588, free breakfast. Call (435) 789-6625.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

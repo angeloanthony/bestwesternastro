@@ -1,0 +1,76 @@
+---
+// src/components/FAQ.astro
+// Renders the visible FAQ (<details>/<summary>) AND emits the matching
+// FAQPage JSON-LD from the SAME data array — so the structured data and
+// the on-page content can never disagree (runbook Part 2/3).
+//
+// Visual markup and inline styles are reproduced verbatim from the legacy
+// pages so the rendered output is byte-for-byte equivalent.
+//
+// Usage:
+//   <FAQ heading="Frequently Asked Questions" faqs={[{q:'…', a:'…'}, …]} />
+// To match legacy pages where the FAQPage JSON-LD lived in <head>, render
+// the schema into the layout's schema slot via the `schemaOnly` companion,
+// or place this whole component in the body (the schema script is valid in
+// body too). Most legacy pages had the script in <head>; for an exact match
+// pass the same faqs to <FAQSchema> in the schema slot and set
+// renderSchema={false} here. By default it renders both together.
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+interface Props {
+  faqs: FaqItem[];
+  heading?: string;
+  /** Set false if the FAQPage JSON-LD is emitted separately (e.g. in <head>). */
+  renderSchema?: boolean;
+  /** Wrap in the legacy .content-section container. */
+  wrap?: boolean;
+  /** Emit ONLY the JSON-LD (no visible markup) — use in the head schema slot. */
+  schemaOnly?: boolean;
+}
+const {
+  faqs,
+  heading = 'Frequently Asked Questions',
+  renderSchema = true,
+  wrap = true,
+  schemaOnly = false,
+} = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+{renderSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
+
+{!schemaOnly && (wrap ? (
+  <div class="content-section">
+    <h2>{heading}</h2>
+    {faqs.map((f) => (
+      <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+        <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">{f.q}</summary>
+        <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">{f.a}</p>
+      </details>
+    ))}
+  </div>
+) : (
+  <>
+    <h2>{heading}</h2>
+    {faqs.map((f) => (
+      <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+        <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">{f.q}</summary>
+        <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">{f.a}</p>
+      </details>
+    ))}
+  </>
+))}

@@ -1,0 +1,35 @@
+---
+// src/components/Footer.astro
+// Shared site footer. Links and structure are verbatim from the legacy
+// pages; NAP + partner links come from the single source of truth so
+// they can never drift. The "Last updated" label varied per legacy page
+// (Feb 2026 on home, April 2026 on subpages) and is passed in.
+import { BUSINESS } from '../data/business.ts';
+
+interface Props {
+  lastUpdated?: string;
+}
+const { lastUpdated = BUSINESS.lastUpdated } = Astro.props;
+---
+
+<footer>
+  <div class="flogo">Best Western Vernal Inn · Vernal, Utah</div>
+  <div class="flinks">
+    <a href="/">Home</a>
+    <a href="explore.html">Explore Vernal</a>
+    <a href="things-to-do-vernal-utah.html">Things to Do</a>
+    <a href="extended-stay-hotel-vernal-utah.html">Extended Stay</a>
+    <a href="pet-friendly-hotel-vernal-utah.html">Pet Friendly</a>
+    <a href="weekly-hotel-rates-vernal-utah.html">Weekly Rates</a>
+    <a href="faq.html">FAQ</a>
+    <a href="video.html">Our Story</a>
+    <a href={BUSINESS.bookingUrl} target="_blank">Book Now by Calling</a>
+  </div>
+  <p>{BUSINESS.address.full} &nbsp;|&nbsp; <a href={`tel:${BUSINESS.phoneTel}`}>{BUSINESS.phoneDisplay}</a></p>
+  <p style="margin-top:10px;font-size:.85rem;opacity:.75">
+    © 2026 Best Western Vernal Inn. All rights reserved. &nbsp;|&nbsp;
+    Proudly managed in partnership with <a href={BUSINESS.partners.management.url} target="_blank" style="color:var(--gold);text-decoration:none;">{BUSINESS.partners.management.name}</a>
+    &nbsp;|&nbsp; Powered by <a href={BUSINESS.partners.poweredBy.url} target="_blank" style="color:var(--gold);text-decoration:none;">{BUSINESS.partners.poweredBy.name}</a>
+    &nbsp;|&nbsp; <span>Last updated: {lastUpdated}</span>
+  </p>
+</footer>

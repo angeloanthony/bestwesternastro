@@ -1,0 +1,25 @@
+---
+// src/components/SummaryBlock.astro
+// A consistent, AI-pullable summary block (runbook Part 9 — the TL;DR
+// that AI Overviews cite). The legacy pages used an ".intro-pull" lead
+// paragraph for the same purpose; this component reproduces that pattern
+// so existing pages keep their exact intro while new pages get a uniform
+// summary slot. Pass the existing intro text verbatim.
+//
+// Usage (preserving a legacy intro-pull):
+//   <SummaryBlock>
+//     <strong>Your dog is part of the trip.</strong> Best Western Vernal Inn …
+//   </SummaryBlock>
+
+interface Props {
+  /** Optional plain-text summary; if omitted, the default slot is used. */
+  text?: string;
+  /** CSS class for the wrapper — legacy lead paragraph is "intro-pull". */
+  variant?: string;
+}
+const { text, variant = 'intro-pull' } = Astro.props;
+---
+
+<div class={variant}>
+  {text ? <Fragment set:html={text} /> : <slot />}
+</div>

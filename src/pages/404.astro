@@ -1,0 +1,58 @@
+---
+// src/pages/404.astro
+// MIGRATION of /404.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = undefined;
+const bodyContent = `<!-- ── Navigation ── -->
+  
+
+  <!-- ── Hero ── -->
+  <section class="page-hero">
+    <div class="page-hero-cnt">
+      <p class="eyebrow">404 Error</p>
+      <h1 class="htitle">Page Not <em>Found</em></h1>
+      <p class="hsub">Sorry, that page doesn't exist or may have moved. Let's get you back on track.</p>
+      <div class="hbtns">
+        <a href="/" class="btn-p">Back to Homepage</a>
+        <a href="/faq" class="btn-s">Visit FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Perks Bar ── -->
+  <div class="pbar">
+    <div class="pi"><span class="ic">🏨</span><div><div class="label">Extended Stay</div><div class="sub">Weekly &amp; Monthly Rates</div></div></div>
+    <div class="pi"><span class="ic">🐾</span><div><div class="label">Pet Friendly</div><div class="sub">Dogs Welcome</div></div></div>
+    <div class="pi"><span class="ic">📍</span><div><div class="label">Vernal, Utah</div><div class="sub">Near Dinosaur National Monument</div></div></div>
+    <div class="pi"><span class="ic">📞</span><div><div class="label">(435) 781-3883</div><div class="sub">Call Anytime</div></div></div>
+  </div>
+
+  <!-- ── Footer ── -->
+  
+
+  <!-- ── Nav scroll behavior ── -->`;
+const pageScripts = `<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>`;
+---
+
+<BaseLayout
+  title=`Page Not Found | Best Western Vernal Inn`
+  description=``
+  canonical=`https://bestwesternvernalinn.com/404.html`
+  robots=`noindex, nofollow`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment set:html={bodyContent} />
+  <Fragment slot="scripts" set:html={pageScripts} />
+</BaseLayout>

@@ -1,0 +1,72 @@
+---
+// src/components/RelatedLinks.astro
+// The "Plan Your Stay" internal-linking mesh that appears near the foot
+// of the money/area pages. Structure and inline styles are reproduced
+// verbatim; the link groups are passed in so each page keeps its exact
+// set of cross-links (preserving the existing internal-link graph).
+//
+// Usage:
+//   <RelatedLinks
+//     groups={[
+//       { heading: 'By Stay Type', links: [
+//         { href:'extended-stay-hotel-vernal-utah.html', label:'Extended Stay', note:'— Weekly & monthly stays from $588' }, … ] },
+//       …
+//     ]}
+//   />
+
+interface LinkItem {
+  href: string;
+  label: string;
+  note?: string;
+}
+interface Group {
+  heading: string;
+  links: LinkItem[];
+}
+interface Props {
+  groups: Group[];
+  eyebrow?: string;
+  heading?: string;
+  intro?: string; // may contain inline HTML (e.g. a linked phrase)
+  backLabel?: string;
+  backHref?: string;
+}
+const {
+  groups,
+  eyebrow = '✦ Plan Your Stay',
+  heading = 'Find the Right Room for Your Trip',
+  intro = '',
+  backLabel = '← Back to Best Western Vernal Inn',
+  backHref = 'index.html',
+} = Astro.props;
+---
+
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+  <div style="max-width:1180px;margin:0 auto;">
+    <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">{eyebrow}</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">{heading}</h2>
+    {intro && (
+      <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;" set:html={intro} />
+    )}
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+      {groups.map((g) => (
+        <div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">{g.heading}</h3>
+          <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+            {g.links.map((l) => (
+              <li>
+                <a href={l.href} style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">{l.label}</a>
+                {l.note && <span style="color:var(--muted);font-size:.88em;"> {l.note}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div style="text-align:center;margin-top:2.6rem;">
+      <a href={backHref} style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">{backLabel}</a>
+    </div>
+  </div>
+</section>
+<!-- ===== /MESH ===== -->

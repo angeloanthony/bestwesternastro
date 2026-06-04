@@ -1,0 +1,279 @@
+---
+// src/pages/naples-utah-hotel.astro
+// MIGRATION of /naples-utah-hotel.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Best Western Extended Stay Vernal",
+    "url": "https://bestwesternvernalinn.com",
+    "telephone": "+14357896625",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "addressCountry": "US"
+    },
+    "description": "The closest full-service hotel to Naples, Utah. Best Western Vernal Inn is just minutes from Naples — offering hot breakfast, free Wi-Fi, pet-friendly rooms, and weekly and monthly extended stay rates.",
+    "priceRange": "$$",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Weekly Rates", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Truck Parking", "value": true }
+    ]
+  }
+  </script>`;
+const bodyContent = `<div class="page-hero">
+  <div class="page-hero-cnt">
+    <div class="eyebrow">📍 Naples, Utah · Uintah County</div>
+    <h1 class="htitle">Hotel Near<br><em>Naples, Utah</em></h1>
+    <p class="hsub">The closest full-service hotel to Naples, UT — just minutes away in neighboring Vernal. Hot breakfast, pet-friendly rooms, and weekly rates for every type of stay.</p>
+    <div class="hbtns">
+      <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="btn-p">Book Your Stay</a>
+      <a href="tel:4357896625" class="btn-s">📞 (435) 789-6625</a>
+    </div>
+  </div>
+</div>
+
+<div class="distance-bar">
+  📍 Best Western Vernal Inn — just minutes from Naples, Utah
+</div>
+
+<div class="pbar">
+  <div class="pi"><span class="ic">🏙️</span><div><div class="label">Minutes from Naples</div><div class="sub">Closest full-service hotel</div></div></div>
+  <div class="pi"><span class="ic">🍳</span><div><div class="label">Free Breakfast</div><div class="sub">Hot breakfast every morning</div></div></div>
+  <div class="pi"><span class="ic">🐶</span><div><div class="label">Pet Friendly</div><div class="sub">Dogs welcome</div></div></div>
+  <div class="pi"><span class="ic">📅</span><div><div class="label">Weekly &amp; Monthly</div><div class="sub">Extended stay rates</div></div></div>
+  <div class="pi"><span class="ic">🚛</span><div><div class="label">Truck Parking</div><div class="sub">Work vehicles welcome</div></div></div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="intro-pull rv">
+    Naples, Utah is a small city in Uintah County sitting directly adjacent to Vernal — they share a border and for most practical purposes operate as a single community. If you're visiting Naples, working in Naples, or passing through the area, <strong>Best Western Vernal Inn</strong> is your closest full-service lodging option, just a short drive away with full amenities, comfortable rooms, and rates for every length of stay.
+  </div>
+
+  <section class="content-section rv">
+    <h2>Naples and Vernal — Two Cities, One Community</h2>
+    <p>Naples (population ~6,000) and Vernal (population ~10,000) sit side by side in the Uintah Basin, separated by a city limit line that most residents and visitors barely notice. The two cities share US-40, the main commercial corridor, utility infrastructure, and the same access to the surrounding recreation areas and energy industry.</p>
+    <p>For hotel guests, the practical reality is simple: there is no full-service hotel in Naples itself. Best Western Vernal Inn is the closest quality lodging option, and the drive between the two cities is a matter of minutes.</p>
+    <div class="pro-tip">
+      <p><strong>Local note:</strong> If you're searching for a "Naples Utah hotel" and coming up short, that's why. Vernal is where the hotels are — and we're the closest and most complete option to the Naples area.</p>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Who Stays With Us From Naples</h2>
+    <div class="highlight-cards">
+      <div class="hcard">
+        <div class="hc-icon">🔧</div>
+        <strong>Contractors &amp; Tradespeople</strong>
+        <span>Workers on projects in Naples and surrounding Uintah County. Weekly rates, truck parking, and early breakfast before the job site.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">👨‍👩‍👧</div>
+        <strong>Visiting Families</strong>
+        <span>Family and friends coming to visit Naples residents. A comfortable, pet-friendly base just minutes from where you're spending your time.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">🏥</div>
+        <strong>Medical Visitors</strong>
+        <span>Patients and family members in the area for care at Ashley Regional or other Vernal-area medical facilities.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">🦕</div>
+        <strong>Adventure Travelers</strong>
+        <span>Using Naples as a launch point for Dinosaur National Monument, Flaming Gorge, and the surrounding canyon country.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">⛽</div>
+        <strong>Oilfield &amp; Energy Crews</strong>
+        <span>Workers on rotating assignments throughout Uintah County including the Naples area. Weekly and monthly crew rates available.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">🏛️</div>
+        <strong>Government &amp; Per Diem</strong>
+        <span>County, state, and federal employees on assignment in the Uintah Basin. Per diem friendly with itemized receipts provided.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>What You Get at Best Western Vernal</h2>
+    <p>A full-service hotel experience — not a budget motel or a bare-bones extended stay property. Every room includes the same complete amenity set whether you're here for one night or three months.</p>
+    <div class="included-box">
+      <h3>Included With Every Stay</h3>
+      <div class="included-grid">
+        <div class="inc-item">Hot breakfast daily</div>
+        <div class="inc-item">Free high-speed Wi-Fi</div>
+        <div class="inc-item">In-room microwave</div>
+        <div class="inc-item">In-room refrigerator</div>
+        <div class="inc-item">Flat-screen TV</div>
+        <div class="inc-item">Desk &amp; work area</div>
+        <div class="inc-item">On-site laundry</div>
+        <div class="inc-item">Truck &amp; trailer parking</div>
+        <div class="inc-item">Pet-friendly rooms available</div>
+        <div class="inc-item">Best Western Rewards points</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Explore the Area Around Naples &amp; Vernal</h2>
+    <p>The Naples–Vernal area is surrounded by some of the most striking outdoor recreation in the American West. Whether you're here for work or play, these destinations are all within easy reach.</p>
+    <div class="attraction-cards">
+      <div class="attr-card">
+        <strong>🦕 Dinosaur National Monument</strong>
+        <p>~20 minutes from Vernal. World-famous fossil quarry, canyon scenic drives, petroglyphs, and river corridors along the Green and Yampa Rivers.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🎣 Flaming Gorge</strong>
+        <p>~40 minutes. World-class fishing, boating, and the dramatic Red Canyon overlook above the reservoir. One of Utah's great scenic drives.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🏊 Red Fleet State Park</strong>
+        <p>~15 minutes. Swimming, kayaking, dinosaur trackway, and beautiful red-rock reservoir scenery just north of Vernal.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🏛️ Utah Field House</strong>
+        <p>Right in downtown Vernal. Natural history museum with full-scale dinosaur exhibits — great for families and a perfect rainy-day option.</p>
+      </div>
+      <div class="attr-card">
+        <strong>⛰️ Uinta Mountains</strong>
+        <p>~1 hour. The highest range in Utah, with high-alpine lakes, fishing, and wilderness hiking accessible from the Ashley National Forest trailheads.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🪨 Steinaker State Park</strong>
+        <p>~10 minutes north of Vernal. Water skiing, fishing, and camping on a quiet reservoir with easy access from US-191.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Weekly &amp; Monthly Rates for Naples-Area Guests</h2>
+    <p>If you're in the Naples–Vernal area for more than a few days, our extended stay rates make a real difference. Weekly and monthly pricing is available for all room types including pet-friendly rooms.</p>
+    <div class="rate-cards">
+      <div class="rate-card">
+        <div class="rate-icon">🌙</div>
+        <span class="rate-label">Nightly</span>
+        <p class="rate-desc">No commitment required. Full amenities included. Best for short visits, passing through, or weekend stays.</p>
+      </div>
+      <div class="rate-card featured">
+        <div class="rate-card-badge">Best Value</div>
+        <div class="rate-icon">📅</div>
+        <span class="rate-label">Weekly</span>
+        <p class="rate-desc">Substantial discount over nightly rates. The go-to option for contractors, project workers, and extended family visits.</p>
+      </div>
+      <div class="rate-card">
+        <div class="rate-icon">🏠</div>
+        <span class="rate-label">Monthly</span>
+        <p class="rate-desc">Our lowest per-night rate. For oilfield crews, long-term projects, and anyone on open-ended assignment in the basin.</p>
+      </div>
+    </div>
+    <div class="savings-tip">
+      <p><strong>Call for current rates:</strong> Weekly and monthly pricing varies by season and room type. Call or text us directly at <a href="tel:4357896625">(435) 789-6625</a> — extended stay rates are often not accurately listed on third-party booking sites.</p>
+    </div>
+  </section>
+
+</div><!-- /content-wrap -->
+
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+<div class="cta-contact">
+  <h2>Book Your Stay Near Naples, Utah</h2>
+  <p>Just minutes from Naples — call, text, or book online to lock in your room.</p>
+  <div class="contact-options">
+    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
+    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">(435) 789-6625</span></a>
+    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book"><span class="icon">🌐</span><span class="lbl">Book Online</span><span class="val">bestwesternvernalinn.com</span></a>
+  </div>
+</div>
+
+<div class="faq-page-sec" style="background:var(--soft)">
+  <div class="faq-categories content-wrap">
+    <div>
+      <div class="sh" style="padding:0 0 2rem">
+        <div class="tag">Common Questions</div>
+        <h2>Naples, Utah Hotel FAQ</h2>
+        <div class="gline"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q">Is there a hotel in Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Naples, Utah does not have a full-service hotel within its city limits. The closest hotel isBest Western Vernal Inn, located just minutes away in neighboring Vernal. The two cities share a border and are functionally a single community — the drive between them is brief.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How far is Best Western Vernal from Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Best Western Vernal Inn is just a few minutes' drive from Naples. The two cities are adjacent, sharing the US-40 corridor through the Uintah Basin.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is the Best Western Vernal pet friendly? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We have designated pet-friendly rooms for guests traveling with dogs and cats. Let us know you'll have a pet when you book or call ahead to confirm availability.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are there weekly hotel rates near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Vernal Inn offers weekly and monthly rates that are significantly lower than nightly pricing. Call us at <a href="tel:4357896625">(435) 789-6625</a> for current extended stay pricing.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is breakfast included at the hotel near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. A hot breakfast is included with every stay — nightly, weekly, or monthly.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is there truck parking near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Vernal Inn has on-site parking suitable for work trucks, trailers, and larger vehicles. A common need for contractors and energy workers in the Naples–Vernal area.</p></div></div>
+        <div class="faq-item"><button class="faq-q">What is Naples, Utah known for? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Naples is a residential city in Uintah County, sitting adjacent to Vernal in the northeastern Utah basin. The broader Naples–Vernal area is known as the gateway to Dinosaur National Monument and Flaming Gorge, and as a hub for the Uintah Basin oil and gas industry.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How far is Naples, Utah from Dinosaur National Monument? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Naples is approximately 20–25 minutes from the Utah entrance to Dinosaur National Monument. Staying at Best Western Vernal puts you in a very similar position — a short drive from the monument's Quarry Visitor Center.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Can I book rooms for a work crew near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We regularly accommodate oilfield workers, construction crews, and contractors working in the Naples–Vernal area. Corporate billing and weekly rates are available. Call us to discuss your crew's needs.</p></div></div>
+        <div class="faq-item"><button class="faq-q">What is the zip code for Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Naples, Utah zip code is 84078. It is located in Uintah County, directly adjacent to Vernal (84078 and 84078 share the same zip code — Naples and Vernal both fall under 84078).</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Hotel Near Naples, Utah | Best Western Vernal Inn`
+  description=`Looking for a hotel near Naples, Utah? Best Western Extended Stay Vernal is just minutes away — the closest full-service hotel to Naples, UT. Pet friendly, weekly rates, free breakfast. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/naples-utah-hotel`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

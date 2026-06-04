@@ -1,0 +1,1179 @@
+---
+// src/pages/index.astro
+// MIGRATION of /index.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": ["Hotel", "LodgingBusiness"],
+ "name": "Best Western Vernal Inn",
+ "description": "Newly transformed Best Western Inn in Vernal, Utah. Weekly rates from $588 (7 nights). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.",
+ "url": "https://bestwesternvernalinn.com",
+ "telephone": "+14357896625",
+ "email": "surestayplus53027@gmail.com",
+ "address": {
+ "@type": "PostalAddress",
+ "streetAddress": "1935 South 1500 East",
+ "addressLocality": "Vernal",
+ "addressRegion": "UT",
+ "postalCode": "84078",
+ "addressCountry": "US"
+ },
+ "geo": {
+ "@type": "GeoCoordinates",
+ "latitude": 40.4474,
+ "longitude": -109.5194
+ },
+ "checkinTime": "15:00",
+ "checkoutTime": "11:00",
+ "petsAllowed": true,
+ "priceRange": "$$",
+ "currenciesAccepted": "USD",
+ "paymentAccepted": "Cash, Credit Card",
+ "openingHours": "Mo-Su 00:00-23:59",
+ "image": [
+ "https://bestwesternvernalinn.com/images/35.webp",
+ "https://bestwesternvernalinn.com/images/61.webp",
+ "https://bestwesternvernalinn.com/images/59.webp"
+ ],
+ "amenityFeature": [
+ { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Kitchenette", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Jacuzzi Suite", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "24-Hour Front Desk", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Laundry Service", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "Business Center", "value": true },
+ { "@type": "LocationFeatureSpecification", "name": "ADA Accessible Rooms", "value": true }
+ ],
+ "numberOfRooms": "50",
+ "starRating": {
+ "@type": "Rating",
+ "ratingValue": "3"
+ },
+ "brand": {
+ "@type": "Brand",
+ "name": "Best Western"
+ },
+ "aggregateRating": {
+ "@type": "AggregateRating",
+ "ratingValue": "4.5",
+ "reviewCount": "47",
+ "bestRating": "5",
+ "worstRating": "1"
+ },
+ "makesOffer": [
+ {
+ "@type": "Offer",
+ "name": "Weekly Extended Stay — Standard Queen",
+ "itemOffered": {
+ "@type": "Service",
+ "name": "Standard Queen Room — 7-Night Extended Stay",
+ "description": "Standard Queen room with free hot breakfast, free WiFi, free parking. Perfect for solo travelers and couples."
+ },
+ "priceSpecification": {
+ "@type": "UnitPriceSpecification",
+ "price": 588,
+ "priceCurrency": "USD",
+ "unitCode": "WEE"
+ },
+ "availability": "https://schema.org/InStock",
+ "url": "https://www.theworld24.com/booking/executiveinnsuites.php"
+ },
+ {
+ "@type": "Offer",
+ "name": "Weekly Extended Stay — Double Queen",
+ "itemOffered": {
+ "@type": "Service",
+ "name": "Double Queen Room — 7-Night Extended Stay",
+ "description": "Double Queen room with two beds, free hot breakfast, free WiFi, free parking. Ideal for families and groups."
+ },
+ "priceSpecification": {
+ "@type": "UnitPriceSpecification",
+ "price": 660,
+ "priceCurrency": "USD",
+ "unitCode": "WEE"
+ },
+ "availability": "https://schema.org/InStock",
+ "url": "https://www.theworld24.com/booking/executiveinnsuites.php"
+ },
+ {
+ "@type": "Offer",
+ "name": "Weekly Extended Stay — Standard King",
+ "itemOffered": {
+ "@type": "Service",
+ "name": "Standard King Room — 7-Night Extended Stay",
+ "description": "Standard King room with free hot breakfast, free WiFi, free parking. Great for business travelers and longer stays."
+ },
+ "priceSpecification": {
+ "@type": "UnitPriceSpecification",
+ "price": 700,
+ "priceCurrency": "USD",
+ "unitCode": "WEE"
+ },
+ "availability": "https://schema.org/InStock",
+ "url": "https://www.theworld24.com/booking/executiveinnsuites.php"
+ }
+ ]
+ }
+ </script>
+<script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+ {
+ "@type": "ListItem",
+ "position": 1,
+ "name": "Home",
+ "item": "https://bestwesternvernalinn.com/"
+ }
+ ]
+ }
+ </script>
+<script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "Person",
+ "name": "Paresh Ghandi",
+ "jobTitle": "Owner / Manager",
+ "description": "Local Vernal owner who transformed the former Executive Inn into Best Western Vernal Inn, committed to warm hospitality in the Uintah Basin.",
+ "url": "https://bestwesternvernalinn.com/video.html",
+ "worksFor": {
+ "@type": "Hotel",
+ "name": "Best Western Vernal Inn",
+ "url": "https://bestwesternvernalinn.com"
+ }
+ }
+ </script>
+<script type="application/ld+json">
+ {
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+ {
+ "@type": "Question",
+ "name": "What are the weekly rates at Best Western Vernal Inn?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Weekly rates start at $588 + tax for a Standard Queen (7 nights), $660 + tax for a Double Queen, and $700 + tax for a Standard King. Monthly rates and corporate billing for long-term stays are available — call (435) 789-6625."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Is Best Western Vernal Inn pet friendly?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Yes. Up to two dogs per room, 80 lb limit per dog. Pet fee is $30/day plus a $100 refundable deposit at check-in. Other pets may be approved with prior notice — call (435) 789-6625."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Does Best Western Vernal Inn include free breakfast?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Yes. A free hot breakfast is included every day — hot dishes, pancakes, pastries, fruit, juice, and coffee. No extra charge, served daily."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "Do the rooms have kitchenettes?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Most rooms include a full kitchenette with stovetop, microwave, full-size refrigerator, and coffee maker — ideal for extended stays and long-term guests."
+ }
+ },
+ {
+ "@type": "Question",
+ "name": "How far is Best Western Vernal from Dinosaur National Monument?",
+ "acceptedAnswer": {
+ "@type": "Answer",
+ "text": "Dinosaur National Monument is approximately 20 minutes from Best Western Vernal Inn at 1935 South 1500 East, Vernal, UT 84078."
+ }
+ }
+ ]
+ }
+ </script>
+<style>
+ /* Page Summary Bar */
+ .page-summary-bar {
+ position: absolute;
+ width: 1px;
+ height: 1px;
+ padding: 0;
+ margin: -1px;
+ overflow: hidden;
+ clip: rect(0,0,0,0);
+ white-space: nowrap;
+ border: 0;
+ }
+
+ /* Badge styles moved to styles.css */
+ </style>
+<link rel="icon" href="images/logo.webp" type="image/webp">`;
+const bodyContent = `<!-- ═══════════════════════════════════════════════════════════
+     EXECUTIVE INN FLOATING BADGE — LEFT SIDE
+     Remove this entire block once Best Western branding is official
+     ═══════════════════════════════════════════════════════════ -->
+<div id="ei-badge" role="status" aria-live="polite">
+  <button id="ei-badge-close"
+    onclick="document.getElementById('ei-badge').style.display='none';"
+    aria-label="Dismiss notice">✕</button>
+  <div class="ei-header">
+    <span class="ei-dot"></span> We're Open!
+  </div>
+  <div class="ei-body">
+        This page previews the <em>exciting upgrades</em> coming as we transform into <strong>Best Western Vernal Inn</strong>.<br><br>  Not yet listed on BestWestern.com — book directly: <a href="tel:4357896625" style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 (435) 789-6625,</a>
+    brand new experience on the way! <strong>Discount Available</strong> for Best Western Members.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<!-- PAGE SUMMARY BAR — AI-extractable content, visible to all crawlers -->
+<div class="page-summary-bar" role="complementary" aria-label="Quick summary">
+ <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Weekly rates from $588 (7 nights · Queen room). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> or <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank">book online</a>.
+</div>
+
+<!-- NAV -->
+
+
+<!-- HERO SLIDESHOW — cinematic Ken Burns backgrounds -->
+<section class="hero">
+ <div class="hero-slide kb-right active"><div class="hero-kb" style="background-image:url('images/35.webp')"></div></div>
+ <div class="hero-slide kb-left"><div class="hero-kb" style="background-image:url('images/31a.webp')"></div></div>
+ <div class="hero-slide kb-up"><div class="hero-kb" style="background-image:url('images/40.webp')"></div></div>
+ <div class="hero-slide kb-down"><div class="hero-kb" style="background-image:url('images/37.webp')"></div></div>
+ <div class="hero-slide kb-right"><div class="hero-kb" style="background-image:url('images/49.webp')"></div></div>
+ <div class="hero-ov"></div>
+ <div class="hero-cnt">
+ <p class="eyebrow">Coming Soon in Vernal, Utah as</p>
+ <h1 class="htitle">Best Western Inn<br><em>Vernal, Utah</em></h1>
+ <p class="hsub">The Executive Inn is in the process of being beautifully transformed into Best Western Vernal inn — spacious rooms, free hot breakfast, and a warm welcome every single day. Your home away from home.</p>
+ <div class="hbtns">
+ <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="btn-p" target="_blank">Book Your Stay</a>
+ <a href="#rooms" class="btn-s">Explore Rooms</a>
+ </div>
+ </div>
+ <div class="hdots" id="hdots"></div>
+ <div class="scroll-hint">Scroll</div>
+
+ <!-- PET FRIENDLY BADGE -->
+ <a href="#rooms" onclick="st(document.querySelector('[onclick*=pet]'),'pet')" class="pet-badge">
+ <div class="pet-badge-img">
+ <img src="images/puppy.webp" alt="Pet Friendly Hotel Vernal Utah — Dogs Welcome at Best Western Vernal Inn">
+ </div>
+ <div class="pet-badge-footer">
+ <span class="pet-paw-icon">🐾</span>
+ <div class="pet-badge-words">
+ <span class="pet-label">Pet Friendly</span>
+ <span class="pet-sub">Dogs Welcome</span>
+ </div>
+ </div>
+ </a>
+
+</section>
+
+<!-- PERKS BAR -->
+<div class="pbar rv">
+ <div class="pi"><span class="ic">🍳</span><div><div class="label">Free Breakfast</div><div class="sub">Hot &amp; fresh every morning</div></div></div>
+ <div class="pi"><span class="ic">📶</span><div><div class="label">Free WiFi</div><div class="sub">Fast in every room</div></div></div>
+ <div class="pi"><span class="ic">🅿️</span><div><div class="label">Free Parking</div><div class="sub">Always on us</div></div></div>
+ <div class="pi"><span class="ic">🍴</span><div><div class="label">Full Kitchenettes</div><div class="sub">Cook your own meals</div></div></div>
+ <div class="pi"><span class="ic">🕐</span><div><div class="label">24-Hr Front Desk</div><div class="sub">Always here for you</div></div></div>
+ <div class="pi"><span class="ic">🐾</span><div><div class="label">Pet Friendly</div><div class="sub">Whole family welcome</div></div></div>
+</div>
+
+<!-- WEEKLY RATES -->
+<section class="weekly-rates rv">
+ <div class="wr-inner">
+ <p class="wr-eyebrow">✦ Extended Stay Savings ✦</p>
+ <h2 class="wr-title">Special <em>Weekly Rates</em></h2>
+ <p class="wr-sub">Stay 7 nights and save — our best rates for extended stays in Vernal, Utah.</p>
+ <div class="wr-cards">
+ <div class="wr-card">
+ <div class="wr-icon">🛏️</div>
+ <div class="wr-type">Queen Room</div>
+ <div class="wr-price">$588</div>
+ <div class="wr-period">+ tax · 7 nights</div>
+ <a>Book Now by Calling</a>
+ </div>
+ <div class="wr-card featured">
+ <div class="wr-badge">Most Popular</div>
+ <div class="wr-icon">👥</div>
+ <div class="wr-type">Double Queen</div>
+ <div class="wr-price">$660</div>
+ <div class="wr-period">+ tax · 7 nights</div>
+ <a>Book Now by Calling</a>
+ </div>
+ <div class="wr-card">
+ <div class="wr-icon">👑</div>
+ <div class="wr-type">King Room</div>
+ <div class="wr-price">$700</div>
+ <div class="wr-period">+ tax · 7 nights</div>
+ <a>Book Now by Calling</a>
+ </div>
+ </div>
+
+ <!-- STRUCTURED RATES TABLE — for AI extraction and featured snippets -->
+ <div class="rates-table-wrap">
+ <table class="rates-table" aria-label="Extended Stay Weekly Rates — Best Western Vernal Utah">
+ <thead>
+ <tr>
+ <th>Room Type</th>
+ <th>Sleeps</th>
+ <th>7-Night Rate</th>
+ <th>Est. per Night</th>
+ <th>Best For</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Standard Queen</strong></td>
+ <td>1–2</td>
+ <td><span class="rate-price">$588</span><div class="rate-note">+ tax</div></td>
+ <td>~$84/night</td>
+ <td>Solo travelers, couples</td>
+ </tr>
+ <tr>
+ <td><strong>Double Queen</strong></td>
+ <td>1–4</td>
+ <td><span class="rate-price">$660</span><div class="rate-note">+ tax</div></td>
+ <td>~$94/night</td>
+ <td>Families, road trips</td>
+ </tr>
+ <tr>
+ <td><strong>Standard King</strong></td>
+ <td>1–2</td>
+ <td><span class="rate-price">$700</span><div class="rate-note">+ tax</div></td>
+ <td>~$100/night</td>
+ <td>Business travelers, couples</td>
+ </tr>
+ <tr>
+ <td><strong>King Suite (Kitchenette)</strong></td>
+ <td>1–2</td>
+ <td>Call for rate</td>
+ <td>—</td>
+ <td>Extended stays, contractors</td>
+ </tr>
+ <tr>
+ <td><strong>King Jacuzzi Suite</strong></td>
+ <td>1–2</td>
+ <td>Call for rate</td>
+ <td>—</td>
+ <td>Romance, special occasions</td>
+ </tr>
+ <tr>
+ <td><strong>Jacuzzi Double Queen Suite</strong></td>
+ <td>1–4</td>
+ <td>Call for rate</td>
+ <td>—</td>
+ <td>Families wanting luxury</td>
+ </tr>
+ <tr>
+ <td><strong>Pet Friendly King / Double Queen</strong></td>
+ <td>1–4</td>
+ <td>From $588</td>
+ <td>~$84+/night</td>
+ <td>Guests with dogs (up to 80 lbs)</td>
+ </tr>
+ </tbody>
+ </table>
+ <p class="rates-monthly-note">📞 Monthly rates available — call <a href="tel:4357896625">(435) 789-6625</a> for long-term pricing and corporate / company billing options.</p>
+ </div>
+
+ <p class="wr-note">📞 To book weekly rates call <a href="tel:4357896625">(435) 789-6625</a></p>
+ </div>
+</section>
+
+<!-- WATCH OUR STORY BANNER -->
+<section class="story-banner rv">
+ <div class="sb-bg" style="background-image:url('images/35.webp')"></div>
+ <div class="sb-overlay"></div>
+ <div class="sb-content">
+ <p class="sb-eyebrow">✦ See the Transformation ✦</p>
+ <h2 class="sb-title">Watch Our Story</h2>
+ <p class="sb-sub">From the Executive Inn to Best Western Vernal Inn — a warm, cinematic look at everything that's new, beautiful, and waiting for you.</p>
+ <a href="video.html" class="sb-play-btn" aria-label="Watch presentation">
+ <span class="sb-play-ring"></span>
+ <span class="sb-play-icon">▶</span>
+ </a>
+ <p class="sb-hint">1 minute &nbsp;·&nbsp; 11 scenes</p>
+ </div>
+</section>
+
+<!-- OWNER STORY -->
+<section class="owner-sec rv">
+ <div class="owner-inner">
+
+ <!-- Left — 3D video frame -->
+ <div class="owner-left">
+ <div class="owner-frame-scene">
+ <div class="owner-frame-box" id="ownerFrameBox">
+
+ <!-- Outer decorative frame -->
+ <div class="frame-border">
+ <!-- Corner accents -->
+ <span class="fc tl"></span>
+ <span class="fc tr"></span>
+ <span class="fc bl"></span>
+ <span class="fc br"></span>
+
+ <!-- BW badge top center -->
+ <div class="frame-badge">
+ <span class="frame-badge-icon">BW</span>
+ Best Western
+ </div>
+
+ <!-- YouTube embed — autoplay on click via JS -->
+ <div class="frame-screen">
+ <iframe
+ id="ownerVideo"
+ class="frame-video"
+ src="https://www.youtube.com/embed/muU4RyNBzQI?si=UDQjYvrGPWQhwdg4"
+ title="Best Western Vernal Inn — Owner's Welcome & Property Walkthrough"
+ frameborder="0"
+ loading="lazy"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+ referrerpolicy="strict-origin-when-cross-origin"
+ allowfullscreen>
+ </iframe>
+
+ <!-- Play overlay — hides once clicked -->
+ <div class="frame-play-overlay" id="ownerPlayOverlay">
+ <div class="frame-play-btn">
+ <span class="fplay-ring"></span>
+ <span class="fplay-icon">▶</span>
+ </div>
+ <p class="frame-play-label">Watch Our Story</p>
+ </div>
+
+ <!-- Progress bar (decorative — YouTube handles its own) -->
+ <div class="frame-progress" id="ownerProgress">
+ <div class="frame-progress-fill" id="ownerProgressFill"></div>
+ </div>
+ </div><!-- /.frame-screen -->
+ </div><!-- /.frame-border -->
+
+ <!-- Reflection beneath the frame -->
+ <div class="frame-reflection"></div>
+
+ </div><!-- /.owner-frame-box -->
+ </div><!-- /.owner-frame-scene -->
+
+ <div class="owner-sig">
+ <div class="owner-sig-name">The Owner</div>
+ <div class="owner-sig-title">Best Western Vernal Inn · Vernal, Utah</div>
+ </div>
+ </div>
+
+ <!-- Right — story text -->
+ <div class="owner-right">
+ <p class="owner-tag">✦ A Word From Us</p>
+ <h2 class="owner-title">Come On In.<br><em>You Made It.</em></h2>
+ <div class="owner-divider"></div>
+
+ <div class="owner-body">
+ <p>Come on in. Set your bags down. You made it.</p>
+
+ <p>We rebuilt this place from the ground up — new rooms, hot breakfast every morning, and heated floors in the dining room that'll warm you up before you even pour your coffee.</p>
+
+ <p>We were waiting for you.</p>
+
+ <p class="owner-closing">We'll see you at breakfast.</p>
+ </div>
+ </div>
+
+ </div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms" class="rooms-sec">
+ <div class="sh rv">
+ <p class="tag">✦ Our Rooms</p>
+ <h2>Every Room Feels Like Home</h2>
+ <div class="gline"></div>
+ <p>From cozy queen rooms to full kitchen suites with jacuzzi tubs — the perfect space for every kind of stay, whether it's one night or one month.</p>
+ </div>
+ <div class="tabnav rv">
+ <button class="tbtn active" onclick="st(this,'queen')">Standard Queen</button>
+ <button class="tbtn" onclick="st(this,'king')">Standard King</button>
+ <button class="tbtn" onclick="st(this,'queens')">Double Queen</button>
+ <button class="tbtn" onclick="st(this,'kingsuite')">King Suite</button>
+ <button class="tbtn" onclick="st(this,'jacuzzi')">Jacuzzi Suites</button>
+ <button class="tbtn" onclick="st(this,'pet')">Pet Friendly</button>
+ <button class="tbtn" onclick="st(this,'handicap')">Accessible Room</button>
+ </div>
+
+ <!-- STANDARD QUEEN -->
+ <div class="tpanel active" id="t-queen">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/41.webp','Standard Queen Room')">
+ <img src="images/41.webp" alt="Standard Queen Room — Best Western Vernal Inn">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Standard Queen</p>
+ <h2 class="ftitle">Comfortable, Clean &amp;<br>All Yours.</h2>
+ <p class="fdesc">A plush queen bed with crisp white linens, warm lighting, and everything you need for a great night's rest. Simple, spotless, and genuinely comfortable — exactly what a good room should be.</p>
+ <div class="tags">
+ <span class="t">🛏️ Queen Bed</span><span class="t">📺 Flat-Screen TV</span>
+ <span class="t">❄️ A/C &amp; Heat</span><span class="t">📶 Free WiFi</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/48.webp','Standard Queen Room — Full View')">
+ <img src="images/48.webp" alt="Standard Queen Room full view — extended stay hotel Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Well-Appointed &amp; Relaxing</p>
+ <h2 class="ftitle">Drop Your Bags.<br><em>You're Home.</em></h2>
+ <p class="fdesc">Every detail taken care of — fresh linens, a quiet room, and a warm welcome waiting. Whether you're passing through or settling in for a few nights, this room is ready for you.</p>
+ <div class="tags">
+ <span class="t">🛁 Full Bathroom</span><span class="t">💼 Work Desk</span>
+ <span class="t">🏨 BW Standards</span><span class="t">☕ Coffee Maker</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- STANDARD KING -->
+ <div class="tpanel" id="t-king">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/40.webp','Standard King Room')">
+ <img src="images/40.webp" alt="Standard King Room — Best Western Vernal Inn">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Standard King</p>
+ <h2 class="ftitle">Big, Bright &amp;<br>Beautifully Comfortable.</h2>
+ <p class="fdesc">Sink into a plush king-size bed with crisp white linens and all the room you need to breathe. A cozy sitting area, work desk, and warm lighting make this your personal retreat after every long day.</p>
+ <div class="tags">
+ <span class="t">🛏️ King Bed</span><span class="t">🛋️ Sitting Area</span>
+ <span class="t">💼 Work Desk</span><span class="t">❄️ A/C &amp; Heat</span><span class="t">📺 Flat-Screen TV</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/47.webp','Standard King Room — Full View')">
+ <img src="images/47.webp" alt="Standard King Room full view — extended stay hotel Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Long-Stay Ready</p>
+ <h2 class="ftitle">Unpack. Settle In.<br>You Belong Here.</h2>
+ <p class="fdesc">Our king rooms come with full storage space, open closet, and all the room you need for a longer visit. Here a few nights or a few weeks — this room is yours to make your own.</p>
+ <div class="tags">
+ <span class="t">🚪 Full Closet</span><span class="t">🗃️ Dresser</span>
+ <span class="t">💡 Warm Lighting</span><span class="t">📶 Free WiFi</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- STANDARD DOUBLE QUEEN -->
+ <div class="tpanel" id="t-queens">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/38.webp','Double Queen Room')">
+ <img src="images/38.webp" alt="Double Queen Room — family-friendly extended stay Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Double Queen Rooms</p>
+ <h2 class="ftitle">Room for Everyone<br>You Love.</h2>
+ <p class="fdesc">Two plush queen beds dressed in Best Western signature linens — perfect for families, road-trip crews, or anyone who likes a little extra room to stretch. Spacious, clean, and genuinely welcoming.</p>
+ <div class="tags">
+ <span class="t">👨‍👩‍👧 Family Friendly</span><span class="t">🛏️ Two Queens</span>
+ <span class="t">🛋️ Lounge Chair</span><span class="t">💼 Desk &amp; Chair</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/42.webp','Double Queen Room — View 2')">
+ <img src="images/42.webp" alt="Double Queen Room view 2 — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Spotlessly Clean</p>
+ <h2 class="ftitle">Clean, Fresh &amp;<br>Ready for You.</h2>
+ <p class="fdesc">Every room is cleaned to Best Western standards before you arrive. Fluffy pillows, crisp linens, and a room that looks as good in person as it does in the photos — every single time.</p>
+ <div class="tags">
+ <span class="t">🏨 BW Standards</span><span class="t">🛏️ Fresh Linens</span>
+ <span class="t">📺 Flat-Screen TV</span><span class="t">📶 Free WiFi</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat">
+ <div class="fi" onclick="ol('images/45.webp','Double Queen Room — View 3')">
+ <img src="images/45.webp" alt="Double Queen Room spacious layout — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Extra Space, Extra Comfort</p>
+ <h2 class="ftitle">Plenty of Room.<br><em>For All of You.</em></h2>
+ <p class="fdesc">Whether it's a family getaway or a working trip with a colleague, our double queen rooms give everyone the space they need. Stretch out, relax, and enjoy your stay at Best Western.</p>
+ <div class="tags">
+ <span class="t">🛏️ Two Queens</span><span class="t">❄️ A/C &amp; Heat</span>
+ <span class="t">☕ Coffee Maker</span><span class="t">🛁 Full Bathroom</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- KING SUITE -->
+ <div class="tpanel" id="t-kingsuite">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/39.webp','King Suite Room')">
+ <img src="images/39.webp" alt="King Suite with full kitchenette — extended stay Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Studio King Suite</p>
+ <h2 class="ftitle">More Space.<br>More Comfort.</h2>
+ <p class="fdesc">Our studio king suites offer more of everything — a full king bed, separate living area, full kitchenette, and all the space you need to truly unwind. Perfect for extended visits or anyone who wants more room to breathe.</p>
+ <div class="tags">
+ <span class="t">🛏️ King Bed</span><span class="t">🛋️ Living Area</span>
+ <span class="t">🍳 Kitchenette</span><span class="t">🧊 Full Fridge</span><span class="t">☕ Coffee Maker</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/43.webp','King Suite Room — View 2')">
+ <img src="images/43.webp" alt="King Suite work desk and living area — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Work Hard, Rest Even Harder</p>
+ <h2 class="ftitle">Unpack for Real.<br><em>You've Earned It.</em></h2>
+ <p class="fdesc">Large desk, ergonomic seating, fast WiFi, full kitchen, and a king bed waiting for you at the end of the day. Everything the working traveler or long-stay guest actually needs — in one beautiful room.</p>
+ <div class="tags">
+ <span class="t">💻 Work Desk</span><span class="t">📶 Fast WiFi</span>
+ <span class="t">📺 Smart TV</span><span class="t">🚪 Full Closet</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat">
+ <div class="fi" onclick="ol('images/46.webp','King Suite Room — View 3')">
+ <img src="images/46.webp" alt="King Suite dining and storage area — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Built for Longer Stays</p>
+ <h2 class="ftitle">Settle In.<br><em>Stay a While.</em></h2>
+ <p class="fdesc">Our king suites are purpose-built for guests who need more than just a bed. A fully equipped kitchenette, dining space, and comfortable living area make it easy to feel right at home from day one.</p>
+ <div class="tags">
+ <span class="t">🍽️ Dining Area</span><span class="t">🧺 In-Room Storage</span>
+ <span class="t">💡 Warm Lighting</span><span class="t">🏨 BW Standards</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/51.webp','King Suite Room — View 4')">
+ <img src="images/51.webp" alt="King Suite move-in ready — Best Western Vernal Inn">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Clean &amp; Move-In Ready</p>
+ <h2 class="ftitle">Everything You Need.<br><em>Nothing Missing.</em></h2>
+ <p class="fdesc">Fresh linens, clean surfaces, a fully stocked kitchenette, and a quiet king suite waiting for you. Whether you're here for a week or a month, this room is ready to become your home away from home.</p>
+ <div class="tags">
+ <span class="t">🛏️ King Bed</span><span class="t">🍳 Full Kitchenette</span>
+ <span class="t">📶 Free WiFi</span><span class="t">🅿️ Free Parking</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- JACUZZI SUITES -->
+ <div class="tpanel" id="t-jacuzzi">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/37.webp','King Jacuzzi Suite')">
+ <img src="images/37.webp" alt="King Jacuzzi Suite with private in-room soaking tub — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ King Jacuzzi Suite</p>
+ <h2 class="ftitle">You Deserve<br>a Little Luxury.</h2>
+ <p class="fdesc">Imagine soaking in a private in-room jacuzzi tub after a day on the trails. Our king jacuzzi suites pair a plush king bed with a beautiful soaking tub right in the room — your own private escape, no extra travel required.</p>
+ <div class="tags">
+ <span class="t">🛁 In-Room Jacuzzi</span><span class="t">🛏️ King Bed</span>
+ <span class="t">🛋️ Sitting Area</span><span class="t">🪟 Bright Windows</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/49.webp','King Jacuzzi Suite — View 2')">
+ <img src="images/49.webp" alt="King Jacuzzi Suite soak and sleep — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Soak. Sleep. Repeat.</p>
+ <h2 class="ftitle">Your Own Retreat.<br><em>Every Single Night.</em></h2>
+ <p class="fdesc">A warm jacuzzi, crisp king bed, and a quiet room all to yourself. Our king jacuzzi suites are the perfect upgrade for a romantic getaway, a special occasion, or simply because you've earned it.</p>
+ <div class="tags">
+ <span class="t">🛁 Soaking Tub</span><span class="t">🛏️ King Bed</span>
+ <span class="t">☕ Coffee Maker</span><span class="t">📺 Wall TV</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat">
+ <div class="fi" onclick="ol('images/44.webp','Jacuzzi Double Queen Suite')">
+ <img src="images/44.webp" alt="Jacuzzi Double Queen Suite two beds and in-room jacuzzi — Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Jacuzzi Double Queen Suite</p>
+ <h2 class="ftitle">Two Beds. One Jacuzzi.<br><em>All the Luxury.</em></h2>
+ <p class="fdesc">The best of both worlds — two plush queen beds AND an in-room jacuzzi tub. Perfect for families or groups who want a little extra indulgence. Everyone gets their space, and everyone gets to soak.</p>
+ <div class="tags">
+ <span class="t">🛁 In-Room Jacuzzi</span><span class="t">🛏️ Two Queens</span>
+ <span class="t">👨‍👩‍👧 Family Friendly</span><span class="t">📺 Flat-Screen TV</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/53.webp','Jacuzzi Double Queen Suite — View 2')">
+ <img src="images/53.webp" alt="Jacuzzi Double Queen Suite with kitchenette — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Cook. Soak. Relax.</p>
+ <h2 class="ftitle">Everything You Need.<br><em>Just Like Home.</em></h2>
+ <p class="fdesc">Spacious, beautifully appointed, and fully loaded. These suites come with a kitchenette AND a jacuzzi — making them as practical as they are luxurious. Whether it's one night or one week, this is the room you'll remember.</p>
+ <div class="tags">
+ <span class="t">🛁 Soaking Tub</span><span class="t">🍳 Kitchenette</span>
+ <span class="t">🧊 Full Fridge</span><span class="t">☕ Coffee Maker</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- PET FRIENDLY — GROUND FLOOR, WOOD FLOORS -->
+ <div class="tpanel" id="t-pet">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/53.webp','Pet Friendly King Room')">
+ <img src="images/53.webp" alt="Pet-friendly King Room with hardwood floors — Best Western Vernal Inn">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Pet Friendly · King Room</p>
+ <h2 class="ftitle">Bring the Whole Family.<br><em>Fur Included.</em></h2>
+ <p class="fdesc">Our ground-floor pet friendly king rooms feature beautiful hardwood-style floors — easy to clean and comfortable for your four-legged companions. Direct outdoor access, a plush king bed, and a warm welcome for everyone in your crew.</p>
+ <div class="tags">
+ <span class="t">🐾 Pet Friendly</span><span class="t">🛏️ King Bed</span>
+ <span class="t">🪵 Wood Floors</span><span class="t">🚪 Ground Floor</span><span class="t">📶 Free WiFi</span>
+ </div>
+ </div>
+ </div>
+ <div class="feat rev">
+ <div class="fi" onclick="ol('images/54.webp','Pet Friendly Double Queen Room')">
+ <img src="images/54.webp" alt="Pet-friendly Double Queen Room ground floor — Best Western Vernal Utah">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ Pet Friendly · Double Queen</p>
+ <h2 class="ftitle">Two Beds. Wood Floors.<br><em>Everyone Welcome.</em></h2>
+ <p class="fdesc">Ground floor, two queen beds, and beautiful hardwood-style flooring — our pet friendly double queen rooms are designed to make the whole family comfortable. Spacious, easy to navigate, and right outside your door.</p>
+ <div class="tags">
+ <span class="t">🐾 Pet Friendly</span><span class="t">🛏️ Two Queens</span>
+ <span class="t">🪵 Wood Floors</span><span class="t">🚪 Ground Floor Access</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ADA ACCESSIBLE -->
+ <!-- ⚠️ TODO: Replace with actual handicap room image number -->
+ <div class="tpanel" id="t-handicap">
+ <div class="feat">
+ <div class="fi" onclick="ol('images/47.webp','ADA Accessible King Room')">
+ <img src="images/47.webp" alt="ADA Accessible King Room with roll-in shower — Best Western Vernal Inn">
+ <div class="fiz">🔍</div>
+ </div>
+ <div class="ft">
+ <p class="ftag">✦ ADA Accessible Room</p>
+ <h2 class="ftitle">Comfortable for Everyone.<br><em>No Exceptions.</em></h2>
+ <p class="fdesc">Our ADA accessible king rooms are designed with care — wide doorways, roll-in shower, lowered fixtures, and all the space needed for a safe, comfortable, and dignified stay. Every guest deserves the same warm welcome.</p>
+ <div class="tags">
+ <span class="t">♿ ADA Accessible</span><span class="t">🛏️ King Bed</span>
+ <span class="t">🚿 Roll-In Shower</span><span class="t">🚪 Wide Doorways</span><span class="t">📶 Free WiFi</span>
+ </div>
+ </div>
+ </div>
+ </div>
+
+</section>
+
+<!-- QUOTE -->
+<div class="quote rv">
+ <div class="stars">★★★★★</div>
+ <blockquote>"Friendly and accommodating, clean rooms, nice breakfast — everything you'd want from a hotel stay."</blockquote>
+ <cite>— Verified Guest Review · Hotels.com</cite>
+</div>
+
+<!-- BREAKFAST BANNER -->
+<section class="bkhero rv">
+ <img src="images/1.webp" alt="Free hot breakfast served daily — Best Western Vernal Inn">
+ <div class="bkov"></div>
+ <div class="bkcnt">
+ <p class="tag">✦ Every Morning, On Us</p>
+ <h2>Wake Up to a Free Hot Breakfast.</h2>
+ <p>Start every morning the right way — hot dishes, fresh pastries, pancakes, fruit, coffee, and more. Included in your stay, no extra charge, every single day.</p>
+ </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gal-sec">
+ <div class="sh rv">
+ <p class="tag">✦ Photo Gallery</p>
+ <h2>See It for Yourself</h2>
+ <div class="gline"></div>
+ <p>Every corner of this hotel has been beautifully refreshed. Browse the photos — then come experience it in person.</p>
+ </div>
+ <div class="gal-grid rv" id="galgrid">
+ <div class="gi wide" onclick="ola(0)"><img src="images/61.webp" alt="Best Western Vernal Inn — Hotel Exterior at Night"><div class="gi-ov"><span class="gi-label">Hotel Exterior</span></div></div>
+ <div class="gi" onclick="ola(1)"><img src="images/35.webp" alt="Best Western Vernal Inn — Night Sky View"><div class="gi-ov"><span class="gi-label">Under the Stars</span></div></div>
+ <div class="gi" onclick="ola(2)"><img src="images/41.webp" alt="Standard Queen Room at Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">Standard Queen</span></div></div>
+ <div class="gi" onclick="ola(3)"><img src="images/40.webp" alt="Standard King Room at Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">Standard King</span></div></div>
+ <div class="gi" onclick="ola(4)"><img src="images/38.webp" alt="Double Queen Room — family-friendly extended stay Vernal Utah"><div class="gi-ov"><span class="gi-label">Double Queen</span></div></div>
+ <div class="gi" onclick="ola(5)"><img src="images/39.webp" alt="King Suite with full kitchenette at Best Western Vernal Utah"><div class="gi-ov"><span class="gi-label">King Suite</span></div></div>
+ <div class="gi" onclick="ola(6)"><img src="images/37.webp" alt="King Jacuzzi Suite with in-room soaking tub — Best Western Vernal Utah"><div class="gi-ov"><span class="gi-label">King Jacuzzi Suite</span></div></div>
+ <div class="gi" onclick="ola(7)"><img src="images/44.webp" alt="Jacuzzi Double Queen Suite — two beds and in-room jacuzzi Vernal Utah"><div class="gi-ov"><span class="gi-label">Jacuzzi Double Queen</span></div></div>
+ <div class="gi" onclick="ola(8)"><img src="images/43.webp" alt="King Suite interior detail — Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">King Suite — Detail</span></div></div>
+ <div class="gi" onclick="ola(9)"><img src="images/53.webp" alt="Pet-friendly King Room with hardwood floors — Best Western Vernal Utah"><div class="gi-ov"><span class="gi-label">Pet Friendly King</span></div></div>
+ <div class="gi" onclick="ola(10)"><img src="images/54.webp" alt="Pet-friendly Double Queen Room ground floor — Best Western Vernal Utah"><div class="gi-ov"><span class="gi-label">Pet Friendly Queen</span></div></div>
+ <div class="gi wide" onclick="ola(11)"><img src="images/35.webp" alt="Best Western Vernal Inn — Exterior Wide View"><div class="gi-ov"><span class="gi-label">Best Western Vernal</span></div></div>
+ <div class="gi" onclick="ola(12)"><img src="images/59.webp" alt="Free hot breakfast dining room with heated floors — Best Western Vernal Utah"><div class="gi-ov"><span class="gi-label">Breakfast Dining Room</span></div></div>
+ <div class="gi" onclick="ola(13)"><img src="images/2.webp" alt="Free hot breakfast — included daily at Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">Breakfast Area</span></div></div>
+ </div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities" class="amen-sec">
+ <div class="sh rv">
+ <p class="tag">✦ Amenities</p>
+ <h2>Everything You Need. Nothing Hidden.</h2>
+ <div class="gline"></div>
+ </div>
+ <div class="amen-grid rv">
+ <div class="ac d1"><div class="aic">🍳</div><h3>Free Hot Breakfast</h3><p>Warm &amp; fresh every morning, included.</p></div>
+ <div class="ac d1"><div class="aic">📶</div><h3>Free WiFi</h3><p>Fast, reliable in every room.</p></div>
+ <div class="ac d2"><div class="aic">🅿️</div><h3>Free Parking</h3><p>Pull right up — no fees ever.</p></div>
+ <div class="ac d2"><div class="aic">🍴</div><h3>Full Kitchenettes</h3><p>Fridge, stovetop, microwave &amp; coffee.</p></div>
+ <div class="ac d3"><div class="aic">🕐</div><h3>24-Hr Front Desk</h3><p>Always here when you need us.</p></div>
+ <div class="ac d3"><div class="aic">🐾</div><h3>Pet Friendly</h3><p>Bring the whole family — fur included.</p></div>
+ <div class="ac d1"><div class="aic">🧺</div><h3>Laundry Services</h3><p>On-site dry cleaning available.</p></div>
+ <div class="ac d2"><div class="aic">💼</div><h3>Business Center</h3><p>24-hour business center for guests.</p></div>
+ <div class="ac d3"><div class="aic">♿</div><h3>Accessible Rooms</h3><p>ADA accessible rooms available.</p></div>
+ </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location" class="loc-sec rv">
+ <div class="loc-map">
+ <iframe
+ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999!2d-109.5194!3d40.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8753f2f0b0b0b0b1%3A0x1!2s1935+S+1500+E%2C+Naples%2C+UT+84078!5e0!3m2!1sen!2sus!4v1"
+ width="100%" height="100%"
+ style="border:0; display:block;"
+ allowfullscreen=""
+ loading="lazy"
+ referrerpolicy="no-referrer-when-downgrade">
+ </iframe>
+ </div>
+ <div class="loc-txt">
+ <p class="tag">✦ Prime Location</p>
+ <h2>Right in the Heart<br>of the Uintah Basin</h2>
+ <p>Everything Vernal has to offer is right outside your door — minutes from the airport, dinosaur museums, national parks, and Utah's finest trails.</p>
+ <ul class="loc-list">
+ <li>0.6 miles from Vernal Regional Airport</li>
+ <li>Near Utah Field House of Natural History</li>
+ <li>Close to Dinosaur National Monument</li>
+ <li>Near Dinaland Golf Course</li>
+ <li>Easy access to restaurants &amp; shopping</li>
+ </ul>
+ <a href="https://maps.app.goo.gl/ZxuXuD1tQzKHGerFA" target="_blank" class="btn-p" style="margin-top:24px;display:inline-block;">📍 Get Directions</a>
+ </div>
+</section>
+
+
+<!-- ===== PILLAR: Topic Cluster Hub — links to all spokes ===== -->
+<section class="topic-hub rv" style="background:linear-gradient(180deg,var(--cream) 0%,#fff 100%);padding:90px 24px 80px;">
+ <div style="max-width:1240px;margin:0 auto;">
+  <p class="tag" style="text-align:center;display:block;color:var(--gold);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.95rem;margin-bottom:.6rem;">✦ Plan Your Stay in Vernal</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:var(--navy);text-align:center;margin:0 0 .8rem;font-weight:700;">Find the <em style="color:var(--gold);font-style:italic;">Right Room</em> for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:740px;margin:0 auto 3rem;font-size:1.08rem;line-height:1.6;font-weight:300;">From extended stays to weekend trips to Dinosaur Country — we have detailed pages for every kind of guest. Pick the page that fits your stay.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:2.6rem;align-items:start;">
+   <div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin:0 0 1rem;text-align:center;letter-spacing:.01em;"><span style="color:var(--gold);">✦</span> By Stay Type</h3>
+    <div style="display:grid;gap:.85rem;">
+    <a href="extended-stay-hotel-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Extended Stay</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Weekly &amp; monthly stays from $588</div>
+    </a>
+    <a href="weekly-hotel-rates-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Weekly Rates</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">7-night discount pricing</div>
+    </a>
+    <a href="workforce-housing-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Workforce Housing</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Crew lodging &amp; corporate billing</div>
+    </a>
+    <a href="oilfield-housing-vernal.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Oilfield Housing</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Truck parking, flexible billing</div>
+    </a>
+    <a href="pet-friendly-hotel-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Pet Friendly</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Dogs welcome, ground-floor rooms</div>
+    </a>
+    <a href="dog-friendly-hotel-vernal.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Dog Friendly</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Hardwood floors, direct outdoor access</div>
+    </a>
+    </div>
+   </div>
+   <div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin:0 0 1rem;text-align:center;letter-spacing:.01em;"><span style="color:var(--gold);">✦</span> By Destination</h3>
+    <div style="display:grid;gap:.85rem;">
+    <a href="hotel-near-vernal-airport.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Vernal Airport</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">0.6 miles</div>
+    </a>
+    <a href="hotel-near-dinosaur-national-monument.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Dinosaur Nat'l Monument</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">20 miles</div>
+    </a>
+    <a href="hotel-near-flaming-gorge.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Flaming Gorge</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">40 miles</div>
+    </a>
+    <a href="hotel-near-red-fleet-state-park.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Red Fleet State Park</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">12 miles</div>
+    </a>
+    <a href="hotel-near-ashley-national-forest.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Ashley National Forest</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">15 miles</div>
+    </a>
+    <a href="hotel-near-jensen-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Jensen, Utah</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">10 miles</div>
+    </a>
+    </div>
+   </div>
+   <div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin:0 0 1rem;text-align:center;letter-spacing:.01em;"><span style="color:var(--gold);">✦</span> Plan Your Visit</h3>
+    <div style="display:grid;gap:.85rem;">
+    <a href="vernal-utah-travel-guide.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Vernal Travel Guide</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Plan your trip</div>
+    </a>
+    <a href="things-to-do-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Things to Do</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Activities &amp; attractions</div>
+    </a>
+    <a href="explore.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Explore Vernal</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Restaurants &amp; adventures</div>
+    </a>
+    <a href="faq.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+     <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">FAQ</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Common questions</div>
+    </a>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+<!-- ===== /PILLAR ===== -->
+
+<style>
+.topic-hub .topic-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(var(--navy-rgb),0.10);
+  border-color: var(--gold);
+}
+</style>
+
+<!-- CTA -->
+<section class="cta rv">
+ <h2>Ready to Feel at Home?</h2>
+ <p>Book your stay at Best Western Vernal Inn — Vernal tonight.<br>Great rooms, free breakfast, and a warm welcome waiting for you.</p>
+ <div class="cta-btns">
+ <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="btn-p" target="_blank">Book Your Room Today</a>
+ <a href="tel:4357896625" class="btn-s" style="color:var(--navy);border-color:var(--navy);">📞 (435) 789-6625</a>
+ </div>
+ <p class="cta-info">1935 South 1500 East, Vernal, UT &nbsp;|&nbsp; <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></p>
+</section>
+
+<!-- FOOTER -->
+
+
+
+
+<!-- LIGHTBOX -->
+<div id="lb">
+ <button id="lbclose" onclick="cl()">✕</button>
+ <button class="lbn" id="lbprev" onclick="ln(-1)">‹</button>
+ <img id="lb-img" src="" alt="">
+ <p id="lb-cap"></p>
+ <button class="lbn" id="lbnext" onclick="ln(1)">›</button>
+ <div class="lbcount" id="lbc"></div>
+</div>`;
+const pageScripts = `<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const b = document.getElementById('ei-badge');
+    if (!b) return;
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    setTimeout(() => {
+      b.style.transform = isMobile ? 'translateY(0)' : 'translateY(-20%) translateX(0)';
+    }, 120);
+    setTimeout(() => { b.classList.add('ei-visible'); }, 900);
+  });
+</script>
+<script>
+// Hero Slideshow — Ken Burns backgrounds
+const slides = document.querySelectorAll('.hero-slide');
+const dc     = document.getElementById('hdots');
+let cs = 0;
+if (slides.length && dc) {
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'hdot' + (i === 0 ? ' active' : '');
+    d.onclick = () => gs(i);
+    dc.appendChild(d);
+  });
+}
+function gs(n) {
+  slides[cs].classList.remove('active');
+  dc.children[cs].classList.remove('active');
+  cs = n;
+  slides[cs].classList.add('active');
+  dc.children[cs].classList.add('active');
+  const kb = slides[cs].querySelector('.hero-kb');
+  kb.style.transition = 'none';
+  kb.style.transform  = 'scale(1.08)';
+  kb.offsetHeight;
+  kb.style.transition = 'transform 8s ease-out';
+  kb.style.transform  = 'scale(1)';
+}
+if (slides.length) {
+  setInterval(() => gs((cs + 1) % slides.length), 6000);
+  (function() {
+    const kb = slides[0].querySelector('.hero-kb');
+    kb.style.transition = 'transform 8s ease-out';
+    kb.style.transform  = 'scale(1)';
+  })();
+}
+
+// Room Tabs
+function st(btn,id){
+  document.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('t-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Lightbox
+const imgs=[
+  {s:'images/61.webp',  c:'Hotel Exterior — Night'},
+  {s:'images/35.webp',  c:'Hotel Under the Stars'},
+  {s:'images/61.webp',  c:'Best Western — Vernal, Utah'},
+  {s:'images/41.webp',  c:'Standard Queen Room'},
+  {s:'images/48.webp',  c:'Standard Queen Suite Room'},
+  {s:'images/40.webp',  c:'Standard King Room'},
+  {s:'images/47.webp',  c:'Standard King Suite Room'},
+  {s:'images/38.webp',  c:'Standard Double Queen Room'},
+  {s:'images/42.webp',  c:'Standard Double Queen Room — View 2'},
+  {s:'images/45.webp',  c:'Double Queen Suite Room'},
+  {s:'images/50.webp',  c:'Standard Double Queen Room — View 3'},
+  {s:'images/39.webp',  c:'King Suite Room'},
+  {s:'images/43.webp',  c:'Standard King Suite Room'},
+  {s:'images/46.webp',  c:'King Suite Room — Living Area'},
+  {s:'images/51.webp',  c:'King Suite Room — View 4'},
+  {s:'images/37.webp',  c:'Jacuzzi King Suite Room'},
+  {s:'images/49.webp',  c:'Jacuzzi King Suite Room — View 2'},
+  {s:'images/44.webp',  c:'Jacuzzi Double Queen Suite Room'},
+  {s:'images/53.webp',  c:'Standard King — Pet Friendly'},
+  {s:'images/54.webp',  c:'Standard Queen — Pet Friendly'},
+  {s:'images/59.webp',  c:'Breakfast Dining Room'},
+  {s:'images/1.webp',    c:'Free Breakfast Area'},
+];
+let li=0;
+function ola(i){li=i;sl();document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
+function ol(s,c){const i=imgs.findIndex(x=>x.s===s);li=i>=0?i:0;sl();document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
+function sl(){
+  const img=document.getElementById('lb-img');
+  img.style.opacity=0;
+  setTimeout(()=>{img.src=imgs[li].s;document.getElementById('lb-cap').textContent=imgs[li].c;document.getElementById('lbc').textContent=(li+1)+' / '+imgs.length;img.style.opacity=1;},150);
+}
+function ln(d){li=(li+d+imgs.length)%imgs.length;sl();}
+function cl(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lb')?.addEventListener('click',function(e){if(e.target===this)cl();});
+document.addEventListener('keydown',e=>{
+  const lb=document.getElementById('lb');
+  if(!lb||!lb.classList.contains('open'))return;
+  if(e.key==='ArrowRight')ln(1);
+  if(e.key==='ArrowLeft')ln(-1);
+  if(e.key==='Escape')cl();
+});
+
+/* ── Owner Video Frame — YouTube embed ── */
+const ownerOverlay = document.getElementById('ownerPlayOverlay');
+const ownerIframe  = document.getElementById('ownerVideo');
+
+if (ownerOverlay && ownerIframe) {
+  ownerOverlay.addEventListener('click', () => {
+    ownerIframe.contentWindow.postMessage(
+      '{"event":"command","func":"playVideo","args":""}', '*'
+    );
+    ownerOverlay.style.opacity = '0';
+    ownerOverlay.style.pointerEvents = 'none';
+  });
+
+  if (window.matchMedia('(hover: hover)').matches) {
+    const ownerBox = document.getElementById('ownerFrameBox');
+    const scene    = ownerBox.closest('.owner-frame-scene');
+    scene.addEventListener('mousemove', e => {
+      const r    = scene.getBoundingClientRect();
+      const x    = (e.clientX - r.left)  / r.width  - 0.5;
+      const y    = (e.clientY - r.top)   / r.height - 0.5;
+      const rotY =  x * 14;
+      const rotX = -y * 14;
+      ownerBox.style.transform = \`rotateX(\${rotX}deg) rotateY(\${rotY}deg)\`;
+    });
+    scene.addEventListener('mouseleave', () => {
+      ownerBox.style.transform = 'rotateX(2deg) rotateY(2deg)';
+    });
+  }
+}
+</script>`;
+---
+
+<BaseLayout
+  title=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn — Weekly Rates from $84/night`
+  description=`Best Western Inn in Vernal, Utah — weekly rates from $588 (7 nights), free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/`
+  ogTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
+  ogDescription=`Weekly rates from $588 (7 nights). Free hot breakfast, full kitchenettes, jacuzzi suites, pet friendly. 0.6 miles from Vernal Regional Airport.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
+  twitterDescription=`Weekly rates from $588. Free hot breakfast, kitchenettes, jacuzzi suites, pet friendly. Near Dinosaur National Monument.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  hreflang=`https://bestwesternvernalinn.com/`
+  isHome={true}
+  lastUpdated=`February 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+  <Fragment slot="scripts" set:html={pageScripts} />
+</BaseLayout>

@@ -1,0 +1,142 @@
+---
+// src/layouts/BaseLayout.astro
+// The single shell every page wraps. Owns <head> (title, description,
+// canonical, Open Graph, Twitter, schema injection) and the shared
+// nav / mobile-menu / scroll-to-top chrome + the global stylesheet.
+//
+// SEO PRESERVATION: title, description, canonical, OG and Twitter values
+// are PASSED IN per page so each page keeps its exact legacy metadata.
+// Pages that had bespoke OG/Twitter copy pass it explicitly; otherwise
+// sensible derivations from title/description are used.
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  /** Exact <title> from the legacy page. */
+  title: string;
+  /** Exact meta description from the legacy page. */
+  description: string;
+  /** Absolute canonical URL from the legacy page. */
+  canonical: string;
+  /** Robots directive; legacy default is "index, follow". */
+  robots?: string;
+  /** Open Graph overrides (fall back to title/description/canonical). */
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  ogImage?: string;
+  /** Twitter card overrides. */
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  /** hreflang alternate, if the legacy page declared one. */
+  hreflang?: string;
+  /** Header behaviour (home page marks the Home link active + logo -> #). */
+  isHome?: boolean;
+  /** Footer "Last updated" label — varies per legacy page. */
+  lastUpdated?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  robots = 'index, follow',
+  ogTitle,
+  ogDescription,
+  ogType = 'website',
+  ogImage = 'https://bestwesternvernalinn.com/images/35.webp',
+  twitterTitle,
+  twitterDescription,
+  twitterImage = 'https://bestwesternvernalinn.com/images/35.webp',
+  hreflang,
+  isHome = false,
+  lastUpdated = 'April 2026',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={robots} />
+  <meta name="author" content="Best Western Vernal Inn" />
+  <link rel="canonical" href={canonical} />
+  {hreflang && <link rel="alternate" hreflang="en-us" href={hreflang} />}
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={twitterTitle ?? ogTitle ?? title} />
+  <meta name="twitter:description" content={twitterDescription ?? ogDescription ?? description} />
+  <meta name="twitter:image" content={twitterImage} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={ogTitle ?? title} />
+  <meta property="og:description" content={ogDescription ?? description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Fonts (loaded identically to the legacy site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Analytics placeholder — drop GA/Plausible/etc. snippet here at launch. -->
+  <slot name="analytics" />
+
+  <!-- Per-page structured data (JSON-LD) is injected here, verbatim. -->
+  <slot name="schema" />
+
+  <!-- Per-page <head> extras (page-specific inline <style>, etc.). -->
+  <slot name="head" />
+</head>
+<body>
+  <Header isHome={isHome} />
+
+  <!-- Page body -->
+  <slot />
+
+  <Footer lastUpdated={lastUpdated} />
+
+  <button id="stop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top">↑</button>
+
+  <!-- Shared chrome behaviour: sticky-nav state, scroll-top reveal, burger menu. -->
+  <script is:inline>
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav')?.classList.toggle('scrolled', scrollY > 50);
+      document.getElementById('stop')?.classList.toggle('show', scrollY > 400);
+    });
+    document.getElementById('burger')?.addEventListener('click', function () {
+      this.classList.toggle('open');
+      document.getElementById('mm')?.classList.toggle('open');
+    });
+    function cm() {
+      document.getElementById('burger')?.classList.remove('open');
+      document.getElementById('mm')?.classList.remove('open');
+    }
+
+    // Reveal-on-scroll: .rv elements start hidden (opacity:0) and fade in
+    // when they enter the viewport. Without this, every .rv section stays
+    // invisible — the cause of the "missing sections" after migration.
+    const ro = new IntersectionObserver((es) => {
+      es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('on'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.rv').forEach((el) => ro.observe(el));
+  </script>
+
+  <!-- Page-specific scripts (parallax, galleries, video, etc.). -->
+  <slot name="scripts" />
+</body>
+</html>

@@ -1,0 +1,287 @@
+---
+// src/pages/oilfield-housing-vernal.astro
+// MIGRATION of /oilfield-housing-vernal.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Best Western Extended Stay Vernal",
+    "url": "https://bestwesternvernalinn.com",
+    "telephone": "+18015971696",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "addressCountry": "US"
+    },
+    "description": "Oilfield and energy worker housing in Vernal, Utah. Weekly and monthly hotel rates, truck parking, hot breakfast, laundry, and corporate billing for crews in the Uintah Basin.",
+    "priceRange": "$$",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Weekly Rates", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Monthly Rates", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Truck Parking", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Laundry Facilities", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Corporate Billing", "value": true }
+    ]
+  }
+  </script>`;
+const bodyContent = `<div class="distance-bar">
+  ⛽ Serving oilfield, pipeline, and energy crews working the Uintah Basin — call (435) 789-6625 for crew and corporate pricing
+</div>
+
+<div class="pbar">
+  <div class="pi"><span class="ic">🚛</span><div><div class="label">Truck Parking</div><div class="sub">Work vehicles &amp; trailers welcome</div></div></div>
+  <div class="pi"><span class="ic">🍳</span><div><div class="label">Early Breakfast</div><div class="sub">Hot breakfast before the drive out</div></div></div>
+  <div class="pi"><span class="ic">📅</span><div><div class="label">Weekly &amp; Monthly</div><div class="sub">Discounted crew rates</div></div></div>
+  <div class="pi"><span class="ic">🧺</span><div><div class="label">On-Site Laundry</div><div class="sub">Washers &amp; dryers on property</div></div></div>
+  <div class="pi"><span class="ic">🏢</span><div><div class="label">Corporate Billing</div><div class="sub">Invoicing &amp; company accounts</div></div></div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="intro-pull rv">
+    The Uintah Basin is one of the most productive energy regions in the western United States, and Vernal is its hub. Best Western Vernal Inn has been housing oilfield workers, pipeline crews, drilling teams, and energy contractors for years. We know what a field crew needs — and we've built our operation around delivering it reliably, week after week.
+  </div>
+
+  <section class="content-section rv">
+    <h2>Why Crews Choose Best Western Vernal</h2>
+    <p>There's a difference between a hotel that tolerates work crews and one that's genuinely set up for them. We're in the second category. Our team understands the rhythm of oilfield rotations — early starts, late arrivals, extended stays, and schedules that change without much notice.</p>
+    <ul class="feat-list">
+      <li>Weekly and monthly rates well below nightly pricing</li>
+      <li>Truck, trailer, and equipment parking on property</li>
+      <li>Hot breakfast available early — before the drive to the field</li>
+      <li>On-site laundry for end-of-week gear cleanup</li>
+      <li>Corporate billing and invoicing for company accounts</li>
+      <li>Flexible check-in and check-out for rotating shifts</li>
+      <li>In-room microwave and refrigerator in every room</li>
+      <li>Free high-speed Wi-Fi — reliable enough for reporting and communication</li>
+      <li>Pet-friendly rooms available for workers with dogs</li>
+      <li>Best Western Rewards points on all stays</li>
+    </ul>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Room Setup for the Long-Haul Worker</h2>
+    <p>After a 12-hour day in the field, you want a real bed, a real shower, and a place that feels like something other than a truck cab. Our rooms are designed to function as a proper home base for extended stays — not just a place to sleep, but a place to decompress, eat, and get ready for tomorrow.</p>
+
+    <div class="highlight-cards">
+      <div class="hcard">
+        <div class="hc-icon">🛏️</div>
+        <strong>Quality Beds</strong>
+        <span>Real mattresses, quality linens, and blackout curtains. Sleep matters when your days are hard.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">🚿</div>
+        <strong>Reliable Hot Water</strong>
+        <span>Full bathroom with consistent hot water pressure. Not a truck stop. A real hotel room.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">🍽️</div>
+        <strong>In-Room Microwave &amp; Fridge</strong>
+        <span>Store snacks, leftovers, and drinks. Prep simple meals on your own schedule.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">📺</div>
+        <strong>Flat-Screen TV</strong>
+        <span>Decompress at the end of a long day. Cable included, no streaming device required.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">💼</div>
+        <strong>Desk &amp; Work Area</strong>
+        <span>Complete field reports, handle paperwork, and stay in contact with the office.</span>
+      </div>
+      <div class="hcard">
+        <div class="hc-icon">📶</div>
+        <strong>Fast Wi-Fi</strong>
+        <span>Reliable enough for video calls, documentation uploads, and staying connected to your company.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Corporate &amp; Company Billing</h2>
+    <p>We work directly with companies, drilling contractors, pipeline operators, and project managers to set up billing arrangements that make the administrative side easy. If you're booking for a crew, we can handle it as a single account.</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <span class="tip-icon">🏢</span>
+        <p><strong>Company accounts.</strong> Establish a house account for ongoing crew bookings. One invoice per billing cycle rather than individual receipts.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🧾</span>
+        <p><strong>Itemized invoicing.</strong> Detailed receipts for expense reporting and per diem documentation. We understand the paperwork requirements.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">📋</span>
+        <p><strong>Flexible crew management.</strong> Rotating personnel on the same account. Workers can check in and out as the rotation schedule changes.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">📞</span>
+        <p><strong>Direct line to management.</strong> Call <a href="tel:4357896625">(435) 789-6625</a> to speak with someone who can actually make decisions on pricing and logistics.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>The Uintah Basin Energy Landscape</h2>
+    <p>The Uintah Basin sits atop one of the most significant hydrocarbon-bearing formations in the Rocky Mountain region. Oil and gas production, pipeline infrastructure, and associated services have driven the local economy for decades. Vernal serves as the operational hub — where crews base out of, where supplies are sourced, and where the workforce lives between rotations.</p>
+    <p>If your project is anywhere in the basin — from the Wasatch Front to the Colorado border, from the Wyoming line down to the Book Cliffs — Vernal is almost certainly your closest full-service city, and Best Western is your most complete lodging option in it.</p>
+    <div class="attraction-cards">
+      <div class="attr-card">
+        <strong>📍 Central Vernal Location</strong>
+        <p>Walking distance to fuel, restaurants, hardware, and supply runs. Everything a crew needs within a few miles.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🚛 Truck-Friendly Property</strong>
+        <p>Designed to accommodate work vehicles. No complaints from residential neighbors, no narrow parking lots.</p>
+      </div>
+      <div class="attr-card">
+        <strong>⛽ Near US-40 Corridor</strong>
+        <p>Quick access to the main artery through the basin. Efficient drive to sites across the region.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🏥 Near Vernal Services</strong>
+        <p>Ashley Regional Medical Center and urgent care facilities nearby — important for crews on long rotations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Better Than a Man Camp</h2>
+    <p>Temporary workforce housing camps are common in the basin, but they're not the only option — and for many workers, they're not the best one. A hotel with weekly rates offers everything a man camp does, plus things it doesn't.</p>
+    <div class="included-box">
+      <h3>What You Get at Best Western That a Man Camp Typically Doesn't Offer</h3>
+      <div class="included-grid">
+        <div class="inc-item">Hot breakfast included daily</div>
+        <div class="inc-item">Private room — not a bunk</div>
+        <div class="inc-item">Private bathroom</div>
+        <div class="inc-item">In-room TV and Wi-Fi</div>
+        <div class="inc-item">In-room fridge and microwave</div>
+        <div class="inc-item">No shared sleeping quarters</div>
+        <div class="inc-item">Best Western Rewards points</div>
+        <div class="inc-item">Housekeeping service</div>
+        <div class="inc-item">On-site laundry</div>
+        <div class="inc-item">No camp curfews or restrictions</div>
+      </div>
+    </div>
+    <div class="savings-tip">
+      <p><strong>Bottom line:</strong> For workers on a per diem, a private hotel room at a weekly rate often comes close to the per diem ceiling — meaning the company covers most or all of it, and the worker gets a real room instead of a bunk. Call us to run the numbers for your situation.</p>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>How to Book Housing for Your Crew</h2>
+    <p>The simplest way is a phone call. Tell us how many people, how long the rotation, and whether you need corporate billing set up. We'll handle the rest.</p>
+    <ul class="feat-list">
+      <li>Call <a href="tel:4357896625">(435) 789-6625</a> — speak directly with the front desk</li>
+      <li>Text the same number for quick confirmations</li>
+      <li>Email available for formal corporate account setup</li>
+      <li>Individual bookings also available at <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></li>
+      <li>Book early during busy basin periods — rooms fill fast</li>
+      <li>Let us know about pets, parking needs, or special requirements upfront</li>
+    </ul>
+    <div class="pro-tip">
+      <p><strong>For project managers:</strong> If you have a crew coming in for a multi-week project, reach out before the crew arrives. Setting up the account in advance makes check-in smooth for everyone, especially on day-shift starts at 4 or 5 a.m.</p>
+    </div>
+  </section>
+
+</div><!-- /content-wrap -->
+
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+<div class="cta-contact">
+  <h2>Book Oilfield Crew Housing in Vernal</h2>
+  <p>Call us to discuss crew rates, corporate billing, and availability. We'll get your team set up right.</p>
+  <div class="contact-options">
+    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
+    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">(435) 789-6625</span></a>
+    <a href="https://bestwesternvernalinn.com" class="contact-opt book"><span class="icon">🌐</span><span class="lbl">Book Online</span><span class="val">bestwesternvernalinn.com</span></a>
+  </div>
+</div>
+
+<div class="faq-page-sec" style="background:var(--soft)">
+  <div class="faq-categories content-wrap">
+    <div>
+      <div class="sh" style="padding:0 0 2rem">
+        <div class="tag">Common Questions</div>
+        <h2>Oilfield Housing FAQ</h2>
+        <div class="gline"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q">Does Best Western Vernal offer housing for oilfield workers? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We regularly house oilfield workers, pipeline crews, drilling teams, and energy contractors working in the Uintah Basin. We offer weekly and monthly rates, truck parking, corporate billing, and the full amenity package.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is there truck and equipment parking on site? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We have on-site parking suitable for work trucks, trailers, and larger vehicles. This is a standard expectation for our oilfield and contractor guests.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Can my company set up a billing account for the crew? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We work with companies to set up corporate accounts with invoicing and itemized billing. Call us at <a href="tel:4357896625">(435) 789-6625</a> to discuss your company's needs before the crew arrives.</p></div></div>
+        <div class="faq-item"><button class="faq-q">What are the weekly rates for oilfield worker housing in Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Rates vary by season and room type. Call us directly for current crew pricing — extended stay rates are often not accurately reflected on third-party booking platforms.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is breakfast included for extended stay oilfield workers? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Hot breakfast is included with every stay regardless of rate tier. For crews with early start times, breakfast is available before the drive out to the field.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Can workers on rotating schedules share the same company account? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We can manage rotating personnel under a single company account. Workers check in and out as the rotation changes, with billing consolidated at the company level.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is there laundry available for field crews? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Washer and dryer facilities are available on property. For crews going back into the field, end-of-week laundry is straightforward without leaving the hotel.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are pet-friendly rooms available for oilfield workers traveling with dogs? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Pet-friendly rooms are available. Let us know when booking that you'll have a pet with you.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How does the per diem work for oilfield workers staying at a hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Many oilfield workers receive a per diem that covers lodging. Our weekly rates are structured to be competitive with or within common per diem allowances. Call us to discuss your situation and we'll work with you on pricing that fits the per diem structure.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How do I book rooms for a crew arriving on short notice? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Call us directly at <a href="tel:4357896625">(435) 789-6625</a>. We can often accommodate short-notice crew bookings faster over the phone than through online booking platforms. The earlier you call, the better — especially during busy basin periods.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Oilfield Worker Housing in Vernal, Utah | Best Western Vernal Inn`
+  description=`Oilfield and energy worker housing in Vernal, Utah. Best Western Extended Stay offers weekly and monthly rates, truck parking, early breakfast, laundry, and flexible billing for crews working the Uintah Basin. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/oilfield-housing-vernal`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

@@ -1,0 +1,747 @@
+---
+// src/pages/hotel-near-jensen-utah.astro
+// MIGRATION of /hotel-near-jensen-utah.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "Hotel",
+   "name": "Best Western Vernal Inn",
+   "description": "Hotel near Jensen, Utah — 15 minutes from Dinosaur National Monument. Free hot breakfast, full kitchenettes, pet friendly rooms, free WiFi and parking.",
+   "url": "https://bestwesternvernalinn.com",
+   "telephone": "+14357896625",
+   "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "1935 South 1500 East",
+     "addressLocality": "Vernal",
+     "addressRegion": "UT",
+     "postalCode": "84078",
+     "addressCountry": "US"
+   },
+   "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": 40.4474,
+     "longitude": -109.5194
+   },
+   "amenityFeature": [
+     { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
+     { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
+     { "@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true },
+     { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
+     { "@type": "LocationFeatureSpecification", "name": "Kitchenette", "value": true }
+   ],
+   "priceRange": "$$",
+   "checkinTime": "15:00",
+   "checkoutTime": "11:00"
+ }
+ </script>
+<script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bestwesternvernalinn.com/" },
+     { "@type": "ListItem", "position": 2, "name": "Hotel Near Jensen Utah", "item": "https://bestwesternvernalinn.com/hotel-near-jensen-utah.html" }
+   ]
+ }
+ </script>
+<script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "FAQPage",
+   "mainEntity": [
+     {
+       "@type": "Question",
+       "name": "What is the closest hotel to Jensen Utah?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Best Western Vernal Inn at 1935 South 1500 East, Vernal, UT 84078 is approximately 15 minutes from Jensen, Utah — the closest full-service hotel to Jensen and Dinosaur National Monument's Quarry Visitor Center."
+       }
+     },
+     {
+       "@type": "Question",
+       "name": "How far is Best Western Vernal Inn from Dinosaur National Monument?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Best Western Vernal Inn is approximately 15–20 minutes from the Quarry Visitor Center at Dinosaur National Monument, via US-40 East through Jensen, Utah."
+       }
+     },
+     {
+       "@type": "Question",
+       "name": "Is there a pet friendly hotel near Jensen Utah?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes. Best Western Vernal Inn is pet friendly — up to two dogs per room, 80 lb limit per dog. $30/day pet fee plus $100 refundable deposit. Located 15 minutes from Jensen, UT."
+       }
+     },
+     {
+       "@type": "Question",
+       "name": "Does the hotel near Jensen Utah include breakfast?",
+       "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Yes. Best Western Vernal Inn includes a free hot breakfast every morning — hot dishes, pancakes, pastries, fruit, juice, and coffee. Included in every stay at no extra charge."
+       }
+     }
+   ]
+ }
+ </script>
+<style>
+   /* ── Page-specific hero ── */
+   .seo-hero {
+     position: relative;
+     min-height: 82vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+     overflow: hidden;
+     background: var(--navy);
+   }
+   .seo-hero-bg {
+     position: absolute;
+     inset: 0;
+     background-image: url('images/35.webp');
+     background-size: cover;
+     background-position: center;
+     transform: scale(1.08);
+     transition: transform 8s ease-out;
+     will-change: transform;
+   }
+   .seo-hero-bg.loaded { transform: scale(1); }
+   .seo-hero-ov {
+     position: absolute;
+     inset: 0;
+     background: linear-gradient(160deg, rgba(10,26,47,.72) 0%, rgba(10,26,47,.45) 60%, rgba(10,26,47,.78) 100%);
+   }
+   .seo-hero-cnt {
+     position: relative;
+     z-index: 2;
+     max-width: 820px;
+     padding: 0 24px;
+     color: #fff;
+   }
+   .seo-hero-cnt .eyebrow {
+     font-family: 'Lato', sans-serif;
+     font-size: .85rem;
+     font-weight: 700;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     color: var(--gold);
+     margin-bottom: 18px;
+   }
+   .seo-hero-cnt h1 {
+     font-family: 'Playfair Display', serif;
+     font-size: clamp(2.2rem, 5vw, 3.8rem);
+     line-height: 1.15;
+     margin-bottom: 20px;
+     color: #fff;
+   }
+   .seo-hero-cnt h1 em { color: var(--gold); font-style: italic; }
+   .seo-hero-cnt p {
+     font-size: clamp(1rem, 2vw, 1.18rem);
+     line-height: 1.7;
+     color: rgba(255,255,255,.88);
+     margin-bottom: 36px;
+     max-width: 640px;
+     margin-left: auto;
+     margin-right: auto;
+   }
+   .seo-hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+   /* ── Intro section ── */
+   .intro-sec {
+     max-width: 860px;
+     margin: 0 auto;
+     padding: 80px 24px 60px;
+     text-align: center;
+   }
+   .intro-sec h2 {
+     font-family: 'Playfair Display', serif;
+     font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+     color: var(--navy);
+     margin-bottom: 20px;
+   }
+   .intro-sec h2 em { color: var(--gold); font-style: italic; }
+   .intro-sec p {
+     font-size: 1.08rem;
+     line-height: 1.8;
+     color: #444;
+     margin-bottom: 16px;
+   }
+
+   /* ── Distance card strip ── */
+   .dist-strip {
+     background: var(--navy);
+     padding: 48px 24px;
+   }
+   .dist-strip-inner {
+     max-width: 1100px;
+     margin: 0 auto;
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+     gap: 24px;
+   }
+   .dist-card {
+     background: rgba(255,255,255,.06);
+     border: 1px solid rgba(212,175,55,.25);
+     border-radius: 12px;
+     padding: 28px 20px;
+     text-align: center;
+     color: #fff;
+   }
+   .dist-card .dist-icon { font-size: 2rem; margin-bottom: 10px; }
+   .dist-card .dist-place {
+     font-family: 'Playfair Display', serif;
+     font-size: 1.05rem;
+     color: var(--gold);
+     margin-bottom: 6px;
+   }
+   .dist-card .dist-time {
+     font-size: 1.5rem;
+     font-weight: 900;
+     color: #fff;
+     margin-bottom: 4px;
+   }
+   .dist-card .dist-note { font-size: .82rem; color: rgba(255,255,255,.6); }
+
+   /* ── Why stay section ── */
+   .why-sec {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: 80px 24px;
+   }
+   .why-sec .sh { text-align: center; margin-bottom: 48px; }
+   .why-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+     gap: 28px;
+   }
+   .why-card {
+     background: #fff;
+     border-radius: 14px;
+     padding: 32px 28px;
+     box-shadow: 0 4px 24px rgba(0,0,0,.07);
+     border-top: 3px solid var(--gold);
+     transition: transform .3s, box-shadow .3s;
+   }
+   .why-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.12); }
+   .why-card .wic { font-size: 2.2rem; margin-bottom: 14px; }
+   .why-card h3 {
+     font-family: 'Playfair Display', serif;
+     font-size: 1.2rem;
+     color: var(--navy);
+     margin-bottom: 10px;
+   }
+   .why-card p { font-size: .95rem; line-height: 1.7; color: #555; }
+
+   /* ── Jensen info section ── */
+   .jensen-sec {
+     background: #f8f6f0;
+     padding: 80px 24px;
+   }
+   .jensen-inner {
+     max-width: 1100px;
+     margin: 0 auto;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 60px;
+     align-items: center;
+   }
+   @media (max-width: 768px) { .jensen-inner { grid-template-columns: 1fr; gap: 36px; } }
+   .jensen-img {
+     border-radius: 16px;
+     overflow: hidden;
+     box-shadow: 0 8px 40px rgba(0,0,0,.15);
+     aspect-ratio: 4/3;
+   }
+   .jensen-img img { width: 100%; height: 100%; object-fit: cover; }
+   .jensen-txt .tag {
+     font-size: .8rem;
+     font-weight: 700;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     color: var(--gold);
+     margin-bottom: 14px;
+     display: block;
+   }
+   .jensen-txt h2 {
+     font-family: 'Playfair Display', serif;
+     font-size: clamp(1.7rem, 3vw, 2.4rem);
+     color: var(--navy);
+     margin-bottom: 18px;
+     line-height: 1.2;
+   }
+   .jensen-txt h2 em { color: var(--gold); font-style: italic; }
+   .jensen-txt p { font-size: 1rem; line-height: 1.8; color: #444; margin-bottom: 14px; }
+   .jensen-list { list-style: none; padding: 0; margin: 20px 0; }
+   .jensen-list li {
+     padding: 8px 0 8px 28px;
+     position: relative;
+     font-size: .97rem;
+     color: #333;
+     border-bottom: 1px solid rgba(0,0,0,.06);
+   }
+   .jensen-list li::before {
+     content: '✦';
+     position: absolute;
+     left: 0;
+     color: var(--gold);
+     font-size: .75rem;
+     top: 10px;
+   }
+
+   /* ── Rooms preview ── */
+   .rooms-preview {
+     max-width: 1100px;
+     margin: 0 auto;
+     padding: 80px 24px;
+   }
+   .rooms-preview .sh { text-align: center; margin-bottom: 48px; }
+   .rp-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+     gap: 28px;
+   }
+   .rp-card {
+     border-radius: 14px;
+     overflow: hidden;
+     box-shadow: 0 4px 24px rgba(0,0,0,.09);
+     background: #fff;
+     transition: transform .3s, box-shadow .3s;
+   }
+   .rp-card:hover { transform: translateY(-4px); box-shadow: 0 10px 36px rgba(0,0,0,.14); }
+   .rp-img { aspect-ratio: 16/10; overflow: hidden; }
+   .rp-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+   .rp-card:hover .rp-img img { transform: scale(1.05); }
+   .rp-body { padding: 24px; }
+   .rp-body .rp-tag {
+     font-size: .75rem;
+     font-weight: 700;
+     letter-spacing: 2px;
+     text-transform: uppercase;
+     color: var(--gold);
+     margin-bottom: 8px;
+   }
+   .rp-body h3 {
+     font-family: 'Playfair Display', serif;
+     font-size: 1.2rem;
+     color: var(--navy);
+     margin-bottom: 10px;
+   }
+   .rp-body p { font-size: .92rem; line-height: 1.6; color: #555; margin-bottom: 16px; }
+   .rp-price {
+     font-size: 1.4rem;
+     font-weight: 900;
+     color: var(--navy);
+     margin-bottom: 4px;
+   }
+   .rp-price span { font-size: .85rem; font-weight: 400; color: #888; }
+   .rp-book {
+     display: inline-block;
+     margin-top: 14px;
+     padding: 10px 22px;
+     background: var(--gold);
+     color: var(--navy);
+     font-weight: 700;
+     font-size: .9rem;
+     border-radius: 6px;
+     text-decoration: none;
+     transition: background .2s, transform .2s;
+   }
+   .rp-book:hover { background: #c9a227; transform: translateY(-1px); }
+
+   /* ── Amenities strip ── */
+   .amen-strip {
+     background: var(--navy);
+     padding: 60px 24px;
+   }
+   .amen-strip-inner {
+     max-width: 1100px;
+     margin: 0 auto;
+   }
+   .amen-strip .sh { text-align: center; margin-bottom: 40px; }
+   .amen-strip .sh h2 { color: #fff; }
+   .amen-strip .sh p { color: rgba(255,255,255,.75); }
+   .amen-icons {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+     gap: 20px;
+   }
+   .ai-item {
+     text-align: center;
+     padding: 24px 16px;
+     background: rgba(255,255,255,.05);
+     border-radius: 12px;
+     border: 1px solid rgba(212,175,55,.2);
+     color: #fff;
+   }
+   .ai-item .ai-icon { font-size: 2rem; margin-bottom: 10px; }
+   .ai-item .ai-label { font-size: .88rem; font-weight: 700; color: var(--gold); }
+
+   /* ── FAQ section ── */
+   .faq-sec {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 80px 24px;
+   }
+   .faq-sec .sh { text-align: center; margin-bottom: 48px; }
+   .faq-item {
+     border-bottom: 1px solid rgba(0,0,0,.1);
+     padding: 24px 0;
+   }
+   .faq-item h3 {
+     font-family: 'Playfair Display', serif;
+     font-size: 1.1rem;
+     color: var(--navy);
+     margin-bottom: 10px;
+     cursor: pointer;
+   }
+   .faq-item p { font-size: .97rem; line-height: 1.75; color: #555; }
+
+   /* ── CTA section ── */
+   .cta-sec {
+     background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 100%);
+     padding: 80px 24px;
+     text-align: center;
+     color: #fff;
+   }
+   .cta-sec h2 {
+     font-family: 'Playfair Display', serif;
+     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+     margin-bottom: 16px;
+     color: #fff;
+   }
+   .cta-sec h2 em { color: var(--gold); font-style: italic; }
+   .cta-sec p { font-size: 1.05rem; color: rgba(255,255,255,.82); margin-bottom: 36px; max-width: 580px; margin-left: auto; margin-right: auto; }
+   .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+   .cta-info { font-size: .88rem; color: rgba(255,255,255,.55); }
+   .cta-info a { color: var(--gold); text-decoration: none; }
+
+   /* ── Map section ── */
+   .map-sec {
+     height: 420px;
+     position: relative;
+   }
+   .map-sec iframe { width: 100%; height: 100%; border: 0; display: block; }
+ </style>
+<link rel="icon" href="images/logo.webp" type="image/webp">`;
+const bodyContent = `<!-- NAV -->
+
+
+<!-- HERO -->
+<section class="seo-hero">
+ <div class="seo-hero-bg" id="heroBg"></div>
+ <div class="seo-hero-ov"></div>
+ <div class="seo-hero-cnt">
+   <p class="eyebrow">Hotel Near Jensen, Utah</p>
+   <h1>Your Base Camp for<br><em>Dinosaur Country.</em></h1>
+   <p>Just 15 minutes from Jensen, Utah and the Quarry Visitor Center at Dinosaur National Monument — Best Western Vernal Inn puts you perfectly placed for everything the Uintah Basin has to offer.</p>
+   <div class="seo-hero-btns">
+     <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="btn-p" target="_blank">Book Your Stay</a>
+     <a href="tel:4357896625" class="btn-s">📞 Call Us</a>
+   </div>
+ </div>
+</section>
+
+<!-- DISTANCE STRIP -->
+<div class="dist-strip">
+ <div class="dist-strip-inner">
+   <div class="dist-card">
+     <div class="dist-icon">🦕</div>
+     <div class="dist-place">Jensen, Utah</div>
+     <div class="dist-time">~15 min</div>
+     <div class="dist-note">via US-40 East</div>
+   </div>
+   <div class="dist-card">
+     <div class="dist-icon">🏛️</div>
+     <div class="dist-place">Dinosaur National Monument</div>
+     <div class="dist-time">~20 min</div>
+     <div class="dist-note">Quarry Visitor Center</div>
+   </div>
+   <div class="dist-card">
+     <div class="dist-icon">✈️</div>
+     <div class="dist-place">Vernal Regional Airport</div>
+     <div class="dist-time">0.6 miles</div>
+     <div class="dist-note">Closest hotel to VEL</div>
+   </div>
+   <div class="dist-card">
+     <div class="dist-icon">🏔️</div>
+     <div class="dist-place">Red Fleet State Park</div>
+     <div class="dist-time">~10 min</div>
+     <div class="dist-note">North of Vernal</div>
+   </div>
+   <div class="dist-card">
+     <div class="dist-icon">🦴</div>
+     <div class="dist-place">Utah Field House Museum</div>
+     <div class="dist-time">~5 min</div>
+     <div class="dist-note">Downtown Vernal</div>
+   </div>
+ </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro-sec rv">
+ <h2>The Closest Full-Service Hotel<br><em>to Jensen, Utah</em></h2>
+ <p>Jensen is a small community on US-40, best known as the gateway to Dinosaur National Monument — home to one of the largest dinosaur fossil quarries in the world. There are no hotels in Jensen itself, which makes Best Western Vernal Inn your closest and most comfortable option.</p>
+ <p>We're just 15 minutes west on US-40 — close enough to make an early morning run to the Quarry Visitor Center before the crowds arrive, and comfortable enough to come back to after a full day on the trails.</p>
+</section>
+
+<!-- JENSEN INFO -->
+<section class="jensen-sec">
+ <div class="jensen-inner">
+   <div class="jensen-img rv">
+     <img src="images/61.webp" alt="Hotel near Jensen Utah — Best Western Vernal Inn exterior">
+   </div>
+   <div class="jensen-txt rv">
+     <span class="tag">✦ Gateway to Dinosaur Country</span>
+     <h2>Jensen, Utah —<br><em>Where the Fossils Are.</em></h2>
+     <p>Jensen, Utah sits right at the entrance to Dinosaur National Monument, one of America's most remarkable paleontological sites. The Quarry Exhibit Hall protects over 1,500 dinosaur bones still embedded in the cliff face — visible exactly as they were discovered.</p>
+     <p>From Best Western Vernal Inn, you're perfectly positioned to explore everything Jensen and the surrounding area has to offer:</p>
+     <ul class="jensen-list">
+       <li>Dinosaur National Monument — Quarry Visitor Center</li>
+       <li>Quarry Exhibit Hall — 1,500+ fossils in the rock face</li>
+       <li>Split Mountain Campground & Green River</li>
+       <li>Jones Hole National Fish Hatchery</li>
+       <li>Cub Creek Road scenic drive</li>
+       <li>Petroglyphs and ancient rock art sites</li>
+       <li>Green River rafting and kayaking put-ins</li>
+     </ul>
+   </div>
+ </div>
+</section>
+
+<!-- WHY STAY WITH US -->
+<section class="why-sec">
+ <div class="sh rv">
+   <p class="tag">✦ Why Best Western Vernal Inn</p>
+   <h2>Everything You Need.<br><em>Right Where You Need It.</em></h2>
+   <div class="gline"></div>
+ </div>
+ <div class="why-grid rv">
+   <div class="why-card">
+     <div class="wic">🍳</div>
+     <h3>Free Hot Breakfast Daily</h3>
+     <p>Fuel up before your drive to Jensen — hot dishes, pancakes, pastries, fruit, juice, and coffee every morning. Included in your stay, no extra charge.</p>
+   </div>
+   <div class="why-card">
+     <div class="wic">🍴</div>
+     <h3>Full Kitchenettes</h3>
+     <p>Most rooms include a stovetop, microwave, full-size refrigerator, and coffee maker. Cook your own meals and save — perfect for multi-night stays near Dinosaur National Monument.</p>
+   </div>
+   <div class="why-card">
+     <div class="wic">🐾</div>
+     <h3>Pet Friendly Rooms</h3>
+     <p>Bringing the dog on your Dinosaur Country adventure? We welcome up to two dogs per room (80 lb limit). Ground floor rooms with wood floors available.</p>
+   </div>
+   <div class="why-card">
+     <div class="wic">🅿️</div>
+     <h3>Free Parking — Always</h3>
+     <p>Pull in with your truck, trailer, or RV tow vehicle — our lot has plenty of space and parking is always free. No fees, no surprises.</p>
+   </div>
+   <div class="why-card">
+     <div class="wic">📶</div>
+     <h3>Fast Free WiFi</h3>
+     <p>Plan tomorrow's hike, upload your fossil photos, or just catch up on the news — fast, reliable WiFi in every room at no extra charge.</p>
+   </div>
+   <div class="why-card">
+     <div class="wic">🛁</div>
+     <h3>Jacuzzi Suites Available</h3>
+     <p>After a long day on the trails, soak in a private in-room jacuzzi tub. King Jacuzzi Suites and Jacuzzi Double Queen Suites available — call to reserve.</p>
+   </div>
+ </div>
+</section>
+
+<!-- ROOMS PREVIEW -->
+<section class="rooms-preview">
+ <div class="sh rv">
+   <p class="tag">✦ Our Rooms</p>
+   <h2>Pick Your Perfect Room<br><em>for Your Jensen Stay</em></h2>
+   <div class="gline"></div>
+ </div>
+ <div class="rp-grid rv">
+   <div class="rp-card">
+     <div class="rp-img">
+       <img src="images/41.webp" alt="Standard Queen Room — hotel near Jensen Utah">
+     </div>
+     <div class="rp-body">
+       <div class="rp-tag">✦ Standard Queen</div>
+       <h3>Queen Room</h3>
+       <p>Plush queen bed, flat-screen TV, free WiFi, and a warm, clean room ready for you after a day at Dinosaur National Monument.</p>
+       <div class="rp-price">$588 <span>+ tax · 7 nights</span></div>
+       <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="rp-book" target="_blank">Book Now</a>
+     </div>
+   </div>
+   <div class="rp-card">
+     <div class="rp-img">
+       <img src="images/38.webp" alt="Double Queen Room — family hotel near Jensen Utah">
+     </div>
+     <div class="rp-body">
+       <div class="rp-tag">✦ Double Queen</div>
+       <h3>Double Queen Room</h3>
+       <p>Two plush queen beds — perfect for families exploring Dinosaur National Monument together. Spacious, clean, and genuinely comfortable.</p>
+       <div class="rp-price">$660 <span>+ tax · 7 nights</span></div>
+       <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="rp-book" target="_blank">Book Now</a>
+     </div>
+   </div>
+   <div class="rp-card">
+     <div class="rp-img">
+       <img src="images/39.webp" alt="King Suite with kitchenette — extended stay near Jensen Utah">
+     </div>
+     <div class="rp-body">
+       <div class="rp-tag">✦ King Suite</div>
+       <h3>King Suite with Kitchenette</h3>
+       <p>Full kitchenette, king bed, and a separate living area. Ideal for longer stays near Jensen and Dinosaur National Monument.</p>
+       <div class="rp-price">Call for rate</div>
+       <a href="tel:4357896625" class="rp-book">📞 Call to Book</a>
+     </div>
+   </div>
+ </div>
+</section>
+
+<!-- AMENITIES STRIP -->
+<div class="amen-strip">
+ <div class="amen-strip-inner">
+   <div class="sh rv">
+     <p class="tag" style="color:var(--gold)">✦ Included in Every Stay</p>
+     <h2>Everything You Need. Nothing Hidden.</h2>
+     <div class="gline"></div>
+   </div>
+   <div class="amen-icons rv">
+     <div class="ai-item"><div class="ai-icon">🍳</div><div class="ai-label">Free Breakfast</div></div>
+     <div class="ai-item"><div class="ai-icon">📶</div><div class="ai-label">Free WiFi</div></div>
+     <div class="ai-item"><div class="ai-icon">🅿️</div><div class="ai-label">Free Parking</div></div>
+     <div class="ai-item"><div class="ai-icon">🍴</div><div class="ai-label">Kitchenettes</div></div>
+     <div class="ai-item"><div class="ai-icon">🐾</div><div class="ai-label">Pet Friendly</div></div>
+     <div class="ai-item"><div class="ai-icon">🛁</div><div class="ai-label">Jacuzzi Suites</div></div>
+     <div class="ai-item"><div class="ai-icon">🕐</div><div class="ai-label">24-Hr Front Desk</div></div>
+     <div class="ai-item"><div class="ai-icon">♿</div><div class="ai-label">ADA Accessible</div></div>
+   </div>
+ </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-sec">
+ <div class="sh rv">
+   <p class="tag">✦ Common Questions</p>
+   <h2>Hotel Near Jensen Utah —<br>Frequently Asked Questions</h2>
+   <div class="gline"></div>
+ </div>
+ <div class="rv">
+   <div class="faq-item">
+     <h3>What is the closest hotel to Jensen, Utah?</h3>
+     <p>Best Western Vernal Inn at 1935 South 1500 East, Vernal, UT 84078 is approximately 15 minutes from Jensen, Utah — the closest full-service hotel to Jensen and the Dinosaur National Monument Quarry Visitor Center.</p>
+   </div>
+   <div class="faq-item">
+     <h3>How far is Best Western Vernal Inn from Dinosaur National Monument?</h3>
+     <p>Approximately 15–20 minutes via US-40 East through Jensen, Utah. The Quarry Visitor Center and Quarry Exhibit Hall are a straightforward drive with no difficult roads.</p>
+   </div>
+   <div class="faq-item">
+     <h3>Is there a pet friendly hotel near Jensen, Utah?</h3>
+     <p>Yes. Best Western Vernal Inn welcomes up to two dogs per room (80 lb limit per dog). Pet fee is $30/day plus a $100 refundable deposit at check-in. Ground floor rooms with wood floors available for pets.</p>
+   </div>
+   <div class="faq-item">
+     <h3>Does the hotel near Jensen Utah include breakfast?</h3>
+     <p>Yes — a free hot breakfast is included every morning. Hot dishes, pancakes, pastries, fruit, juice, and coffee. No extra charge, served daily.</p>
+   </div>
+   <div class="faq-item">
+     <h3>Do rooms have kitchenettes near Jensen Utah?</h3>
+     <p>Most rooms include a full kitchenette with stovetop, microwave, full-size refrigerator, and coffee maker — ideal for multi-night stays while exploring Dinosaur National Monument and the Jensen area.</p>
+   </div>
+   <div class="faq-item">
+     <h3>What is the check-in time at Best Western Vernal Inn?</h3>
+     <p>Check-in is at 3:00 PM and check-out is at 11:00 AM. Early check-in and late check-out may be available — call (435) 789-6625 to arrange.</p>
+   </div>
+ </div>
+</section>
+
+<!-- MAP -->
+<div class="map-sec">
+ <iframe
+   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999!2d-109.5194!3d40.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8753f2f0b0b0b0b1%3A0x1!2s1935+S+1500+E%2C+Naples%2C+UT+84078!5e0!3m2!1sen!2sus!4v1"
+   width="100%" height="100%"
+   style="border:0; display:block;"
+   allowfullscreen=""
+   loading="lazy"
+   referrerpolicy="no-referrer-when-downgrade"
+   title="Best Western Vernal Inn — Hotel near Jensen Utah map">
+ </iframe>
+</div>
+
+<!-- CTA -->
+<section class="cta-sec">
+ <h2>Ready to Explore<br><em>Dinosaur Country?</em></h2>
+ <p>Book your stay at Best Western Vernal Inn tonight — 15 minutes from Jensen, Utah and Dinosaur National Monument. Free breakfast, great rooms, and a warm welcome waiting.</p>
+ <div class="cta-btns">
+   <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="btn-p" target="_blank">Book Your Room Today</a>
+   <a href="tel:4357896625" class="btn-s" style="color:#fff;border-color:rgba(255,255,255,.5);">📞 (435) 789-6625</a>
+ </div>
+ <p class="cta-info">1935 South 1500 East, Vernal, UT 84078 &nbsp;|&nbsp; <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></p>
+</section>
+
+<!-- FOOTER -->
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Hotel Near Jensen Utah | Best Western Vernal Inn — 15 Min from Dinosaur National Monument`
+  description=`Looking for a hotel near Jensen, Utah? Best Western Vernal Inn is just 15 minutes away — free hot breakfast, full kitchenettes, pet friendly, free WiFi & parking. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/hotel-near-jensen-utah`
+  ogTitle=`Hotel Near Jensen Utah | Best Western Vernal Inn`
+  ogDescription=`15 minutes from Jensen, Utah and Dinosaur National Monument. Free hot breakfast, kitchenettes, pet friendly. Book direct.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

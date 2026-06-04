@@ -1,0 +1,217 @@
+---
+// src/pages/vernal-utah-travel-guide.astro
+// MIGRATION of /vernal-utah-travel-guide.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What is Vernal, Utah known for?","acceptedAnswer":{"@type":"Answer","text":"Vernal is the gateway to Dinosaur National Monument, Flaming Gorge National Recreation Area, and the Uinta Mountains. The area is known for dinosaur fossils, red rock landscapes, world-class fishing, and access to some of the most remote wilderness in the lower 48 states."}},
+   {"@type":"Question","name":"When is the best time to visit Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Late May through October offers the best weather for outdoor activities. Summer months are peak season for Dinosaur National Monument and Flaming Gorge. September and October bring fall colors, cooler temperatures, and hunting season in the Ashley National Forest."}},
+   {"@type":"Question","name":"How do I get to Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Vernal is located on Highway 40 in northeastern Utah, approximately 175 miles east of Salt Lake City. Vernal Regional Airport (VEL) offers commercial flights. Most visitors drive from Salt Lake City, Denver, or Grand Junction."}},
+   {"@type":"Question","name":"What outdoor activities are near Vernal?","acceptedAnswer":{"@type":"Answer","text":"Dinosaur National Monument (20 miles), Flaming Gorge (40 miles), Red Fleet State Park (12 miles), Steinaker State Park (7 miles), and Ashley National Forest (15 miles to the boundary) all offer hiking, fishing, boating, camping, and wildlife viewing."}},
+   {"@type":"Question","name":"Where should I stay in Vernal?","acceptedAnswer":{"@type":"Answer","text":"Best Western Vernal Inn is centrally located at 1935 South 1500 East — 0.6 miles from Vernal Regional Airport and within easy driving distance of all major attractions. Rates start at $84/night with free breakfast and kitchenettes."}}
+ ]}
+ </script>`;
+const bodyContent = `<section class="page-hero">
+ <div class="page-hero-cnt">
+ <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">Your Complete Guide to Dinosaur Country</p>
+ <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Vernal, Utah<br>Travel Guide</h1>
+ <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Everything you need to plan a trip to Vernal — from Dinosaur National Monument and Flaming Gorge to Red Fleet State Park and the High Uintas. What to see, when to go, and where to stay.</p>
+ <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">Book Your Stay</a>
+  <a href="tel:4357896625" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+ </div>
+ </div>
+</section>
+<div class="distance-bar">🗺️ DINOSAUR MONUMENT · FLAMING GORGE · RED FLEET · ASHLEY FOREST · HIGH UINTAS</div>
+<div class="content-wrap">
+<div class="intro-pull">
+<strong>Vernal, Utah sits at the crossroads of some of the most dramatic landscape in the American West.</strong> Twenty miles east, Dinosaur National Monument holds 1,500 fossils in a single rock wall. Forty miles north, Flaming Gorge carves a 91-mile reservoir through red canyon walls. The Uinta Mountains — home to Utah's highest peak — rise just behind town. And in between, Red Fleet State Park hides real dinosaur footprints along a desert reservoir that glows red at sunset. This guide covers everything you need to know to plan your visit.
+</div>
+
+<div class="content-section">
+ <h2>Dinosaur National Monument — 20 Miles East</h2>
+ <p>The main draw for most Vernal visitors. Dinosaur National Monument spans 210,000 acres across the Utah-Colorado border. The Utah side features the famous Quarry Exhibit Hall, where over 1,500 dinosaur bones are exposed in a tilted rock face — the densest concentration of Jurassic-era fossils ever found. Beyond the quarry, Cub Creek Road passes ancient Fremont petroglyphs and the Josie Bassett Morris homestead. The monument also offers backcountry camping, river rafting on the Green and Yampa, and scenic drives to Harper's Corner with thousand-foot canyon views.</p>
+ <p><strong>Getting there:</strong> 20 miles east of Vernal via Highway 40 and Highway 149. About 25 minutes by car. No entrance fee for the monument; the quarry shuttle is $25 per vehicle during peak season.</p>
+ <p><strong>What to know:</strong> There are no restaurants, gas stations, or stores inside the monument. Stock up in Vernal before you go. Summers are hot — bring water. The quarry is open year-round but shuttle-access only in summer.</p>
+ <div class="pro-tip" style="border-left-color:var(--gold);">
+  <p><strong>Where to stay:</strong> <a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:700;">Best Western Vernal Inn is the closest full-service hotel</a> to the monument — 20 miles south with weekly rates from $588 and free breakfast.</p>
+ </div>
+</div>
+
+<div class="content-section">
+ <h2>Flaming Gorge — 40 Miles North</h2>
+ <p>Flaming Gorge National Recreation Area stretches 91 miles along the Green River, with a reservoir surrounded by red-rock canyon walls that gave the gorge its name. The area is famous for trophy lake trout (30+ pounders caught regularly), kokanee salmon, and smallmouth bass. The Red Canyon Visitor Center offers a 1,400-foot overlook that rivals anything in southern Utah. Flaming Gorge Dam, completed in 1964, is open for tours. Below the dam, the Green River tailwaters offer world-class fly fishing.</p>
+ <p><strong>Getting there:</strong> Approximately 40 miles north of Vernal via Highway 191. Under one hour by car. Vernal is the last full-service town heading north.</p>
+ <p><strong>What to know:</strong> Summer weekends fill up fast — boat ramp lines can be long at Cedar Springs Marina. Lodging near the gorge is limited and expensive. Most visitors stay in Vernal and make day trips.</p>
+ <div class="pro-tip" style="border-left-color:var(--gold);">
+  <p><strong>Where to stay:</strong> <a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:700;">Lodging near Flaming Gorge from Vernal</a> — Best Western Vernal Inn offers kitchenettes for packing coolers and free parking for boats and trailers.</p>
+ </div>
+</div>
+
+<div class="content-section">
+ <h2>Red Fleet State Park — 12 Miles North</h2>
+ <p>Red Fleet is Vernal's most underrated attraction. A 15-minute drive north on Highway 191 brings you to a red-sandstone reservoir with warm swimming water, cliff jumping spots, and a 1.5-mile trail to a dinosaur trackway — over 200 dilophosaurus footprints preserved in Navajo sandstone, roughly 200 million years old. The park is small enough for a half-day visit but striking enough to be a trip highlight.</p>
+ <p><strong>Getting there:</strong> 12 miles north of Vernal on Highway 191. About 15 minutes.</p>
+ <p><strong>What to know:</strong> Best visited in the morning when the light makes the dinosaur tracks easiest to see. Warm enough for swimming from late May through September. Day-use fee applies.</p>
+ <div class="pro-tip" style="border-left-color:var(--gold);">
+  <p><strong>Where to stay:</strong> <a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:700;">Places to stay near Red Fleet</a> — Best Western Vernal Inn is 12 miles south, with pet friendly rooms and free breakfast.</p>
+ </div>
+</div>
+
+<div class="content-section">
+ <h2>Ashley National Forest & the High Uintas — 15 Miles North</h2>
+ <p>Ashley National Forest covers 1.3 million acres of mountain terrain north of Vernal, including the High Uintas Wilderness — the largest wilderness area in Utah and home to Kings Peak (13,528 feet), the state's highest point. The forest is the primary destination for elk and mule deer hunting (September–October), summer backpacking, mountain lake fishing, ATV riding, and horseback pack trips. In winter, snowmobiling and cross-country skiing take over.</p>
+ <p><strong>Getting there:</strong> Forest boundary begins approximately 15 miles north of Vernal on Highway 191. Access roads branch to trailheads and campgrounds from there.</p>
+ <p><strong>What to know:</strong> Vernal is the last town with hotels, groceries, gas, and gear before you enter the backcountry. During hunting season (September–October), accommodations fill up early.</p>
+ <div class="pro-tip" style="border-left-color:var(--gold);">
+  <p><strong>Where to stay:</strong> <a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:700;">Vernal hotel near Ashley National Forest</a> — weekly rates from $588, free breakfast, and parking for trucks and horse trailers.</p>
+ </div>
+</div>
+
+<div class="content-section">
+ <h2>Steinaker State Park — 7 Miles North</h2>
+ <p>Steinaker Reservoir is the closest major recreation area to Vernal — just 7 miles north on Highway 191. The park is popular for fishing (rainbow trout and largemouth bass), waterskiing, swimming, and camping. It's also the most convenient half-day outing from town, with easy access and a developed campground.</p>
+ <p><strong>Getting there:</strong> 7 miles north of Vernal on Highway 191. About 10 minutes.</p>
+</div>
+
+<div class="content-section">
+ <h2>When to Visit Vernal</h2>
+ <p>Vernal is a year-round destination, but most visitors come between May and October. Here's what each season offers:</p>
+ <div class="season-grid">
+  <div class="season-card"><span class="season-icon">🌸</span><strong>Spring (April–May)</strong><p>Mild temps, fewer crowds. Dinosaur Monument and Red Fleet are ideal. Rivers begin to run — early rafting season.</p></div>
+  <div class="season-card"><span class="season-icon">☀️</span><strong>Summer (June–August)</strong><p>Peak season. All parks open, warm reservoir swimming, full rafting operations. Book early — Flaming Gorge and Vernal hotels fill up.</p></div>
+  <div class="season-card"><span class="season-icon">🍂</span><strong>Fall (September–October)</strong><p>Hunting season in Ashley National Forest. Fall colors in the Uintas. Cooler temps, thinner crowds, excellent fishing.</p></div>
+  <div class="season-card"><span class="season-icon">❄️</span><strong>Winter (November–March)</strong><p>Snowmobiling and cross-country skiing in the Uintas. Dinosaur Monument quarry open year-round. Budget rates at hotels.</p></div>
+ </div>
+</div>
+
+<div class="content-section">
+ <h2>Getting to Vernal</h2>
+ <p>Vernal is located on Highway 40 in northeastern Utah, approximately 175 miles (about 3 hours) east of Salt Lake City. The drive from Denver is approximately 350 miles (5.5 hours) via I-70 and Highway 40. Grand Junction, Colorado, is about 200 miles (3.5 hours) south. Vernal Regional Airport (VEL) offers commercial flights — Best Western Vernal Inn is <a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:700;">just 0.6 miles from the terminal</a>.</p>
+</div>
+
+<div class="content-section">
+ <h2>Where to Stay in Vernal</h2>
+ <p>Best Western Vernal Inn is centrally located in Vernal at 1935 South 1500 East — within easy driving distance of every attraction listed above. Rates start at $84/night with free hot breakfast, kitchenettes, free parking for boats and trailers, and pet friendly rooms. For extended visits, weekly rates start at $588.</p>
+ <ul class="feat-list">
+  <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:700;">Accommodations near Dinosaur National Monument</a> — 20 miles</li>
+  <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:700;">Lodging near Flaming Gorge</a> — 40 miles</li>
+  <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:700;">Places to stay near Red Fleet</a> — 12 miles</li>
+  <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:700;">Closest hotel to Vernal Airport</a> — 0.6 miles</li>
+  <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:700;">Vernal hotel near Ashley Forest</a> — 15 miles</li>
+  <li><a href="cheap-hotel-vernal-utah.html" style="color:var(--navy);font-weight:700;">Affordable rates in Vernal</a> — from $84/night</li>
+  <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:700;">Extended stay options</a> — weekly from $588</li>
+  <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:700;">Pet friendly accommodations</a> — dogs welcome</li>
+  <li><a href="best-hotel-in-vernal-utah.html" style="color:var(--navy);font-weight:700;">Compare Vernal hotel options</a></li>
+  <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:700;">Workforce housing</a> — crew rates available</li>
+ </ul>
+</div>
+<div class="content-section">
+ <h2>Frequently Asked Questions</h2>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What is Vernal, Utah known for?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Vernal is the gateway to Dinosaur National Monument, Flaming Gorge National Recreation Area, and the Uinta Mountains. The area is known for dinosaur fossils, red rock landscapes, world-class fishing, and access to some of the most remote wilderness in the lower 48 states.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">When is the best time to visit Vernal, Utah?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Late May through October offers the best weather for outdoor activities. Summer months are peak season for Dinosaur National Monument and Flaming Gorge. September and October bring fall colors, cooler temperatures, and hunting season in the Ashley National Forest.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How do I get to Vernal, Utah?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Vernal is located on Highway 40 in northeastern Utah, approximately 175 miles east of Salt Lake City. Vernal Regional Airport (VEL) offers commercial flights. Most visitors drive from Salt Lake City, Denver, or Grand Junction.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What outdoor activities are near Vernal?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Dinosaur National Monument (20 miles), Flaming Gorge (40 miles), Red Fleet State Park (12 miles), Steinaker State Park (7 miles), and Ashley National Forest (15 miles to the boundary) all offer hiking, fishing, boating, camping, and wildlife viewing.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Where should I stay in Vernal?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Best Western Vernal Inn is centrally located at 1935 South 1500 East — 0.6 miles from Vernal Regional Airport and within easy driving distance of all major attractions. Rates start at $84/night with free breakfast and kitchenettes.</p>
+ </details>
+</div>
+<div style="background:var(--soft);padding:1.5rem 2rem;margin:2rem 0;border-radius:8px;text-align:center;font-size:.92rem;color:var(--muted);line-height:2.4;">
+ <strong style="display:block;margin-bottom:.5rem;color:var(--navy);font-family:'Playfair Display',serif;">Quick Links</strong>
+ <a href="index.html" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);">Home</a>
+ <a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);">Things to Do</a>
+ <a href="explore.html" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);">Explore Vernal</a>
+ <a href="cheap-hotel-vernal-utah.html" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);">Rates & Pricing</a>
+ <a href="faq.html" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid var(--gold);">FAQ</a>
+</div>
+</div>
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+<div class="cta-contact">
+ <h2>Ready to Book?</h2>
+ <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
+ <div class="contact-options">
+  <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Directly</span><span class="val">(435) 789-6625</span></a>
+  <a href="mailto:surestayplus53027@gmail.com" class="contact-opt"><span class="icon">✉️</span><span class="lbl">Email</span><span class="val">Send a Message</span></a>
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book"><span class="icon">🔒</span><span class="lbl">Book Online</span><span class="val">Reserve Now</span></a>
+ </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Vernal, Utah Travel Guide — Dinosaur Country, Flaming Gorge & the Uintas | Best Western Vernal Inn`
+  description=`Complete travel guide to Vernal, Utah. Dinosaur National Monument, Flaming Gorge, Red Fleet, Ashley National Forest. When to visit, what to do, where to stay. Plan your trip.`
+  canonical=`https://bestwesternvernalinn.com/vernal-utah-travel-guide`
+  ogTitle=`Vernal, Utah Travel Guide — Dinosaur Country, Flaming Gorge & the Uintas | Best Western Vernal Inn`
+  ogDescription=`Complete travel guide to Vernal, Utah. Dinosaur National Monument, Flaming Gorge, Red Fleet, Ashley National Forest. When to visit, what to do, where to stay. Plan your trip.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Vernal, Utah Travel Guide — Dinosaur Country, Flaming Gorge & the Uintas | Best Western Vernal Inn`
+  twitterDescription=`Complete travel guide to Vernal, Utah. Dinosaur National Monument, Flaming Gorge, Red Fleet, Ashley National Forest. When to visit, what to do, where to stay. Plan your trip.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

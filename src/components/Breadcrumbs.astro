@@ -1,0 +1,48 @@
+---
+// src/components/Breadcrumbs.astro
+// Emits BreadcrumbList JSON-LD from a single items array, matching the
+// legacy schema exactly (Home -> current page). A visual trail can be
+// rendered too, but legacy pages only shipped the JSON-LD, so showTrail
+// defaults to false to keep output identical. Place in the schema slot.
+//
+// Usage:
+//   <Breadcrumbs slot="schema" items={[
+//     { name: 'Home', url: 'https://bestwesternvernalinn.com/' },
+//     { name: 'Hotel Near Jensen Utah', url: 'https://bestwesternvernalinn.com/hotel-near-jensen-utah.html' },
+//   ]} />
+
+interface Crumb {
+  name: string;
+  url: string;
+}
+interface Props {
+  items: Crumb[];
+  showTrail?: boolean;
+}
+const { items, showTrail = false } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: c.url,
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+{showTrail && (
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      {items.map((c, i) => (
+        <li>
+          {i < items.length - 1 ? <a href={c.url}>{c.name}</a> : <span aria-current="page">{c.name}</span>}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

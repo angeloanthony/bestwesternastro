@@ -1,0 +1,490 @@
+---
+// src/pages/video.astro
+// MIGRATION of /video.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<link rel="icon" href="images/logo.webp" type="image/webp">`;
+const bodyContent = `<!-- LOADER -->
+<div id="loader">
+ <div class="loader-logo">Best Western</div>
+ <div class="loader-bar-track"><div class="loader-bar-fill" id="lbar"></div></div>
+ <div class="loader-label">Loading Presentation…</div>
+</div>
+
+<!-- MAIN STAGE -->
+<div id="stage">
+
+ <!-- GRAIN OVERLAY -->
+ <div id="grain"></div>
+
+ <!-- ═══════════════════════════════════════
+      SCENES
+ ════════════════════════════════════════ -->
+
+ <!-- SCENE 1 — Night Exterior (starry sky) -->
+ <div class="scene kb-right" data-duration="6" data-label="A New Chapter Begins">
+   <div class="scene-bg" style="background-image:url('images/35.webp')"></div>
+   <div class="scene-ov center"></div>
+   <div class="scene-caption" style="text-align:center; padding:0 5vw;">
+     <p class="cap-eyebrow">Vernal, Utah · 2025</p>
+     <h2 class="cap-title">Something Amazing<br>Just Happened <em>Here.</em></h2>
+     <p class="cap-sub" style="margin:0 auto;">The hotel you know has been completely transformed — and we can't wait to show you what's new.</p>
+   </div>
+   <div class="scene-num"><span>01</span> / 11</div>
+ </div>
+
+ <!-- SCENE 2 — Exterior wide shot -->
+ <div class="scene kb-left" data-duration="7" data-label="Your Home Away From Home">
+   <div class="scene-bg" style="background-image:url('images/61.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">✦ Best Western Vernal Inny</p>
+     <h2 class="cap-title">Your Home<br><em>Away From Home.</em></h2>
+     <p class="cap-sub">The Executive Inn has been beautifully transformed into Best Western Vernal Inn — spacious rooms, free hot breakfast, and a warm welcome every single day.</p>
+   </div>
+   <div class="scene-num"><span>02</span> / 11</div>
+ </div>
+
+ <!-- SCENE 3 — Second night exterior angle -->
+ <div class="scene kb-up" data-duration="6" data-label="Brand New Look">
+   <div class="scene-bg" style="background-image:url('images/61.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">The Big Upgrade</p>
+     <h2 class="cap-title">The Executive Inn<br>Is Now <em>Best Western.</em></h2>
+     <p class="cap-sub">Refreshed from top to bottom, inside and out. Same great location — a whole new standard of comfort and care.</p>
+   </div>
+   <div class="scene-num"><span>03</span> / 11</div>
+ </div>
+
+ <!-- SCENE 4 — Standard King Room -->
+ <div class="scene kb-right" data-duration="6" data-label="Standard King Rooms">
+   <div class="scene-bg" style="background-image:url('images/40.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">Standard King Rooms</p>
+     <h2 class="cap-title">Big, Bright &amp;<br><em>Beautifully</em> Comfortable.</h2>
+     <p class="cap-sub">Plush king beds, warm lighting, a cozy sitting area, and all the space you need to breathe. This isn't just a hotel room — it's your retreat.</p>
+   </div>
+   <div class="scene-num"><span>04</span> / 11</div>
+ </div>
+
+ <!-- SCENE 5 — Double Queen Room -->
+ <div class="scene kb-right" data-duration="6" data-label="Double Queen Rooms">
+   <div class="scene-bg" style="background-image:url('images/38.webp')"></div>
+   <div class="scene-ov bottom"></div>
+   <div class="scene-caption" style="text-align:center;padding:0 5vw;position:absolute;bottom:130px;">
+     <p class="cap-eyebrow">Double Queen Rooms</p>
+     <h2 class="cap-title">Room for <em>Everyone</em><br>You Love.</h2>
+     <p class="cap-sub" style="margin:0 auto;">Two plush queens dressed in Best Western signature linens — perfect for families, road-trip crews, or anyone who likes a little extra room to stretch.</p>
+   </div>
+   <div class="scene-num"><span>05</span> / 11</div>
+ </div>
+
+ <!-- SCENE 6 — Jacuzzi King Suite -->
+ <div class="scene kb-down" data-duration="6" data-label="Jacuzzi King Suites">
+   <div class="scene-bg" style="background-image:url('images/37.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">Jacuzzi King Suites</p>
+     <h2 class="cap-title">A Little Luxury,<br>Right in <em>Your Room.</em></h2>
+     <p class="cap-sub">Some stays deserve more than ordinary. Our jacuzzi king suites bring the spa experience directly to you — a private soak waiting every single night.</p>
+   </div>
+   <div class="scene-num"><span>06</span> / 11</div>
+ </div>
+
+ <!-- SCENE 7 — Jacuzzi Double Queen Suite -->
+ <div class="scene kb-left" data-duration="6" data-label="Jacuzzi Double Queen Suites">
+   <div class="scene-bg" style="background-image:url('images/44.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">Jacuzzi Double Queen Suites</p>
+     <h2 class="cap-title">Two Beds.<br><em>One Jacuzzi.</em></h2>
+     <p class="cap-sub">The best of both worlds — two plush queen beds AND an in-room jacuzzi tub. Perfect for families who want a little extra indulgence on their stay.</p>
+   </div>
+   <div class="scene-num"><span>07</span> / 11</div>
+ </div>
+
+ <!-- SCENE 8 — Free Hot Breakfast -->
+ <div class="scene kb-right" data-duration="6" data-label="Free Hot Breakfast">
+   <div class="scene-bg" style="background-image:url('images/59.webp')"></div>
+   <div class="scene-ov center"></div>
+   <div class="scene-caption" style="text-align:center;padding:0 8vw;">
+     <p class="cap-eyebrow">Every Single Morning</p>
+     <h2 class="cap-title">Wake Up to a<br><em>Free Hot Breakfast.</em></h2>
+     <p class="cap-sub" style="margin:0 auto;">Hot dishes, fresh pastries, pancakes, fruit, juice, and coffee — all included in every stay, every day, at no extra charge. Because mornings should be good.</p>
+   </div>
+   <div class="scene-num"><span>08</span> / 11</div>
+ </div>
+
+ <!-- SCENE 9 — King Suite (work ready) -->
+ <div class="scene kb-up" data-duration="6" data-label="King Suite Rooms">
+   <div class="scene-bg" style="background-image:url('images/43.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">King Suite Rooms</p>
+     <h2 class="cap-title">Work Hard,<br>Rest <em>Even Harder.</em></h2>
+     <p class="cap-sub">Full kitchenette, large desk, fast free WiFi, and a king bed waiting when you're done. Our king suites are built for the modern traveler who needs more than just a bed.</p>
+   </div>
+   <div class="scene-num"><span>09</span> / 11</div>
+ </div>
+
+ <!-- SCENE 10 — Pet Friendly Rooms -->
+ <div class="scene kb-left" data-duration="6" data-label="Pet Friendly Rooms">
+   <div class="scene-bg" style="background-image:url('images/53.webp')"></div>
+   <div class="scene-ov right"></div>
+   <div class="scene-caption">
+     <p class="cap-eyebrow">Pet Friendly · Ground Floor</p>
+     <h2 class="cap-title">Bring the<br><em>Whole Family.</em></h2>
+     <p class="cap-sub">Your four-legged companions are welcome here too. Ground-floor pet friendly rooms with beautiful hardwood-style floors — easy access, warm welcome, no exceptions.</p>
+   </div>
+   <div class="scene-num"><span>10</span> / 11</div>
+ </div>
+
+ <!-- SCENE 11 — Closing Night Shot -->
+ <div class="scene kb-down" data-duration="8" data-label="Best Western Vernal">
+   <div class="scene-bg" style="background-image:url('images/35.webp')"></div>
+   <div class="scene-ov center"></div>
+   <div class="scene-caption" style="text-align:center;padding:0 5vw;">
+     <p class="cap-eyebrow">✦ Now Open in Vernal, Utah ✦</p>
+     <h2 class="cap-title"><em>Best Western</em><br>Extended Stay</h2>
+     <p class="cap-sub" style="margin:0 auto;">Free Breakfast &nbsp;·&nbsp; Free WiFi &nbsp;·&nbsp; Free Parking &nbsp;·&nbsp; Full Kitchenettes &nbsp;·&nbsp; Pet Friendly &nbsp;·&nbsp; 24-Hr Front Desk</p>
+     <div class="cap-cta" style="justify-content:center;">
+       <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank">Book Your Stay</a>
+       <span class="phone">📞 <strong>(435) 789-6625</strong></span>
+     </div>
+   </div>
+   <div class="scene-num"><span>11</span> / 11</div>
+ </div>
+
+ <!-- ═══════════════════════════════════════
+      INTRO SCREEN
+ ════════════════════════════════════════ -->
+ <div id="intro">
+   <div style="position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+     <div class="intro-ring"></div>
+     <button class="intro-play" id="btn-start"></button>
+   </div>
+   <p class="intro-hint">Click to Begin</p>
+   <div style="position:absolute;bottom:50px;left:50%;transform:translateX(-50%);text-align:center;">
+     <div class="intro-logo">Best Western <em>Extended Stay</em></div>
+     <div class="intro-sub">Vernal, Utah · A New Chapter</div>
+   </div>
+ </div>
+
+ <!-- ═══════════════════════════════════════
+      OUTRO SCREEN
+ ════════════════════════════════════════ -->
+ <div id="outro">
+   <div class="star-row">★ ★ ★ ★ ★</div>
+   <p class="outro-eyebrow">✦ Now Accepting Reservations ✦</p>
+   <div class="outro-divider"></div>
+   <h2 class="outro-title"><em>Come Feel</em><br>at Home.</h2>
+   <p class="outro-sub">Whether you're here for the night or settling in for a while — Best Western Vernal Inn has everything you need, and then some.</p>
+   <div class="outro-btns">
+     <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="ob-book" target="_blank">Book Your Room</a>
+     <a href="#yt-hero" class="ob-fullvideo" id="btn-watch-video" onclick="document.getElementById('outro').classList.remove('show');">▶ &nbsp; Watch Full Video</a>
+     <a href="#" class="ob-replay" id="btn-replay">↺ &nbsp; Watch Again</a>
+   </div>
+   <p class="outro-address">
+     1935 South 1500 East, Vernal, UT 84078<br>
+     <a href="tel:4357896625">(435) 789-6625</a> &nbsp;·&nbsp;
+     <a href="https://bestwesternvernalinn.com" target="_blank">bestwesternvernalinn.com</a>
+   </p>
+ </div>
+
+ <!-- ═══════════════════════════════════════
+      PLAYER CONTROLS
+ ════════════════════════════════════════ -->
+ <div id="controls">
+   <div id="progress-track" id="ptrack">
+     <div id="progress-fill"></div>
+   </div>
+   <div class="ctrl-row">
+     <div class="ctrl-left">
+       <button class="ctrl-btn" id="btn-prev" title="Previous scene">⏮</button>
+       <button class="ctrl-btn" id="play-pause" title="Play / Pause">⏸</button>
+       <button class="ctrl-btn" id="btn-next" title="Next scene">⏭</button>
+       <div class="ctrl-time"><span id="cur-time">0:00</span> / <span id="tot-time">1:07</span></div>
+       <div class="scene-title-bar" id="scene-label">A New Chapter Begins</div>
+     </div>
+     <div class="ctrl-right">
+       <div class="vol-wrap">
+         <span class="vol-icon">🔈</span>
+         <div class="vol-track"><div class="vol-fill"></div></div>
+       </div>
+       <div class="speed-badge" id="speed-btn" title="Playback speed">1×</div>
+       <button class="ctrl-btn" id="btn-fs" title="Fullscreen">⛶</button>
+     </div>
+   </div>
+ </div>
+
+ <!-- Thumbnail strip -->
+ <div class="thumb-strip" id="thumbStrip"></div>
+
+</div><!-- end #stage -->
+
+<!-- ═══════════════════════════════════════
+     SECTION DIVIDER
+════════════════════════════════════════ -->
+<div class="section-divider">
+ <div class="section-divider-inner">
+   <div class="section-divider-line"></div>
+   <div class="section-divider-text">Full Video Walkthrough</div>
+   <div class="section-divider-line"></div>
+ </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     YOUTUBE FULL-SCREEN HERO SECTION
+════════════════════════════════════════ -->
+<section id="yt-hero">
+ <div class="yt-hero-header">
+   <p class="yt-hero-eyebrow">✦ The Full Story ✦</p>
+   <h2 class="yt-hero-title">See the <em>Transformation</em><br>for Yourself.</h2>
+   <p class="yt-hero-sub">From the Executive Inn to Best Western Vernal Inn — watch the full walkthrough and discover every corner of your new home away from home in Vernal, Utah.</p>
+ </div>
+ <div class="yt-accent-line"></div>
+ <div class="yt-video-wrap">
+   <iframe
+     width="560"
+     height="315"
+     src="https://www.youtube.com/embed/W9xKjd7Y7Kg?si=XbnBzmBOAI9BdzZw&rel=0&color=white&modestbranding=1"
+     title="Best Western Extended Stay Vernal Utah — Full Property Walkthrough"
+     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+     referrerpolicy="strict-origin-when-cross-origin"
+     allowfullscreen>
+   </iframe>
+ </div>
+ <div class="yt-hero-footer">
+   <p>Free Breakfast &nbsp;·&nbsp; Free WiFi &nbsp;·&nbsp; Free Parking &nbsp;·&nbsp; Pet Friendly</p>
+   <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="yt-book-btn" target="_blank">Book Your Stay</a>
+ </div>
+</section>`;
+const pageScripts = `<script>
+/* ═══════════════════════════════════════════
+   PRESENTATION ENGINE
+═══════════════════════════════════════════ */
+
+const scenes      = Array.from(document.querySelectorAll('.scene'));
+const totalScenes = scenes.length;
+let current  = 0;
+let playing  = false;
+let ticker   = null;
+let elapsed  = 0;
+let speedMul = 1;
+
+const durations = scenes.map(s => parseInt(s.dataset.duration) || 6);
+const totalDur  = durations.reduce((a,b) => a+b, 0);
+
+const sceneStarts = [];
+let acc = 0;
+durations.forEach(d => { sceneStarts.push(acc); acc += d; });
+
+/* ── Loader ── */
+const lbar = document.getElementById('lbar');
+let lp = 0;
+const lInter = setInterval(() => {
+ lp += Math.random() * 18;
+ if (lp >= 100) { lp = 100; clearInterval(lInter); setTimeout(() => { document.getElementById('loader').classList.add('done'); }, 300); }
+ lbar.style.width = lp + '%';
+}, 120);
+
+/* ── Build thumbnails ── */
+const thumbStrip = document.getElementById('thumbStrip');
+scenes.forEach((s, i) => {
+ const bg = s.querySelector('.scene-bg').style.backgroundImage;
+ const url = bg.replace(/url\\(['"]?(.*?)['"]?\\)/, '$1');
+ const div = document.createElement('div');
+ div.className = 'thumb' + (i === 0 ? ' active' : '');
+ div.innerHTML = \`<img src="\${url}" alt="Scene \${i+1}">\`;
+ div.onclick = () => goScene(i);
+ thumbStrip.appendChild(div);
+});
+
+/* ── Chapter dots on progress bar ── */
+const ptrack = document.getElementById('progress-track');
+sceneStarts.slice(1).forEach(st => {
+ const dot = document.createElement('div');
+ dot.className = 'chapter-dot';
+ dot.style.left = (st / totalDur * 100) + '%';
+ ptrack.appendChild(dot);
+});
+
+function goScene(n, autoPlay = true) {
+ if (n < 0 || n >= totalScenes) return;
+ scenes[current].classList.remove('active');
+ document.querySelectorAll('.thumb')[current].classList.remove('active');
+ current = n;
+ elapsed = 0;
+ scenes[current].classList.add('active');
+ document.querySelectorAll('.thumb')[current].classList.add('active');
+ const bg = scenes[current].querySelector('.scene-bg');
+ bg.style.transition = 'none';
+ bg.offsetHeight;
+ bg.style.transition = \`transform \${durations[current] / speedMul}s ease-out\`;
+ bg.style.transform = 'scale(1)';
+ document.getElementById('scene-label').textContent = scenes[current].dataset.label;
+ if (autoPlay && !playing) startPlay();
+ updateProgress();
+}
+
+function updateProgress() {
+ const globalElapsed = sceneStarts[current] + elapsed;
+ const pct = (globalElapsed / totalDur) * 100;
+ document.getElementById('progress-fill').style.width = pct + '%';
+ document.getElementById('cur-time').textContent = fmt(globalElapsed);
+ document.getElementById('tot-time').textContent = fmt(totalDur);
+}
+
+function fmt(s) {
+ const m = Math.floor(s / 60);
+ const sec = Math.floor(s % 60);
+ return \`\${m}:\${sec.toString().padStart(2,'0')}\`;
+}
+
+function startPlay() {
+ if (playing) return;
+ playing = true;
+ document.getElementById('play-pause').textContent = '⏸';
+ ticker = setInterval(tick, 250);
+}
+function pausePlay() {
+ if (!playing) return;
+ playing = false;
+ document.getElementById('play-pause').textContent = '▶';
+ clearInterval(ticker);
+}
+function togglePlay() {
+ playing ? pausePlay() : startPlay();
+}
+
+function tick() {
+ elapsed += 0.25 * speedMul;
+ updateProgress();
+ if (elapsed >= durations[current]) {
+   elapsed = 0;
+   if (current >= totalScenes - 1) {
+     pausePlay();
+     showOutro();
+   } else {
+     goScene(current + 1, true);
+   }
+ }
+}
+
+function showOutro() { document.getElementById('outro').classList.add('show'); }
+function hideOutro() { document.getElementById('outro').classList.remove('show'); }
+
+document.getElementById('btn-start').addEventListener('click', () => {
+ document.getElementById('intro').classList.add('hide');
+ goScene(0, true);
+});
+
+document.getElementById('play-pause').addEventListener('click', togglePlay);
+document.getElementById('btn-prev').addEventListener('click', () => { goScene(Math.max(0, current - 1)); });
+document.getElementById('btn-next').addEventListener('click', () => { goScene(Math.min(totalScenes-1, current+1)); });
+
+document.getElementById('btn-replay').addEventListener('click', (e) => {
+ e.preventDefault();
+ hideOutro();
+ goScene(0, true);
+});
+
+document.getElementById('btn-watch-video').addEventListener('click', (e) => {
+ pausePlay();
+ hideOutro();
+ setTimeout(() => {
+   document.getElementById('yt-hero').scrollIntoView({ behavior: 'smooth' });
+ }, 150);
+});
+
+document.getElementById('progress-track').addEventListener('click', function(e) {
+ const rect = this.getBoundingClientRect();
+ const pct  = (e.clientX - rect.left) / rect.width;
+ const targetTime = pct * totalDur;
+ let si = 0;
+ for (let i = sceneStarts.length - 1; i >= 0; i--) {
+   if (targetTime >= sceneStarts[i]) { si = i; break; }
+ }
+ elapsed = targetTime - sceneStarts[si];
+ if (current !== si) {
+   scenes[current].classList.remove('active');
+   document.querySelectorAll('.thumb')[current].classList.remove('active');
+   current = si;
+   scenes[current].classList.add('active');
+   document.querySelectorAll('.thumb')[current].classList.add('active');
+   document.getElementById('scene-label').textContent = scenes[current].dataset.label;
+ }
+ updateProgress();
+ if (!playing) startPlay();
+});
+
+const speeds = [1, 1.5, 2, 0.75];
+let speedIdx = 0;
+document.getElementById('speed-btn').addEventListener('click', function() {
+ speedIdx = (speedIdx + 1) % speeds.length;
+ speedMul = speeds[speedIdx];
+ this.textContent = speedMul + '×';
+});
+
+document.addEventListener('keydown', e => {
+ if (e.target.tagName === 'INPUT') return;
+ if (e.key === ' ')           { e.preventDefault(); togglePlay(); }
+ if (e.key === 'ArrowRight')  { goScene(Math.min(totalScenes-1, current+1)); }
+ if (e.key === 'ArrowLeft')   { goScene(Math.max(0, current-1)); }
+ if (e.key === 'f' || e.key === 'F') { toggleFS(); }
+});
+
+function toggleFS() {
+ if (!document.fullscreenElement) {
+   document.getElementById('stage').requestFullscreen?.();
+ } else {
+   document.exitFullscreen?.();
+ }
+}
+document.getElementById('btn-fs').addEventListener('click', toggleFS);
+
+document.getElementById('stage').addEventListener('click', function(e) {
+ const skip = ['controls','intro','outro','lbprev','lbnext'].some(id => {
+   const el = document.getElementById(id);
+   return el && el.contains(e.target);
+ });
+ if (!skip && !document.getElementById('intro').contains(e.target)
+   && !document.getElementById('outro').contains(e.target)) {
+   togglePlay();
+ }
+});
+
+window.addEventListener('load', () => {
+ scenes[0].classList.add('active');
+});
+
+let touchX = 0;
+document.getElementById('stage').addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.getElementById('stage').addEventListener('touchend', e => {
+ const dx = e.changedTouches[0].clientX - touchX;
+ if (Math.abs(dx) > 50) dx < 0 ? goScene(Math.min(totalScenes-1, current+1)) : goScene(Math.max(0, current-1));
+});
+</script>`;
+---
+
+<BaseLayout
+  title=`Our Story — Best Western Extended Stay Vernal Utah`
+  description=`Watch the transformation of the Executive Inn into Best Western Extended Stay Vernal, Utah. Spacious rooms, free hot breakfast, heated floors, and a warm welcome every day.`
+  canonical=`https://bestwesternvernalinn.com/video.html`
+  ogTitle=`Our Story — Best Western Extended Stay Vernal Utah`
+  ogDescription=`Watch the transformation of the Executive Inn into Best Western Extended Stay — your home away from home in Vernal, Utah.`
+  ogType=`video.other`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+  <Fragment slot="scripts" set:html={pageScripts} />
+</BaseLayout>

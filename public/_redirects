@@ -1,0 +1,24 @@
+# Best Western Vernal Inn — Netlify _redirects
+# 301 redirects consolidating duplicate pages onto canonical URLs.
+
+/extended-stay        /extended-stay-hotel-vernal-utah    301
+/extended-stay.html   /extended-stay-hotel-vernal-utah    301
+/petfriendly        /pet-friendly-hotel-vernal-utah    301
+/petfriendly.html   /pet-friendly-hotel-vernal-utah    301
+/weekly-rates        /weekly-hotel-rates-vernal-utah    301
+/weekly-rates.html   /weekly-hotel-rates-vernal-utah    301
+/workforcecrewhousing        /workforce-housing-vernal-utah    301
+/workforcecrewhousing.html   /workforce-housing-vernal-utah    301
+/flaming-gorge        /hotel-near-flaming-gorge    301
+/flaming-gorge.html   /hotel-near-flaming-gorge    301
+/dinosaurnationalmonument        /hotel-near-dinosaur-national-monument    301
+/dinosaurnationalmonument.html   /hotel-near-dinosaur-national-monument    301
+/red-fleet-state-park        /hotel-near-red-fleet-state-park    301
+/red-fleet-state-park.html   /hotel-near-red-fleet-state-park    301
+/hotelprices        /cheap-hotel-vernal-utah    301
+/hotelprices.html   /cheap-hotel-vernal-utah    301
+/vernal-utah-hotel        /    301
+/vernal-utah-hotel.html   /    301
+
+# Pretty URL fallback: serve .html when extensionless URL is requested
+# (Netlify does this by default for files in publish dir; included for clarity)

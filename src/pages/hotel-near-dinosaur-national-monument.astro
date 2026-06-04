@@ -1,0 +1,170 @@
+---
+// src/pages/hotel-near-dinosaur-national-monument.astro
+// MIGRATION of /hotel-near-dinosaur-national-monument.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+   {"@type":"Question","name":"How far is Best Western Vernal Inn from Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"The hotel is approximately 20 miles from the Quarry Exhibit Hall — about a 25-minute drive east on Highway 40 and north on Highway 149."}},
+    {"@type":"Question","name":"Is there a hotel inside Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"No. There are no hotels inside the monument. Vernal, Utah is the closest town with full-service hotel accommodations."}},
+    {"@type":"Question","name":"What are your rates for stays near Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Nightly rates start at $84. Weekly extended-stay rates start at $588 for 7 nights. Free hot breakfast, WiFi, and parking are included with every stay."}},
+    {"@type":"Question","name":"Can I bring my dog?","acceptedAnswer":{"@type":"Answer","text":"Yes. Best Western Vernal Inn is pet friendly. A small pet fee applies. Ground-floor rooms are available for easy access."}},
+    {"@type":"Question","name":"Is there parking for trailers or large vehicles?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free parking with space for trucks, trailers, and oversized vehicles. No reservations needed."}}
+  ]
+ }
+ </script>`;
+const bodyContent = `<section class="page-hero">
+ <div class="page-hero-cnt">
+ <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">20 Miles from the Quarry Exhibit Hall</p>
+ <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Hotel Near Dinosaur<br>National Monument</h1>
+ <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Best Western Vernal Inn is the closest full-service hotel to Dinosaur National Monument — with weekly rates from $588, free hot breakfast every morning, and full kitchenettes so you can explore on your schedule.</p>
+ <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">Book Your Stay</a>
+  <a href="tel:4357896625" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+ </div>
+ </div>
+</section>
+<div class="distance-bar">📍 ONLY 20 MILES — ABOUT 25 MINUTES FROM THE QUARRY EXHIBIT HALL</div>
+<div class="content-wrap">
+<div class="intro-pull"><strong>Planning a trip to Dinosaur National Monument?</strong> Best Western Vernal Inn is located just 20 miles (approximately 25 minutes by car) from the Quarry Exhibit Hall on Highway 149 — closer than any full-service hotel in the region. Whether you're here for a weekend fossil adventure or a week-long exploration of the Green and Yampa river canyons, our Vernal hotel gives you the perfect base camp with real rooms, real breakfast, and rates that make multi-night stays easy. Nightly rates start at $84, and weekly extended stays drop to $588 for seven nights.</div>
+<div class="content-section">
+ <h2>Why Guests Choose Us for Monument Trips</h2>
+<p>Most visitors to Dinosaur National Monument stay in Vernal because it's the only town with full hotel amenities within a short drive of the quarry. Best Western Vernal Inn sits 20 miles south of the Quarry Exhibit Hall — about 25 minutes on Highway 40 and Highway 149. We offer something the chain properties on Main Street don't: weekly extended-stay rates starting at $588, full kitchenettes in select rooms, and a free hot breakfast that saves your family $40–$60 a day compared to eating out every meal.</p>
+<ul class="feat-list">
+ <li>20 miles to the Quarry Exhibit Hall — 25-minute drive</li>
+ <li>Free hot breakfast daily — fuel up before the drive</li>
+ <li>Full kitchenettes — pack lunches for the monument</li>
+ <li>Pet friendly rooms — bring the whole family</li>
+ <li>Free parking for trucks, trailers, and RVs</li>
+ <li>Jacuzzi suites available after long hiking days</li>
+ <li>24-hour front desk — early departures, late arrivals</li>
+</ul>
+</div>
+<div class="content-section">
+ <h2>What to See at Dinosaur National Monument</h2>
+<p>Dinosaur National Monument spans over 210,000 acres across the Utah-Colorado border. The main draw on the Utah side is the Quarry Exhibit Hall — 20 miles from our hotel — where you can see and touch over 1,500 dinosaur fossils still embedded in the rock face. Beyond the quarry, the monument offers stunning canyon overlooks, ancient Fremont-culture petroglyphs along the Cub Creek Road, and world-class whitewater rafting on the Green and Yampa rivers. There are no restaurants, gas stations, or stores inside the monument — Vernal is where you stock up.</p>
+<ul class="feat-list">
+ <li>Quarry Exhibit Hall — 1,500+ fossils in the rock wall</li>
+ <li>Cub Creek petroglyphs — Fremont culture rock art</li>
+ <li>Josie Bassett Morris cabin — homestead history</li>
+ <li>Split Mountain Campground — riverside camping</li>
+ <li>Green River rafting — half-day to multi-day trips</li>
+ <li>Harper's Corner scenic drive — breathtaking overlooks</li>
+</ul>
+</div>
+<div class="pro-tip"><p><strong>Pro Tip:</strong> Book a kitchenette room and pack coolers for the monument. There are no restaurants or stores inside the park — the closest food is back in Vernal, 20 miles south. Guests who stay 3+ nights save significantly at our weekly rate of $588 compared to nightly pricing.</p></div>
+<div class="content-section">
+ <h2>Frequently Asked Questions</h2>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How far is Best Western Vernal Inn from Dinosaur National Monument?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The hotel is approximately 20 miles from the Quarry Exhibit Hall — about a 25-minute drive east on Highway 40 and north on Highway 149.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is there a hotel inside Dinosaur National Monument?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">No. There are no hotels inside the monument. Vernal, Utah is the closest town with full-service hotel accommodations.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What are your rates for stays near Dinosaur National Monument?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Nightly rates start at $84. Weekly extended-stay rates start at $588 for 7 nights. Free hot breakfast, WiFi, and parking are included with every stay.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Can I bring my dog?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Best Western Vernal Inn is pet friendly. A small pet fee applies. Ground-floor rooms are available for easy access.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is there parking for trailers or large vehicles?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Free parking with space for trucks, trailers, and oversized vehicles. No reservations needed.</p>
+ </details>
+</div>
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+</div>
+<div class="cta-contact">
+ <h2>Ready to Book?</h2>
+ <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
+ <div class="contact-options">
+  <a href="tel:4357896625" class="contact-opt">
+   <span class="icon">📞</span>
+   <span class="lbl">Call Directly</span>
+   <span class="val">(435) 789-6625</span>
+  </a>
+  <a href="mailto:surestayplus53027@gmail.com" class="contact-opt">
+   <span class="icon">✉️</span>
+   <span class="lbl">Email</span>
+   <span class="val">Send a Message</span>
+  </a>
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book">
+   <span class="icon">🔒</span>
+   <span class="lbl">Book Online</span>
+   <span class="val">Reserve Now</span>
+  </a>
+ </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Hotel Near Dinosaur National Monument | Best Western Vernal Inn — From $84/Night`
+  description=`Closest full-service hotel to Dinosaur National Monument. Best Western Vernal Inn — 20 miles from the quarry. Weekly rates from $588, free breakfast, kitchenettes, pet friendly. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/hotel-near-dinosaur-national-monument`
+  ogTitle=`Hotel Near Dinosaur National Monument | Best Western Vernal Inn — From $84/Night`
+  ogDescription=`Closest full-service hotel to Dinosaur National Monument. Best Western Vernal Inn — 20 miles from the quarry. Weekly rates from $588, free breakfast, kitchenettes, pet friendly. Call (435) 789-6625.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Hotel Near Dinosaur National Monument | Best Western Vernal Inn — From $84/Night`
+  twitterDescription=`Closest full-service hotel to Dinosaur National Monument. Best Western Vernal Inn — 20 miles from the quarry. Weekly rates from $588, free breakfast, kitchenettes, pet friendly. Call (435) 789-6625.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

@@ -1,0 +1,849 @@
+---
+// src/pages/explore.astro
+// MIGRATION of /explore.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": "Vernal, Utah — Dinosaurland",
+    "description": "Vernal, Utah is home to Dinosaur National Monument, Flaming Gorge, McConkie Ranch petroglyphs, Red Fleet State Park, and world-class outdoor adventure.",
+    "url": "https://bestwesternvernalinn.com/explore.html",
+    "touristType": ["Families", "Outdoor Enthusiasts", "History Buffs", "Adventure Seekers"],
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.4474,
+      "longitude": -109.5194
+    },
+    "isPartOf": {
+      "@type": "Hotel",
+      "name": "Best Western Extended Stay Vernal",
+      "url": "https://bestwesternvernalinn.com",
+      "telephone": "+14357896625",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1935 South 1500 East",
+        "addressLocality": "Vernal",
+        "addressRegion": "UT",
+        "postalCode": "84078",
+        "addressCountry": "US"
+      }
+    },
+    "containsPlace": [
+      {
+        "@type": "TouristAttraction",
+        "name": "Dinosaur National Monument",
+        "description": "1,500+ dinosaur bones embedded in the cliff face at the Quarry Exhibit Hall, plus canyon hikes and the Green River. ~20 minutes from Best Western Vernal.",
+        "url": "https://www.nps.gov/dino/index.htm"
+      },
+      {
+        "@type": "TouristAttraction",
+        "name": "Flaming Gorge National Recreation Area",
+        "description": "200,000+ acres of red canyon, emerald reservoir, world-class fishing and boating. ~40 minutes from Best Western Vernal.",
+        "url": "https://www.fs.usda.gov/detail/ashley/recreation/?cid=fsm9_004244"
+      },
+      {
+        "@type": "TouristAttraction",
+        "name": "McConkie Ranch Petroglyphs",
+        "description": "Near-life-sized Fremont culture figures carved into canyon sandstone. ~15 minutes from Best Western Vernal.",
+        "url": "https://utah.com/vernal/mcconkie-ranch-petroglyphs"
+      },
+      {
+        "@type": "TouristAttraction",
+        "name": "Red Fleet State Park",
+        "description": "Dinosaur trackway hike and reservoir kayaking. ~10 minutes from Best Western Vernal.",
+        "url": "https://stateparks.utah.gov/parks/red-fleet/"
+      },
+      {
+        "@type": "TouristAttraction",
+        "name": "Utah Field House of Natural History",
+        "description": "Walk through 200 million years of geologic time. Life-sized dinosaur replicas, fossil prep lab. In-town attraction.",
+        "url": "https://stateparks.utah.gov/parks/field-house/"
+      }
+    ]
+  }
+  </script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Paresh Ghandi",
+    "jobTitle": "Owner / Manager",
+    "description": "Local Vernal owner and guide to the Uintah Basin who transformed the former Executive Inn into Best Western Extended Stay.",
+    "url": "https://bestwesternvernalinn.com/video.html",
+    "worksFor": {
+      "@type": "Hotel",
+      "name": "Best Western Extended Stay Vernal",
+      "url": "https://bestwesternvernalinn.com"
+    }
+  }
+  </script>
+<style>
+    .visually-hidden {
+      position: absolute !important;
+      inset: -9999px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+      white-space: normal !important;
+    }
+
+    html, body {
+      overflow-x: clip !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+    }
+
+    @media (max-width: 900px) {
+      #nav {
+        padding: 0 28px 0 20px !important;
+        box-sizing: border-box !important;
+      }
+      .burger {
+        flex-shrink: 0 !important;
+        margin-left: auto !important;
+      }
+      .ex-hero-cnt {
+        padding-top: 80px !important;
+      }
+      .delivery-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .feature-inner {
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+      }
+      .feature-right {
+        grid-template-columns: 1fr 1fr !important;
+      }
+      .ex-sec {
+        padding: 60px 16px !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cards-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .resto-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .delivery-btns {
+        flex-direction: column !important;
+      }
+      .del-app-btn {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      .ex-hero-title {
+        font-size: 2.2rem !important;
+      }
+    }
+  </style>
+<link rel="icon" href="images/logo.webp" type="image/webp">`;
+const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users -->
+<div class="visually-hidden">
+  Best Western Vernal Inn | Extended stay hotel with weekly rates from $588, full kitchenettes, pet friendly ($30/day + $100 refundable deposit), free breakfast, free parking for trucks. Located at 1935 South 1500 East, Vernal, UT 84078. Phone (435) 789-6625. 20 min to Dinosaur National Monument, 40 min to Flaming Gorge. Book direct at bestwesternvernalinn.com.
+</div>
+
+<!-- NAV -->
+
+
+<!-- HERO -->
+<section class="ex-hero">
+  <div class="ex-hero-bg">
+    <iframe class="ex-hero-video"
+      src="https://www.youtube.com/embed/ugR79DX2CHE?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=ugR79DX2CHE&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;disablekb=1"
+      title="Explore Vernal, Utah" frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <div class="ex-hero-ov"></div>
+  <div class="ex-hero-cnt rv">
+    <p class="ex-hero-eyebrow">✦ Welcome to Dinosaurland ✦</p>
+    <h1 class="ex-hero-title">Explore<br><em>Vernal, Utah</em></h1>
+    <p class="ex-hero-sub">Ancient fossils, wild rivers, stunning red rock, and genuine small-town warmth. This is one of Utah's best-kept secrets — and Best Western puts you right in the middle of it all.</p>
+    <div class="ex-hero-btns">
+      <a href="#adventures" class="btn-p">Adventures</a>
+      <a href="#restaurants" class="btn-s" style="color:#fff;border-color:rgba(255,255,255,0.5);">Restaurants</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK NAV PILLS -->
+<div class="ex-pill-wrap">
+  <div class="ex-pill-nav rv">
+    <a href="#delivery" class="ex-pill">🛵 Room Delivery</a>
+    <a href="#adventures" class="ex-pill">🦕 Dinosaur Country</a>
+    <a href="#outdoors" class="ex-pill">🏔️ Outdoors</a>
+    <a href="#utv" class="ex-pill">🏎️ UTV Tours</a>
+    <a href="#restaurants" class="ex-pill">🍽️ Restaurants</a>
+    <a href="#book" class="ex-pill">🛏️ Book a Room</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 4b — FOOD DELIVERY
+════════════════════════════════════ -->
+<div id="delivery" class="ex-delivery-wrap">
+<div class="ex-sec rv">
+  <p class="ex-tag">✦ Too Tired to Go Out?</p>
+  <h2 class="ex-title">Get Food Delivered<br><em>Right to Your Room</em></h2>
+  <p class="ex-intro">Long day on the trails? Just arrived late? Both DoorDash and Uber Eats deliver to our hotel. Tap the button below and your food comes straight to you.</p>
+
+  <!-- Delivery App Buttons -->
+  <div class="delivery-btns">
+    <a href="https://www.doordash.com/food-delivery/vernal-ut-restaurants/" target="_blank" class="del-app-btn del-doordash">
+      <span class="del-app-icon">🚗</span>
+      <div>
+        <div>Order on DoorDash</div>
+        <div class="del-app-sub">Deliver to 1935 S 1500 E</div>
+      </div>
+    </a>
+    <a href="https://www.ubereats.com/city/vernal-ut" target="_blank" class="del-app-btn del-ubereats">
+      <span class="del-app-icon">🛵</span>
+      <div>
+        <div>Order on Uber Eats</div>
+        <div class="del-app-sub">Deliver to 1935 S 1500 E</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- What's Available -->
+  <div class="delivery-grid">
+
+    <!-- Local Favorites on Delivery -->
+    <div class="rv">
+      <h3 class="del-col-title">Local Favorites</h3>
+      <p class="del-col-sub">May be available on DoorDash or Uber Eats — availability varies, check apps</p>
+      <div class="del-list">
+        <div class="del-row"><span class="del-icon">🍕</span><div><strong>Antica Forma</strong><span class="del-type">Italian · Pizza · Pasta</span></div></div>
+        <div class="del-row"><span class="del-icon">🌮</span><div><strong>Plaza Mexicana</strong><span class="del-type">Mexican · Best Mole in Utah</span></div></div>
+        <div class="del-row"><span class="del-icon">🍺</span><div><strong>Vernal Brewing Co</strong><span class="del-type">American · Burgers · Craft Beer</span></div></div>
+        <div class="del-row"><span class="del-icon">🍜</span><div><strong>Khao Hom Thai Kitchen</strong><span class="del-type">Thai · Asian Fusion</span></div></div>
+        <div class="del-row"><span class="del-icon">🌯</span><div><strong>Cafe Rio</strong><span class="del-type">Fast-casual Mexican</span></div></div>
+        <div class="del-row"><span class="del-icon">🍖</span><div><strong>Dinosaur Brew Haus</strong><span class="del-type">BBQ · Burgers · Bar Food</span></div></div>
+        <div class="del-row"><span class="del-icon">🥩</span><div><strong>The Valley Steakhouse</strong><span class="del-type">Steakhouse · American</span></div></div>
+        <div class="del-row"><span class="del-icon">🍛</span><div><strong>Canton City</strong><span class="del-type">Chinese · Best in the Basin</span></div></div>
+      </div>
+    </div>
+
+    <!-- Always Available Chains -->
+    <div class="rv">
+      <h3 class="del-col-title">Always Available</h3>
+      <p class="del-col-sub">Chains with reliable delivery in Vernal</p>
+      <div class="del-list">
+        <div class="del-row"><span class="del-icon">🍔</span><div><strong>McDonald's</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🍕</span><div><strong>Domino's</strong><span class="del-type">Own app + DoorDash</span></div></div>
+        <div class="del-row"><span class="del-icon">🍕</span><div><strong>Pizza Hut</strong><span class="del-type">Own app + Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🍗</span><div><strong>KFC</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🥪</span><div><strong>Arby's</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🍔</span><div><strong>Freddy's</strong><span class="del-type">Steakburgers &amp; Custard</span></div></div>
+        <div class="del-row"><span class="del-icon">🥤</span><div><strong>Sonic Drive-In</strong><span class="del-type">DoorDash</span></div></div>
+        <div class="del-row"><span class="del-icon">🧇</span><div><strong>Denny's</strong><span class="del-type">24-hr delivery option</span></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tip-box rv">
+    <span class="tip-icon">📍</span>
+    <div class="tip-text">
+      <h4>Delivery Address</h4>
+      <p>When ordering, use our address: <strong>1935 South 1500 East, Vernal, UT 84078</strong>. Our front desk is staffed 24 hours — if you have a delivery arriving late, just let them know and they'll make sure it gets to you.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 3 — ADVENTURE TOURS VERNAL
+════════════════════════════════════ -->
+<div id="utv" class="feature-strip">
+  <div class="feature-video-wrap">
+    <iframe class="feature-video"
+      src="https://www.youtube.com/embed/LsqbwVkwrbw?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=LsqbwVkwrbw&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;disablekb=1"
+      title="Adventure Tours Vernal" frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+  <div class="feature-video-ov"></div>
+  <div class="feature-inner">
+    <div class="feature-left rv">
+      <p class="ex-tag">✦ Locally Owned · Vernal's Best</p>
+      <h2 class="ex-title feature-title">Adventure Tours<br><em>Vernal</em></h2>
+      <p class="feature-desc">Experience the red rock canyon country of northeastern Utah the way it was meant to be seen — wide open, off-road, and with a guide who knows every trail. Our UTV tours take you through stunning terrain you'd never find on your own.</p>
+      <div class="feature-highlights">
+        <div class="fh"><span class="fh-icon">🏎️</span>Guided UTV tours through canyon country</div>
+        <div class="fh"><span class="fh-icon">📸</span>Photo stops at the best viewpoints</div>
+        <div class="fh"><span class="fh-icon">👨‍👩‍👧</span>Family friendly — all ages welcome</div>
+        <div class="fh"><span class="fh-icon">🗺️</span>Local guides who know every inch of the terrain</div>
+        <div class="fh"><span class="fh-icon">⭐</span>Highly rated on TripAdvisor</div>
+      </div>
+      <a href="https://adventuretoursvernal.com/booking" target="_blank" rel="noopener" class="btn-p" style="display:inline-block;">Book a UTV Tour</a>
+    </div>
+    <div class="feature-right rv">
+      <div class="fcard">
+        <div class="fcard-icon">🌅</div>
+        <div class="fcard-label">Sunrise Tours</div>
+        <div class="fcard-sub">Golden hour canyon views</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-icon">🌄</div>
+        <div class="fcard-label">Half Day Trips</div>
+        <div class="fcard-sub">3-4 hours of adventure</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-icon">🏜️</div>
+        <div class="fcard-label">Full Day</div>
+        <div class="fcard-sub">Deep canyon exploration</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-icon">🐾</div>
+        <div class="fcard-label">Pet Friendly</div>
+        <div class="fcard-sub">Bring the whole crew</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     SECTION 1 — MUST-SEE LANDMARKS
+════════════════════════════════════ -->
+<div id="adventures">
+<div class="ex-sec rv">
+  <p class="ex-tag">✦ Must-See Attractions</p>
+  <h2 class="ex-title">Dinosaur Country<br><em>Right Outside Your Door</em></h2>
+  <p class="ex-intro">Vernal sits at the heart of one of the most geologically and paleontologically rich regions on earth. Here's what you absolutely can't miss.</p>
+
+  <div class="cards-grid">
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #1a3a5c, #2d5a3d);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/PoCN4Lo9Lkk?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Dinosaur National Monument" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">⭐ Top Attraction</span>
+        <span class="card-dist">~20 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">National Monument</p>
+        <h3 class="card-name">Dinosaur National Monument</h3>
+        <p class="card-desc">The crown jewel of Vernal. The Quarry Exhibit Hall puts you face-to-face with 1,500+ dinosaur bones still embedded in the cliff face — exactly where they were discovered. Add in canyon hikes, petroglyphs, and the Green River and you'll easily spend a full day here.</p>
+        <a href="https://www.nps.gov/dino/index.htm" target="_blank" class="card-link">Plan Your Visit →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #2d3a1a, #3d5a2d);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/5fZUTR8bTec?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Utah Field House of Natural History" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Free Entry</span>
+        <span class="card-dist">In Town</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Museum · State Park</p>
+        <h3 class="card-name">Utah Field House of Natural History</h3>
+        <p class="card-desc">Walk through 200 million years of geologic time on the famous ramp exhibit. Life-sized dinosaur replicas greet you outside. Inside: real fossils, a working fossil prep lab you can watch through glass, and a knowledgeable staff that doubles as an informal visitor center.</p>
+        <a href="https://stateparks.utah.gov/parks/field-house/" target="_blank" class="card-link">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #3a1a2d, #5a2d3d);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/fwzaXWfuFdk?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="McConkie Ranch Petroglyphs" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Hidden Gem</span>
+        <span class="card-dist">~15 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Historic Site · Petroglyphs</p>
+        <h3 class="card-name">McConkie Ranch Petroglyphs</h3>
+        <p class="card-desc">One of Utah's best-kept secrets. Near-life-sized Fremont culture figures carved into canyon sandstone — asks only a $5 donation. The main trail requires a short climb but rewards you with some of the most stunning ancient rock art in the American West.</p>
+        <a href="https://utah.com/vernal/mcconkie-ranch-petroglyphs" target="_blank" class="card-link">Get Directions →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #1a2d3a, #0a4a6a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/tktE4GbS9gQ?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Flaming Gorge" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Scenic Drive</span>
+        <span class="card-dist">~40 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">National Recreation Area</p>
+        <h3 class="card-name">Flaming Gorge</h3>
+        <p class="card-desc">200,000+ acres of stunning red canyon, emerald reservoir, and world-class fishing. Boat, waterski, camp, hike, or simply drive the Flaming Gorge–Uintas National Scenic Byway. The dam tour is surprisingly fascinating. Often called "the crown of the Uinta Mountains."</p>
+        <a href="https://www.fs.usda.gov/detail/ashley/recreation/?cid=fsm9_004244" target="_blank" class="card-link">Explore Flaming Gorge →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #2d1a3a, #1a3050);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/9F16EIFko60?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Red Fleet State Park" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Easy Hike</span>
+        <span class="card-dist">~10 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">State Park · Hiking</p>
+        <h3 class="card-name">Red Fleet State Park</h3>
+        <p class="card-desc">Known as "Little Lake Powell," Red Fleet offers a stunning sandstone lake setting. Hike the Dinosaur Trackway — a 3-mile round trip across sandstone formations to real 200-million-year-old dinosaur footprints, ending at a beautiful swimming spot on the reservoir. Kayak rentals available.</p>
+        <a href="https://stateparks.utah.gov/parks/red-fleet/" target="_blank" class="card-link">Park Info →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #3a2d1a, #6a4a0a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/m64J-ovzTf4?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Fantasy Canyon" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Wow Factor</span>
+        <span class="card-dist">~1 hr</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Scenic Wonder</p>
+        <h3 class="card-name">Fantasy Canyon</h3>
+        <p class="card-desc">One of the most bizarre and beautiful places in Utah — otherworldly sandstone formations that look like they belong on another planet. About an hour south of Vernal, accessible by passenger car. Visit near sunset for extraordinary photography. Small but absolutely unforgettable.</p>
+        <a href="https://www.blm.gov/visit/fantasy-canyon" target="_blank" class="card-link">Directions →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #1a3a1a, #2a4a3a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/hmKWG8GZBiw?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Moonshine Arch" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Easy Trail</span>
+        <span class="card-dist">~8 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Hiking · Nature</p>
+        <h3 class="card-name">Moonshine Arch</h3>
+        <p class="card-desc">A stunning 40-foot-tall, 85-foot-wide sandstone arch just 8 miles from town — easy 2-mile round-trip hike with views of Steinaker Reservoir. Shaded caverns behind the arch are perfect for a picnic. Moab doesn't have a monopoly on Utah arches — this one is spectacular and never crowded.</p>
+        <a href="https://www.alltrails.com/trail/us/utah/moonshine-arch-trail" target="_blank" class="card-link">Trail Info →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #0a2a3a, #1a3a5a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/M-jBccq_69c?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Jones Hole Fish Hatchery" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Family Favorite</span>
+        <span class="card-dist">~30 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Nature · Hiking</p>
+        <h3 class="card-name">Jones Hole Fish Hatchery</h3>
+        <p class="card-desc">A beautiful drive leads to a working fish hatchery where you can watch thousands of trout up close. From here, the Jones Hole Trail follows a stunning creek through canyon walls to Ely Creek Waterfall — one of the most rewarding hikes in the region. Kids love the fish.</p>
+        <a href="https://www.fws.gov/office/jones-hole-national-fish-hatchery" target="_blank" class="card-link">Plan Visit →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tip-box rv">
+    <span class="tip-icon">💡</span>
+    <div class="tip-text">
+      <h4>Best Western Pro Tip</h4>
+      <p>Dinosaur National Monument is just 20 minutes from our front door. Our front desk team is happy to share the best times to visit, trail recommendations for kids and pets, and which roads are passable. Stop by — we know this place like home. Or <a href="faq.html">check the FAQ</a> for more tips.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- BOOK CTA STRIP 1 -->
+<div id="book" class="ex-cta">
+  <h2>Your Base Camp<br><em>for All of It.</em></h2>
+  <p>Every adventure on this page starts and ends with a great night's rest. Best Western Vernal Inn has spacious rooms, free hot breakfast, and a welcome that makes you feel like you belong here.</p>
+  <div class="ex-cta-btns">
+    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="ex-cta-book">Book Your Room</a>
+    <a href="tel:4357896625" class="ex-cta-call">📞 (435) 789-6625</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 2 — OUTDOOR ADVENTURES
+════════════════════════════════════ -->
+<div class="stripe" id="outdoors">
+<div class="ex-sec rv">
+  <p class="ex-tag">✦ Get Outside</p>
+  <h2 class="ex-title">More Than Dinosaurs —<br><em>Vernal is an Outdoor Paradise</em></h2>
+  <p class="ex-intro">Over 100 miles of mountain biking trails, whitewater on the Green River, kayaking, paddleboarding, ATV tracks, and hiking that rivals anything in Utah. All of it within an hour of your pillow.</p>
+
+  <div class="cards-grid">
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #0a2a4a, #1a5a4a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/p05cObabbjg?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Green River Rafting" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Thrilling</span>
+        <span class="card-dist">~20 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Rafting · Adventure</p>
+        <h3 class="card-name">Green River Rafting</h3>
+        <p class="card-desc">Raft through the breathtaking canyons of Dinosaur National Monument on the legendary Green River. Single-day and multi-day trips available. Dinosaur River Expeditions is Vernal's only locally owned outfitter (since 1979). OARS and Adrift Adventures also offer excellent guided trips.</p>
+        <div class="stars-sm">★★★★★</div>
+        <a href="https://www.dinosaurriverexpeditions.com" target="_blank" class="card-link">Book a Trip →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #2a3a0a, #3a5a1a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/m6610B9GyXQ?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="McCoy Flats &amp; Trail Network" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">100+ Miles</span>
+        <span class="card-dist">Various</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Mountain Biking</p>
+        <h3 class="card-name">McCoy Flats &amp; Trail Network</h3>
+        <p class="card-desc">Vernal's mountain biking is gaining a devoted following — and for good reason. 40+ miles at McCoy Flats alone, plus the Red Fleet Complex, Lapoint Trail System, and the aspen-lined Dry Fork Flume Trail. All without the Moab crowds. Stop at Altitude Cycle on Main Street for maps and advice.</p>
+        <a href="https://www.imba.com/trails/mccoy-flats" target="_blank" class="card-link">Trail Info →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #0a1a4a, #1a3a6a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/wi3AnFtOHQc?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Steinaker State Park" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Water Fun</span>
+        <span class="card-dist">~10 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">State Park · Water</p>
+        <h3 class="card-name">Steinaker State Park</h3>
+        <p class="card-desc">Swimming, wakeboarding, kayaking, ATV trails, and camping — all centered around a beautiful reservoir just minutes from town. One of three state parks in the Vernal area. Great for families with kids who need to burn energy after a day of museum-going.</p>
+        <a href="https://stateparks.utah.gov/parks/steinaker/" target="_blank" class="card-link">Park Details →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #3a1a0a, #5a2a0a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/QDTf0WBooKc?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Buckskin Hills Recreation Complex" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Year-Round</span>
+        <span class="card-dist">~5 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">ATV · Multi-Sport</p>
+        <h3 class="card-name">Buckskin Hills Recreation Complex</h3>
+        <p class="card-desc">Vernal's year-round outdoor sports hub. Mountain biking, ATV trails, motocross, shooting range, drag strip, speedway, camping — and in winter, a ski and snow tubing hill. There is genuinely something for everyone here, in every season.</p>
+        <a href="https://www.dinoland.com" target="_blank" class="card-link">Learn More →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #1a3a0a, #2a5a3a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/-oKo-mk0-Ss?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Flaming Gorge Fishing" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">Fishing</span>
+        <span class="card-dist">~40 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Fishing · Recreation</p>
+        <h3 class="card-name">Flaming Gorge Fishing</h3>
+        <p class="card-desc">Widely considered some of the best fishing in the western United States — record-breaking lake trout, rainbow and brown trout, smallmouth bass, and more in the reservoir and Green River tailwaters. Guided trips available. Bring a license and come prepared to be amazed.</p>
+        <a href="https://www.utah.gov/fishing" target="_blank" class="card-link">Fishing Info →</a>
+      </div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-img" style="background: linear-gradient(135deg, #0a2a2a, #1a4a4a);">
+        <iframe class="card-video"
+          src="https://www.youtube.com/embed/hUdTg5K6Ta0?rel=0&amp;modestbranding=1&amp;playsinline=1"
+          title="Dinaland Golf Course" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="card-badge">18 Holes</span>
+        <span class="card-dist">~5 min</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Golf</p>
+        <h3 class="card-name">Dinaland Golf Course</h3>
+        <p class="card-desc">Vernal's local 18-hole golf course set against stunning high-desert scenery. Consistently well-maintained and very reasonably priced. A perfect way to spend a morning before heading out to explore the canyon country. Just minutes from Best Western.</p>
+        <a href="https://www.golflink.com/golf-courses/ut/vernal/dinaland-golf-course" target="_blank" class="card-link">Tee Times →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SECTION 4 — RESTAURANTS
+════════════════════════════════════ -->
+<div id="restaurants">
+<div class="ex-sec rv">
+  <p class="ex-tag">✦ Where to Eat</p>
+  <h2 class="ex-title">Vernal's Best<br><em>Restaurants</em></h2>
+  <p class="ex-intro">Vernal's dining scene is genuinely impressive for a small town. From New York-trained Italian chefs to the best Thai food you'll find in rural Utah — here are the places worth making a reservation for.</p>
+
+  <div class="resto-grid">
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">Italian · Pizza · Pasta</p><h3 class="rcard-name">Antica Forma</h3></div>
+        <span style="font-size:1.6rem;">🍕</span>
+      </div>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Vernal's crown jewel of dining. The chef trained at a top New York pizza institution and it shows — housemade mozzarella, wood-fired crust with the perfect char, handmade pasta, and a balsamic dressing made in-house. Consistently ranked the #1 restaurant in Vernal. The pistachio pizza is legendary.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$$ · Dinner</span>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g57155-d3214980-Reviews-Antica_Forma-Vernal_Utah.html" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">Craft Beer · American</p><h3 class="rcard-name">Vernal Brewing Company</h3></div>
+        <span style="font-size:1.6rem;">🍺</span>
+      </div>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Right across from the Utah Field House — the perfect post-museum stop. A dozen craft beers on tap including the adventure-themed series with GPS coordinates for local trails on the cans. Great pub menu, warm atmosphere, and a root beer that'll win over non-drinkers too. Beloved by locals and visitors alike.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.vernalbrewing.com" target="_blank" class="rcard-link">Website →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">Thai · Asian</p><h3 class="rcard-name">Khao Hom Thai Kitchen</h3></div>
+        <span style="font-size:1.6rem;">🍜</span>
+      </div>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Consistently ranked the #1 restaurant in Vernal on multiple platforms. Authentic Thai food — attentive service, incredible cashew chicken, Pad Thai, and curries that reviewers from Denver say rivals the best Thai restaurants there. A genuine surprise in northeastern Utah and an absolute must-visit.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g57155-d12076702-Reviews-Khao_Hom_Thai_Kitchen-Vernal_Utah.html" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">American · Breakfast</p><h3 class="rcard-name">Betty's Cafe</h3></div>
+        <span style="font-size:1.6rem;">☕</span>
+      </div>
+      <div class="stars-sm">★★★★½</div>
+      <p class="rcard-desc">The best breakfast in Vernal — full stop. Colossal homemade biscuits with strawberry jam, perfect poached eggs, honest coffee, and genuinely kind staff. A beloved local institution with a warm western atmosphere. Regulars fill it every morning. Get here early — the biscuits run out.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$ · Breakfast &amp; Lunch</span>
+        <a href="https://www.yelp.com/biz/bettys-cafe-vernal" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">Mexican · Authentic</p><h3 class="rcard-name">Plaza Mexicana</h3></div>
+        <span style="font-size:1.6rem;">🌮</span>
+      </div>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Reviewers call it the best Mexican food in Utah — a high bar. The Chimichangas Mole are legendary, the portions are enormous, and the atmosphere is lively and authentic. Multiple visitors returned two nights in a row. The margaritas and pina coladas are excellent. Huge portions, warm service.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g57155-d424574-Reviews-Plaza_Mexicana-Vernal_Utah.html" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">Steakhouse · American</p><h3 class="rcard-name">The Valley Steakhouse</h3></div>
+        <span style="font-size:1.6rem;">🥩</span>
+      </div>
+      <div class="stars-sm">★★★★½</div>
+      <p class="rcard-desc">The go-to for a proper steak dinner in Vernal. Reviewers rave about the charbroiled rib eye — "one of the best I've had in a while." All-you-can-eat options, a full salad bar, and loaded baked potatoes that are worth the trip on their own. Worth it for a special night out.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$$$ · Dinner</span>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g57155-d425041-Reviews-The_Valley_Steak_House-Vernal_Utah.html" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">BBQ · American</p><h3 class="rcard-name">Swain Brothers</h3></div>
+        <span style="font-size:1.6rem;">🫙</span>
+      </div>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Brisket mac &amp; cheese, smoked meats, and a server named Jamie who smokes the meat herself and takes immense pride in every plate. Described as a hidden gem by visitors who expected a bar but found extraordinary BBQ. The brisket and house-smoked meats are exceptional. A local treasure.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.yelp.com/biz/swain-brothers-vernal" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+    <div class="rcard rv">
+      <div class="rcard-top">
+        <div><p class="rcard-cuisine">Breakfast · Café</p><h3 class="rcard-name">Abby's Cafe</h3></div>
+        <span style="font-size:1.6rem;">🥞</span>
+      </div>
+      <div class="stars-sm">★★★★½</div>
+      <p class="rcard-desc">Plate-sized pancakes, great Rueben sandwiches, homemade vegetable soup, and the best scone in Vernal. A cozy, locally-loved spot that surprised more than a few visitors who called it their new favorite. Warm, personal service and honest food at prices that make Vernal feel like a deal.</p>
+      <div class="rcard-foot">
+        <span class="rcard-price">$ · Breakfast &amp; Lunch</span>
+        <a href="https://www.yelp.com/biz/abbys-cafe-vernal" target="_blank" class="rcard-link">View →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tip-box rv">
+    <span class="tip-icon">🍳</span>
+    <div class="tip-text">
+      <h4>Don't Forget — Free Breakfast Included at Best Western</h4>
+      <p>Every stay includes our free hot breakfast every morning — hot dishes, pancakes, pastries, fresh fruit, juice, and coffee. Save your appetite for these restaurants at lunch and dinner, and let us take care of your mornings. <a href="faq.html#dining">FAQ: breakfast details →</a></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- LOCATION MAP -->
+<div class="stripe">
+<div class="ex-sec rv">
+  <p class="ex-tag">✦ Location</p>
+  <h2 class="ex-title">Everything Within<br><em>Easy Reach</em></h2>
+  <p class="ex-intro">Best Western Vernal Inn sits right in Naples part of Vernal — a perfect base camp for every attraction on this page.</p>
+
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48520!2d-109.5194!3d40.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8750c74764e9a6c9%3A0x2d4b87a0d4d20d7c!2sVernal%2C%20UT%2084078!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Map showing Best Western Extended Stay Vernal Utah location">
+    </iframe>
+  </div>
+
+  <div class="dist-bar rv">
+    <div class="dist-pill">🦕 <strong>Dinosaur Nat'l Monument</strong> — 20 min</div>
+    <div class="dist-pill">🏛️ <strong>Utah Field House</strong> — In Town</div>
+    <div class="dist-pill">🔥 <strong>Flaming Gorge</strong> — 40 min</div>
+    <div class="dist-pill">🪨 <strong>McConkie Ranch</strong> — 15 min</div>
+    <div class="dist-pill">🦶 <strong>Red Fleet State Park</strong> — 10 min</div>
+    <div class="dist-pill">🌉 <strong>Moonshine Arch</strong> — 8 min</div>
+    <div class="dist-pill">✈️ <strong>Vernal Airport</strong> — 2 min</div>
+    <div class="dist-pill">⛳ <strong>Dinaland Golf</strong> — 5 min</div>
+  </div>
+</div>
+</div>
+
+<!-- FINAL BOOK CTA -->
+<section class="ex-cta">
+  <h2>Ready to<br><em>Make Memories?</em></h2>
+  <p>Book your stay at Best Western Vernal Inn — Vernal's most comfortable home base for everything this incredible corner of Utah has to offer.</p>
+  <div class="ex-cta-btns">
+    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="ex-cta-book">Book Your Room Today</a>
+    <a href="tel:4357896625" class="ex-cta-call">📞 (435) 789-6625</a>
+  </div>
+  <p class="ex-cta-address">1935 South 1500 East, Vernal, UT 84078 &nbsp;·&nbsp;
+    <a href="https://bestwesternvernalinn.com" target="_blank">bestwesternvernalinn.com</a>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Explore Vernal Utah — Things To Do, Restaurants &amp; Adventures Near Best Western`
+  description=`Discover the best things to do in Vernal, Utah. Dinosaur National Monument, Flaming Gorge, McConkie Ranch petroglyphs, UTV tours, whitewater rafting, top-rated restaurants and more — all near Best Western Extended Stay.`
+  canonical=`https://bestwesternvernalinn.com/explore`
+  ogTitle=`Explore Vernal Utah — Things To Do Near Best Western Extended Stay`
+  ogDescription=`The complete guide to Vernal, Utah: dinosaur monuments, river rafting, UTV adventures, top restaurants, and hidden gems — all within minutes of Best Western Extended Stay.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Explore Vernal Utah — Things To Do Near Best Western`
+  twitterDescription=`Dinosaur National Monument, Flaming Gorge, UTV tours, top restaurants — all minutes from your room at Best Western Extended Stay Vernal.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  hreflang=`https://bestwesternvernalinn.com/explore`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

@@ -1,0 +1,184 @@
+---
+// src/pages/best-hotel-in-vernal-utah.astro
+// MIGRATION of /best-hotel-in-vernal-utah.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+ {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"What is the best hotel in Vernal, Utah?","acceptedAnswer":{"@type":"Answer","text":"Best Western Vernal Inn is consistently rated among the top hotels in Vernal for value, offering rates from $84/night with free hot breakfast, kitchenettes, free parking, and pet friendly rooms — amenities that most Vernal competitors charge extra for or don't offer."}},
+   {"@type":"Question","name":"Should I book a hotel or Airbnb in Vernal?","acceptedAnswer":{"@type":"Answer","text":"Hotels in Vernal offer more consistency and included amenities than most Airbnbs. Best Western Vernal Inn includes free hot breakfast, daily housekeeping, 24-hour front desk, and laundry — services that vacation rentals typically lack. For stays under 30 days, a hotel with weekly rates is usually the better value."}},
+   {"@type":"Question","name":"Which Vernal hotel is closest to Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Best Western Vernal Inn is approximately 20 miles from the Quarry Exhibit Hall at Dinosaur National Monument — about a 25-minute drive. It is the closest full-service hotel to the monument's Utah entrance."}},
+   {"@type":"Question","name":"Do any Vernal hotels have kitchenettes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Best Western Vernal Inn offers kitchenette rooms with a full-size refrigerator, microwave, stovetop, and basic cookware — available for both nightly and weekly stays."}},
+   {"@type":"Question","name":"What's the cheapest hotel in Vernal with free breakfast?","acceptedAnswer":{"@type":"Answer","text":"Best Western Vernal Inn starts at $84/night with free hot breakfast included. Weekly rates drop to $588 for 7 nights. No other full-service Vernal hotel matches this rate with breakfast included."}}
+ ]}
+ </script>`;
+const bodyContent = `<section class="page-hero">
+ <div class="page-hero-cnt">
+ <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">Honest Comparison — Vernal Hotels & Alternatives</p>
+ <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Best Hotel in<br>Vernal, Utah</h1>
+ <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Choosing where to stay in Vernal? This page breaks down what actually matters — included amenities, total cost, proximity to attractions, and what real guests care about — so you can make the right call.</p>
+ <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">Book Your Stay</a>
+  <a href="tel:4357896625" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+ </div>
+ </div>
+</section>
+<div class="distance-bar">🏆 COMPARE HOTELS · AIRBNBS · MOTELS — SEE WHAT'S ACTUALLY INCLUDED</div>
+<div class="content-wrap">
+<div class="intro-pull">
+<strong>Not all Vernal hotels are the same — and the cheapest room rate doesn't always mean the cheapest stay.</strong> When you factor in breakfast, parking, kitchen access, and proximity to attractions like Dinosaur National Monument and Flaming Gorge, the total cost picture changes dramatically. This page compares the major lodging options in Vernal so you can see exactly what you're paying for.
+</div>
+<div class="content-section">
+ <h2>How Vernal Lodging Options Compare</h2>
+ <p>Vernal has roughly a dozen hotels, a handful of Airbnb and VRBO listings, and a few budget motels. Here's how the main categories stack up on the things that actually affect your trip cost and experience:</p>
+<div style="overflow-x:auto;margin:1.5rem 0;">
+<table style="width:100%;border-collapse:collapse;font-size:.88rem;">
+<thead><tr style="background:var(--navy);color:#fff;">
+<th style="padding:12px 10px;text-align:left;">Feature</th>
+<th style="padding:12px 10px;text-align:center;">Budget Motels<br><span style="font-weight:300;font-size:.78rem;">($55–$75/night)</span></th>
+<th style="padding:12px 10px;text-align:center;">Chain Hotels<br><span style="font-weight:300;font-size:.78rem;">($120–$160/night)</span></th>
+<th style="padding:12px 10px;text-align:center;">Airbnb / VRBO<br><span style="font-weight:300;font-size:.78rem;">($90–$200/night)</span></th>
+<th style="padding:12px 10px;text-align:center;background:var(--gold);color:var(--navy);font-weight:900;">Best Western<br>Vernal Inn<br><span style="font-weight:300;font-size:.78rem;">($84/night · $588/wk)</span></th>
+</tr></thead>
+<tbody>
+<tr style="background:#f5f4f0;"><td style="padding:10px;">Free Hot Breakfast</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;">Sometimes</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ Daily</td></tr>
+<tr><td style="padding:10px;">Free Parking</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">Varies ($0–$15)</td><td style="text-align:center;padding:10px;">Usually</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ Always</td></tr>
+<tr style="background:#f5f4f0;"><td style="padding:10px;">Kitchenette</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;">Rare</td><td style="text-align:center;padding:10px;">Usually</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ Select Rooms</td></tr>
+<tr><td style="padding:10px;">Pet Friendly</td><td style="text-align:center;padding:10px;">Varies</td><td style="text-align:center;padding:10px;">Varies</td><td style="text-align:center;padding:10px;">Rare</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ Dogs Welcome</td></tr>
+<tr style="background:#f5f4f0;"><td style="padding:10px;">Weekly / Extended Rates</td><td style="text-align:center;padding:10px;">Informal</td><td style="text-align:center;padding:10px;">Rare</td><td style="text-align:center;padding:10px;">Weekly discounts</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ From $588/wk</td></tr>
+<tr><td style="padding:10px;">24-Hour Front Desk</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">❌ Self check-in</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅</td></tr>
+<tr style="background:#f5f4f0;"><td style="padding:10px;">Daily Housekeeping</td><td style="text-align:center;padding:10px;">Limited</td><td style="text-align:center;padding:10px;">✅</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅</td></tr>
+<tr><td style="padding:10px;">On-Site Laundry</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;">Sometimes</td><td style="text-align:center;padding:10px;">Sometimes</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ Free</td></tr>
+<tr style="background:#f5f4f0;"><td style="padding:10px;">Trailer / Boat Parking</td><td style="text-align:center;padding:10px;">Limited</td><td style="text-align:center;padding:10px;">Limited</td><td style="text-align:center;padding:10px;">❌</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">✅ Free</td></tr>
+<tr><td style="padding:10px;">Proximity to VEL Airport</td><td style="text-align:center;padding:10px;">Varies</td><td style="text-align:center;padding:10px;">1–3 miles</td><td style="text-align:center;padding:10px;">Varies</td><td style="text-align:center;padding:10px;font-weight:900;color:var(--navy);">0.6 miles</td></tr>
+</tbody></table>
+</div>
+</div>
+<div class="content-section">
+ <h2>Hotel vs. Airbnb in Vernal — What to Consider</h2>
+ <p>Airbnbs and VRBOs in Vernal can be a good option for large groups or very long stays — but they come with trade-offs that travelers don't always think about until they arrive. There's no front desk if you have a problem at midnight. No breakfast — you're cooking or eating out every meal. No daily housekeeping. And cancellation policies vary wildly by host. For stays under 30 days, a hotel with weekly rates, included breakfast, and a front desk is usually the simpler, safer, and often cheaper choice when total cost is calculated.</p>
+ <ul class="feat-list">
+  <li>Hotels offer consistency — Airbnbs vary dramatically by host</li>
+  <li>Free breakfast at a hotel saves $10–$15/person/day vs. cooking or dining out</li>
+  <li>24-hour front desk handles problems — no waiting for a host to respond</li>
+  <li>Daily housekeeping keeps rooms clean without effort</li>
+  <li>Hotels handle their own maintenance — no broken AC surprises</li>
+  <li>Flexible cancellation policies at Best Western Vernal Inn</li>
+ </ul>
+</div>
+<div class="content-section">
+ <h2>Who Best Western Vernal Inn Is Best For</h2>
+ <p>We're not the cheapest room in Vernal, and we're not the most expensive. What we are is the best all-in value — the most amenities per dollar, with the convenience of a central location 0.6 miles from the airport and within easy driving distance of every major attraction in the Uintah Basin.</p>
+ <ul class="feat-list">
+  <li>Families visiting Dinosaur National Monument — 20 miles away</li>
+  <li>Fishing groups heading to Flaming Gorge — 40 miles north</li>
+  <li>Oilfield crews on rotating schedules — closest hotel to VEL airport</li>
+  <li>Hunters during fall elk and deer season — free trailer parking</li>
+  <li>Road trippers on Highway 40 — hot breakfast and a clean room</li>
+  <li>Budget-conscious travelers who do the math on total trip cost</li>
+  <li>Pet owners who want to bring their dog — ground floor rooms</li>
+ </ul>
+</div>
+<div class="pro-tip">
+ <p><strong>The real comparison:</strong> Don't just compare nightly rates — compare what's included. A $65/night motel with no breakfast, paid parking, and no kitchen costs more per day than an $84/night room where breakfast, parking, WiFi, and a kitchenette are all free. Over a 5-night stay, that difference adds up to $150–$300.</p>
+</div>
+<div class="content-section">
+ <h2>Frequently Asked Questions</h2>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What is the best hotel in Vernal, Utah?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Best Western Vernal Inn is consistently rated among the top hotels in Vernal for value, offering rates from $84/night with free hot breakfast, kitchenettes, free parking, and pet friendly rooms — amenities that most Vernal competitors charge extra for or don't offer.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Should I book a hotel or Airbnb in Vernal?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Hotels in Vernal offer more consistency and included amenities than most Airbnbs. Best Western Vernal Inn includes free hot breakfast, daily housekeeping, 24-hour front desk, and laundry — services that vacation rentals typically lack. For stays under 30 days, a hotel with weekly rates is usually the better value.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Which Vernal hotel is closest to Dinosaur National Monument?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Best Western Vernal Inn is approximately 20 miles from the Quarry Exhibit Hall at Dinosaur National Monument — about a 25-minute drive. It is the closest full-service hotel to the monument's Utah entrance.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do any Vernal hotels have kitchenettes?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Best Western Vernal Inn offers kitchenette rooms with a full-size refrigerator, microwave, stovetop, and basic cookware — available for both nightly and weekly stays.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What's the cheapest hotel in Vernal with free breakfast?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Best Western Vernal Inn starts at $84/night with free hot breakfast included. Weekly rates drop to $588 for 7 nights. No other full-service Vernal hotel matches this rate with breakfast included.</p>
+ </details>
+</div>
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+</div>
+<div class="cta-contact">
+ <h2>Ready to Book?</h2>
+ <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
+ <div class="contact-options">
+  <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Directly</span><span class="val">(435) 789-6625</span></a>
+  <a href="mailto:surestayplus53027@gmail.com" class="contact-opt"><span class="icon">✉️</span><span class="lbl">Email</span><span class="val">Send a Message</span></a>
+  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book"><span class="icon">🔒</span><span class="lbl">Book Online</span><span class="val">Reserve Now</span></a>
+ </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Best Hotel in Vernal, Utah | Best Western Vernal Inn — Compare & Book`
+  description=`Comparing hotels in Vernal, Utah? Best Western Vernal Inn offers the best value — from $84/night with free breakfast, kitchenettes, pet friendly rooms. See how we compare. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/best-hotel-in-vernal-utah`
+  ogTitle=`Best Hotel in Vernal, Utah | Best Western Vernal Inn — Compare & Book`
+  ogDescription=`Comparing hotels in Vernal, Utah? Best Western Vernal Inn offers the best value — from $84/night with free breakfast, kitchenettes, pet friendly rooms. See how we compare. Call (435) 789-6625.`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterTitle=`Best Hotel in Vernal, Utah | Best Western Vernal Inn — Compare & Book`
+  twitterDescription=`Comparing hotels in Vernal, Utah? Best Western Vernal Inn offers the best value — from $84/night with free breakfast, kitchenettes, pet friendly rooms. See how we compare. Call (435) 789-6625.`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>

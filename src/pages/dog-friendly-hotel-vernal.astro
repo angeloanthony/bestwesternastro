@@ -1,0 +1,250 @@
+---
+// src/pages/dog-friendly-hotel-vernal.astro
+// MIGRATION of /dog-friendly-hotel-vernal.html — metadata, canonical, JSON-LD schema, body copy,
+// headings, and internal links preserved VERBATIM. Shared chrome
+// (nav / mobile menu / footer / scroll-top + burger script) is provided by
+// BaseLayout; page-specific <style>/schema go in the head slot and
+// page-specific scripts in the scripts slot, both emitted unchanged.
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const headExtras = `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Best Western Extended Stay Vernal",
+    "url": "https://bestwesternvernalinn.com",
+    "telephone": "+18015971696",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Vernal",
+      "addressRegion": "UT",
+      "addressCountry": "US"
+    },
+    "description": "Dog friendly hotel in Vernal, Utah. Pets welcome at Best Western Extended Stay Vernal. Near Dinosaur National Monument, Flaming Gorge, and dog-friendly trails throughout northeastern Utah.",
+    "priceRange": "$$",
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Pets Allowed", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Dogs Allowed", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Extended Stay Rates", "value": true }
+    ]
+  }
+  </script>`;
+const bodyContent = `<div class="distance-bar">
+  🐾 Pets welcome — let us know you're traveling with a dog when you book
+</div>
+
+<div class="pbar">
+  <div class="pi"><span class="ic">🐶</span><div><div class="label">Dogs Welcome</div><div class="sub">Pet-friendly rooms available</div></div></div>
+  <div class="pi"><span class="ic">🦕</span><div><div class="label">~20 Min Drive</div><div class="sub">To Dinosaur National Monument</div></div></div>
+  <div class="pi"><span class="ic">🎣</span><div><div class="label">~40 Min Drive</div><div class="sub">To Flaming Gorge</div></div></div>
+  <div class="pi"><span class="ic">🍳</span><div><div class="label">Breakfast Included</div><div class="sub">Hot breakfast every morning</div></div></div>
+  <div class="pi"><span class="ic">📅</span><div><div class="label">Weekly Rates</div><div class="sub">Discounted extended stays</div></div></div>
+</div>
+
+<div class="content-wrap">
+
+  <div class="intro-pull rv">
+    Northeastern Utah is tailor-made for dogs — wide open canyon country, desert trails, river corridors, and mountain wilderness. When you're road-tripping to <strong>Dinosaur National Monument</strong> or <strong>Flaming Gorge</strong>, leaving your dog at home doesn't have to be part of the plan. Best Western Extended Stay Vernal is a genuine pet-friendly hotel where your dog is a welcome guest, not an afterthought.
+  </div>
+
+  <section class="content-section rv">
+    <h2>Pet Policy at a Glance</h2>
+    <p>We want your stay with your dog to be straightforward. Here's what you need to know before you book:</p>
+    <ul class="feat-list">
+      <li>Dogs and cats welcome in designated pet-friendly rooms</li>
+      <li>Let us know you're traveling with a pet when you book or call</li>
+      <li>Pet fee applies — ask about current fee when booking</li>
+      <li>Pets must be leashed in all common areas</li>
+      <li>Please do not leave pets unattended in rooms for extended periods</li>
+      <li>Designated outdoor area on property for pet walks</li>
+      <li>Weekly and monthly rates available for pet-friendly rooms</li>
+    </ul>
+    <div class="pro-tip">
+      <p><strong>Heads up:</strong> Pet-friendly rooms are limited — especially during summer. Call ahead at <a href="tel:4357896625">(435) 789-6625</a> to confirm pet room availability before your arrival date, particularly on peak-season weekends.</p>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Dog-Friendly Adventures Near Vernal</h2>
+    <p>Vernal is one of the better base camps for dog owners in the West. The surrounding public lands are vast, the crowds are manageable compared to more-famous parks, and dogs are welcome across a wide range of trails and recreation areas. A few notes on each major destination:</p>
+
+    <div class="attraction-cards">
+      <div class="attr-card">
+        <strong>🦕 Dinosaur National Monument</strong>
+        <p>Dogs allowed in developed areas, parking lots, campgrounds, and along paved roads — on leash. Not permitted inside the Quarry Exhibit Hall or on most backcountry trails. Bring water; don't leave your dog in a hot car.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🎣 Flaming Gorge NRA</strong>
+        <p>Dogs welcome throughout most of the recreation area on leash. Great for reservoir-side walks, canyon overlooks, and developed picnic areas. ~40 minutes from Vernal.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🏊 Red Fleet State Park</strong>
+        <p>Dogs allowed on leash throughout the park. The reservoir shoreline makes for an easy, scenic walk. ~15 minutes from Vernal.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🪨 Steinaker State Park</strong>
+        <p>Dogs welcome on leash. Easy terrain around the reservoir, good for dogs of all sizes and fitness levels. ~10 minutes north of town.</p>
+      </div>
+      <div class="attr-card">
+        <strong>⛰️ Ashley National Forest</strong>
+        <p>Dogs generally welcome on leash or voice control depending on the area. Hundreds of miles of trails from canyon walks to high-alpine routes in the Uinta Mountains.</p>
+      </div>
+      <div class="attr-card">
+        <strong>🏙️ Vernal Itself</strong>
+        <p>Dog-friendly town. Walking distance from the hotel to parks and green space. Several restaurants with outdoor seating welcome well-behaved dogs on the patio.</p>
+      </div>
+    </div>
+
+    <div class="pro-tip">
+      <p><strong>Summer heat advisory:</strong> Vernal sits at about 5,300 feet and summer temperatures regularly exceed 95°F. Trail surfaces heat up fast. Early morning and evening outings are best for your dog in July and August. Always carry more water than you think you'll need — for both of you.</p>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Tips for Road-Tripping to Vernal With Your Dog</h2>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <span class="tip-icon">💧</span>
+        <p><strong>Bring a collapsible bowl.</strong> Desert country means frequent water stops. A lightweight bowl takes up no space and your dog will thank you on every trail.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🌡️</span>
+        <p><strong>Check paw temperature.</strong> Hot pavement and rock can burn pads fast. If you can't hold your hand on the surface for 7 seconds, it's too hot for paws.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🦟</span>
+        <p><strong>Tick and flea prevention.</strong> Utah's high desert has ticks, especially near water and in brushy canyon areas. Make sure your dog is current on preventatives before the trip.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🏜️</span>
+        <p><strong>Watch for desert hazards.</strong> Prickly pear, rattlesnakes, and rough terrain are real in canyon country. Keep your dog on leash in unfamiliar areas.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🌅</span>
+        <p><strong>Go early or late.</strong> The best hiking in summer is before 9 a.m. or after 5 p.m. Plan your dog's activity around the temperature, not the other way around.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">📋</span>
+        <p><strong>Bring vaccination records.</strong> Some areas may ask for proof of current rabies vaccination. Keep a copy in your travel bag alongside your dog's health documents.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section rv">
+    <h2>What to Pack for Your Dog</h2>
+    <ul class="feat-list">
+      <li>Leash and collar with current ID tags</li>
+      <li>Collapsible water bowl and extra water</li>
+      <li>Enough food for the full trip plus a day extra</li>
+      <li>Familiar blanket or dog bed for the hotel room</li>
+      <li>Poop bags — always</li>
+      <li>Current vaccination records</li>
+      <li>Flea and tick prevention up to date</li>
+      <li>Basic pet first-aid kit for canyon country hiking</li>
+      <li>Dog booties if hiking in summer heat</li>
+      <li>Any medications your dog takes regularly</li>
+    </ul>
+  </section>
+
+  <section class="content-section rv">
+    <h2>Long-Term Stays With Your Dog</h2>
+    <p>A significant number of our extended stay guests — oilfield workers, contractors, and traveling professionals — come with dogs. If you're on a multi-week rotation in the Uintah Basin and your dog makes the long work schedule easier to manage, bring them. Our weekly and monthly rates apply to pet-friendly rooms, and the property is set up to handle working dogs and larger breeds without drama.</p>
+    <p>Call us at <a href="tel:4357896625">(435) 789-6625</a> to discuss pet room availability and extended stay pricing for your situation.</p>
+  </section>
+
+</div><!-- /content-wrap -->
+
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
+<section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
+ <div style="max-width:1180px;margin:0 auto;">
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
+  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
+      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+     </ul>
+    </div>
+    <div>
+     <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
+     <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
+      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+     </ul>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.6rem;">
+   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+  </div>
+ </div>
+</section>
+<!-- ===== /MESH ===== -->
+<div class="cta-contact">
+  <h2>Book a Dog-Friendly Room in Vernal</h2>
+  <p>Pet rooms are limited — call ahead to confirm availability and lock in your dates.</p>
+  <div class="contact-options">
+    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
+    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">(435) 789-6625</span></a>
+    <a href="https://bestwesternvernalinn.com" class="contact-opt book"><span class="icon">🌐</span><span class="lbl">Book Online</span><span class="val">bestwesternvernalinn.com</span></a>
+  </div>
+</div>
+
+<div class="faq-page-sec" style="background:var(--soft)">
+  <div class="faq-categories content-wrap">
+    <div>
+      <div class="sh" style="padding:0 0 2rem">
+        <div class="tag">Common Questions</div>
+        <h2>Dog-Friendly Hotel FAQ</h2>
+        <div class="gline"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q">Is Best Western Vernal a dog-friendly hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Extended Stay Vernal is a pet-friendly hotel with designated rooms for guests traveling with dogs and cats. Let us know you'll have a pet when you book, or call ahead to confirm pet room availability.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is there a pet fee at Best Western Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes, a pet fee applies. Call us at <a href="tel:4357896625">(435) 789-6625</a> for current pet fee information when you book your room.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are large dogs allowed at the hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Call us to discuss your dog's size and breed. We'd rather have a conversation than have you leave your dog at home — we accommodate larger dogs whenever possible.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are dogs allowed at Dinosaur National Monument? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Dogs are allowed in developed areas, parking lots, campgrounds, and along paved roads on leash. They are not permitted inside the Quarry Exhibit Hall or on most backcountry trails. Check nps.gov/dino for current pet policies before your visit.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are dogs allowed at Flaming Gorge? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Dogs are welcome throughout most of the Flaming Gorge National Recreation Area on leash. Great for walks at overlooks and along the reservoir shores.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Can I leave my dog in the hotel room while I'm out? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>We ask guests not to leave pets unattended for extended periods. If you need to be away for a few hours, let the front desk know. For longer absences, look into local doggy daycare options in Vernal.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is there a place to walk my dog at the hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. There is a designated outdoor area on the property for pet walks. The hotel is also within easy walking distance of parks and green space in town.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are weekly rates available for dog-friendly rooms? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Weekly and monthly extended stay rates are available for pet-friendly rooms. Call us directly to confirm current pet room availability and extended rate pricing.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How many dogs can I bring? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Call us to discuss your specific situation. Multi-pet stays are handled case by case — we want to make it work when we can.</p></div></div>
+        <div class="faq-item"><button class="faq-q">What should I pack for a dog-friendly road trip to Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Leash, water bowl, extra water, poop bags, your dog's food, a familiar blanket for the hotel room, current vaccination records, and flea and tick prevention. A basic pet first-aid kit is worth having in canyon country. See our tips section on this page for desert-specific advice.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+const pageScripts = undefined;
+---
+
+<BaseLayout
+  title=`Dog Friendly Hotel in Vernal, Utah | Best Western Vernal Inn`
+  description=`Looking for a dog friendly hotel in Vernal, Utah? Best Western Extended Stay Vernal welcomes pets. Bring your dog and explore Dinosaur National Monument, Flaming Gorge, and Utah's canyon country together. Call (435) 789-6625.`
+  canonical=`https://bestwesternvernalinn.com/dog-friendly-hotel-vernal`
+  ogImage=`https://bestwesternvernalinn.com/images/35.webp`
+  twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
+  lastUpdated=`April 2026`
+>
+  <Fragment slot="head" set:html={headExtras} />
+  <Fragment set:html={bodyContent} />
+</BaseLayout>
