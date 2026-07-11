@@ -199,5 +199,7 @@ Significant, hard‑to‑reverse decisions live as short records in [`docs/adr/`
 - [ADR‑003 — Adopt Supabase over a FastAPI Stack](adr/ADR-003-adopt-supabase.md)
 - [ADR‑004 — Add Tailwind Without Preflight](adr/ADR-004-tailwind-without-preflight.md)
 - [ADR‑005 — AI Concierge Scope Limited to Vernal](adr/ADR-005-ai-scope-limited-to-vernal.md)
+- [ADR‑006 — Passwordless, Magic-Link Identity](adr/ADR-006-passwordless-identity.md)
+- [ADR‑007 — Attraction Catalogue in TypeScript; Favorites Keyed by Slug](adr/ADR-007-attraction-catalogue-in-typescript.md)
 
 Add a new ADR whenever a decision is costly to reverse or someone will ask "why did we do it this way?" six months from now. Never edit a superseded ADR — mark it `Superseded by ADR‑NNN` and write a new one.

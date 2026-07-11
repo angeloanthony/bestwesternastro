@@ -75,8 +75,6 @@ Passwordless, magic-link only (see ADR-006). **Code implemented + offline-verifi
 - [x] Public pages unaffected (the 23 SEO pages + conversion layer never gate) — ✅ fails-open + visual 12/12 verified offline
 - [ ] Optional profile completion after login (never blocks signup) — ⏳ live write (§7.4); form + types verified offline
 
----
-
 ## E. Rollback plan (verify BEFORE shipping auth)
 
 Authentication is the first feature that can accidentally affect the whole site — a bad guard, a global redirect, or an env misconfiguration can take down public pages. Prove the blast radius is contained and that auth can be pulled without collateral damage:
@@ -93,3 +91,23 @@ Authentication is the first feature that can accidentally affect the whole site 
 > The offline-verifiable §E guardrails are green. The remaining live drills (§7.8 outage, §7.9 revert) confirm them against the deployed project before auth ships to real traffic.
 
 **Test matrix** for the auth behaviours themselves lives with Prompt 5 (new-user, returning-user, expired-link, refresh-persists, logged-out→dashboard-redirect, anonymous→guides-landing, invalid-token→graceful-recovery). Build it as the auth code is written, not after.
+
+---
+
+## F. Adventure Pass itinerary (M4 — built; live items pending)
+
+Saved Adventures + Trip Planner. **Code implemented + offline-verified**
+([M4_ITINERARY_VERIFICATION.md](M4_ITINERARY_VERIFICATION.md)); ⏳ items need a live project +
+authenticated session (its §7 runbook). **Prereq:** apply migration `005_favorite.sql`
+(`supabase db push`) and re-run `npm run verify:db`.
+
+- [ ] Save an attraction (❤️) → row in `favorite` with your `user_id` + slug — ⏳ live (§7.1)
+- [ ] Favorite persists across reload; unsave deletes the row — ⏳ live (§7.2–7.3)
+- [ ] Build a trip → `itinerary` row (`days` populated) + `member_profile` dates/interests set — ⏳ live (§7.5)
+- [ ] Update reuses the SAME itinerary row (no duplicate); trip pre-fills on reload — ⏳ live (§7.6)
+- [ ] Clear trip → `itinerary` row deleted, dates cleared — ⏳ live (§7.8)
+- [ ] Trip Status: countdown / length / days-remaining / season / packing render correctly — ⏳ live (§7.7); pure logic verified offline
+- [ ] **RLS isolation:** member B cannot read member A's `favorite` / `itinerary` rows — ⏳ live (§7.9); policy `fav_own` covered by `verify:db`
+- [ ] M2 profile data (`user_types`/`visit_reason`/`marketing_optin`) intact after trip saves (no clobber) — ⏳ live (§7.9); partial-upsert design verified offline
+- [x] Public pages unaffected; additive only (one migration, no schema redesign) — ✅ visual 12/12 verified offline
+- [ ] Analytics: `favorite_added/removed`, `trip_created/updated/deleted`, `itinerary_viewed` in GA4 DebugView — ⏳ live (needs GA4 id)
