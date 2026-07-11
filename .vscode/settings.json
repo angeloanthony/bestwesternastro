@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.experimental.useFlatConfig": true,
+  "[astro]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "tailwindCSS.experimental.configFile": "src/styles/tailwind.css",
+  "files.eol": "\n"
+}

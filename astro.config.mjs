@@ -1,5 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import preact from '@astrojs/preact';
+import tailwindcss from '@tailwindcss/vite';
 
 // ─────────────────────────────────────────────────────────────
 // Best Western Vernal Inn — Astro 6 configuration
@@ -21,6 +23,24 @@ export default defineConfig({
   build: {
     // Keep flat .html URLs identical to the legacy static site.
     format: 'file',
+  },
+  // ───────────────────────────────────────────────────────────
+  // ADVENTUREOS FOUNDATION (additive — see docs/TECHNICAL_BASELINE.md)
+  //
+  // Preact powers interactive islands (src/islands/). Adding the
+  // renderer alone emits ZERO client JS: static pages stay static
+  // until a component is used with a client:* directive. No existing
+  // page uses one, so existing output is unaffected.
+  //
+  // Tailwind is wired as a Vite plugin but is only compiled where the
+  // Tailwind entrypoint (src/styles/tailwind.css) is imported — and it
+  // is imported ONLY by new AdventureOS islands, never by BaseLayout.
+  // Preflight is disabled in that entrypoint (ADR-004) so Tailwind can
+  // never restyle the legacy global.css cascade.
+  // ───────────────────────────────────────────────────────────
+  integrations: [preact()],
+  vite: {
+    plugins: [tailwindcss()],
   },
   // ───────────────────────────────────────────────────────────
   // REDIRECTS — handled at the HOST level via public/_redirects

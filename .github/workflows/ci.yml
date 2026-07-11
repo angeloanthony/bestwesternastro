@@ -1,0 +1,36 @@
+name: CI
+
+# Infrastructure gate: format + lint + build must pass. No deployment here.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check formatting (new code only; existing site is prettier-ignored)
+        run: npx prettier --check .
+
+      - name: Lint (new AdventureOS code only)
+        run: npx eslint .
+
+      - name: Build (fails on any Astro build error)
+        run: npm run build
+
+# NOTE: visual-regression (npm run test:visual) is intentionally NOT gated in CI.
+# Playwright pixel snapshots are OS-specific; baselines are generated locally
+# (Windows/dev) and would mismatch on ubuntu runners. Running it in CI is a
+# follow-up that needs a pinned container so baseline and runner match.

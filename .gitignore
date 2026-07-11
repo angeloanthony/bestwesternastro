@@ -7,5 +7,8 @@ node_modules/
 # env
 .env
 .env.production
+# test artifacts (visual-regression diffs/reports; committed *-snapshots/ baselines are kept)
+test-results/
+playwright-report/
 # os
 .DS_Store

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo \"gen exit: $?\")",
+      "Bash(sed 's/from '\\\\''playwright'\\\\''/from '\\\\''@playwright\\\\/test'\\\\''/' __TRACKED_VAR__/diag.mjs)",
+      "Bash(node ./_diag.mjs)",
+      "Bash(curl -s http://localhost:4321/index.html)",
+      "Bash(echo \"compare exit: $?\")",
+      "Bash(echo \"astro check exit: $?\")",
+      "Bash(echo \"eslint tests exit: $?\")",
+      "Bash(echo \"visual exit: $?\")"
+    ]
+  }
+}

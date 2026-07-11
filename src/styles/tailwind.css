@@ -1,0 +1,18 @@
+/* AdventureOS Tailwind v4 entrypoint — PREFLIGHT DELIBERATELY OMITTED (ADR-004).
+ *
+ * Tailwind v4's `@import "tailwindcss"` pulls in three layers: theme,
+ * preflight (a global base reset), and utilities. Importing preflight
+ * globally would restyle headings, lists, forms, buttons and typography
+ * across all 23 legacy SEO pages — with no build error. We therefore
+ * import ONLY the theme (CSS variables) and utilities layers, and never
+ * the preflight layer.
+ *
+ * This file must be imported ONLY by new AdventureOS islands/pages.
+ * Never import it from src/layouts/BaseLayout.astro — doing so would put
+ * Tailwind's reset (if ever re-enabled) and utilities into the cascade of
+ * every production page. The legacy src/styles/global.css stays authoritative.
+ */
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
