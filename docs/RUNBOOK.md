@@ -70,7 +70,7 @@ survives a handoff.
 | Analytics flatline               | GA4 Realtime, latest deploy                  | Missing measurement ID, broken build          |
 | Member features down             | Supabase Auth status                         | Auth outage — public site must still work     |
 
-**Rollback of last resort:** revert to `v0.4-foundation-complete` — the tagged
+**Rollback of last resort:** revert to `v0.4-infrastructure-verified` — the tagged
 infrastructure baseline with no auth. See the rollback plan in
 [STAGING_CHECKLIST.md §E](STAGING_CHECKLIST.md).
 

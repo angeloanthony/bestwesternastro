@@ -79,6 +79,6 @@ Authentication is the first feature that can accidentally affect the whole site 
 - [ ] Existing analytics still fire (`call_click` / `book_click` unaffected by auth JS)
 - [ ] Existing lead form still functions (Supabase insert + mailto fallback both intact)
 - [ ] A member/auth outage **fails open** for public content — if Supabase Auth is down, the marketing site and lead capture keep working; only member features degrade
-- [ ] Rollback mechanics documented: which commit/tag to revert to (`v0.4-foundation-complete`), and that reverting the auth PR restores the last-known-good site without data loss
+- [ ] Rollback mechanics documented: which commit/tag to revert to (`v0.4-infrastructure-verified`), and that reverting the auth PR restores the last-known-good site without data loss
 
 **Test matrix** for the auth behaviours themselves lives with Prompt 5 (new-user, returning-user, expired-link, refresh-persists, logged-out→dashboard-redirect, anonymous→guides-landing, invalid-token→graceful-recovery). Build it as the auth code is written, not after.

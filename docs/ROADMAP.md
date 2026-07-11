@@ -14,7 +14,13 @@ milestone's own checks.
 
 ## M1 — Infrastructure Verified
 
-Baseline the whole product builds on. Tag when green: **`v0.4-foundation-complete`**.
+Baseline the whole product builds on. Tag when green: **`v0.4-infrastructure-verified`**.
+
+The tag name is deliberate. _Code complete_ (repo builds, 0 hints, tooling + docs
+in place) is an engineering checkpoint, not this milestone — the code being clean
+does not prove the backend works. M1 is reached only when the live checks below
+pass, which is why the tag says **verified**, not "complete." (Production-ready —
+monitoring, staff testing, rollback drill — is a later milestone again.)
 
 - [ ] Repository baseline established
 - [ ] ADRs complete ([001–006](adr/))
@@ -29,7 +35,7 @@ Baseline the whole product builds on. Tag when green: **`v0.4-foundation-complet
 - [ ] Analytics verified in GA4 ([STAGING_CHECKLIST.md §C](STAGING_CHECKLIST.md))
 - [ ] Rollback documented ([STAGING_CHECKLIST.md §E](STAGING_CHECKLIST.md), [RUNBOOK.md](RUNBOOK.md))
 
-Only when all of the above are green do we tag `v0.4-foundation-complete` and
+Only when all of the above are green do we tag `v0.4-infrastructure-verified` and
 begin M2.
 
 ## M2 — Identity Verified (Prompt 5)
