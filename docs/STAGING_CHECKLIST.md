@@ -11,8 +11,12 @@ Manual verification to run against the **live** backend before building on top o
 - [ ] Extensions enabled: `postgis`, `vector`, `uuid-ossp`
 - [ ] Migrations applied in order: `001_schema` → `002_rls` → `003_functions`
 - [ ] Seed applied: `database/seed/001_destination.sql` (vernal destination exists)
+- [ ] **Schema verified** — run `database/tests/schema_checks.sql`, all lines PASS (right objects, right extensions, right policies)
 - [ ] **RLS verified** — run `database/tests/rls_checks.sql`, all checks print PASS
+- [ ] Storage bucket for guide PDFs created (private; served via signed URLs) — needed by Prompt 5+
+- [ ] `service_role` key stored server-side only (Worker secret / never in client bundle)
 - [ ] Env set in Cloudflare Pages + local `.env`: `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`
+- [ ] CORS: confirm the site origin can call Supabase (default allows; verify once)
 
 ## B. Lead pipeline end-to-end (prove before adding auth)
 
@@ -61,3 +65,20 @@ Passwordless, magic-link only (see ADR-006):
 - [ ] Private pages protected (dashboard redirects when logged out)
 - [ ] Public pages unaffected (the 23 SEO pages + conversion layer never gate)
 - [ ] Optional profile completion after login (never blocks signup)
+
+---
+
+## E. Rollback plan (verify BEFORE shipping auth)
+
+Authentication is the first feature that can accidentally affect the whole site — a bad guard, a global redirect, or an env misconfiguration can take down public pages. Prove the blast radius is contained and that auth can be pulled without collateral damage:
+
+- [ ] Auth can be **disabled without affecting existing pages** — turning off signups / removing the member routes leaves the 23 SEO pages fully functional
+- [ ] Anonymous visitors still browse everything public (no page silently starts requiring login)
+- [ ] Existing booking flow unchanged (sticky bar, `bookingUrl`, click-to-call)
+- [ ] Existing SEO pages unchanged (visual regression 12/12 still green after auth lands)
+- [ ] Existing analytics still fire (`call_click` / `book_click` unaffected by auth JS)
+- [ ] Existing lead form still functions (Supabase insert + mailto fallback both intact)
+- [ ] A member/auth outage **fails open** for public content — if Supabase Auth is down, the marketing site and lead capture keep working; only member features degrade
+- [ ] Rollback mechanics documented: which commit/tag to revert to (`v0.4-foundation-complete`), and that reverting the auth PR restores the last-known-good site without data loss
+
+**Test matrix** for the auth behaviours themselves lives with Prompt 5 (new-user, returning-user, expired-link, refresh-persists, logged-out→dashboard-redirect, anonymous→guides-landing, invalid-token→graceful-recovery). Build it as the auth code is written, not after.
