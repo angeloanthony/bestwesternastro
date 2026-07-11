@@ -1,11 +1,12 @@
 // Flat ESLint config. Conservative scope: lints ONLY new AdventureOS code.
 // The 23 migrated production pages/components are intentionally NOT linted —
 // they were migrated verbatim and must not churn (ADR-001, Baseline §2).
+import { defineConfig } from 'eslint/config';
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import astro from 'eslint-plugin-astro';
 
-export default tseslint.config(
+export default defineConfig(
   {
     // Only these paths are linted. Widen deliberately as the app grows.
     files: [

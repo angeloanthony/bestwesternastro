@@ -13,10 +13,13 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
+    "typecheck": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "verify": "npm run build && npm run typecheck && npm run lint && npm run format:check",
+    "verify:db": "node scripts/verify-db.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",

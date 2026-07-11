@@ -133,6 +133,10 @@ const {
       document.getElementById('burger')?.classList.remove('open');
       document.getElementById('mm')?.classList.remove('open');
     }
+    // cm() is invoked from inline onclick="cm()" on the Header nav links
+    // (Header.astro). The type-checker can't see that HTML reference, so this
+    // no-op reference keeps it from being reported as unused — behavior unchanged.
+    void cm;
 
     // Reveal-on-scroll: .rv elements start hidden (opacity:0) and fade in
     // when they enter the viewport. Without this, every .rv section stays

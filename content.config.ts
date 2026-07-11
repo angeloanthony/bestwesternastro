@@ -13,7 +13,8 @@
 // inert until you add files under src/content/. Defining it now costs
 // nothing and documents the intended growth path from the runbook.
 
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 // Informational / traffic articles (e.g. travel guides, area write-ups).
@@ -22,7 +23,7 @@ const articles = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    canonical: z.string().url(),
+    canonical: z.url(),
     summary: z.string().min(40),                 // AI-pullable TL;DR (runbook Part 9)
     faqs: z
       .array(z.object({ q: z.string(), a: z.string() }))
@@ -40,7 +41,7 @@ const local = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    canonical: z.string().url(),
+    canonical: z.url(),
     landmark: z.string(),
     distance: z.string(),                        // specific distance, not generic
     localDetail: z.string().min(40),             // forces real, distinct content
