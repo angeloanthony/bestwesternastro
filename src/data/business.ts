@@ -54,6 +54,18 @@ export const BUSINESS = {
     poweredBy: { name: 'cozelosdata.com', url: 'https://cozelosdata.com' },
   },
 
+  // Direct-booking benefits shown in the conversion layer (AdventureOS Prompt 3).
+  // `confirmed` GATES publication: an unhonored claim is worse than none
+  // (Report §12). Flip to `true` ONLY after the GM signs off in writing —
+  // no code change needed, just this flag. Only confirmed claims are rendered.
+  bookDirect: [
+    { id: 'no-fees', label: 'No booking fees', confirmed: true }, // true by definition when booking direct
+    { id: 'free-parking', label: 'Free parking — truck & trailer', confirmed: true },
+    { id: 'free-breakfast', label: 'Free hot breakfast', confirmed: true },
+    { id: 'best-rate', label: 'Best rate guarantee', confirmed: false }, // NEEDS GM sign-off
+    { id: 'flex-cancel', label: 'Flexible cancellation', confirmed: false }, // NEEDS GM to confirm actual policy
+  ],
+
   lastUpdated: 'February 2026',
 } as const;
 

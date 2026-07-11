@@ -11,7 +11,11 @@
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
+import StickyBookingBar from '../components/StickyBookingBar.astro';
 import '../styles/global.css';
+// AdventureOS conversion layer (Prompt 3) — additive; global.css untouched.
+import '../styles/conversion.css';
 
 interface Props {
   /** Exact <title> from the legacy page. */
@@ -91,7 +95,9 @@ const {
     rel="stylesheet"
   />
 
-  <!-- Analytics placeholder — drop GA/Plausible/etc. snippet here at launch. -->
+  <!-- Analytics: GA4 + CallRail + conversion click tracking. Dormant until the
+       env IDs are set (PUBLIC_GA4_MEASUREMENT_ID / PUBLIC_CALLRAIL_ID). -->
+  <Analytics />
   <slot name="analytics" />
 
   <!-- Per-page structured data (JSON-LD) is injected here, verbatim. -->
@@ -107,6 +113,9 @@ const {
   <slot />
 
   <Footer lastUpdated={lastUpdated} />
+
+  <!-- Persistent book-direct conversion bar (Prompt 3). Static, no framework JS. -->
+  <StickyBookingBar />
 
   <button id="stop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top">↑</button>
 

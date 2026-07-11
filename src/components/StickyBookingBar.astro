@@ -1,0 +1,35 @@
+---
+// src/components/StickyBookingBar.astro
+// Persistent book-direct bar (Report §12 / Baseline §6 Track B). Static — no
+// framework JS. Two tap targets (Call, Book) that work without JavaScript, plus
+// a compact trust line built ONLY from GM-confirmed claims. Click events are
+// tracked via [data-track] hooks (see Analytics.astro); tracking is a no-op
+// until GA4 is configured. Styling: src/styles/conversion.css.
+import { BUSINESS } from '../data/business.ts';
+
+// Only publish claims the GM has confirmed (business.ts bookDirect[].confirmed).
+const claims = BUSINESS.bookDirect.filter((c) => c.confirmed).map((c) => c.label);
+---
+
+<aside class="sbb" aria-label="Book directly with the hotel">
+  <div class="sbb-inner">
+    <p class="sbb-claims">
+      <strong>Book Direct &amp; Save</strong>
+      {claims.map((c) => <span class="sbb-claim">{c}</span>)}
+    </p>
+    <div class="sbb-actions">
+      <a class="sbb-call" href={`tel:${BUSINESS.phoneTel}`} data-track="call_click">
+        <span aria-hidden="true">📞</span> {BUSINESS.phoneDisplay}
+      </a>
+      <a
+        class="sbb-book"
+        href={BUSINESS.bookingUrl}
+        target="_blank"
+        rel="noopener"
+        data-track="book_click"
+      >
+        Book Now
+      </a>
+    </div>
+  </div>
+</aside>
