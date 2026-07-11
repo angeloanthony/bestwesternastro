@@ -68,6 +68,16 @@ begin
   end;
   raise notice '% : anon cannot insert a location (expect denied)',
     case when denied then 'PASS' else 'FAIL' end;
+
+  -- 5. Anon has NO access to member favorites (no grant + RLS → denied/empty).
+  --    Favorites are member-owned; the anon key must never read them.
+  denied := false;
+  begin
+    perform count(*) from favorite;
+  exception when insufficient_privilege or others then denied := true;
+  end;
+  raise notice '% : anon cannot read favorites (expect denied)',
+    case when denied then 'PASS' else 'FAIL' end;
 end $$;
 
 reset role;

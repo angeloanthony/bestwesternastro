@@ -20,6 +20,7 @@ import type { MemberProfileRow } from '../lib/database.types';
 import { track } from '../lib/analytics';
 import PassSignIn from './PassSignIn';
 import PassProfileForm from './PassProfileForm';
+import PassMemberHome from './PassMemberHome';
 import '../styles/tailwind.css';
 
 type View = 'loading' | 'anon' | 'member';
@@ -125,18 +126,17 @@ export default function PassDashboard() {
         </button>
       </div>
 
-      <div class="rounded-lg border border-[#1a2e52]/15 bg-white p-5">
-        <h2 class="mb-3 text-lg font-bold text-[#1a2e52]">Personalise your Pass</h2>
-        <PassProfileForm userId={user!.id} initial={profile} />
-      </div>
+      <details class="rounded-lg border border-[#1a2e52]/15 bg-white p-5">
+        <summary class="cursor-pointer text-lg font-bold text-[#1a2e52]">
+          Personalise your Pass
+        </summary>
+        <div class="mt-3">
+          <PassProfileForm userId={user!.id} initial={profile} />
+        </div>
+      </details>
 
-      <div class="rounded-lg border border-dashed border-[#c9a84c] bg-[#fdf8f0] p-5 text-[#1a2e52]">
-        <h2 class="text-lg font-bold">Your saved guides &amp; itineraries</h2>
-        <p class="mt-1 text-sm">
-          Coming soon — downloadable Vernal guides, saved attractions, and a trip planner will
-          appear here as they roll out. Your Pass is ready for them.
-        </p>
-      </div>
+      {/* M4 — Saved Adventures, My Adventures, and the Trip Planner. */}
+      <PassMemberHome userId={user!.id} />
     </div>
   );
 }

@@ -52,6 +52,36 @@ export type MemberProfileRow = {
 export type MemberProfileInsert = Pick<MemberProfileRow, 'user_id' | 'destination_id'> &
   Partial<Omit<MemberProfileRow, 'user_id' | 'destination_id' | 'member_since' | 'created_at'>>;
 
+// Saved Adventure (M4). One row per (member, attraction slug); RLS `fav_own`
+// (005) restricts read/write to own rows; `authenticated` has CRUD via 005.
+// Keyed by attraction slug (src/data/attractions.ts), NOT a location FK — the
+// `location` table is the not-yet-built Knowledge Base track.
+export type FavoriteRow = {
+  id: string;
+  user_id: string;
+  attraction_slug: string;
+  created_at: string;
+};
+
+export type FavoriteInsert = Pick<FavoriteRow, 'user_id' | 'attraction_slug'>;
+
+// Itinerary (M4). Reuses the table from 001 (no schema change). One generated
+// trip plan per member (the app keeps a single row per user_id). `days` holds
+// the deterministic plan (see src/lib/trip-plan.ts ItineraryDay). RLS `itin_own`
+// (002) scopes it; `authenticated` has CRUD via 004.
+export type ItineraryRow = {
+  id: string;
+  user_id: string;
+  title: string;
+  start_date: string | null; // ISO date
+  days: unknown; // ItineraryDay[] — see src/lib/trip-plan.ts
+  created_at: string;
+  updated_at: string;
+};
+
+export type ItineraryInsert = Pick<ItineraryRow, 'user_id' | 'title' | 'days'> &
+  Partial<Pick<ItineraryRow, 'start_date'>>;
+
 // Destination — public reference table (RLS-free, SELECT-only for anon/auth via
 // grant 004). Only the columns the app reads are typed precisely; `center`
 // (PostGIS geography) is opaque to the client.
@@ -84,6 +114,18 @@ export type Database = {
         Row: MemberProfileRow;
         Insert: MemberProfileInsert;
         Update: Partial<MemberProfileInsert>;
+        Relationships: [];
+      };
+      favorite: {
+        Row: FavoriteRow;
+        Insert: FavoriteInsert;
+        Update: Partial<FavoriteInsert>;
+        Relationships: [];
+      };
+      itinerary: {
+        Row: ItineraryRow;
+        Insert: ItineraryInsert;
+        Update: Partial<ItineraryInsert>;
         Relationships: [];
       };
     };
