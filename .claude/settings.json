@@ -8,7 +8,23 @@
       "Bash(echo \"compare exit: $?\")",
       "Bash(echo \"astro check exit: $?\")",
       "Bash(echo \"eslint tests exit: $?\")",
-      "Bash(echo \"visual exit: $?\")"
+      "Bash(echo \"visual exit: $?\")",
+      "PowerShell(npm run verify)",
+      "PowerShell(npx astro check 2>&1 | Select-String -Pattern '\\\\.\\(astro|ts|tsx|mjs\\)\\\\:' -Context 0,0 | ForEach-Object { $_.Line } | Where-Object { $_ -notmatch 'pageScripts' })",
+      "PowerShell(node \"C:\\\\Users\\\\deluc\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-deluc-Documents-bestwesternastro\\\\5cab0fdf-5118-4a54-aaed-8d2cd15fba11\\\\scratchpad\\\\strip-dead-vars.mjs\")",
+      "PowerShell(npx astro check 2>&1)",
+      "Bash(node -p \"require\\('./package.json'\\).version\")",
+      "Bash(node -p \"require\\('../zod/package.json'\\).version\")",
+      "Bash(xargs grep -ln \"\\\\bz\\\\b\")",
+      "Bash(node -p \"Object.keys\\(require\\('../zod'\\)\\).slice\\(0,5\\)\")",
+      "Bash(node -p \"require\\('./package.json'\\).exports['./zod']\")",
+      "Bash(node -e \"const {defineConfig}=require\\('eslint/config'\\); console.log\\('defineConfig:', typeof defineConfig\\)\")",
+      "PowerShell(npm run lint 2>&1)",
+      "PowerShell(npx eslint src/pages/404.astro 2>&1)",
+      "PowerShell(npm run verify 2>&1)",
+      "Bash(git reset *)",
+      "Bash(git commit -m '@ *)",
+      "Bash(git commit *)"
     ]
   }
 }

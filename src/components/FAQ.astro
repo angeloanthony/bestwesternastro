@@ -50,7 +50,7 @@ const faqSchema = {
 ---
 
 {renderSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 )}
 
 {!schemaOnly && (wrap ? (

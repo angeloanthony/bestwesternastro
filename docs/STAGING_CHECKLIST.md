@@ -20,33 +20,40 @@ Manual verification to run against the **live** backend before building on top o
 
 ## B. Lead pipeline end-to-end (prove before adding auth)
 
-Submit at `/corporate-rates` and verify each hop:
+Submit at `/corporate-rates` and verify each hop. Offline status recorded in
+[M1_LEAD_PIPELINE_VERIFICATION.md](M1_LEAD_PIPELINE_VERIFICATION.md); ⏳ items await the live backend (its §7 runbook):
 
-- [ ] Form → Supabase: a row appears in `lead` (Table editor)
-- [ ] Supabase → Worker: webhook fires (Worker logs / `wrangler tail`)
-- [ ] Worker → Email: Resend shows the send
-- [ ] Email received by the front-desk inbox, with correct fields + reply-to = submitter
-- [ ] `source_page` on the row = `/corporate-rates`
+- [ ] Form → Supabase: a row appears in `lead` (Table editor) — ⏳ live (§7.1)
+- [ ] Supabase → Worker: webhook fires (Worker logs / `wrangler tail`) — ⏳ live (§7.2)
+- [ ] Worker → Email: Resend shows the send — ⏳ live (§7.2)
+- [ ] Email received by the front-desk inbox, with correct fields + reply-to = submitter — ⏳ live (§7.2)
+- [ ] `source_page` on the row = `/corporate-rates` — ⏳ live (§7.1); client sends it correctly (verified)
 
 Input cases (behaviour should be sane, not crash):
 
-- [ ] Valid submission → success state shown, row written
-- [ ] Missing required fields (name/email) → blocked client-side, no submit
-- [ ] Invalid email (`foo@`, `foo`, `foo@bar`) → blocked, inline error
-- [ ] Extremely long notes (10k+ chars) → accepted or gracefully truncated, no error
-- [ ] Duplicate submissions (same data twice) → both captured (dedupe is a later concern; confirm no crash)
-- [ ] Spam-like input (URLs, script tags in notes) → stored as text, not executed anywhere it's displayed
-- [ ] Supabase env UNSET → form falls back to mailto (regression check of the fallback)
+- [ ] Valid submission → success state shown, row written — success state ✅ offline; row write ⏳ live (§7.1)
+- [x] Missing required fields (name/email) → blocked client-side, no submit — ✅ browser-verified
+- [x] Invalid email (`foo@`, `foo`, `foo@bar`) → blocked, inline error — ✅ browser-verified
+- [ ] Extremely long notes (10k+ chars) → accepted or gracefully truncated, no error — ⏳ live (needs DB)
+- [x] Duplicate submissions (same data twice) → both captured (dedupe is a later concern; confirm no crash) — ✅ client no-crash verified; "both captured" ⏳ live
+- [ ] Spam-like input (URLs, script tags in notes) → stored as text, not executed anywhere it's displayed — ⏳ live (needs DB + a display surface)
+- [x] Supabase env UNSET → form falls back to mailto (regression check of the fallback) — ✅ browser-verified
 
 > Note: there is **no rate-limiting / captcha** on lead insert yet (RLS allows anon insert). If bot spam appears, add a honeypot field or a Turnstile check before the insert. Tracked, not built.
 
 ## C. Analytics (verify before real traffic)
 
-Set `PUBLIC_GA4_MEASUREMENT_ID` (+ `PUBLIC_CALLRAIL_ID`), rebuild, then in GA4 DebugView / Realtime:
+Event wiring is verified in code + browser ([M1_LEAD_PIPELINE_VERIFICATION.md §6](M1_LEAD_PIPELINE_VERIFICATION.md)).
+Three distinct lead events now exist — `corporate_lead_submit` (attempt), `corporate_lead_success`
+(conversion, `via: supabase|mailto`), `corporate_lead_error` (`reason: validation|backend`) — plus
+`call_click` / `book_click`. Live delivery still needs GA4: set `PUBLIC_GA4_MEASUREMENT_ID`
+(+ `PUBLIC_CALLRAIL_ID`), rebuild, then in GA4 DebugView / Realtime:
 
 - [ ] Call-click fires `call_click` (sticky bar phone + any `tel:` with `data-track`)
 - [ ] Book-click fires `book_click` (sticky bar Book Now)
 - [ ] Corporate submit fires `corporate_lead_submit` (form button)
+- [ ] Successful lead fires `corporate_lead_success` with `via` (submit a valid request)
+- [ ] Failed lead fires `corporate_lead_error` with `reason` (block on validation; force a backend error per report §7.1.5)
 - [ ] Events carry `transport_type: beacon` and are not lost on navigation
 - [ ] CallRail number-swap replaces the displayed phone number
 
@@ -79,6 +86,6 @@ Authentication is the first feature that can accidentally affect the whole site 
 - [ ] Existing analytics still fire (`call_click` / `book_click` unaffected by auth JS)
 - [ ] Existing lead form still functions (Supabase insert + mailto fallback both intact)
 - [ ] A member/auth outage **fails open** for public content — if Supabase Auth is down, the marketing site and lead capture keep working; only member features degrade
-- [ ] Rollback mechanics documented: which commit/tag to revert to (`v0.4-foundation-complete`), and that reverting the auth PR restores the last-known-good site without data loss
+- [ ] Rollback mechanics documented: which commit/tag to revert to (`v0.4-infrastructure-verified`), and that reverting the auth PR restores the last-known-good site without data loss
 
 **Test matrix** for the auth behaviours themselves lives with Prompt 5 (new-user, returning-user, expired-link, refresh-persists, logged-out→dashboard-redirect, anonymous→guides-landing, invalid-token→graceful-recovery). Build it as the auth code is written, not after.
