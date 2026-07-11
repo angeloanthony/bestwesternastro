@@ -51,7 +51,9 @@ survives a handoff.
   just the stale ones.
 - **Audit RLS** — re-run `npm run verify:db` against production and re-read
   [ADR-003](adr/ADR-003-adopt-supabase.md) policies. Confirm anon still cannot
-  read `lead` or any member data.
+  read `lead` or any member data, and that one member cannot read another's
+  `member_profile`, `favorite`, or `itinerary` rows (policies `prof_own`,
+  `fav_own`, `itin_own`).
 - **Review dependencies** — `npm outdated`, security advisories, and the pinned
   Astro / Supabase / Tailwind majors. Patch before you're forced to.
 - **Test disaster recovery** — actually restore a backup into a scratch

@@ -13,5 +13,6 @@ Short records of significant, hard‑to‑reverse decisions for AdventureOS. Eac
 | [004](ADR-004-tailwind-without-preflight.md) | Add Tailwind Without Preflight | Accepted |
 | [005](ADR-005-ai-scope-limited-to-vernal.md) | AI Concierge Scope Limited to Vernal | Accepted |
 | [006](ADR-006-passwordless-identity.md) | Passwordless, Magic-Link Identity | Accepted |
+| [007](ADR-007-attraction-catalogue-in-typescript.md) | Attraction Catalogue in TypeScript; Favorites Keyed by Slug | Accepted |
 
 See also: [`../TECHNICAL_BASELINE.md`](../TECHNICAL_BASELINE.md) — the project's reference contract.

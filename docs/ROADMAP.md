@@ -64,7 +64,23 @@ Locations · events · categories · search.
 
 ## M4 — Adventure Pass Verified
 
-Guides · trip planner · crew mode.
+Saved Adventures · My Adventures · Trip Planner · Trip Status. (Guides &
+crew mode remain deferred — see Report; not in this milestone.)
+
+**Status (2026-07-11):** application layer **built + offline-verified** — favorites
+(save/unsave), a My Adventures dashboard (saved / recently viewed / recommended),
+a **deterministic** trip planner (dates + interests → day-by-day itinerary, no AI —
+[ADR-007](adr/ADR-007-attraction-catalogue-in-typescript.md)) with persistence reusing
+`member_profile` + `itinerary`, and trip status (countdown/length/season/packing).
+Additive only: one migration (`005_favorite.sql`); public site untouched (visual 12/12).
+([M4_ITINERARY_VERIFICATION.md](M4_ITINERARY_VERIFICATION.md)). `[~]` Remaining = live
+favorites/trip read-write round-trips and RLS isolation (report §7). Not verified until those pass live.
+
+- [~] Saved Adventures (`favorite` table, RLS `fav_own`) — built + typed; live write pending (§7.1–7.3)
+- [~] Trip Planner + Trip Status (deterministic; reuses `member_profile`/`itinerary`) — built; live persistence pending (§7.5–7.8)
+- [x] My Adventures dashboard with empty states; analytics events; fails open — offline-verified
+- [x] Public pages never gate; additive only (one migration, no schema redesign) — offline-verified (visual 12/12)
+- [ ] Live: save → reload → present; trip create/update/delete; RLS isolation between members (§7)
 
 ## M5 — Concierge Verified
 
