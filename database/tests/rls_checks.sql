@@ -4,6 +4,11 @@
 -- (Report §6: "Adding RLS after data exists is painful"). This whole script
 -- runs in a transaction that ROLLS BACK — it leaves no data behind.
 --
+-- Requires the privilege baseline from migration 004_grants.sql: anon and
+-- authenticated need table-level GRANTs, or these checks fail with "permission
+-- denied for table ..." BEFORE RLS is ever evaluated (discovered during M1
+-- Infrastructure Verification).
+--
 -- Expected: every check prints "PASS". Any "FAIL" is a policy bug to fix now.
 -- ============================================================================
 begin;

@@ -28,15 +28,17 @@ monitoring, staff testing, rollback drill — is a later milestone again.)
 - [ ] Tailwind, preflight disabled ([ADR-004](adr/ADR-004-tailwind-without-preflight.md))
 - [ ] Preact integration
 - [ ] CI
-- [ ] Supabase schema applied ([PROVISIONING.md](PROVISIONING.md))
-- [ ] Schema verified (`database/tests/schema_checks.sql` — all PASS)
-- [ ] RLS verified (`database/tests/rls_checks.sql` — all PASS)
-- [ ] Lead pipeline proven end-to-end ([STAGING_CHECKLIST.md §B](STAGING_CHECKLIST.md))
-- [ ] Analytics verified in GA4 ([STAGING_CHECKLIST.md §C](STAGING_CHECKLIST.md))
+- [x] Supabase schema applied ([PROVISIONING.md](PROVISIONING.md)) — live ([M1_VERIFICATION_REPORT.md](M1_VERIFICATION_REPORT.md))
+- [x] Schema verified (`database/tests/schema_checks.sql` — all PASS) — [M1_VERIFICATION_REPORT.md §2](M1_VERIFICATION_REPORT.md)
+- [x] RLS verified (`database/tests/rls_checks.sql` — all PASS) — [M1_VERIFICATION_REPORT.md §2](M1_VERIFICATION_REPORT.md)
+- [~] Lead pipeline proven end-to-end ([STAGING_CHECKLIST.md §B](STAGING_CHECKLIST.md)) — **application layer verified offline** ([M1_LEAD_PIPELINE_VERIFICATION.md](M1_LEAD_PIPELINE_VERIFICATION.md)); live DB + email hops pending (its §7)
+- [~] Analytics verified in GA4 ([STAGING_CHECKLIST.md §C](STAGING_CHECKLIST.md)) — 3 distinct events (submit/success/error) implemented + browser-verified; live GA4 DebugView delivery pending ([M1_LEAD_PIPELINE_VERIFICATION.md §6/§7.3](M1_LEAD_PIPELINE_VERIFICATION.md))
 - [ ] Rollback documented ([STAGING_CHECKLIST.md §E](STAGING_CHECKLIST.md), [RUNBOOK.md](RUNBOOK.md))
 
 Only when all of the above are green do we tag `v0.4-infrastructure-verified` and
-begin M2.
+begin M2. **Status (2026-07-11):** DB layer green; lead-pipeline application layer
+verified offline; the tag remains **ungated** until the live DB/email/GA4 hops in
+[M1_LEAD_PIPELINE_VERIFICATION.md §7](M1_LEAD_PIPELINE_VERIFICATION.md) are executed. `[~]` = partially verified.
 
 ## M2 — Identity Verified (Prompt 5)
 

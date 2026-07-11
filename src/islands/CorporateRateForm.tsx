@@ -9,6 +9,22 @@ import '../styles/tailwind.css';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+// Fire a GA4 event directly from the island (outcome-based). `corporate_lead_submit`
+// is the click-level *attempt*, emitted by the delegated [data-track] listener in
+// Analytics.astro; success/error are emitted here so conversions and failures are
+// distinguishable from raw button clicks. No-op until gtag is configured.
+function track(event: string, params: Record<string, unknown> = {}) {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', event, { transport_type: 'beacon', ...params });
+  }
+}
+
 const FIELD =
   'w-full rounded-md border border-[#1a2e52]/30 bg-white px-3 py-2 text-[#1a2e52] ' +
   'outline-none focus:border-[#c9a84c] focus:ring-2 focus:ring-[#c9a84c]/40';
@@ -39,7 +55,10 @@ export default function CorporateRateForm() {
   async function onSubmit(e: Event) {
     e.preventDefault();
     setTouched({ contact_name: true, email: true });
-    if (!formValid) return;
+    if (!formValid) {
+      track('corporate_lead_error', { reason: 'validation' });
+      return;
+    }
     setStatus('submitting');
     setError('');
 
@@ -60,8 +79,10 @@ export default function CorporateRateForm() {
     if (!result.ok) {
       setStatus('error');
       setError(result.error);
+      track('corporate_lead_error', { reason: 'backend' });
       return;
     }
+    track('corporate_lead_success', { via: result.via }); // 'supabase' | 'mailto'
     if (result.via === 'mailto') {
       window.location.href = result.href; // hand off to the mail client
     }

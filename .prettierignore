@@ -15,6 +15,10 @@ astro.config.mjs
 content.config.ts
 public/
 
+# Local editor/harness settings (gitignored) — not project source; keeps
+# `npm run verify` answering "is the PROJECT healthy?" not "is a local file formatted?"
+.claude/settings.local.json
+
 # Committed visual snapshots (binary/generated)
 tests/visual/**/*-snapshots/
 tests/visual/__snapshots__/
