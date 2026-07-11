@@ -40,12 +40,23 @@ begin M2. **Status (2026-07-11):** DB layer green; lead-pipeline application lay
 verified offline; the tag remains **ungated** until the live DB/email/GA4 hops in
 [M1_LEAD_PIPELINE_VERIFICATION.md §7](M1_LEAD_PIPELINE_VERIFICATION.md) are executed. `[~]` = partially verified.
 
-## M2 — Identity Verified (Prompt 5)
+## M2 — Identity Verified (Adventure Pass)
 
 Passwordless, magic-link only ([ADR-006](adr/ADR-006-passwordless-identity.md)).
 Must prove: magic links · sessions · dashboard · member profile · protected
 routes — **without** any public page starting to require login
 ([STAGING_CHECKLIST.md §D/§E](STAGING_CHECKLIST.md)).
+
+**Status (2026-07-11):** application layer **built + offline-verified** — magic-link
+sign-in, `/pass` dashboard, client-side guard, optional profile, sign-out; fails-open;
+public site unaffected (visual 12/12) ([M2_IDENTITY_VERIFICATION.md](M2_IDENTITY_VERIFICATION.md)).
+`[~]` Remaining = live magic-link round-trip, session lifecycle, `member_profile` write,
+and the outage/rollback drills (report §7). Not verified until those pass live.
+
+- [~] Magic-link sign-in + `/pass` dashboard + session guard — built; live round-trip pending (§7)
+- [~] Optional member profile write (`member_profile`) — built + typed; live write pending (§7.4)
+- [x] Public pages never gate; auth fails open — offline-verified (fails-open + visual 12/12)
+- [ ] Live: link → session → returning user → logout → expiry; outage + rollback drills (§7)
 
 ## M3 — Knowledge Base Verified
 

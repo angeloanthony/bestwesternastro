@@ -57,21 +57,23 @@ Three distinct lead events now exist — `corporate_lead_submit` (attempt), `cor
 - [ ] Events carry `transport_type: beacon` and are not lost on navigation
 - [ ] CallRail number-swap replaces the displayed phone number
 
-## D. Adventure Pass auth (Prompt 5 — do NOT check until built)
+## D. Adventure Pass auth (M2 — built; live items pending)
 
-Passwordless, magic-link only (see ADR-006):
+Passwordless, magic-link only (see ADR-006). **Code implemented + offline-verified**
+([M2_IDENTITY_VERIFICATION.md](M2_IDENTITY_VERIFICATION.md)); ⏳ items need a live project + inbox
+(its §7 runbook):
 
-- [ ] Magic link received
-- [ ] Link expires correctly (reuse after expiry fails)
-- [ ] Repeat login works (request a second link)
-- [ ] New account created on first login
-- [ ] Existing account reused (same email → same user)
-- [ ] Logout works
-- [ ] Session persists after refresh
-- [ ] Session expires correctly
-- [ ] Private pages protected (dashboard redirects when logged out)
-- [ ] Public pages unaffected (the 23 SEO pages + conversion layer never gate)
-- [ ] Optional profile completion after login (never blocks signup)
+- [ ] Magic link received — ⏳ live (§7.1)
+- [ ] Link expires correctly (reuse after expiry fails) — ⏳ live (§7.6)
+- [ ] Repeat login works (request a second link) — ⏳ live (§7.3)
+- [ ] New account created on first login — ⏳ live (§7.1)
+- [ ] Existing account reused (same email → same user) — ⏳ live (§7.3)
+- [ ] Logout works — ⏳ live (§7.5); sign-out wired + event verified offline
+- [ ] Session persists after refresh — ⏳ live (§7.2)
+- [ ] Session expires correctly — ⏳ live (§7.6)
+- [ ] Private pages protected (logged-out guests see the join view, not member content) — ⏳ live (§7.1); anon path verified offline
+- [x] Public pages unaffected (the 23 SEO pages + conversion layer never gate) — ✅ fails-open + visual 12/12 verified offline
+- [ ] Optional profile completion after login (never blocks signup) — ⏳ live write (§7.4); form + types verified offline
 
 ---
 
@@ -79,13 +81,15 @@ Passwordless, magic-link only (see ADR-006):
 
 Authentication is the first feature that can accidentally affect the whole site — a bad guard, a global redirect, or an env misconfiguration can take down public pages. Prove the blast radius is contained and that auth can be pulled without collateral damage:
 
-- [ ] Auth can be **disabled without affecting existing pages** — turning off signups / removing the member routes leaves the 23 SEO pages fully functional
-- [ ] Anonymous visitors still browse everything public (no page silently starts requiring login)
-- [ ] Existing booking flow unchanged (sticky bar, `bookingUrl`, click-to-call)
-- [ ] Existing SEO pages unchanged (visual regression 12/12 still green after auth lands)
-- [ ] Existing analytics still fire (`call_click` / `book_click` unaffected by auth JS)
-- [ ] Existing lead form still functions (Supabase insert + mailto fallback both intact)
-- [ ] A member/auth outage **fails open** for public content — if Supabase Auth is down, the marketing site and lead capture keep working; only member features degrade
-- [ ] Rollback mechanics documented: which commit/tag to revert to (`v0.4-infrastructure-verified`), and that reverting the auth PR restores the last-known-good site without data loss
+- [x] Auth can be **disabled without affecting existing pages** — `/pass` is the only page importing auth code; reverting the M2 merge removes it with zero effect on the 23 SEO pages ([M2_IDENTITY_VERIFICATION.md §6](M2_IDENTITY_VERIFICATION.md))
+- [x] Anonymous visitors still browse everything public (no page silently starts requiring login) — ✅ verified offline (fails-open test + no gating)
+- [x] Existing booking flow unchanged (sticky bar, `bookingUrl`, click-to-call) — no change; auth JS not on those surfaces
+- [x] Existing SEO pages unchanged (visual regression 12/12 still green after auth lands) — ✅ 12/12 green
+- [x] Existing analytics still fire (`call_click` / `book_click` unaffected by auth JS) — no change to Analytics.astro / sticky bar
+- [x] Existing lead form still functions (Supabase insert + mailto fallback both intact) — M1 code untouched
+- [x] A member/auth outage **fails open** for public content — ✅ verified offline (`/pass` degrades to a notice; public pages + lead form keep working)
+- [x] Rollback mechanics documented: revert the `feature/m2-identity` merge (base tag `v0.4-infrastructure-verified`); restores last-known-good with no data loss ([M2_IDENTITY_VERIFICATION.md §6](M2_IDENTITY_VERIFICATION.md)) — ⏳ live drill: §7.9
+
+> The offline-verifiable §E guardrails are green. The remaining live drills (§7.8 outage, §7.9 revert) confirm them against the deployed project before auth ships to real traffic.
 
 **Test matrix** for the auth behaviours themselves lives with Prompt 5 (new-user, returning-user, expired-link, refresh-persists, logged-out→dashboard-redirect, anonymous→guides-landing, invalid-token→graceful-recovery). Build it as the auth code is written, not after.
