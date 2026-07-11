@@ -1,0 +1,24 @@
+# Build + deps
+dist/
+.astro/
+node_modules/
+package-lock.json
+
+# EXISTING PRODUCTION SITE — never reformat (Baseline §2, ADR-001).
+# These files were migrated verbatim; Prettier must not touch them.
+src/pages/
+src/components/
+src/layouts/
+src/data/
+src/styles/global.css
+astro.config.mjs
+content.config.ts
+public/
+
+# Committed visual snapshots (binary/generated)
+tests/visual/**/*-snapshots/
+tests/visual/__snapshots__/
+
+# Documentation is prose with hand-aligned tables/ASCII — not machine-formatted.
+# (Also keeps Prettier off the verbatim-migrated README.md / MIGRATION_REPORT.md.)
+**/*.md
