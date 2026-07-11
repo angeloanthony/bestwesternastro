@@ -12,5 +12,6 @@ Short records of significant, hard‑to‑reverse decisions for AdventureOS. Eac
 | [003](ADR-003-adopt-supabase.md) | Adopt Supabase over a FastAPI Stack | Accepted |
 | [004](ADR-004-tailwind-without-preflight.md) | Add Tailwind Without Preflight | Accepted |
 | [005](ADR-005-ai-scope-limited-to-vernal.md) | AI Concierge Scope Limited to Vernal | Accepted |
+| [006](ADR-006-passwordless-identity.md) | Passwordless, Magic-Link Identity | Accepted |
 
 See also: [`../TECHNICAL_BASELINE.md`](../TECHNICAL_BASELINE.md) — the project's reference contract.

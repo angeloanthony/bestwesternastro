@@ -1,0 +1,11 @@
+# Cloudflare Worker config for lead-notify (AdventureOS Prompt 4).
+# Deploy: cd workers && npx wrangler deploy
+# Secrets (do NOT put in this file): set with `wrangler secret put <NAME>`
+#   RESEND_API_KEY, LEAD_WEBHOOK_SECRET
+name = "bwvi-lead-notify"
+main = "lead-notify.ts"
+compatibility_date = "2026-01-01"
+
+[vars]
+FRONT_DESK_EMAIL = "frontdesk@example.com"   # override with the real front-desk inbox
+FROM_EMAIL = "leads@bestwesternvernalinn.com"
