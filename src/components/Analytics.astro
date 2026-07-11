@@ -1,0 +1,41 @@
+---
+// src/components/Analytics.astro
+// GA4 + CallRail wiring + conversion click-tracking (Report §12 measurement).
+// Rendered once in <head> by BaseLayout. Dormant by design: if the env IDs are
+// unset (the default), NO analytics <script> is emitted, so existing pages gain
+// nothing until measurement is provisioned. The tiny [data-track] click listener
+// ships always but no-ops unless gtag is present.
+const ga4 = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
+const callRail = import.meta.env.PUBLIC_CALLRAIL_ID;
+---
+
+{/* Google Analytics 4 — only when a measurement ID is configured. */}
+{ga4 && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4}`} />}
+{
+  ga4 && (
+    <script is:inline define:vars={{ ga4 }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', ga4);
+    </script>
+  )
+}
+
+{/* CallRail number-swap — only when configured. Exact swap URL comes from the
+    CallRail dashboard; provisioning is a business step (Report §14). */}
+{callRail && <script is:inline async src={`//cdn.callrail.com/companies/${callRail}/12/swap.js`} />}
+
+{/* Conversion click tracking: one delegated listener for [data-track] elements
+    (sticky bar Call/Book, future forms). No-ops if gtag isn't loaded. */}
+<script is:inline>
+  document.addEventListener('click', function (e) {
+    var el = e.target && e.target.closest ? e.target.closest('[data-track]') : null;
+    if (!el) return;
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', el.getAttribute('data-track'), { transport_type: 'beacon' });
+    }
+  });
+</script>

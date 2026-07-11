@@ -9,6 +9,7 @@ const PAGES = [
   { name: 'extended-stay', path: '/extended-stay-hotel-vernal-utah.html' },
   { name: 'workforce-housing', path: '/workforce-housing-vernal-utah.html' },
   { name: 'not-found', path: '/404.html' },
+  { name: 'corporate-rates', path: '/corporate-rates.html' }, // Prompt 4: new page + form island
 ];
 
 for (const p of PAGES) {
@@ -26,6 +27,8 @@ for (const p of PAGES) {
     // Guard against serving the wrong project (a sibling Astro app uses the same
     // default port). Every page carries the hotel brand; fail loudly if it doesn't.
     await expect(page.locator('body')).toContainText('Best Western', { timeout: 5000 });
+    // Conversion layer (Prompt 3): the book-direct bar must be present on every page.
+    await expect(page.locator('.sbb')).toBeVisible();
     // Wait for web fonts (Playfair/Lato via Google Fonts) to finish loading —
     // text reflows/renders differently before vs. after, the main flakiness source.
     await page.evaluate(() => document.fonts.ready);

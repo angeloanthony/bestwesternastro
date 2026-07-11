@@ -1,0 +1,135 @@
+/* AdventureOS conversion layer (Prompt 3) — sticky book-direct bar.
+ * ADDITIVE ONLY. References existing design tokens from global.css; does not
+ * modify or reset any legacy rule. Loads on every page because the bar is a
+ * global element. Kept small (Baseline island budget: bar < 5 KB). */
+
+:root {
+  --sbb-h: 76px;
+}
+
+/* Reserve space so the fixed bar never covers the bottom of the footer. */
+body {
+  padding-bottom: var(--sbb-h);
+}
+
+.sbb {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--navy-dark, #0e1c33);
+  border-top: 2px solid var(--gold, #c9a84c);
+  color: var(--cream, #fdf8f0);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
+  padding: 0.5rem calc(0.75rem + env(safe-area-inset-right))
+    calc(0.5rem + env(safe-area-inset-bottom)) calc(0.75rem + env(safe-area-inset-left));
+}
+
+.sbb-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sbb-claims {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+.sbb-claims strong {
+  color: var(--gold, #c9a84c);
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+.sbb-claim {
+  position: relative;
+  padding-left: 0.95rem;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+.sbb-claim::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--gold, #c9a84c);
+  font-weight: 700;
+}
+
+.sbb-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.sbb-call,
+.sbb-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 0.6rem 0.95rem;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+.sbb-call {
+  color: var(--cream, #fdf8f0);
+  border: 1px solid rgba(var(--cream-rgb, 253, 248, 240), 0.5);
+}
+.sbb-call:hover,
+.sbb-call:focus-visible {
+  border-color: var(--gold, #c9a84c);
+  color: var(--gold, #c9a84c);
+}
+.sbb-book {
+  background: var(--gold, #c9a84c);
+  color: var(--navy-dark, #0e1c33);
+}
+.sbb-book:hover,
+.sbb-book:focus-visible {
+  background: var(--gold-light, #e0bb5a);
+}
+
+/* Keep the legacy scroll-to-top button clear of the bar. #stop is
+ * position:fixed bottom in global.css; nudge it up by the bar height.
+ * Intentional, minimal override for this new feature (global.css untouched). */
+#stop {
+  bottom: calc(var(--sbb-h) + 1rem) !important;
+}
+
+/* Phones: drop the claims line, make Call/Book full-width tap targets. */
+@media (max-width: 640px) {
+  .sbb-claims {
+    display: none;
+  }
+  .sbb-actions {
+    width: 100%;
+  }
+  .sbb-call,
+  .sbb-book {
+    flex: 1;
+    justify-content: center;
+    padding-block: 0.7rem;
+  }
+}
+
+@media print {
+  .sbb {
+    display: none;
+  }
+  body {
+    padding-bottom: 0;
+  }
+}
