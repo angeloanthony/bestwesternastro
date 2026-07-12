@@ -1,0 +1,42 @@
+---
+// src/pages/go/[partner].astro
+// Outbound booking interstitial — the attribution spine's public entry point.
+// Deliberately NOT an SEO page and NOT wrapped in BaseLayout: a redirect page must
+// not carry the site header / footer / sticky "Book Now" bar. noindex; one prerendered
+// page per known partner (src/data/partners.ts). The GoRedirect island records the
+// intent and redirects; <noscript> gives JS-off visitors a direct link so a booking
+// is never blocked.
+import { PARTNER_SLUGS, getPartner } from '../../data/partners';
+import GoRedirect from '../../islands/GoRedirect.tsx';
+
+export function getStaticPaths() {
+  return PARTNER_SLUGS.map((partner) => ({ params: { partner } }));
+}
+
+const slug = Astro.params.partner!;
+// getStaticPaths only emits known slugs, so this always resolves at build.
+const partner = getPartner(slug)!;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Redirecting to booking… | {partner.name}</title>
+  </head>
+  <body style="margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#fff;">
+    <GoRedirect slug={slug} client:only="preact" />
+    <noscript>
+      <div style="max-width:28rem;margin:3rem auto;padding:0 1rem;text-align:center;color:#1a2e52;">
+        <p>Continue to {partner.name}’s secure booking:</p>
+        <p>
+          <a href={partner.bookingUrl} rel="noopener" style="color:#1a2e52;font-weight:700;"
+            >Open booking page →</a
+          >
+        </p>
+      </div>
+    </noscript>
+  </body>
+</html>

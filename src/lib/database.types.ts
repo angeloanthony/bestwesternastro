@@ -95,6 +95,62 @@ export type DestinationRow = {
   created_at: string;
 };
 
+// Booking intent (M-attribution, migration 006). One row per outbound "Book Now"
+// click routed through /go. RLS `bi_insert` (006) allows anon/member INSERT (a
+// member may only attribute to their own user_id); there is NO select policy, so
+// anon reads return zero rows (staff read via service_role). The client supplies
+// `partner_slug` (src/data/partners.ts key) and `ref_code` (generated in
+// src/lib/referrals.ts so the interstitial can show it instantly); everything else
+// is optional or DB-defaulted. Reconciliation columns are filled monthly, server-side.
+export type BookingIntentStatus = 'clicked' | 'confirmed' | 'stayed' | 'no_match' | 'cancelled';
+
+export type BookingIntentRow = {
+  id: string;
+  partner_slug: string;
+  ref_code: string;
+  promo_code: string | null;
+  user_id: string | null;
+  itinerary_id: string | null;
+  checkin: string | null; // ISO date
+  checkout: string | null; // ISO date
+  party_size: number | null;
+  landing_page: string | null;
+  referrer: string | null;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  device: string | null;
+  status: BookingIntentStatus;
+  matched_at: string | null;
+  confirmation_number: string | null;
+  room_nights: number | null;
+  revenue_cents: number | null;
+  commission_cents: number | null;
+  notes: string | null;
+  created_at: string;
+};
+
+// Client supplies partner_slug + ref_code; the rest default in Postgres or are
+// optional provenance. status/reconciliation columns are never set from the browser.
+export type BookingIntentInsert = Pick<BookingIntentRow, 'partner_slug' | 'ref_code'> &
+  Partial<
+    Pick<
+      BookingIntentRow,
+      | 'promo_code'
+      | 'user_id'
+      | 'itinerary_id'
+      | 'checkin'
+      | 'checkout'
+      | 'party_size'
+      | 'landing_page'
+      | 'referrer'
+      | 'utm_source'
+      | 'utm_medium'
+      | 'utm_campaign'
+      | 'device'
+    >
+  >;
+
 export type Database = {
   public: {
     Tables: {
@@ -102,6 +158,12 @@ export type Database = {
         Row: LeadRow;
         Insert: LeadInsert;
         Update: Partial<LeadInsert>;
+        Relationships: [];
+      };
+      booking_intent: {
+        Row: BookingIntentRow;
+        Insert: BookingIntentInsert;
+        Update: Partial<BookingIntentInsert>;
         Relationships: [];
       };
       destination: {
