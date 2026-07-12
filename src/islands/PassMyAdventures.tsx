@@ -53,10 +53,16 @@ export default function PassMyAdventures({
       <div class="grid gap-3">
         <h3 class={H3}>❤️ Saved Adventures</h3>
         {saved.length === 0 ? (
-          <p class={MUTED}>
-            You haven’t saved anything yet. Tap the heart on any place below and it’ll wait for you
-            here.
-          </p>
+          <div class="rounded-lg border border-dashed border-[#1a2e52]/25 bg-[#fdf8f0] p-5 text-center">
+            <p class="text-2xl" aria-hidden="true">
+              🤍
+            </p>
+            <p class="mt-1 font-semibold text-[#1a2e52]">No saved adventures yet</p>
+            <p class={`mt-1 ${MUTED}`}>
+              Tap the heart on any place below and it’ll wait for you right here — ready when you
+              start planning your trip.
+            </p>
+          </div>
         ) : (
           <div class="grid gap-3 sm:grid-cols-2">
             {saved.map((a) => (

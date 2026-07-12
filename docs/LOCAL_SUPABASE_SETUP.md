@@ -2,7 +2,11 @@
 
 A single, practical path from a fresh checkout to a **working Adventure Pass sign-in** on your local machine: magic-link auth, favorites, and the trip planner persisting against a real Supabase project.
 
-**Scope.** This covers the member-facing identity + trip features (M2/M4). The lead-capture pipeline (corporate form → `lead` table → email Worker) is a separate concern documented in [PROVISIONING.md](PROVISIONING.md). The two overlap only on "create a project / set env / run migrations."
+## Scope
+
+This guide explains how to provision a **local development environment** for AdventureOS using the current repository structure. It covers environment variables, Supabase authentication, database schema setup, verification, and common troubleshooting. **It is not a deployment guide.**
+
+It covers the member-facing identity + trip features (M2/M4). The lead-capture pipeline (corporate form → `lead` table → email Worker) is a separate concern documented in [PROVISIONING.md](PROVISIONING.md); the two overlap only on "create a project / set env / apply migrations."
 
 **Why this doc exists — two repository-specific facts you won't guess:**
 
@@ -75,7 +79,7 @@ In **Supabase → SQL Editor**, paste and run each file **in numeric order**:
 
 Order matters: `001` enables the `uuid-ossp`, `postgis`, and `vector` extensions and creates the tables the later files depend on. Every `create table` uses `if not exists`, so **re-running a migration on an already-provisioned database is safe** — it won't error or duplicate.
 
-Seed data is **not required** for Adventure Pass testing (favorites/itineraries/profiles don't depend on it).
+**Seed the Vernal destination row** — required for the **trip planner** to persist. `member_profile.destination_id` is `NOT NULL`, so `saveTrip` (`src/lib/trip.ts`) resolves the seeded `slug='vernal'` row; without it, saving a trip fails with `destination unavailable` and nothing persists (the itinerary still *generates* client-side, so the failure is silent unless you check). Run [database/seed/001_destination.sql](../database/seed/001_destination.sql) in the SQL Editor (idempotent — `on conflict do nothing`). Favorites do **not** need the seed (they key on `attraction_slug`).
 
 ---
 

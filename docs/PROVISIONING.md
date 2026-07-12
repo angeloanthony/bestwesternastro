@@ -9,18 +9,15 @@ Until these steps run, the corporate rate form still works: it **falls back to a
 1. Create a project at supabase.com. Choose the **Pro** tier (Baseline: avoids the free-tier pausing a production DB).
 2. Note the Project URL and the **anon** and **service_role** keys (Settings → API).
 
-## 2. Run the migrations
+## 2. Apply the schema, then seed
 
-From the repo, using the Supabase CLI (or paste each file into the SQL editor **in order**):
+**Database provisioning:** this repository provisions the schema through the Supabase **SQL Editor**, not the standard Supabase CLI migration layout — there is no `supabase/` directory, so `supabase db push` will **not** pick up `database/migrations/`. See **[LOCAL_SUPABASE_SETUP.md](LOCAL_SUPABASE_SETUP.md) §4** for the single, complete, ordered procedure (`001` → `005`). Order matters; `001` enables the `postgis`, `vector`, and `uuid-ossp` extensions (available on Supabase by default).
+
+Then seed the single Vernal destination row (needed for the lead-capture content, not for auth) — either paste it into the SQL Editor or, if you have `psql`:
 
 ```bash
-supabase link --project-ref <your-ref>
-supabase db push          # applies database/migrations/001,002,003 in order
-# then seed the single destination:
 psql "$SUPABASE_DB_URL" -f database/seed/001_destination.sql
 ```
-
-Order matters: `001_schema` → `002_rls` → `003_functions`. `001` enables the `postgis`, `vector`, and `uuid-ossp` extensions (available on Supabase by default).
 
 ## 3. Wire the site env
 

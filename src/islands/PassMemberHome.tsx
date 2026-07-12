@@ -32,6 +32,7 @@ export default function PassMemberHome({ userId }: { userId: string }) {
   const [saving, setSaving] = useState<Set<string>>(new Set());
   const [recently, setRecently] = useState<string[]>([]);
   const [trip, setTrip] = useState<Trip>(EMPTY_TRIP);
+  const [favError, setFavError] = useState('');
 
   useEffect(() => {
     let active = true;
@@ -59,13 +60,19 @@ export default function PassMemberHome({ userId }: { userId: string }) {
   async function toggleFavorite(slug: string) {
     if (saving.has(slug)) return;
     const isSaved = favorites.includes(slug);
-    // Optimistic update; revert on failure.
+    // Optimistic update; revert AND surface a friendly notice on failure.
+    setFavError('');
     setFavorites((prev) => (isSaved ? prev.filter((s) => s !== slug) : [slug, ...prev]));
     withSaving(slug, true);
 
     const result = isSaved ? await removeFavorite(userId, slug) : await addFavorite(userId, slug);
     if (!result.ok) {
       setFavorites((prev) => (isSaved ? [slug, ...prev] : prev.filter((s) => s !== slug)));
+      setFavError(
+        isSaved
+          ? 'Couldn’t remove that adventure. Please try again.'
+          : 'Couldn’t save this adventure. Please try again.'
+      );
     } else {
       track(isSaved ? 'favorite_removed' : 'favorite_added', { slug });
     }
@@ -86,6 +93,17 @@ export default function PassMemberHome({ userId }: { userId: string }) {
 
   return (
     <div class="grid gap-8">
+      <div aria-live="polite">
+        {favError && (
+          <p
+            role="alert"
+            class="rounded-md border border-red-300 bg-red-50 px-4 py-2 text-sm text-red-700"
+          >
+            {favError}
+          </p>
+        )}
+      </div>
+
       <PassMyAdventures
         favorites={favorites}
         recently={recently}
