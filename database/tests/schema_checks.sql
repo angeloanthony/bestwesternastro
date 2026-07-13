@@ -12,12 +12,14 @@ declare
   item text;
   exts  text[] := array['uuid-ossp','postgis','vector'];
   tbls  text[] := array['destination','location','location_edge','member_profile',
-                        'itinerary','partner','offer','event','lead','favorite'];
+                        'itinerary','partner','offer','event','lead','favorite',
+                        'booking_intent','hotel_report'];
   fns   text[] := array['set_updated_at','season_contains','is_open_now',
                         'nearby','match_locations','rebuild_near_edges'];
   pols  text[] := array['loc_public_read','event_public_read','offer_public_read',
-                        'prof_own','itin_own','lead_insert','fav_own'];
-  rls   text[] := array['location','member_profile','itinerary','lead','event','offer','favorite'];
+                        'prof_own','itin_own','lead_insert','fav_own','bi_insert'];
+  rls   text[] := array['location','member_profile','itinerary','lead','event','offer','favorite',
+                        'booking_intent','hotel_report'];
 begin
   foreach item in array exts loop
     raise notice '% : extension %',

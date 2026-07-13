@@ -95,6 +95,119 @@ export type DestinationRow = {
   created_at: string;
 };
 
+// Location — the Vernal Knowledge Base (M6). Public reference data: anon/auth
+// may SELECT rows where status='published' (RLS `loc_public_read`, 002). The
+// static build reads these at build time via scripts/generate-catalogue.mjs; the
+// app never writes them. Only columns the generator/app read are typed precisely;
+// `gps` (PostGIS geography) and `embedding` (pgvector) are opaque to the client
+// and omitted. Catalogue columns from migration 007 are included.
+export type LocationRow = {
+  id: string;
+  destination_id: string;
+  slug: string;
+  name: string;
+  type: string;
+  categories: string[];
+  good_for: string[];
+  ai_summary: string;
+  description_full: string | null;
+  emoji: string | null;
+  area: 'in-town' | 'nearby' | 'day-trip' | null;
+  drive_minutes: number | null;
+  visit_duration: 'quick' | 'half-day' | 'full-day' | null;
+  difficulty: 'easy' | 'moderate' | 'strenuous' | null;
+  family_friendly: boolean;
+  pet_friendly: boolean;
+  wheelchair_accessible: boolean;
+  website: string | null;
+  phone: string | null;
+  booking_url: string | null;
+  tags: string[];
+  priority: number | null;
+  featured: boolean;
+  learn_more_href: string | null;
+  seasonal_notes: string | null;
+  status: 'draft' | 'published' | 'archived';
+  created_at: string;
+  updated_at: string;
+};
+
+// Relationship graph (M6). `to_id` is null for an edge to a non-location target
+// (see `to_ref`, e.g. 'sunset' | 'family'). `rel` is the rel_type enum (001).
+export type LocationEdgeRow = {
+  id: string;
+  from_id: string;
+  to_id: string | null;
+  to_ref: string | null;
+  rel: string;
+  weight: number | null;
+  note: string | null;
+  created_at: string;
+};
+
+// Booking intent (M-attribution, migration 006). One row per outbound "Book Now"
+// click routed through /go. RLS `bi_insert` (006) allows anon/member INSERT (a
+// member may only attribute to their own user_id); there is NO select policy, so
+// anon reads return zero rows (staff read via service_role). The client supplies
+// `partner_slug` (src/data/partners.ts key) and `ref_code` (generated in
+// src/lib/referrals.ts so the interstitial can show it instantly); everything else
+// is optional or DB-defaulted. Reconciliation columns are filled monthly, server-side.
+export type BookingIntentStatus = 'clicked' | 'confirmed' | 'stayed' | 'no_match' | 'cancelled';
+
+export type BookingIntentRow = {
+  id: string;
+  partner_slug: string;
+  ref_code: string;
+  promo_code: string | null;
+  user_id: string | null;
+  itinerary_id: string | null;
+  checkin: string | null; // ISO date
+  checkout: string | null; // ISO date
+  party_size: number | null;
+  landing_page: string | null;
+  referrer: string | null;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
+  device: string | null;
+  // Journey snapshot (migration 008) — member context frozen at click time.
+  saved_slugs: string[];
+  interests: string[];
+  has_itinerary: boolean;
+  status: BookingIntentStatus;
+  matched_at: string | null;
+  confirmation_number: string | null;
+  room_nights: number | null;
+  revenue_cents: number | null;
+  commission_cents: number | null;
+  notes: string | null;
+  created_at: string;
+};
+
+// Client supplies partner_slug + ref_code; the rest default in Postgres or are
+// optional provenance. status/reconciliation columns are never set from the browser.
+export type BookingIntentInsert = Pick<BookingIntentRow, 'partner_slug' | 'ref_code'> &
+  Partial<
+    Pick<
+      BookingIntentRow,
+      | 'promo_code'
+      | 'user_id'
+      | 'itinerary_id'
+      | 'checkin'
+      | 'checkout'
+      | 'party_size'
+      | 'landing_page'
+      | 'referrer'
+      | 'utm_source'
+      | 'utm_medium'
+      | 'utm_campaign'
+      | 'device'
+      | 'saved_slugs'
+      | 'interests'
+      | 'has_itinerary'
+    >
+  >;
+
 export type Database = {
   public: {
     Tables: {
@@ -102,6 +215,25 @@ export type Database = {
         Row: LeadRow;
         Insert: LeadInsert;
         Update: Partial<LeadInsert>;
+        Relationships: [];
+      };
+      booking_intent: {
+        Row: BookingIntentRow;
+        Insert: BookingIntentInsert;
+        Update: Partial<BookingIntentInsert>;
+        Relationships: [];
+      };
+      location: {
+        Row: LocationRow;
+        Insert: Partial<LocationRow> &
+          Pick<LocationRow, 'destination_id' | 'slug' | 'name' | 'type' | 'ai_summary'>;
+        Update: Partial<LocationRow>;
+        Relationships: [];
+      };
+      location_edge: {
+        Row: LocationEdgeRow;
+        Insert: Partial<LocationEdgeRow> & Pick<LocationEdgeRow, 'from_id' | 'rel'>;
+        Update: Partial<LocationEdgeRow>;
         Relationships: [];
       };
       destination: {

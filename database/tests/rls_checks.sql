@@ -78,6 +78,32 @@ begin
   end;
   raise notice '% : anon cannot read favorites (expect denied)',
     case when denied then 'PASS' else 'FAIL' end;
+
+  -- 6. Anyone may INSERT a booking_intent (the anonymous outbound-click path).
+  --    ref_code defaults in the DB; an anonymous click leaves user_id null.
+  denied := false;
+  begin
+    insert into booking_intent (partner_slug) values ('rls-partner');
+  exception when insufficient_privilege or others then denied := true;
+  end;
+  raise notice '% : anon can insert a booking_intent (expect not denied)',
+    case when not denied then 'PASS' else 'FAIL' end;
+
+  -- 7. Nobody may SELECT booking_intents with the anon key (attribution privacy —
+  --    no select policy → default-deny → 0 rows, mirroring the lead model).
+  select count(*) into n from booking_intent;
+  raise notice '% : anon cannot read booking_intents (expect 0 rows, got %)',
+    case when n = 0 then 'PASS' else 'FAIL' end, n;
+
+  -- 8. Integrity: an anonymous click cannot forge a user_id (bi_insert WITH CHECK
+  --    requires user_id null or = auth.uid(); auth.uid() is null for anon).
+  denied := false;
+  begin
+    insert into booking_intent (partner_slug, user_id) values ('rls-partner', uuid_generate_v4());
+  exception when others then denied := true;
+  end;
+  raise notice '% : anon cannot forge a user_id on booking_intent (expect denied)',
+    case when denied then 'PASS' else 'FAIL' end;
 end $$;
 
 reset role;
