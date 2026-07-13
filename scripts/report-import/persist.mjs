@@ -168,6 +168,90 @@ export async function insertLines(client, report_id, records, options = {}) {
 }
 
 /**
+ * Delete a partner_report header by id — the rollback primitive. Its partner_report_line
+ * children are removed automatically by the FK's ON DELETE CASCADE (migration 009), so this
+ * single delete undoes a whole import. Touches only partner_report.
+ *
+ * @param {Object} client A service-role Supabase client (injected).
+ * @param {string} report_id
+ * @returns {Promise<void>}
+ * @throws {TypeError} On invalid client / report_id.
+ * @throws {Error} If the delete fails.
+ */
+export async function deleteReport(client, report_id) {
+  if (!client || typeof client.from !== 'function') {
+    throw new TypeError('deleteReport requires a Supabase client');
+  }
+  if (typeof report_id !== 'string' || report_id === '') {
+    throw new TypeError('deleteReport requires a report_id string');
+  }
+  const { error } = await client.from(HEADER_TABLE).delete().eq('id', report_id);
+  if (error) {
+    throw new Error(
+      `partner_report rollback delete failed for report ${report_id}: ${error.message}`
+    );
+  }
+}
+
+/**
+ * Atomically persist a report: insert the header, then its lines. If the line insert fails
+ * after the header exists, compensate by deleting the header (cascade removes any lines
+ * already inserted), then abort by re-throwing the original error with rollback context.
+ *
+ * This is the atomic write unit; wiring it to the read path / dedup / --replace is T15.
+ * partner_slug for the lines is taken from the header metadata (single source of truth).
+ *
+ * @param {Object} client A service-role Supabase client (injected).
+ * @param {Object} meta   Header metadata (see buildHeaderRow); must include partner_slug.
+ * @param {Object[]} records Canonical records for the lines.
+ * @param {Object} [options]
+ * @param {number} [options.batchSize] Rows per line batch.
+ * @returns {Promise<{report_id: string, lineCount: number}>}
+ * @throws {TypeError} On invalid client / records.
+ * @throws {Error} If the header insert fails (nothing to roll back), or if the line insert
+ *   fails (header is rolled back first; the thrown error carries rollback context and the
+ *   original error on `.cause`).
+ */
+export async function persistReport(client, meta, records, options = {}) {
+  if (!client || typeof client.from !== 'function') {
+    throw new TypeError('persistReport requires a Supabase client');
+  }
+  if (!Array.isArray(records)) {
+    throw new TypeError('persistReport requires an array of canonical records');
+  }
+
+  // Header first. If this throws, nothing was created — no rollback needed.
+  const report_id = await insertReport(client, meta);
+
+  try {
+    const lineCount = await insertLines(client, report_id, records, {
+      partner_slug: meta.partner_slug,
+      batchSize: options.batchSize,
+    });
+    return { report_id, lineCount };
+  } catch (lineError) {
+    // Compensating rollback: delete the header; ON DELETE CASCADE clears any lines.
+    let rollbackError = null;
+    try {
+      await deleteReport(client, report_id);
+    } catch (e) {
+      rollbackError = e;
+    }
+
+    const context = rollbackError
+      ? ` — ROLLBACK ALSO FAILED for report ${report_id}: ${rollbackError.message} ` +
+        `(manual cleanup required)`
+      : ` — rolled back report ${report_id} (header + cascaded lines deleted)`;
+
+    const err = new Error(`${lineError.message}${context}`);
+    err.cause = lineError;
+    err.report_id = report_id;
+    err.rolledBack = rollbackError === null;
+    throw err;
+  }
+}
+
+/**
  * Build a service-role Supabase client from the environment. Used by the CLI entry point
  * (not by unit tests, which inject a client). The service-role key bypasses RLS and is a
  * server secret — never expose it to the browser build.
