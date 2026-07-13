@@ -14,6 +14,12 @@
 //
 // RFC-4180 coverage: quoted fields, embedded commas, embedded newlines (LF or CRLF),
 // escaped quotes (""), CRLF / LF / lone-CR record terminators, and a leading UTF-8 BOM.
+//
+// This module also hosts the profile-driven transform (T06). The transform turns the
+// generic CSV grid above into canonical records (T03) using a partner PROFILE (T04) —
+// but the transform itself contains ZERO partner-specific logic. See transformToCanonical.
+
+import { createCanonicalRecord } from './canonical.mjs';
 
 /**
  * @typedef {Object} RaggedRow
@@ -135,4 +141,121 @@ export function readCsv(text) {
   });
 
   return { headers, rows, columnCount, ragged };
+}
+
+// ── Profile-driven transform (T06) ───────────────────────────────────────────
+//
+// A PROFILE (built per partner at T04) declares — declaratively, as data — how a
+// partner's columns become canonical fields. The transform below reads only from the
+// profile; it hard-codes nothing about any partner, so swapping the mock profile in the
+// tests for the real Best Western profile requires NO change here.
+//
+// Profile shape the transform consumes (all optional except as noted):
+//   {
+//     map:       { <canonicalField>: '<source header>' },  // which column feeds each field
+//     coerce:    { <canonicalField>: (rawValue, ctx) => value },  // per-field coercion
+//     unitLabel: 'room_nights',                            // constant unit_label for every row
+//     transform: (record, ctx) => record,                  // optional record-level hook
+//   }
+// A field absent from `map` (and not `unit_label`/`raw`) keeps the factory default (null).
+
+/**
+ * @typedef {Object} PartnerProfile
+ * @property {Object<string,string>}   [map]       Canonical field → source header name.
+ * @property {Object<string,Function>} [coerce]    Canonical field → (rawValue, ctx) => value.
+ * @property {string}                  [unitLabel] Constant value for the `unit_label` field.
+ * @property {Function}                [transform] Optional (record, ctx) => record hook.
+ */
+
+/**
+ * Zip a parsed row's cells against the headers into a plain object — the "original row"
+ * kept verbatim on `record.raw`. Missing cells become null; cells beyond the header count
+ * are left out (raggedness is reported by readCsv and judged by validation, not here).
+ *
+ * @param {string[]} headers
+ * @param {string[]} cells
+ * @returns {Object<string,string|null>}
+ */
+function zipRow(headers, cells) {
+  const raw = {};
+  for (let i = 0; i < headers.length; i++) {
+    raw[headers[i]] = i < cells.length ? cells[i] : null;
+  }
+  return raw;
+}
+
+/**
+ * Transform one parsed row into a canonical record using the profile. Pure — no I/O.
+ *
+ * @param {string[]} cells
+ * @param {string[]} headers
+ * @param {number} rowIndex
+ * @param {PartnerProfile} profile
+ * @param {() => Object} createRecord Canonical record factory (injected).
+ * @returns {Object} A canonical record.
+ */
+function transformRow(cells, headers, rowIndex, profile, createRecord) {
+  const raw = zipRow(headers, cells);
+  const record = createRecord(); // full canonical key set, null defaults
+  const ctx = { headers, cells, raw, rowIndex };
+
+  for (const field of Object.keys(record)) {
+    if (field === 'raw') {
+      record.raw = raw;
+      continue;
+    }
+
+    const header = profile.map ? profile.map[field] : undefined;
+    if (header !== undefined) {
+      const rawValue = raw[header] ?? null;
+      const coercer = profile.coerce ? profile.coerce[field] : undefined;
+      record[field] = coercer ? coercer(rawValue, { ...ctx, field, header }) : rawValue;
+    } else if (field === 'unit_label' && profile.unitLabel != null) {
+      record[field] = profile.unitLabel; // constant, not sourced from a column
+    }
+    // otherwise: leave the factory default (null)
+  }
+
+  return typeof profile.transform === 'function' ? profile.transform(record, ctx) : record;
+}
+
+/**
+ * Apply a partner profile to parsed CSV output, producing canonical records. Every piece
+ * of partner-specific behaviour (which column maps where, how to coerce, the unit label,
+ * any record-level fixup) comes from `profile`; this function is partner-agnostic.
+ *
+ * @param {CsvDocument} csvDoc Output of {@link readCsv} (`{ headers, rows, ... }`).
+ * @param {PartnerProfile} profile Partner profile (mock in tests, real BW profile at T04).
+ * @param {() => Object} [createRecord] Canonical record factory; defaults to the real one.
+ * @returns {Object[]} Canonical records, one per data row, each with `raw` retained.
+ * @throws {TypeError} On malformed inputs.
+ */
+export function transformToCanonical(csvDoc, profile, createRecord = createCanonicalRecord) {
+  if (!csvDoc || !Array.isArray(csvDoc.headers) || !Array.isArray(csvDoc.rows)) {
+    throw new TypeError('transformToCanonical expects parsed CSV output { headers, rows }');
+  }
+  if (!profile || typeof profile !== 'object') {
+    throw new TypeError('transformToCanonical requires a profile object');
+  }
+  if (typeof createRecord !== 'function') {
+    throw new TypeError('transformToCanonical requires a canonical record factory function');
+  }
+
+  const { headers, rows } = csvDoc;
+  return rows.map((cells, rowIndex) =>
+    transformRow(cells, headers, rowIndex, profile, createRecord)
+  );
+}
+
+/**
+ * Convenience: read + transform in one call. Composes {@link readCsv} and
+ * {@link transformToCanonical} with the default factory. Does not read files — `text` is
+ * the already-loaded CSV string, supplied by the caller.
+ *
+ * @param {string} text Raw CSV contents.
+ * @param {PartnerProfile} profile
+ * @returns {Object[]} Canonical records.
+ */
+export function parse(text, profile) {
+  return transformToCanonical(readCsv(text), profile);
 }
