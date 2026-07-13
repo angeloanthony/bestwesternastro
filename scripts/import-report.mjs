@@ -1,41 +1,32 @@
 // Partner report CSV importer — entry point (M6).
 //
-// Off-browser staff CLI that ingests a partner's monthly reservation CSV into the
-// staff-only partner_report / partner_report_line tables. Same tooling pattern as
-// scripts/booking-report.mjs and scripts/verify-db.mjs: plain .mjs, ESM, Node ≥22.12,
-// run with the service-role key. Unlike those read-only reports this is a WRITE tool —
-// it is atomic and aborts on error (not fail-open).
+// Off-browser staff CLI that reads a partner's monthly reservation CSV and validates it
+// against the canonical schema. Same tooling pattern as scripts/booking-report.mjs and
+// scripts/verify-db.mjs: plain .mjs, ESM, Node ≥22.12.
 //
-// Every imported line lands as status='unmatched'. This tool does NOT match, reconcile,
-// or compute commission — that is a later, deliberately postponed milestone.
+//   npm run report:import -- --partner best-western-vernal --period 2026-06 \
+//     --file reports/inbox/june.csv
 //
-//   PUBLIC_SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… \
-//     npm run report:import -- --partner best-western-vernal --period 2026-06 --file reports/inbox/june.csv
+// This is the Phase D read path: parse args → load CSV → parser → transform → validate →
+// print a summary. It performs NO database writes, no duplicate detection, and no matching
+// — those are later tasks (T09, T12–T15). Exit 0 on clean validation, non-zero otherwise.
 //
-// This is the T02 scaffold: a usage stub only. Argument parsing (T10), dry-run
-// orchestration (T11), and the write path (T15) are wired in later tasks. See
-// docs/M6_CSV_IMPORTER_CHECKLIST.md and docs/M6_CSV_IMPORTER.md.
+// All logic lives in report-import/cli.mjs (pure + unit-tested); this shell only supplies
+// real dependencies and turns the result into stdout/stderr + an exit code.
 
-const USAGE = `partner report CSV importer (M6) — not yet implemented
+import { readFileSync } from 'node:fs';
 
-Usage:
-  npm run report:import -- --partner <slug> --period <YYYY-MM> --file <path> [options]
+import { runImport } from './report-import/cli.mjs';
 
-Options (parsed in T10 — listed here for reference):
-  --partner <slug>      partner registry slug, e.g. best-western-vernal
-  --period <YYYY-MM>    report month; expands to period_start/period_end
-  --file <path>         CSV to import (drop into reports/inbox/, which is gitignored)
-  --source-note <text>  free-text note stored on the report header
-  --operator <name>     who ran the import (reconciled_by)
-  --dry-run             parse + validate only; make no writes
-  --replace             supersede a prior report for the same partner+period
+// Partner profile registry is built at T04 (report-import/profiles.mjs). Until then no
+// partner resolves and the CLI reports that cleanly rather than guessing a mapping.
+const resolveProfile = () => null;
 
-Environment:
-  PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY   (service-role key — server secret)
+const result = runImport(process.argv.slice(2), {
+  readFile: (path) => readFileSync(path, 'utf8'),
+  resolveProfile,
+});
 
-This is a scaffold stub. It performs no import yet; run the checklist tasks to build it.`;
-
-// Usage stub: always print usage and exit non-zero until the CLI is implemented (T10+).
-// Exiting non-zero keeps the stub from ever looking like a successful no-op import.
-console.error(USAGE);
-process.exit(1);
+if (result.stdout) process.stdout.write(`${result.stdout}\n`);
+if (result.stderr) process.stderr.write(`${result.stderr}\n`);
+process.exit(result.code);
