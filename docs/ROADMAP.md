@@ -1,5 +1,11 @@
 # Roadmap — Verified Milestones
 
+> **Historical / superseded.** This roadmap reflects the earlier AdventureOS milestone plan;
+> its numbering (M1–M6) is **stale** and predates the shipped booking-platform milestones
+> (partner CSV importer, referral engine, reconciliation), which it does not describe. For the
+> current, authoritative state see [V1_RELEASE_DOCUMENTATION.md](V1_RELEASE_DOCUMENTATION.md) and
+> the milestone verification reports (`M6`–`M8`). Retained for historical context only.
+
 We track progress as **milestones that are _verified_, not phases that are
 _complete_**. "Complete" says we're done; "Verified" says: we built it, we
 proved it against a live environment, now we build on it. A milestone is not

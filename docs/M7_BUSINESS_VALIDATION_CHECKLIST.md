@@ -18,13 +18,15 @@ map of the work that becomes unblocked the moment the contract lands.
 
 ## Executive summary
 
-- **The single blocker is a business input, not code.** Every import today fails cleanly at
-  [`scripts/import-report.mjs:32`](../scripts/import-report.mjs#L32) — `resolveProfile = () => null`
-  — because no partner profile is registered. That is by design: the importer refuses to
-  guess a mapping. See the `no profile registered` path in
-  [`cli.mjs`](../scripts/report-import/cli.mjs#L181).
-- **The pipeline behind that stub is built and offline-verified:** parse → validate → dedup →
-  persist (importer, **138 tests**) and match → commission → apply (reconciliation, **58
+- **The single remaining blocker is a business input, not code.** The importer profile
+  (`scripts/report-import/profiles.mjs`) is built and wired at
+  [`scripts/import-report.mjs`](../scripts/import-report.mjs#L34) — `resolveProfile = getProfile`
+  — and `best-western-vernal` resolves today against the **provisional** §2 contract. The
+  remaining dependency is confirming and **locking** that contract (T17). An unknown slug still
+  fails cleanly via the `no profile registered` path in
+  [`cli.mjs`](../scripts/report-import/cli.mjs#L181) — by design, the importer refuses to guess a mapping.
+- **The pipeline is built and offline-verified:** parse → validate → dedup →
+  persist (importer, **151 tests**) and match → commission → apply (reconciliation, **58
   tests**, per [M8_RECONCILIATION_VERIFICATION.md §9](M8_RECONCILIATION_VERIFICATION.md)).
 - **Nothing is verified *live in production* yet.** Per [ROADMAP.md](ROADMAP.md), a milestone
   is "verified" only against a live environment; migrations `009`/`010` are in the repo but
@@ -125,14 +127,14 @@ is `⛔ TBD`**. Fill the confirmed column below; that becomes the spec for `prof
 
 Every item below is already designed and stubbed; none is a redesign. Ordered by dependency.
 
-- [ ] **`scripts/report-import/profiles.mjs`** *(M6 · T04 — the primary deliverable)*
+- [x] **`scripts/report-import/profiles.mjs`** *(M6 · T04 — the primary deliverable)* — **built.**
   Slug-keyed registry + the `best-western-vernal` profile: header→canonical map, date
-  coercer, currency→cents coercer, `unit_label='room_nights'`, `getProfile(slug)`. Built
-  from the **confirmed** Section C values. _Est: a few hours once headers/formats are known._
-- [ ] **Wire the profile in** [`scripts/import-report.mjs:32`](../scripts/import-report.mjs#L32)
-  Replace `const resolveProfile = () => null;` with `getProfile` from `profiles.mjs`. Until
-  this line changes, **every import returns `no profile registered`** — this is the switch
-  that turns the importer on.
+  coercer, currency→cents coercer, `unit_label='room_nights'`, `getProfile(slug)`. Currently
+  built against the **provisional** §2 contract; re-check against the **confirmed** Section C
+  values when the contract is locked (T17).
+- [x] **Wire the profile in** [`scripts/import-report.mjs`](../scripts/import-report.mjs#L34) —
+  **done.** `const resolveProfile = getProfile;` (imported from `profiles.mjs`). With a profile
+  registered, `best-western-vernal` imports; an unknown slug still returns `no profile registered`.
 - [ ] **Synthetic fixtures** *(M6 · T05b)* — `scripts/report-import/fixtures/`: a synthetic
   BW sample matching the confirmed headers + edge cases (dup confirmation, bad date, negative
   revenue, nights/date mismatch, extra column). **No real guest PII.**
@@ -171,7 +173,8 @@ Every item below is already designed and stubbed; none is a redesign. Ordered by
 **Contract gates**
 
 - [ ] Section C fully filled from a **real sample CSV** (no `TBD` left).
-- [ ] `profiles.mjs` built + wired; importer no longer returns `no profile registered`.
+- [x] `profiles.mjs` built + wired — `best-western-vernal` resolves (provisional); importer no
+  longer returns `no profile registered`. **Re-validate against the confirmed profile + fixtures** before the first production import.
 - [ ] Fixtures created; importer + reconciler suites green against the real profile.
 
 **Live-environment gates** (per [ROADMAP.md](ROADMAP.md) — "verified" = proven live)

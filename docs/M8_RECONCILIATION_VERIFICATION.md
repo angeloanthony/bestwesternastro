@@ -151,9 +151,9 @@ M8 proves the *engine*. A live production reconciliation additionally needs the
 two partner inputs from
 [PARTNER_REFERRAL_ARCHITECTURE.md §7](PARTNER_REFERRAL_ARCHITECTURE.md):
 
-- [ ] **The Best Western importer profile** (`profiles.mjs`, M6 · T04) — still
-  blocked on BW confirming the CSV export format — so real report rows exist to
-  reconcile.
+- [ ] **Best Western report rows to reconcile** — the importer profile (`profiles.mjs`,
+  M6 · T04) is **built** and wired against the provisional contract; a live reconciliation
+  still needs a **real** BW report imported (contract confirmed/locked, T17) so real rows exist.
 - [ ] **`partner.commission_percent` populated** from the signed agreement — until
   then the engine runs and reports, but leaves commission NULL by design.
 

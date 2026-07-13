@@ -88,10 +88,26 @@ test('ref_code disambiguates where promo alone would be ambiguous', () => {
 });
 
 test('deterministic + idempotent: input order does not change the plan', () => {
-  const l1 = line({ id: 'L1', external_ref: 'CONF1', promo_code: 'ADVENTURE', service_start: '2026-06-10' });
-  const l2 = line({ id: 'L2', external_ref: 'CONF2', promo_code: 'SUMMER', service_start: '2026-07-05' });
+  const l1 = line({
+    id: 'L1',
+    external_ref: 'CONF1',
+    promo_code: 'ADVENTURE',
+    service_start: '2026-06-10',
+  });
+  const l2 = line({
+    id: 'L2',
+    external_ref: 'CONF2',
+    promo_code: 'SUMMER',
+    service_start: '2026-07-05',
+  });
   const i1 = intent({ id: 'I1', ref_code: 'X', promo_code: 'ADVENTURE', checkin: '2026-06-10' });
-  const i2 = intent({ id: 'I2', ref_code: 'Y', promo_code: 'SUMMER', checkin: '2026-07-05', created_at: '2026-07-05T09:00:00Z' });
+  const i2 = intent({
+    id: 'I2',
+    ref_code: 'Y',
+    promo_code: 'SUMMER',
+    checkin: '2026-07-05',
+    created_at: '2026-07-05T09:00:00Z',
+  });
 
   const a = reconcile([l1, l2], [i1, i2]);
   const b = reconcile([l2, l1], [i2, i1]);

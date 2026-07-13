@@ -40,7 +40,9 @@ function fakeWriteClient(errorFor = () => null) {
         // terminal for the aging update (.select('id')): resolve with rows
         writes.push({ table, row, filters });
         const err = errorFor(table);
-        return Promise.resolve(err ? { data: null, error: err } : { data: [{ id: 'x' }], error: null });
+        return Promise.resolve(
+          err ? { data: null, error: err } : { data: [{ id: 'x' }], error: null }
+        );
       },
       then(resolve, reject) {
         // terminal when awaited without .select()
@@ -92,7 +94,10 @@ test('buildIntentUpdate: fills reconciliation columns + commission', () => {
 });
 
 test('buildIntentUpdate: null rate → null commission (never invented)', () => {
-  const { commission_cents, update } = buildIntentUpdate(match(), { commissionPercent: null, now: NOW });
+  const { commission_cents, update } = buildIntentUpdate(match(), {
+    commissionPercent: null,
+    now: NOW,
+  });
   assert.equal(commission_cents, null);
   assert.equal(update.commission_cents, null);
 });
@@ -154,7 +159,11 @@ test('applyReconciliation: DRY RUN performs no writes but returns the same total
 });
 
 test('applyReconciliation: dry run needs no client', async () => {
-  const result = await applyReconciliation(null, plan(), { commissionPercent: 10, now: NOW, dryRun: true });
+  const result = await applyReconciliation(null, plan(), {
+    commissionPercent: 10,
+    now: NOW,
+    dryRun: true,
+  });
   assert.equal(result.applied.length, 1);
 });
 
@@ -169,18 +178,26 @@ test('applyReconciliation: ambiguous lines are flagged, not matched', async () =
   const { client, writes } = fakeWriteClient();
   const result = await applyReconciliation(
     client,
-    plan({ matches: [], ambiguous: [{ line: { id: 'L9' }, tier: 'promo+arrival', candidateIntentIds: ['I1', 'I2'] }] }),
+    plan({
+      matches: [],
+      ambiguous: [{ line: { id: 'L9' }, tier: 'promo+arrival', candidateIntentIds: ['I1', 'I2'] }],
+    }),
     { commissionPercent: 10, now: NOW }
   );
   assert.equal(writes.length, 1);
   assert.equal(writes[0].table, 'partner_report_line');
   assert.equal(writes[0].row.status, 'ambiguous');
-  assert.deepEqual(writes[0].filters, [['eq', 'id', 'L9'], ['eq', 'status', 'unmatched']]);
+  assert.deepEqual(writes[0].filters, [
+    ['eq', 'id', 'L9'],
+    ['eq', 'status', 'unmatched'],
+  ]);
   assert.equal(result.ambiguousFlagged, 1);
 });
 
 test('applyReconciliation: aborts (not fail-open) when the intent update errors', async () => {
-  const { client } = fakeWriteClient((table) => (table === 'booking_intent' ? { message: 'boom' } : null));
+  const { client } = fakeWriteClient((table) =>
+    table === 'booking_intent' ? { message: 'boom' } : null
+  );
   await assert.rejects(
     () => applyReconciliation(client, plan(), { commissionPercent: 10, now: NOW }),
     /booking_intent update failed.*boom/
@@ -191,7 +208,9 @@ test('applyReconciliation: cancelled match counts as cancelled, not a stay', asy
   const { client } = fakeWriteClient();
   const result = await applyReconciliation(
     client,
-    plan({ matches: [match({ line: { id: 'L1', external_ref: 'C', quantity: 1, revenue_cents: 0 } })] }),
+    plan({
+      matches: [match({ line: { id: 'L1', external_ref: 'C', quantity: 1, revenue_cents: 0 } })],
+    }),
     { commissionPercent: 10, now: NOW }
   );
   assert.equal(result.stayed, 0);
@@ -200,7 +219,10 @@ test('applyReconciliation: cancelled match counts as cancelled, not a stay', asy
 });
 
 test('applyReconciliation: requires opts.now', async () => {
-  await assert.rejects(() => applyReconciliation(fakeWriteClient().client, plan(), { commissionPercent: 10 }), TypeError);
+  await assert.rejects(
+    () => applyReconciliation(fakeWriteClient().client, plan(), { commissionPercent: 10 }),
+    TypeError
+  );
 });
 
 // ── ageUnmatchedIntents ──────────────────────────────────────────────────────
@@ -233,7 +255,11 @@ function fakeSelectClient(result) {
     from() {
       return {
         select() {
-          return { eq() { return { maybeSingle: async () => result }; } };
+          return {
+            eq() {
+              return { maybeSingle: async () => result };
+            },
+          };
         },
       };
     },
@@ -241,14 +267,23 @@ function fakeSelectClient(result) {
 }
 
 test('fetchCommissionPercent: returns the numeric rate', async () => {
-  const pct = await fetchCommissionPercent(fakeSelectClient({ data: { commission_percent: 12.5 }, error: null }), 'bw');
+  const pct = await fetchCommissionPercent(
+    fakeSelectClient({ data: { commission_percent: 12.5 }, error: null }),
+    'bw'
+  );
   assert.equal(pct, 12.5);
 });
 
 test('fetchCommissionPercent: absent partner / unset rate → null (never invented)', async () => {
-  assert.equal(await fetchCommissionPercent(fakeSelectClient({ data: null, error: null }), 'bw'), null);
   assert.equal(
-    await fetchCommissionPercent(fakeSelectClient({ data: { commission_percent: null }, error: null }), 'bw'),
+    await fetchCommissionPercent(fakeSelectClient({ data: null, error: null }), 'bw'),
+    null
+  );
+  assert.equal(
+    await fetchCommissionPercent(
+      fakeSelectClient({ data: { commission_percent: null }, error: null }),
+      'bw'
+    ),
     null
   );
 });

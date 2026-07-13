@@ -11,8 +11,14 @@ import assert from 'node:assert/strict';
 import { runReconcile, parseCliArgs, expandPeriod, EXIT, USAGE } from './cli.mjs';
 
 test('expandPeriod: YYYY-MM → inclusive bounds; junk → null', () => {
-  assert.deepEqual(expandPeriod('2026-06'), { period_start: '2026-06-01', period_end: '2026-06-30' });
-  assert.deepEqual(expandPeriod('2026-02'), { period_start: '2026-02-01', period_end: '2026-02-28' });
+  assert.deepEqual(expandPeriod('2026-06'), {
+    period_start: '2026-06-01',
+    period_end: '2026-06-30',
+  });
+  assert.deepEqual(expandPeriod('2026-02'), {
+    period_start: '2026-02-01',
+    period_end: '2026-02-28',
+  });
   assert.equal(expandPeriod('2026-13'), null);
   assert.equal(expandPeriod('nope'), null);
 });
@@ -23,10 +29,21 @@ test('parseCliArgs: requires --partner', () => {
 });
 
 test('parseCliArgs: validates --period, --window-days, --age-days', () => {
-  assert.ok(parseCliArgs(['--partner', 'bw', '--period', 'xx']).errors.some((e) => /--period/.test(e)));
-  assert.ok(parseCliArgs(['--partner', 'bw', '--window-days', 'x']).errors.some((e) => /--window-days/.test(e)));
-  assert.ok(parseCliArgs(['--partner', 'bw', '--age-days', '0']).errors.some((e) => /--age-days/.test(e)));
-  assert.equal(parseCliArgs(['--partner', 'bw', '--window-days', '2', '--age-days', '45']).errors.length, 0);
+  assert.ok(
+    parseCliArgs(['--partner', 'bw', '--period', 'xx']).errors.some((e) => /--period/.test(e))
+  );
+  assert.ok(
+    parseCliArgs(['--partner', 'bw', '--window-days', 'x']).errors.some((e) =>
+      /--window-days/.test(e)
+    )
+  );
+  assert.ok(
+    parseCliArgs(['--partner', 'bw', '--age-days', '0']).errors.some((e) => /--age-days/.test(e))
+  );
+  assert.equal(
+    parseCliArgs(['--partner', 'bw', '--window-days', '2', '--age-days', '45']).errors.length,
+    0
+  );
 });
 
 // A deps factory that records calls and returns canned data.
@@ -65,8 +82,23 @@ function deps(over = {}) {
   };
 }
 
-const L = { id: 'L1', external_ref: 'CONF1', promo_code: 'ADVENTURE', service_start: '2026-06-10', quantity: 2, revenue_cents: 19950, raw: {} };
-const I = { id: 'I1', ref_code: 'X', promo_code: 'ADVENTURE', checkin: '2026-06-10', status: 'clicked', created_at: '2026-06-10T00:00:00Z' };
+const L = {
+  id: 'L1',
+  external_ref: 'CONF1',
+  promo_code: 'ADVENTURE',
+  service_start: '2026-06-10',
+  quantity: 2,
+  revenue_cents: 19950,
+  raw: {},
+};
+const I = {
+  id: 'I1',
+  ref_code: 'X',
+  promo_code: 'ADVENTURE',
+  checkin: '2026-06-10',
+  status: 'clicked',
+  created_at: '2026-06-10T00:00:00Z',
+};
 
 test('help + usage', async () => {
   const help = await runReconcile(['--help'], deps());

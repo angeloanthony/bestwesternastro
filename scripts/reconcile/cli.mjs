@@ -89,7 +89,9 @@ export function parseCliArgs(argv) {
     if (!periodBounds) errors.push(`invalid --period '${values.period}' (expected YYYY-MM)`);
   }
   if (values['window-days'] !== undefined && !isNonNegativeInt(values['window-days'])) {
-    errors.push(`invalid --window-days '${values['window-days']}' (expected a non-negative integer)`);
+    errors.push(
+      `invalid --window-days '${values['window-days']}' (expected a non-negative integer)`
+    );
   }
   if (values['age-days'] !== undefined && !isPositiveInt(values['age-days'])) {
     errors.push(`invalid --age-days '${values['age-days']}' (expected a positive integer)`);
@@ -193,7 +195,8 @@ export async function runReconcile(argv, deps) {
   const partner = values.partner;
   const period = values.period ?? null;
   const dryRun = Boolean(values['dry-run']);
-  const windowDays = values['window-days'] !== undefined ? Number(values['window-days']) : undefined;
+  const windowDays =
+    values['window-days'] !== undefined ? Number(values['window-days']) : undefined;
   const ageDays = values['age-days'] !== undefined ? Number(values['age-days']) : null;
 
   try {
@@ -226,6 +229,10 @@ export async function runReconcile(argv, deps) {
       stderr: '',
     };
   } catch (e) {
-    return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: reconciliation failed: ${e.message}` };
+    return {
+      code: EXIT.RUNTIME_ERROR,
+      stdout: '',
+      stderr: `error: reconciliation failed: ${e.message}`,
+    };
   }
 }

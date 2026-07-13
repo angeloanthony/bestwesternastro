@@ -197,7 +197,7 @@ export function runImport(argv, { readFile, resolveProfile }) {
     };
   }
 
-  const { csvDoc, records, manifest } = runPipeline(text, profile);
+  const { csvDoc, manifest } = runPipeline(text, profile);
   const summary = formatSummary({ partner, period, bounds: periodBounds, file, csvDoc, manifest });
 
   return {

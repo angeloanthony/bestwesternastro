@@ -18,12 +18,18 @@ import { classify, lineRefTokens, TIER_ORDER, DEFAULT_ARRIVAL_WINDOW_DAYS } from
 
 /** Stable line ordering: by external_ref then id, so results don't depend on input order. */
 function byLineKey(a, b) {
-  return String(a.external_ref ?? '').localeCompare(String(b.external_ref ?? '')) || String(a.id ?? '').localeCompare(String(b.id ?? ''));
+  return (
+    String(a.external_ref ?? '').localeCompare(String(b.external_ref ?? '')) ||
+    String(a.id ?? '').localeCompare(String(b.id ?? ''))
+  );
 }
 
 /** Stable intent ordering: oldest first (created_at) then id. */
 function byIntentKey(a, b) {
-  return String(a.created_at ?? '').localeCompare(String(b.created_at ?? '')) || String(a.id ?? '').localeCompare(String(b.id ?? ''));
+  return (
+    String(a.created_at ?? '').localeCompare(String(b.created_at ?? '')) ||
+    String(a.id ?? '').localeCompare(String(b.id ?? ''))
+  );
 }
 
 /**

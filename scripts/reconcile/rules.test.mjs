@@ -113,6 +113,12 @@ test('no match when promo differs and no ref code', () => {
 
 test('arrival window is configurable', () => {
   const l = line({ service_start: '2026-06-13' });
-  assert.equal(classify(l, intent({ ref_code: 'X' }), { windowDays: 1 }).tier, MATCH_TIER.PROMO_ONLY);
-  assert.equal(classify(l, intent({ ref_code: 'X' }), { windowDays: 3 }).tier, MATCH_TIER.PROMO_ARRIVAL);
+  assert.equal(
+    classify(l, intent({ ref_code: 'X' }), { windowDays: 1 }).tier,
+    MATCH_TIER.PROMO_ONLY
+  );
+  assert.equal(
+    classify(l, intent({ ref_code: 'X' }), { windowDays: 3 }).tier,
+    MATCH_TIER.PROMO_ARRIVAL
+  );
 });

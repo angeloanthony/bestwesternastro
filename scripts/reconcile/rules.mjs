@@ -134,7 +134,8 @@ export function classify(line, intent, ctx = {}) {
 
   // Tier 2 — promo + arrival + member last name.
   if (arrivalMatch) {
-    const intentLast = typeof ctx.intentLastName === 'string' ? ctx.intentLastName.toLowerCase() : null;
+    const intentLast =
+      typeof ctx.intentLastName === 'string' ? ctx.intentLastName.toLowerCase() : null;
     const lineLast = reportedLastName(line?.customer_name);
     if (intentLast && lineLast && intentLast === lineLast) {
       return { tier: MATCH_TIER.PROMO_ARRIVAL_NAME, confidence: CONFIDENCE.HIGH };

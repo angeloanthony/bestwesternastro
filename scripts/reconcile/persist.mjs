@@ -42,7 +42,9 @@ export function buildIntentUpdate(match, opts) {
   const { commissionPercent, now } = opts;
   const line = match.line;
   const outcome = deriveOutcome(line);
-  const commission_cents = computeCommissionCents(line.revenue_cents, commissionPercent, { outcome });
+  const commission_cents = computeCommissionCents(line.revenue_cents, commissionPercent, {
+    outcome,
+  });
   const update = {
     status: outcome,
     matched_at: now,
@@ -72,7 +74,8 @@ export async function fetchUnmatchedLines(client, { partner_slug, period_start, 
   if (period_start) query = query.gte('service_start', period_start);
   if (period_end) query = query.lte('service_start', period_end);
   const { data, error } = await query;
-  if (error) throw new Error(`fetch unmatched lines failed for '${partner_slug}': ${error.message}`);
+  if (error)
+    throw new Error(`fetch unmatched lines failed for '${partner_slug}': ${error.message}`);
   return data ?? [];
 }
 
@@ -88,7 +91,8 @@ export async function fetchMatchableIntents(client, { partner_slug } = {}) {
     .select(INTENT_COLUMNS)
     .eq('partner_slug', partner_slug)
     .in('status', MATCHABLE_INTENT_STATUSES);
-  if (error) throw new Error(`fetch matchable intents failed for '${partner_slug}': ${error.message}`);
+  if (error)
+    throw new Error(`fetch matchable intents failed for '${partner_slug}': ${error.message}`);
   return data ?? [];
 }
 
@@ -105,7 +109,8 @@ export async function fetchCommissionPercent(client, partner_slug) {
     .select('commission_percent')
     .eq('slug', partner_slug)
     .maybeSingle();
-  if (error) throw new Error(`fetch commission rate failed for '${partner_slug}': ${error.message}`);
+  if (error)
+    throw new Error(`fetch commission rate failed for '${partner_slug}': ${error.message}`);
   const pct = data?.commission_percent;
   return pct === null || pct === undefined ? null : Number(pct);
 }
@@ -144,7 +149,10 @@ export async function applyReconciliation(client, plan, opts) {
   };
 
   for (const match of plan.matches) {
-    const { outcome, commission_cents, update } = buildIntentUpdate(match, { commissionPercent, now });
+    const { outcome, commission_cents, update } = buildIntentUpdate(match, {
+      commissionPercent,
+      now,
+    });
 
     if (!dryRun) {
       const { error: intentErr } = await client
@@ -153,7 +161,9 @@ export async function applyReconciliation(client, plan, opts) {
         .eq('id', match.intent.id)
         .in('status', MATCHABLE_INTENT_STATUSES);
       if (intentErr) {
-        throw new Error(`booking_intent update failed for ${match.intent.id}: ${intentErr.message}`);
+        throw new Error(
+          `booking_intent update failed for ${match.intent.id}: ${intentErr.message}`
+        );
       }
       const { error: lineErr } = await client
         .from(LINE_TABLE)
@@ -177,7 +187,9 @@ export async function applyReconciliation(client, plan, opts) {
     if (outcome === 'stayed') {
       totals.stayed += 1;
       totals.roomNights += Number.isFinite(match.line.quantity) ? match.line.quantity : 0;
-      totals.revenueCents += Number.isFinite(match.line.revenue_cents) ? match.line.revenue_cents : 0;
+      totals.revenueCents += Number.isFinite(match.line.revenue_cents)
+        ? match.line.revenue_cents
+        : 0;
       if (commission_cents === null) totals.commissionNullCount += 1;
       else totals.commissionCents += commission_cents;
     } else {
@@ -193,7 +205,9 @@ export async function applyReconciliation(client, plan, opts) {
         .eq('id', item.line.id)
         .eq('status', 'unmatched');
       if (error) {
-        throw new Error(`partner_report_line ambiguous-flag failed for ${item.line.id}: ${error.message}`);
+        throw new Error(
+          `partner_report_line ambiguous-flag failed for ${item.line.id}: ${error.message}`
+        );
       }
     }
     totals.ambiguousFlagged += 1;
@@ -210,7 +224,10 @@ export async function applyReconciliation(client, plan, opts) {
  * @param {Object} opts { partner_slug, cutoffIso, dryRun? }
  * @returns {Promise<number>} Count aged (for dryRun, the count that WOULD be aged).
  */
-export async function ageUnmatchedIntents(client, { partner_slug, cutoffIso, dryRun = false } = {}) {
+export async function ageUnmatchedIntents(
+  client,
+  { partner_slug, cutoffIso, dryRun = false } = {}
+) {
   assertClient(client, 'ageUnmatchedIntents');
   assertSlug(partner_slug, 'ageUnmatchedIntents');
   if (typeof cutoffIso !== 'string' || cutoffIso === '') {
@@ -235,7 +252,8 @@ export async function ageUnmatchedIntents(client, { partner_slug, cutoffIso, dry
     .in('status', MATCHABLE_INTENT_STATUSES)
     .lt('created_at', cutoffIso)
     .select('id');
-  if (error) throw new Error(`age unmatched intents failed for '${partner_slug}': ${error.message}`);
+  if (error)
+    throw new Error(`age unmatched intents failed for '${partner_slug}': ${error.message}`);
   return (data ?? []).length;
 }
 
