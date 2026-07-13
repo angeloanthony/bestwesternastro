@@ -10,7 +10,13 @@
 
 import { createClient } from '@supabase/supabase-js';
 
+import { CANONICAL_FIELDS } from './canonical.mjs';
+
 const HEADER_TABLE = 'partner_report';
+const LINE_TABLE = 'partner_report_line';
+
+/** Default rows per insert batch. */
+export const LINE_BATCH_SIZE = 500;
 
 // The only columns accepted from caller metadata. `received_at` is intentionally absent —
 // the database defaults it to now(). Anything not in this list is dropped, so unrelated
@@ -84,6 +90,81 @@ export async function insertReport(client, meta) {
     throw new Error('partner_report insert returned no id');
   }
   return data.id;
+}
+
+/**
+ * Build one partner_report_line row from a canonical record. Pure. Every row carries the
+ * fixed columns (report_id, partner_slug, booking_intent_id=NULL, status='unmatched') plus
+ * the canonical fields (external_ref … currency, and the `raw` jsonb), mapped 1:1 by name.
+ * booking_intent_id is always NULL here — linking a line to an outbound click is the
+ * matcher's job (a later milestone), never this insert.
+ *
+ * @param {string} report_id
+ * @param {string} partner_slug
+ * @param {Object} record Canonical record (see canonical.mjs).
+ * @returns {Object} A row ready for insert.
+ */
+export function buildLineRow(report_id, partner_slug, record) {
+  const row = {
+    report_id,
+    partner_slug,
+    booking_intent_id: null,
+    status: 'unmatched',
+  };
+  for (const field of CANONICAL_FIELDS) {
+    row[field] = record?.[field] ?? null;
+  }
+  return row;
+}
+
+/**
+ * Insert canonical records as partner_report_line rows, in batches. Does NOT match,
+ * compute commission, update booking_intent, dedup, or roll back on failure (T14 adds
+ * rollback). Not fail-open — aborts on the first failing batch.
+ *
+ * @param {Object} client A service-role Supabase client (injected).
+ * @param {string} report_id The parent partner_report id.
+ * @param {Object[]} records Canonical records.
+ * @param {Object} [options]
+ * @param {string} options.partner_slug Report-level partner slug stamped on every line.
+ * @param {number} [options.batchSize=LINE_BATCH_SIZE] Rows per insert.
+ * @returns {Promise<number>} Total rows inserted.
+ * @throws {TypeError} On invalid client / report_id / records / partner_slug / batchSize.
+ * @throws {Error} If any batch insert fails (aborts; earlier batches are NOT rolled back).
+ */
+export async function insertLines(client, report_id, records, options = {}) {
+  if (!client || typeof client.from !== 'function') {
+    throw new TypeError('insertLines requires a Supabase client');
+  }
+  if (typeof report_id !== 'string' || report_id === '') {
+    throw new TypeError('insertLines requires a report_id string');
+  }
+  if (!Array.isArray(records)) {
+    throw new TypeError('insertLines requires an array of canonical records');
+  }
+  const { partner_slug, batchSize = LINE_BATCH_SIZE } = options;
+  if (typeof partner_slug !== 'string' || partner_slug.trim() === '') {
+    throw new TypeError('insertLines requires options.partner_slug');
+  }
+  if (!Number.isInteger(batchSize) || batchSize < 1) {
+    throw new TypeError('insertLines batchSize must be a positive integer');
+  }
+
+  const rows = records.map((record) => buildLineRow(report_id, partner_slug, record));
+
+  let inserted = 0;
+  for (let start = 0; start < rows.length; start += batchSize) {
+    const batch = rows.slice(start, start + batchSize);
+    const { error } = await client.from(LINE_TABLE).insert(batch);
+    if (error) {
+      throw new Error(
+        `partner_report_line insert failed (batch at row ${start}, ${batch.length} rows) ` +
+          `for report ${report_id}: ${error.message}`
+      );
+    }
+    inserted += batch.length;
+  }
+  return inserted;
 }
 
 /**

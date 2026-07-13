@@ -8,7 +8,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { buildHeaderRow, insertReport, createServiceClient } from './persist.mjs';
+import {
+  buildHeaderRow,
+  insertReport,
+  createServiceClient,
+  buildLineRow,
+  insertLines,
+  LINE_BATCH_SIZE,
+} from './persist.mjs';
+import { createCanonicalRecord } from './canonical.mjs';
 
 // Fake Supabase client capturing calls; `result` is what single() resolves to.
 function fakeClient(result) {
