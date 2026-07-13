@@ -1,11 +1,12 @@
 # M6 — Partner Report CSV Importer
 
-Status: **in build (Phase A).** This document is the operational reference for the
-off-browser partner-report CSV importer. It is written incrementally alongside the
-[implementation checklist](M6_CSV_IMPORTER_CHECKLIST.md); sections marked _(later task)_
-are stubs until their task lands. The full usage/exit-code/PII reference and the **locked**
-CSV column contract are completed in **T17**, after behaviour is final and Best Western has
-confirmed its export format.
+Status: **implementation complete (T02–T16) — merge-ready.** This document is the
+operational reference for the off-browser partner-report CSV importer. The pipeline
+(parse → validate → dedup → persist, with rollback and `--replace`) is built and covered by
+the test suite. **One dependency remains ⛔ contract-blocked:** the Best Western column
+contract (§2) and its import profile await BW's confirmed export format, so the shipped CLI
+has no registered partner profile yet and will report `no profile registered` until that
+profile lands. The **locked** CSV column contract is finalized in **T17** once BW confirms.
 
 The importer ingests a partner's monthly reservation report into staff-only tables. It does
 **not** match, does **not** reconcile, and does **not** compute commission — every imported
@@ -41,21 +42,21 @@ select count(*) from partner_report;
 select count(*) from partner_report_line;
 ```
 
-### 1.2 ⚠️ Open precondition — schema migration not yet in the repo
+### 1.2 Schema migration — [`009_partner_report.sql`](../database/migrations/009_partner_report.sql)
 
-As of this writing, `database/migrations/` ships **`hotel_report`** (the original
-hotel-specific header table, migration 006) but **not** `partner_report` /
-`partner_report_line`. The approved M6 design renames/generalises that header table
-(`hotel_report` → `partner_report`, partner-type-agnostic) and adds the per-line table.
+The migration is in the repo: [`database/migrations/009_partner_report.sql`](../database/migrations/009_partner_report.sql)
+creates both `partner_report` and `partner_report_line`. It is **additive and
+backward-compatible** — it *creates* the partner-type-agnostic tables rather than renaming
+`hotel_report` (migration 006), which is left in place. Self-contained in the `006` style
+(tables + `report_id → partner_report(id) on delete cascade` + the `report_id` index + RLS
+default-deny + `service_role`-only grants) and idempotent (`create table if not exists`), so
+it is safe to re-run. Column names on `partner_report_line` mirror the canonical record
+(§3) 1:1, `status` defaults to `'unmatched'` with a `check (status in ('unmatched','matched'))`,
+and there are deliberately **no commission columns**.
 
-**That migration is a T01 precondition and is out of scope for the importer build itself**
-(the checklist authors no migrations). It must be authored — in the self-contained
-`002/004/005/006` style: table + RLS + grants, idempotent — and applied to staging before
-Phase E (persistence, T12–T14) can be validated. Phase A (scaffolding) and Phases B–D
-(parser, validation, dry-run) do **not** touch the database and are unblocked by this gap.
-
-Tracking: this is the single open item blocking the write path; everything up to
-Checkpoint D (dry-run) can proceed without it.
+Apply it to the target database (`supabase db push`) **before running the write path** — the
+importer never creates these tables itself. The `--dry-run` read path touches no database and
+needs no migration. Confirm it is applied with the §1.1 verification query.
 
 ---
 
@@ -105,7 +106,59 @@ listed here so §2's mapping has a stable target. Field names are **generic** on
 
 ---
 
-## 4. Usage, env, exit codes, PII handling  _(later task — T17)_
+## 4. Usage, env, exit codes, PII handling
 
-Completed once the CLI (T10), dry-run (T11), and write path (T15) are final.
-Until then, see the [checklist](M6_CSV_IMPORTER_CHECKLIST.md) for the intended behaviour.
+The CLI (T10), dry-run (T11), and write path (T15) are final; the behaviour below is what
+ships. The **CSV column contract** in §2 is the one remaining ⛔ contract-blocked item, and
+the write path also requires the BW import profile to be registered (see the status note).
+
+### 4.1 Command
+
+```
+PUBLIC_SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… \
+  npm run report:import -- --partner <slug> --period <YYYY-MM> --file <path> [options]
+```
+
+**Required:** `--partner <slug>` (partner registry slug), `--period <YYYY-MM>` (expands to
+`period_start`/`period_end`), `--file <path>` (CSV to read — drop into `reports/inbox/`, which
+is gitignored).
+
+**Options:** `--operator <name>` (recorded as `reconciled_by`), `--replace` (supersede a prior
+report for the same partner+period — see §4.3), `--dry-run` (parse + validate only, **no**
+database writes), `-h` / `--help`.
+
+### 4.2 Environment
+
+The write path uses a **service-role** Supabase client and requires `PUBLIC_SUPABASE_URL` and
+`SUPABASE_SERVICE_ROLE_KEY`. The service-role key bypasses RLS and is a server secret — never
+put it in the site build or a browser. `--dry-run` performs no database work and needs
+neither variable.
+
+### 4.3 Duplicate detection & `--replace`
+
+Before any write, the file's `sha256` (stored as a `sha256:<hex>` token inside `source_note`)
+and its `partner+period` are checked against existing reports:
+
+- **identical bytes already imported** → `block-duplicate`; blocked, no writes.
+- **same period (or an overlapping period) with different content** → `warn-overlap`; blocked
+  unless `--replace` is given, which voids the conflicting prior report(s) first (their lines
+  cascade-delete) and then imports.
+
+Every imported line lands as `status='unmatched'` with `booking_intent_id` NULL; the importer
+never matches, reconciles, or computes commission.
+
+### 4.4 Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success — imported (or a clean `--dry-run` with no fatal errors). |
+| `1` | Fatal validation error, a blocked duplicate/overlap, or a runtime error (unreadable file, unknown partner, DB/persistence failure — the write is rolled back). |
+| `2` | Usage error (missing/invalid arguments). |
+
+### 4.5 PII handling
+
+Guest names and the verbatim `raw` CSV rows land in `partner_report` / `partner_report_line`,
+which are **staff-only**: RLS is enabled with no policy (default-deny) and access is granted
+only to `service_role`, so the anon/authenticated keys can never read them. Source CSVs belong
+in `reports/inbox/`, which — like all of `reports/` — is gitignored; never commit a real
+partner file.

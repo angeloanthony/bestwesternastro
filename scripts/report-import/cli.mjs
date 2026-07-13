@@ -37,7 +37,6 @@ Required:
   --file <path>         CSV to read (drop into reports/inbox/, which is gitignored)
 
 Options:
-  --source-note <text>  free-text note stored on the report header
   --operator <name>     who ran the import (reconciled_by)
   --replace             supersede a prior report for the same partner+period
   --dry-run             parse + validate only; make NO database writes
@@ -78,7 +77,6 @@ export function parseCliArgs(argv) {
         partner: { type: 'string' },
         period: { type: 'string' },
         file: { type: 'string' },
-        'source-note': { type: 'string' },
         operator: { type: 'string' },
         replace: { type: 'boolean' },
         'dry-run': { type: 'boolean' },
@@ -184,7 +182,7 @@ export function runImport(argv, { readFile, resolveProfile }) {
     return {
       code: EXIT.RUNTIME_ERROR,
       stdout: '',
-      stderr: `error: no profile registered for partner '${partner}'. Partner profiles are built in T04 (profiles.mjs).`,
+      stderr: `error: no profile registered for partner '${partner}'. Check the partner slug, or register its import profile before running.`,
     };
   }
 
@@ -306,7 +304,7 @@ export async function runWriteImport(argv, deps) {
     return {
       code: EXIT.RUNTIME_ERROR,
       stdout: '',
-      stderr: `error: no profile registered for partner '${partner}'. Partner profiles are built in T04 (profiles.mjs).`,
+      stderr: `error: no profile registered for partner '${partner}'. Check the partner slug, or register its import profile before running.`,
     };
   }
 

@@ -62,11 +62,10 @@ test('expandPeriod: rejects bad month formats', () => {
 
 // ── parseCliArgs ─────────────────────────────────────────────────────────────
 test('parseCliArgs: valid args parse with expanded period and no errors', () => {
-  const r = parseCliArgs([...okArgs, '--source-note', 'june batch', '--operator', 'rocco']);
+  const r = parseCliArgs([...okArgs, '--operator', 'rocco']);
   assert.deepEqual(r.errors, []);
   assert.equal(r.values.partner, 'best-western-vernal');
   assert.equal(r.values.file, 'in.csv');
-  assert.equal(r.values['source-note'], 'june batch');
   assert.equal(r.values.operator, 'rocco');
   assert.deepEqual(r.periodBounds, { period_start: '2026-06-01', period_end: '2026-06-30' });
 });
