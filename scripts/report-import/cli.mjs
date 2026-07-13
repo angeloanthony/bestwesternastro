@@ -1,21 +1,22 @@
-// CLI orchestration — read path (M6 · Phase D, T10 arg parsing + T11 read-path wiring).
+// CLI orchestration (M6 · Phase D read path + Phase F write path).
 //
-// Wires the command line to the read pipeline: parse args → load CSV → parser → transform
-// → validate → summary. It performs NO database work: no duplicate detection, no dry-run
-// persistence, no writes, no matching, no commission math. Those are later tasks.
+// Two entry functions, both returning { code, stdout, stderr } and never touching
+// process/console themselves:
+//   * runImport      — read/dry-run path: parse args → load CSV → parse → transform →
+//                      validate → summary. NO database work. (Phase D, T10/T11.)
+//   * runWriteImport — write path: the above, then dedup (decideImport) → persist, with
+//                      --replace support and a final import summary. (Phase F, T15.)
 //
-// Everything here is pure and injectable so it can be unit-tested without a filesystem,
-// a database, or a real partner profile:
-//   * `readFile(path) -> string`   — supplied by the entry point (fs) or a test double.
-//   * `resolveProfile(slug) -> profile|null` — supplied by the entry point. The real
-//       partner registry is T04 (profiles.mjs); until then the entry passes a resolver
-//       that returns null, and tests pass a mock profile.
-// runImport returns { code, stdout, stderr } and never touches process/console itself.
+// Everything is injectable so it can be unit-tested without a filesystem, a database, or a
+// real partner profile. runWriteImport takes high-level deps (fetchReports/persist/remove)
+// so the orchestration logic is tested directly; the persistence primitives they wrap are
+// tested in persist.test.mjs. It does NOT match booking_intent or compute commission.
 
 import { parseArgs } from 'node:util';
 
 import { readCsv, transformToCanonical } from './parser.mjs';
 import { validateRecords } from './validate.mjs';
+import { sha256Hex, formatHashToken, decideImport, DECISION } from './dedup.mjs';
 
 /** Exit codes. Non-zero for any usage, I/O, or fatal-validation failure. */
 export const EXIT = Object.freeze({
@@ -25,7 +26,7 @@ export const EXIT = Object.freeze({
   USAGE: 2,
 });
 
-export const USAGE = `partner report CSV importer (M6) — read path (parse + validate)
+export const USAGE = `partner report CSV importer (M6)
 
 Usage:
   npm run report:import -- --partner <slug> --period <YYYY-MM> --file <path> [options]
@@ -36,11 +37,11 @@ Required:
   --file <path>         CSV to read (drop into reports/inbox/, which is gitignored)
 
 Options:
-  --source-note <text>  free-text note (stored on the report header at persistence time)
-  --operator <name>     who ran the import (reconciled_by, at persistence time)
-  -h, --help            show this help
-
-This command currently reads and validates only — it makes NO database writes.`;
+  --source-note <text>  free-text note stored on the report header
+  --operator <name>     who ran the import (reconciled_by)
+  --replace             supersede a prior report for the same partner+period
+  --dry-run             parse + validate only; make NO database writes
+  -h, --help            show this help`;
 
 /**
  * Expand a `YYYY-MM` month into inclusive ISO day bounds.
@@ -79,6 +80,8 @@ export function parseCliArgs(argv) {
         file: { type: 'string' },
         'source-note': { type: 'string' },
         operator: { type: 'string' },
+        replace: { type: 'boolean' },
+        'dry-run': { type: 'boolean' },
         help: { type: 'boolean', short: 'h' },
       },
       allowPositionals: false,
@@ -196,14 +199,200 @@ export function runImport(argv, { readFile, resolveProfile }) {
     };
   }
 
-  const csvDoc = readCsv(text);
-  const records = transformToCanonical(csvDoc, profile);
-  const manifest = validateRecords(records);
+  const { csvDoc, records, manifest } = runPipeline(text, profile);
   const summary = formatSummary({ partner, period, bounds: periodBounds, file, csvDoc, manifest });
 
   return {
     code: manifest.ok ? EXIT.SUCCESS : EXIT.VALIDATION_FAILED,
     stdout: summary,
+    stderr: '',
+  };
+}
+
+// ── Write path (M6 · Phase F, T15) ───────────────────────────────────────────
+
+/** The shared read pipeline: CSV text + profile → parsed doc, canonical records, manifest. */
+function runPipeline(text, profile) {
+  const csvDoc = readCsv(text);
+  const records = transformToCanonical(csvDoc, profile);
+  const manifest = validateRecords(records);
+  return { csvDoc, records, manifest };
+}
+
+/**
+ * Compose the report header's source_note: operator, warning count, and the file hash token
+ * (so a re-import of the same bytes is detected next time via dedup).
+ */
+export function buildSourceNote({ operator, warnings, hash }) {
+  const who = operator ? `imported by ${operator}` : 'imported';
+  return `${who}; ${warnings} warning(s); ${formatHashToken(hash)}`;
+}
+
+/**
+ * Render the final write-path import summary. Always shows the six required facts:
+ * report_id, rows parsed, rows imported, fatal errors, warnings, and the dedup decision.
+ * @param {Object} s
+ * @returns {string}
+ */
+export function formatWriteSummary(s) {
+  const { partner, period, bounds, file, csvDoc, manifest, decision, outcome } = s;
+  const { report_id = null, imported = 0, replacedCount = 0 } = s;
+  const lines = [];
+  lines.push('Partner report import — summary');
+  lines.push(`  partner : ${partner}`);
+  lines.push(`  period  : ${period} (${bounds.period_start} → ${bounds.period_end})`);
+  lines.push(`  file    : ${file}`);
+  lines.push(`  parsed  : ${csvDoc.rows.length} data row(s)`);
+  if (decision) lines.push(`  dedup   : ${decision.decision} — ${decision.reason}`);
+  if (replacedCount > 0) lines.push(`  replace : voided ${replacedCount} prior report(s)`);
+  lines.push('  ----');
+  lines.push(`  report_id : ${report_id ?? '(none — no write performed)'}`);
+  lines.push(`  imported  : ${imported} line(s)`);
+  lines.push(`  errors    : ${manifest.errors.length} fatal`);
+  for (const i of manifest.errors) lines.push(`    row ${i.row} · ${i.field} · ${i.code} — ${i.message}`);
+  lines.push(`  warnings  : ${manifest.warnings.length}`);
+  lines.push('  ----');
+
+  if (outcome === 'validation-failed') {
+    lines.push(
+      `  RESULT: FAIL — ${manifest.errors.length} fatal error(s). Not eligible for import. No writes performed.`
+    );
+  } else if (outcome === 'blocked') {
+    const hint = decision.decision === DECISION.WARN_OVERLAP ? ' Re-run with --replace to supersede.' : '';
+    lines.push(`  RESULT: BLOCKED — ${decision.decision}. No writes performed.${hint}`);
+  } else {
+    const suffix = replacedCount > 0 ? ' (replaced prior report)' : '';
+    lines.push(`  RESULT: OK — imported ${imported} row(s) as 'unmatched'${suffix}.`);
+  }
+  return lines.join('\n');
+}
+
+/**
+ * Run the full write-path import: parse → transform → validate → dedup → persist.
+ * decideImport() runs BEFORE any write. Blocks on block-duplicate / warn-overlap unless
+ * --replace is given, in which case the conflicting prior report(s) are voided first.
+ *
+ * @param {string[]} argv
+ * @param {Object} deps
+ * @param {(path: string) => string} deps.readFile
+ * @param {(slug: string) => (Object|null)} deps.resolveProfile
+ * @param {(partner_slug: string) => Promise<Object[]>} deps.fetchReports Existing reports for dedup.
+ * @param {(meta: Object, records: Object[]) => Promise<{report_id: string, lineCount: number}>} deps.persist
+ * @param {(report_id: string) => Promise<void>} deps.remove Void a prior report (for --replace).
+ * @returns {Promise<{code: number, stdout: string, stderr: string}>}
+ */
+export async function runWriteImport(argv, deps) {
+  const { readFile, resolveProfile, fetchReports, persist, remove } = deps;
+  const { values, errors, help, periodBounds } = parseCliArgs(argv);
+
+  if (help) return { code: EXIT.SUCCESS, stdout: USAGE, stderr: '' };
+  if (errors.length > 0) {
+    return {
+      code: EXIT.USAGE,
+      stdout: '',
+      stderr: `${USAGE}\n\n${errors.map((e) => `error: ${e}`).join('\n')}`,
+    };
+  }
+
+  const { partner, period, file } = values;
+  const replace = Boolean(values.replace);
+  const operator = values.operator ?? null;
+  const bounds = periodBounds;
+
+  const profile = resolveProfile(partner);
+  if (!profile) {
+    return {
+      code: EXIT.RUNTIME_ERROR,
+      stdout: '',
+      stderr: `error: no profile registered for partner '${partner}'. Partner profiles are built in T04 (profiles.mjs).`,
+    };
+  }
+
+  let text;
+  try {
+    text = readFile(file);
+  } catch (e) {
+    return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: cannot read file '${file}': ${e.message}` };
+  }
+
+  const { csvDoc, records, manifest } = runPipeline(text, profile);
+
+  // Fatal validation → never reach dedup or the database.
+  if (!manifest.ok) {
+    return {
+      code: EXIT.VALIDATION_FAILED,
+      stdout: formatWriteSummary({ partner, period, bounds, file, csvDoc, manifest, outcome: 'validation-failed' }),
+      stderr: '',
+    };
+  }
+
+  // Dedup decision BEFORE any write.
+  const newHash = sha256Hex(text);
+  let existing;
+  try {
+    existing = await fetchReports(partner);
+  } catch (e) {
+    return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: cannot read existing reports: ${e.message}` };
+  }
+  const decision = decideImport(
+    { newHash, partner_slug: partner, period_start: bounds.period_start, period_end: bounds.period_end },
+    existing
+  );
+
+  const conflicts = decision.conflicts ?? [];
+  if (decision.decision !== DECISION.ALLOW && !replace) {
+    return {
+      code: EXIT.VALIDATION_FAILED,
+      stdout: formatWriteSummary({ partner, period, bounds, file, csvDoc, manifest, decision, outcome: 'blocked' }),
+      stderr: '',
+    };
+  }
+
+  // --replace: void conflicting prior report(s) first (cascade removes their lines).
+  let replacedCount = 0;
+  if (replace && conflicts.length > 0) {
+    const ids = [...new Set(conflicts.map((c) => c.report?.id).filter(Boolean))];
+    try {
+      for (const id of ids) {
+        await remove(id);
+        replacedCount += 1;
+      }
+    } catch (e) {
+      return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: --replace failed to void a prior report: ${e.message}` };
+    }
+  }
+
+  // Persist header + lines (atomic; rolls back internally on line failure).
+  const meta = {
+    partner_slug: partner,
+    period_start: bounds.period_start,
+    period_end: bounds.period_end,
+    source_note: buildSourceNote({ operator, warnings: manifest.warnings.length, hash: newHash }),
+    raw_csv: text,
+    ...(operator ? { reconciled_by: operator } : {}),
+  };
+  let result;
+  try {
+    result = await persist(meta, records);
+  } catch (e) {
+    return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: import failed: ${e.message}` };
+  }
+
+  return {
+    code: EXIT.SUCCESS,
+    stdout: formatWriteSummary({
+      partner,
+      period,
+      bounds,
+      file,
+      csvDoc,
+      manifest,
+      decision,
+      outcome: 'imported',
+      report_id: result.report_id,
+      imported: result.lineCount,
+      replacedCount,
+    }),
     stderr: '',
   };
 }
