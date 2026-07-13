@@ -95,6 +95,56 @@ export type DestinationRow = {
   created_at: string;
 };
 
+// Location — the Vernal Knowledge Base (M6). Public reference data: anon/auth
+// may SELECT rows where status='published' (RLS `loc_public_read`, 002). The
+// static build reads these at build time via scripts/generate-catalogue.mjs; the
+// app never writes them. Only columns the generator/app read are typed precisely;
+// `gps` (PostGIS geography) and `embedding` (pgvector) are opaque to the client
+// and omitted. Catalogue columns from migration 007 are included.
+export type LocationRow = {
+  id: string;
+  destination_id: string;
+  slug: string;
+  name: string;
+  type: string;
+  categories: string[];
+  good_for: string[];
+  ai_summary: string;
+  description_full: string | null;
+  emoji: string | null;
+  area: 'in-town' | 'nearby' | 'day-trip' | null;
+  drive_minutes: number | null;
+  visit_duration: 'quick' | 'half-day' | 'full-day' | null;
+  difficulty: 'easy' | 'moderate' | 'strenuous' | null;
+  family_friendly: boolean;
+  pet_friendly: boolean;
+  wheelchair_accessible: boolean;
+  website: string | null;
+  phone: string | null;
+  booking_url: string | null;
+  tags: string[];
+  priority: number | null;
+  featured: boolean;
+  learn_more_href: string | null;
+  seasonal_notes: string | null;
+  status: 'draft' | 'published' | 'archived';
+  created_at: string;
+  updated_at: string;
+};
+
+// Relationship graph (M6). `to_id` is null for an edge to a non-location target
+// (see `to_ref`, e.g. 'sunset' | 'family'). `rel` is the rel_type enum (001).
+export type LocationEdgeRow = {
+  id: string;
+  from_id: string;
+  to_id: string | null;
+  to_ref: string | null;
+  rel: string;
+  weight: number | null;
+  note: string | null;
+  created_at: string;
+};
+
 // Booking intent (M-attribution, migration 006). One row per outbound "Book Now"
 // click routed through /go. RLS `bi_insert` (006) allows anon/member INSERT (a
 // member may only attribute to their own user_id); there is NO select policy, so
@@ -120,6 +170,10 @@ export type BookingIntentRow = {
   utm_medium: string | null;
   utm_campaign: string | null;
   device: string | null;
+  // Journey snapshot (migration 008) — member context frozen at click time.
+  saved_slugs: string[];
+  interests: string[];
+  has_itinerary: boolean;
   status: BookingIntentStatus;
   matched_at: string | null;
   confirmation_number: string | null;
@@ -148,6 +202,9 @@ export type BookingIntentInsert = Pick<BookingIntentRow, 'partner_slug' | 'ref_c
       | 'utm_medium'
       | 'utm_campaign'
       | 'device'
+      | 'saved_slugs'
+      | 'interests'
+      | 'has_itinerary'
     >
   >;
 
@@ -164,6 +221,19 @@ export type Database = {
         Row: BookingIntentRow;
         Insert: BookingIntentInsert;
         Update: Partial<BookingIntentInsert>;
+        Relationships: [];
+      };
+      location: {
+        Row: LocationRow;
+        Insert: Partial<LocationRow> &
+          Pick<LocationRow, 'destination_id' | 'slug' | 'name' | 'type' | 'ai_summary'>;
+        Update: Partial<LocationRow>;
+        Relationships: [];
+      };
+      location_edge: {
+        Row: LocationEdgeRow;
+        Insert: Partial<LocationEdgeRow> & Pick<LocationEdgeRow, 'from_id' | 'rel'>;
+        Update: Partial<LocationEdgeRow>;
         Relationships: [];
       };
       destination: {

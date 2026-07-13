@@ -5,7 +5,7 @@
 -- the site's published copy (the original 13) and hand-authored, verifiable
 -- facts (the rest). Coordinates are approximate to each site (WGS84 lng/lat).
 --
--- Requires migration 006 (adds emoji/area/drive_minutes/visit_duration/etc.).
+-- Requires migration 007 (adds emoji/area/drive_minutes/visit_duration/etc.).
 -- Run after migrations + seed 001 (destination):
 --   psql -f database/seed/002_locations.sql     (or paste into the SQL editor)
 --

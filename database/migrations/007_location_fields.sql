@@ -1,5 +1,5 @@
 -- ============================================================================
--- AdventureOS — Migration 006: Location catalogue fields (M6 — Knowledge Base)
+-- AdventureOS — Migration 007: Location catalogue fields (M6 — Knowledge Base)
 -- Additive ONLY. Adds the columns the Adventure Pass catalogue needs so the
 -- `location` table can fully replace src/data/attractions.ts (ADR-007 migration
 -- path). Nothing existing is altered or dropped: every column below is new and
@@ -16,7 +16,7 @@
 --   drive_time               → drive_minutes     (added here)
 --   everything else          → added here
 --
--- Idempotent (add column if not exists). Apply after 001–005 with:
+-- Idempotent (add column if not exists). Apply after 001–006 with:
 --   supabase db push   (or psql -f)
 -- ============================================================================
 

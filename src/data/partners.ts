@@ -17,9 +17,17 @@
 // and the promo param is withheld from the outbound URL.
 import { BUSINESS } from './business';
 
+// Hotels are only the FIRST partner type. The whole engine (route, booking_intent,
+// interstitial, dashboard) is partner-type agnostic — adding a museum, restaurant,
+// ATV/raft outfitter, or attraction is a config entry here, never a routing change.
+// `type` is purely descriptive: it groups the dashboard and labels the interstitial;
+// no code branches on it.
+export type PartnerType = 'hotel' | 'museum' | 'restaurant' | 'atv' | 'rafting' | 'attraction';
+
 export type Partner = {
   slug: string;
   name: string;
+  type: PartnerType; // descriptive only — no routing/behaviour depends on it
   bookingUrl: string; // the engine we cannot see past — always reached via /go
   promoCode: string; // guest says it at check-in; the load-bearing attribution key
   refPrefix: string; // human ref-code prefix, e.g. 'BW' → BW26-7Q3K9F
@@ -31,6 +39,7 @@ export const PARTNERS: Record<string, Partner> = {
   'best-western-vernal': {
     slug: 'best-western-vernal',
     name: BUSINESS.name,
+    type: 'hotel',
     bookingUrl: BUSINESS.bookingUrl,
     promoCode: 'ADVENTURE',
     refPrefix: 'BW',

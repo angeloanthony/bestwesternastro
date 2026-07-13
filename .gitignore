@@ -10,5 +10,7 @@ node_modules/
 # test artifacts (visual-regression diffs/reports; committed *-snapshots/ baselines are kept)
 test-results/
 playwright-report/
+# internal operational reports (contain member UUIDs — never commit)
+reports/
 # os
 .DS_Store
