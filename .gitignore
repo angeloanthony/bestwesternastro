@@ -12,5 +12,8 @@ test-results/
 playwright-report/
 # internal operational reports (contain member UUIDs — never commit)
 reports/
+# partner-report CSV importer drop-zone (raw guest data / PII) — never commit.
+# reports/ above already covers this; listed explicitly so the inbox intent is clear.
+reports/inbox/
 # os
 .DS_Store
