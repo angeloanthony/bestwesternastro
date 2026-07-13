@@ -26,10 +26,12 @@ import {
   deleteReport,
   fetchReportsForPartner,
 } from './report-import/persist.mjs';
+import { getProfile } from './report-import/profiles.mjs';
 
-// Partner profile registry is built at T04 (report-import/profiles.mjs). Until then no
-// partner resolves and the CLI reports that cleanly rather than guessing a mapping.
-const resolveProfile = () => null;
+// Partner profile registry (report-import/profiles.mjs). A known `--partner` slug resolves
+// to its import profile; an unknown slug returns null and the CLI reports that cleanly
+// rather than guessing a mapping.
+const resolveProfile = getProfile;
 
 const argv = process.argv.slice(2);
 const readFile = (path) => readFileSync(path, 'utf8');
