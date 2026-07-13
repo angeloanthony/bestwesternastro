@@ -252,6 +252,33 @@ export async function persistReport(client, meta, records, options = {}) {
 }
 
 /**
+ * Fetch existing partner_report rows for a partner, for duplicate detection. Selects the
+ * light columns dedup needs (the hash rides in source_note, so raw_csv is not pulled).
+ *
+ * @param {Object} client A service-role Supabase client (injected).
+ * @param {string} partner_slug
+ * @returns {Promise<Object[]>} Rows: { id, partner_slug, period_start, period_end, source_note }.
+ * @throws {TypeError} On invalid client / partner_slug.
+ * @throws {Error} If the query fails.
+ */
+export async function fetchReportsForPartner(client, partner_slug) {
+  if (!client || typeof client.from !== 'function') {
+    throw new TypeError('fetchReportsForPartner requires a Supabase client');
+  }
+  if (typeof partner_slug !== 'string' || partner_slug.trim() === '') {
+    throw new TypeError('fetchReportsForPartner requires a partner_slug');
+  }
+  const { data, error } = await client
+    .from(HEADER_TABLE)
+    .select('id, partner_slug, period_start, period_end, source_note')
+    .eq('partner_slug', partner_slug);
+  if (error) {
+    throw new Error(`partner_report lookup failed for '${partner_slug}': ${error.message}`);
+  }
+  return data ?? [];
+}
+
+/**
  * Build a service-role Supabase client from the environment. Used by the CLI entry point
  * (not by unit tests, which inject a client). The service-role key bypasses RLS and is a
  * server secret — never expose it to the browser build.
