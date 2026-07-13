@@ -249,7 +249,8 @@ export function formatWriteSummary(s) {
   lines.push(`  report_id : ${report_id ?? '(none — no write performed)'}`);
   lines.push(`  imported  : ${imported} line(s)`);
   lines.push(`  errors    : ${manifest.errors.length} fatal`);
-  for (const i of manifest.errors) lines.push(`    row ${i.row} · ${i.field} · ${i.code} — ${i.message}`);
+  for (const i of manifest.errors)
+    lines.push(`    row ${i.row} · ${i.field} · ${i.code} — ${i.message}`);
   lines.push(`  warnings  : ${manifest.warnings.length}`);
   lines.push('  ----');
 
@@ -258,7 +259,8 @@ export function formatWriteSummary(s) {
       `  RESULT: FAIL — ${manifest.errors.length} fatal error(s). Not eligible for import. No writes performed.`
     );
   } else if (outcome === 'blocked') {
-    const hint = decision.decision === DECISION.WARN_OVERLAP ? ' Re-run with --replace to supersede.' : '';
+    const hint =
+      decision.decision === DECISION.WARN_OVERLAP ? ' Re-run with --replace to supersede.' : '';
     lines.push(`  RESULT: BLOCKED — ${decision.decision}. No writes performed.${hint}`);
   } else {
     const suffix = replacedCount > 0 ? ' (replaced prior report)' : '';
@@ -312,7 +314,11 @@ export async function runWriteImport(argv, deps) {
   try {
     text = readFile(file);
   } catch (e) {
-    return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: cannot read file '${file}': ${e.message}` };
+    return {
+      code: EXIT.RUNTIME_ERROR,
+      stdout: '',
+      stderr: `error: cannot read file '${file}': ${e.message}`,
+    };
   }
 
   const { csvDoc, records, manifest } = runPipeline(text, profile);
@@ -321,7 +327,15 @@ export async function runWriteImport(argv, deps) {
   if (!manifest.ok) {
     return {
       code: EXIT.VALIDATION_FAILED,
-      stdout: formatWriteSummary({ partner, period, bounds, file, csvDoc, manifest, outcome: 'validation-failed' }),
+      stdout: formatWriteSummary({
+        partner,
+        period,
+        bounds,
+        file,
+        csvDoc,
+        manifest,
+        outcome: 'validation-failed',
+      }),
       stderr: '',
     };
   }
@@ -332,10 +346,19 @@ export async function runWriteImport(argv, deps) {
   try {
     existing = await fetchReports(partner);
   } catch (e) {
-    return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: cannot read existing reports: ${e.message}` };
+    return {
+      code: EXIT.RUNTIME_ERROR,
+      stdout: '',
+      stderr: `error: cannot read existing reports: ${e.message}`,
+    };
   }
   const decision = decideImport(
-    { newHash, partner_slug: partner, period_start: bounds.period_start, period_end: bounds.period_end },
+    {
+      newHash,
+      partner_slug: partner,
+      period_start: bounds.period_start,
+      period_end: bounds.period_end,
+    },
     existing
   );
 
@@ -343,7 +366,16 @@ export async function runWriteImport(argv, deps) {
   if (decision.decision !== DECISION.ALLOW && !replace) {
     return {
       code: EXIT.VALIDATION_FAILED,
-      stdout: formatWriteSummary({ partner, period, bounds, file, csvDoc, manifest, decision, outcome: 'blocked' }),
+      stdout: formatWriteSummary({
+        partner,
+        period,
+        bounds,
+        file,
+        csvDoc,
+        manifest,
+        decision,
+        outcome: 'blocked',
+      }),
       stderr: '',
     };
   }
@@ -358,7 +390,11 @@ export async function runWriteImport(argv, deps) {
         replacedCount += 1;
       }
     } catch (e) {
-      return { code: EXIT.RUNTIME_ERROR, stdout: '', stderr: `error: --replace failed to void a prior report: ${e.message}` };
+      return {
+        code: EXIT.RUNTIME_ERROR,
+        stdout: '',
+        stderr: `error: --replace failed to void a prior report: ${e.message}`,
+      };
     }
   }
 
