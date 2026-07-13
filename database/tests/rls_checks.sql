@@ -104,6 +104,25 @@ begin
   end;
   raise notice '% : anon cannot forge a user_id on booking_intent (expect denied)',
     case when denied then 'PASS' else 'FAIL' end;
+
+  -- 9. Nobody may read partner_report with the anon key. Unlike booking_intent it has NO
+  --    anon grant at all → denied at the privilege layer (like favorites, §5), not 0 rows.
+  denied := false;
+  begin
+    perform count(*) from partner_report;
+  exception when insufficient_privilege or others then denied := true;
+  end;
+  raise notice '% : anon cannot read partner_report (expect denied)',
+    case when denied then 'PASS' else 'FAIL' end;
+
+  -- 10. Same for partner_report_line, which holds guest PII (names + raw CSV rows).
+  denied := false;
+  begin
+    perform count(*) from partner_report_line;
+  exception when insufficient_privilege or others then denied := true;
+  end;
+  raise notice '% : anon cannot read partner_report_line (expect denied)',
+    case when denied then 'PASS' else 'FAIL' end;
 end $$;
 
 reset role;
