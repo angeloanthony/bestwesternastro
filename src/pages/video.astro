@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<link rel="icon" href="images/logo.webp" type="image/webp">`;
 const bodyContent = `<!-- LOADER -->
@@ -154,8 +155,7 @@ const bodyContent = `<!-- LOADER -->
      <h2 class="cap-title"><em>Best Western</em><br>Extended Stay</h2>
      <p class="cap-sub" style="margin:0 auto;">Free Breakfast &nbsp;·&nbsp; Free WiFi &nbsp;·&nbsp; Free Parking &nbsp;·&nbsp; Full Kitchenettes &nbsp;·&nbsp; Pet Friendly &nbsp;·&nbsp; 24-Hr Front Desk</p>
      <div class="cap-cta" style="justify-content:center;">
-       <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank">Book Your Stay</a>
-       <span class="phone">📞 <strong>(435) 789-6625</strong></span>
+       <a href="tel:${BUSINESS.phoneTel}" data-track="phone_call_video">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
      </div>
    </div>
    <div class="scene-num"><span>11</span> / 11</div>
@@ -186,13 +186,13 @@ const bodyContent = `<!-- LOADER -->
    <h2 class="outro-title"><em>Come Feel</em><br>at Home.</h2>
    <p class="outro-sub">Whether you're here for the night or settling in for a while — Best Western Vernal Inn has everything you need, and then some.</p>
    <div class="outro-btns">
-     <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="ob-book" target="_blank">Book Your Room</a>
+     <a href="tel:${BUSINESS.phoneTel}" class="ob-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
      <a href="#yt-hero" class="ob-fullvideo" id="btn-watch-video" onclick="document.getElementById('outro').classList.remove('show');">▶ &nbsp; Watch Full Video</a>
      <a href="#" class="ob-replay" id="btn-replay">↺ &nbsp; Watch Again</a>
    </div>
    <p class="outro-address">
      1935 South 1500 East, Vernal, UT 84078<br>
-     <a href="tel:4357896625">(435) 789-6625</a> &nbsp;·&nbsp;
+     <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> &nbsp;·&nbsp;
      <a href="https://bestwesternvernalinn.com" target="_blank">bestwesternvernalinn.com</a>
    </p>
  </div>
@@ -262,7 +262,7 @@ const bodyContent = `<!-- LOADER -->
  </div>
  <div class="yt-hero-footer">
    <p>Free Breakfast &nbsp;·&nbsp; Free WiFi &nbsp;·&nbsp; Free Parking &nbsp;·&nbsp; Pet Friendly</p>
-   <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="yt-book-btn" target="_blank">Book Your Stay</a>
+   <a href="tel:${BUSINESS.phoneTel}" class="yt-book-btn">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
 </section>`;
 const pageScripts = `<script>

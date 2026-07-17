@@ -4,9 +4,10 @@ Status: **implementation complete (T02–T16) — merge-ready.** This document i
 operational reference for the off-browser partner-report CSV importer. The pipeline
 (parse → validate → dedup → persist, with rollback and `--replace`) is built and covered by
 the test suite. **One dependency remains ⛔ contract-blocked:** the Best Western column
-contract (§2) and its import profile await BW's confirmed export format, so the shipped CLI
-has no registered partner profile yet and will report `no profile registered` until that
-profile lands. The **locked** CSV column contract is finalized in **T17** once BW confirms.
+contract (§2) awaits BW's confirmed export format. The import profile
+(`scripts/report-import/profiles.mjs`) is **built and wired** against the **provisional** §2
+contract, so `best-western-vernal` resolves today; the **locked** CSV column contract is
+finalized in **T17** once BW confirms, at which point the profile is re-checked against it.
 
 The importer ingests a partner's monthly reservation report into staff-only tables. It does
 **not** match, does **not** reconcile, and does **not** compute commission — every imported

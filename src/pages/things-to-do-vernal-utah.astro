@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
   {
@@ -245,9 +246,9 @@ const bodyContent = `<div class="distance-bar">
   <h2>Book Your Stay in Vernal, Utah</h2>
   <p>Everything the Uintah Basin has to offer — one comfortable base camp.</p>
   <div class="contact-options">
-    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
-    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">WhatsApp</span><span class="val">(801)597-1696</span></a>
-    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book"><span class="icon">🌐</span><span class="lbl">Book Online</span><span class="val">bestwesternvernalinn.com</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="sms:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">💬</span><span class="lbl">WhatsApp</span><span class="val">(801)597-1696</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt book"><span class="icon">📞</span><span class="lbl">${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</span><span class="val">Mention code ${BUSINESS.directBooking.promoCode}</span></a>
   </div>
 </div>
 
@@ -303,12 +304,12 @@ const bodyContent = `<div class="distance-bar">
 
         <div class="faq-item">
           <button class="faq-q">Is Best Western Vernal Inn pet friendly? <span class="faq-arrow">▼</span></button>
-          <div class="faq-a"><p>Yes. We welcome pets — up to two dogs per room with an 80 lb limit per dog. A pet fee and refundable deposit apply. Call <a href="tel:4357896625" style="color:var(--gold);font-weight:700">(435) 789-6625</a> when booking to let us know you'll be traveling with a pet.</p></div>
+          <div class="faq-a"><p>Yes. We welcome pets — up to two dogs per room with an 80 lb limit per dog. A pet fee and refundable deposit apply. Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-weight:700">(435) 789-6625</a> when booking to let us know you'll be traveling with a pet.</p></div>
         </div>
 
         <div class="faq-item">
           <button class="faq-q">Are there weekly rates available for longer stays in Vernal? <span class="faq-arrow">▼</span></button>
-          <div class="faq-a"><p>Yes. Weekly rates start at $588 + tax for a Standard Queen (7 nights). Monthly rates are also available. Call <a href="tel:4357896625" style="color:var(--gold);font-weight:700">(435) 789-6625</a> for long-term pricing.</p></div>
+          <div class="faq-a"><p>Yes. Weekly rates start at $588 + tax for a Standard Queen (7 nights). Monthly rates are also available. Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-weight:700">(435) 789-6625</a> for long-term pricing.</p></div>
         </div>
 
       </div>

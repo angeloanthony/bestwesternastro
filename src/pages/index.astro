@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
  {
@@ -85,7 +86,7 @@ const headExtras = `<script type="application/ld+json">
  "unitCode": "WEE"
  },
  "availability": "https://schema.org/InStock",
- "url": "https://www.theworld24.com/booking/executiveinnsuites.php"
+ "url": "https://bestwesternvernalinn.com"
  },
  {
  "@type": "Offer",
@@ -102,7 +103,7 @@ const headExtras = `<script type="application/ld+json">
  "unitCode": "WEE"
  },
  "availability": "https://schema.org/InStock",
- "url": "https://www.theworld24.com/booking/executiveinnsuites.php"
+ "url": "https://bestwesternvernalinn.com"
  },
  {
  "@type": "Offer",
@@ -119,7 +120,7 @@ const headExtras = `<script type="application/ld+json">
  "unitCode": "WEE"
  },
  "availability": "https://schema.org/InStock",
- "url": "https://www.theworld24.com/booking/executiveinnsuites.php"
+ "url": "https://bestwesternvernalinn.com"
  }
  ]
  }
@@ -230,7 +231,7 @@ const bodyContent = `<!-- ══════════════════
     <span class="ei-dot"></span> We're Open!
   </div>
   <div class="ei-body">
-        This page previews the <em>exciting upgrades</em> coming as we transform into <strong>Best Western Vernal Inn</strong>.<br><br>  Not yet listed on BestWestern.com — book directly: <a href="tel:4357896625" style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 (435) 789-6625,</a>
+        This page previews the <em>exciting upgrades</em> coming as we transform into <strong>Best Western Vernal Inn</strong>.<br><br>  Not yet listed on BestWestern.com — book directly: <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 (435) 789-6625,</a>
     brand new experience on the way! <strong>Discount Available</strong> for Best Western Members.
   </div>
 </div>
@@ -239,7 +240,7 @@ const bodyContent = `<!-- ══════════════════
 
 <!-- PAGE SUMMARY BAR — AI-extractable content, visible to all crawlers -->
 <div class="page-summary-bar" role="complementary" aria-label="Quick summary">
- <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Weekly rates from $588 (7 nights · Queen room). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> or <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank">book online</a>.
+ <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Weekly rates from $588 (7 nights · Queen room). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
 </div>
 
 <!-- NAV -->
@@ -258,9 +259,10 @@ const bodyContent = `<!-- ══════════════════
  <h1 class="htitle">Best Western Inn<br><em>Vernal, Utah</em></h1>
  <p class="hsub">The Executive Inn is in the process of being beautifully transformed into Best Western Vernal inn — spacious rooms, free hot breakfast, and a warm welcome every single day. Your home away from home.</p>
  <div class="hbtns">
- <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="btn-p" target="_blank">Book Your Stay</a>
+ <a href="tel:${BUSINESS.phoneTel}" class="btn-p" data-track="phone_call_homepage">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  <a href="#rooms" class="btn-s">Explore Rooms</a>
  </div>
+ <p style="font-size:.8rem;opacity:.85;margin-top:10px;">Mention "ROCCO" when you call.</p>
  </div>
  <div class="hdots" id="hdots"></div>
  <div class="scroll-hint">Scroll</div>
@@ -291,6 +293,25 @@ const bodyContent = `<!-- ══════════════════
  <div class="pi"><span class="ic">🐾</span><div><div class="label">Pet Friendly</div><div class="sub">Whole family welcome</div></div></div>
 </div>
 
+<!-- BOOK DIRECT PROMO -->
+<section style="background:var(--navy);color:#fff;padding:40px 20px;text-align:center;">
+ <p style="font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;">Save 10% When You Book Direct</p>
+ <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2rem);margin-bottom:12px;">Skip Third-Party Booking Sites</h2>
+ <p style="opacity:.85;max-width:520px;margin:0 auto 20px;line-height:1.6;">Call us directly and mention the code <strong style="color:var(--gold);">ROCCO</strong> — you'll receive 10% off your reservation.</p>
+ <a href="tel:${BUSINESS.phoneTel}" data-track="phone_call_homepage" style="display:inline-block;background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">📞 (435) 789-6625</a>
+ <p style="font-size:.75rem;opacity:.6;margin-top:14px;">Offer valid only when booking directly by phone.</p>
+</section>
+
+<!-- WHY BOOK DIRECT -->
+<section style="background:var(--cream);padding:36px 20px;text-align:center;">
+ <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3vw,1.6rem);color:var(--navy);margin-bottom:18px;">Why Book Direct?</h2>
+ <ul style="list-style:none;padding:0;margin:0 auto;max-width:560px;display:flex;flex-direction:column;gap:12px;text-align:left;">
+  <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);font-weight:900;">✓</span> Save ${BUSINESS.directBooking.discountPercent}% when you mention "${BUSINESS.directBooking.promoCode}"</li>
+  <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);font-weight:900;">✓</span> Speak directly with our front desk staff</li>
+  <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--gold);font-weight:900;">✓</span> Get answers about rooms, pets, parking, and local attractions before you book</li>
+ </ul>
+</section>
+
 <!-- WEEKLY RATES -->
 <section class="weekly-rates rv">
  <div class="wr-inner">
@@ -303,7 +324,7 @@ const bodyContent = `<!-- ══════════════════
  <div class="wr-type">Queen Room</div>
  <div class="wr-price">$588</div>
  <div class="wr-period">+ tax · 7 nights</div>
- <a>Book Now by Calling</a>
+ <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
  <div class="wr-card featured">
  <div class="wr-badge">Most Popular</div>
@@ -311,14 +332,14 @@ const bodyContent = `<!-- ══════════════════
  <div class="wr-type">Double Queen</div>
  <div class="wr-price">$660</div>
  <div class="wr-period">+ tax · 7 nights</div>
- <a>Book Now by Calling</a>
+ <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
  <div class="wr-card">
  <div class="wr-icon">👑</div>
  <div class="wr-type">King Room</div>
  <div class="wr-price">$700</div>
  <div class="wr-period">+ tax · 7 nights</div>
- <a>Book Now by Calling</a>
+ <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
  </div>
 
@@ -386,10 +407,10 @@ const bodyContent = `<!-- ══════════════════
  </tr>
  </tbody>
  </table>
- <p class="rates-monthly-note">📞 Monthly rates available — call <a href="tel:4357896625">(435) 789-6625</a> for long-term pricing and corporate / company billing options.</p>
+ <p class="rates-monthly-note">📞 Monthly rates available — call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> for long-term pricing and corporate / company billing options.</p>
  </div>
 
- <p class="wr-note">📞 To book weekly rates call <a href="tel:4357896625">(435) 789-6625</a></p>
+ <p class="wr-note">📞 To book weekly rates call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a></p>
  </div>
 </section>
 
@@ -1009,8 +1030,8 @@ const bodyContent = `<!-- ══════════════════
  <h2>Ready to Feel at Home?</h2>
  <p>Book your stay at Best Western Vernal Inn — Vernal tonight.<br>Great rooms, free breakfast, and a warm welcome waiting for you.</p>
  <div class="cta-btns">
- <a href="https://www.theworld24.com/booking/executiveinnsuites.php" class="btn-p" target="_blank">Book Your Room Today</a>
- <a href="tel:4357896625" class="btn-s" style="color:var(--navy);border-color:var(--navy);">📞 (435) 789-6625</a>
+ <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+ <a href="tel:${BUSINESS.phoneTel}" class="btn-s" style="color:var(--navy);border-color:var(--navy);">📞 (435) 789-6625</a>
  </div>
  <p class="cta-info">1935 South 1500 East, Vernal, UT &nbsp;|&nbsp; <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></p>
 </section>

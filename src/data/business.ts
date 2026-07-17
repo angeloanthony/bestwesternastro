@@ -38,8 +38,23 @@ export const BUSINESS = {
     display: '24-Hour Front Desk',
   },
 
-  // External booking engine used by every "Book Now" CTA / Offer URL.
+  // External booking engine. No longer linked from on-site CTAs (those now
+  // route to tel: + directBooking below) — kept only for the /go partner
+  // redirect pipe (src/data/partners.ts), which forwards THIRD-PARTY referral
+  // traffic to this engine and is a separate flow from the site's own buttons.
   bookingUrl: 'https://www.theworld24.com/booking/executiveinnsuites.php',
+
+  // Site-wide "call to book" CTA. Replaces online booking buttons per GM
+  // decision (2026-07-16) to drive direct phone bookings instead of the
+  // third-party engine. `confirmed` gates publication like bookDirect[]
+  // below — true because the GM/owner authorized this discount directly.
+  directBooking: {
+    promoCode: 'ROCCO',
+    discountPercent: 10,
+    confirmed: true,
+    // Primary CTA label — combine with discountPercent, e.g. `${ctaLabel} ${discountPercent}%`.
+    ctaLabel: 'Book Direct & Save',
+  },
 
   site: {
     domain: 'https://bestwesternvernalinn.com',
@@ -59,6 +74,7 @@ export const BUSINESS = {
   // (Report §12). Flip to `true` ONLY after the GM signs off in writing —
   // no code change needed, just this flag. Only confirmed claims are rendered.
   bookDirect: [
+    { id: 'save-10', label: 'Save 10% — mention code ROCCO', confirmed: true },
     { id: 'no-fees', label: 'No booking fees', confirmed: true }, // true by definition when booking direct
     { id: 'free-parking', label: 'Free parking — truck & trailer', confirmed: true },
     { id: 'free-breakfast', label: 'Free hot breakfast', confirmed: true },

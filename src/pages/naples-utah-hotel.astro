@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
   {
@@ -37,8 +38,8 @@ const bodyContent = `<div class="page-hero">
     <h1 class="htitle">Hotel Near<br><em>Naples, Utah</em></h1>
     <p class="hsub">The closest full-service hotel to Naples, UT — just minutes away in neighboring Vernal. Hot breakfast, pet-friendly rooms, and weekly rates for every type of stay.</p>
     <div class="hbtns">
-      <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="btn-p">Book Your Stay</a>
-      <a href="tel:4357896625" class="btn-s">📞 (435) 789-6625</a>
+      <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+      <a href="tel:${BUSINESS.phoneTel}" class="btn-s">📞 (435) 789-6625</a>
     </div>
   </div>
 </div>
@@ -179,7 +180,7 @@ const bodyContent = `<div class="page-hero">
       </div>
     </div>
     <div class="savings-tip">
-      <p><strong>Call for current rates:</strong> Weekly and monthly pricing varies by season and room type. Call or text us directly at <a href="tel:4357896625">(435) 789-6625</a> — extended stay rates are often not accurately listed on third-party booking sites.</p>
+      <p><strong>Call for current rates:</strong> Weekly and monthly pricing varies by season and room type. Call or text us directly at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> — extended stay rates are often not accurately listed on third-party booking sites.</p>
     </div>
   </section>
 
@@ -234,9 +235,9 @@ const bodyContent = `<div class="page-hero">
   <h2>Book Your Stay Near Naples, Utah</h2>
   <p>Just minutes from Naples — call, text, or book online to lock in your room.</p>
   <div class="contact-options">
-    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
-    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">(435) 789-6625</span></a>
-    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book"><span class="icon">🌐</span><span class="lbl">Book Online</span><span class="val">bestwesternvernalinn.com</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="sms:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt book"><span class="icon">📞</span><span class="lbl">${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</span><span class="val">Mention code ${BUSINESS.directBooking.promoCode}</span></a>
   </div>
 </div>
 
@@ -252,7 +253,7 @@ const bodyContent = `<div class="page-hero">
         <div class="faq-item"><button class="faq-q">Is there a hotel in Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Naples, Utah does not have a full-service hotel within its city limits. The closest hotel isBest Western Vernal Inn, located just minutes away in neighboring Vernal. The two cities share a border and are functionally a single community — the drive between them is brief.</p></div></div>
         <div class="faq-item"><button class="faq-q">How far is Best Western Vernal from Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Best Western Vernal Inn is just a few minutes' drive from Naples. The two cities are adjacent, sharing the US-40 corridor through the Uintah Basin.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is the Best Western Vernal pet friendly? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We have designated pet-friendly rooms for guests traveling with dogs and cats. Let us know you'll have a pet when you book or call ahead to confirm availability.</p></div></div>
-        <div class="faq-item"><button class="faq-q">Are there weekly hotel rates near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Vernal Inn offers weekly and monthly rates that are significantly lower than nightly pricing. Call us at <a href="tel:4357896625">(435) 789-6625</a> for current extended stay pricing.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Are there weekly hotel rates near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Vernal Inn offers weekly and monthly rates that are significantly lower than nightly pricing. Call us at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> for current extended stay pricing.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is breakfast included at the hotel near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. A hot breakfast is included with every stay — nightly, weekly, or monthly.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is there truck parking near Naples, Utah? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Vernal Inn has on-site parking suitable for work trucks, trailers, and larger vehicles. A common need for contractors and energy workers in the Naples–Vernal area.</p></div></div>
         <div class="faq-item"><button class="faq-q">What is Naples, Utah known for? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Naples is a residential city in Uintah County, sitting adjacent to Vernal in the northeastern Utah basin. The broader Naples–Vernal area is known as the gateway to Dinosaur National Monument and Flaming Gorge, and as a hub for the Uintah Basin oil and gas industry.</p></div></div>

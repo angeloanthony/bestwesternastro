@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
  {
@@ -442,8 +443,8 @@ const bodyContent = `<!-- NAV -->
    <h1>Your Base Camp for<br><em>Dinosaur Country.</em></h1>
    <p>Just 15 minutes from Jensen, Utah and the Quarry Visitor Center at Dinosaur National Monument — Best Western Vernal Inn puts you perfectly placed for everything the Uintah Basin has to offer.</p>
    <div class="seo-hero-btns">
-     <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="btn-p" target="_blank">Book Your Stay</a>
-     <a href="tel:4357896625" class="btn-s">📞 Call Us</a>
+     <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+     <a href="tel:${BUSINESS.phoneTel}" class="btn-s">📞 Call Us</a>
    </div>
  </div>
 </section>
@@ -573,7 +574,7 @@ const bodyContent = `<!-- NAV -->
        <h3>Queen Room</h3>
        <p>Plush queen bed, flat-screen TV, free WiFi, and a warm, clean room ready for you after a day at Dinosaur National Monument.</p>
        <div class="rp-price">$588 <span>+ tax · 7 nights</span></div>
-       <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="rp-book" target="_blank">Book Now</a>
+       <a href="tel:${BUSINESS.phoneTel}" class="rp-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
      </div>
    </div>
    <div class="rp-card">
@@ -585,7 +586,7 @@ const bodyContent = `<!-- NAV -->
        <h3>Double Queen Room</h3>
        <p>Two plush queen beds — perfect for families exploring Dinosaur National Monument together. Spacious, clean, and genuinely comfortable.</p>
        <div class="rp-price">$660 <span>+ tax · 7 nights</span></div>
-       <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="rp-book" target="_blank">Book Now</a>
+       <a href="tel:${BUSINESS.phoneTel}" class="rp-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
      </div>
    </div>
    <div class="rp-card">
@@ -597,7 +598,7 @@ const bodyContent = `<!-- NAV -->
        <h3>King Suite with Kitchenette</h3>
        <p>Full kitchenette, king bed, and a separate living area. Ideal for longer stays near Jensen and Dinosaur National Monument.</p>
        <div class="rp-price">Call for rate</div>
-       <a href="tel:4357896625" class="rp-book">📞 Call to Book</a>
+       <a href="tel:${BUSINESS.phoneTel}" class="rp-book">📞 Call to Book</a>
      </div>
    </div>
  </div>
@@ -677,8 +678,8 @@ const bodyContent = `<!-- NAV -->
  <h2>Ready to Explore<br><em>Dinosaur Country?</em></h2>
  <p>Book your stay at Best Western Vernal Inn tonight — 15 minutes from Jensen, Utah and Dinosaur National Monument. Free breakfast, great rooms, and a warm welcome waiting.</p>
  <div class="cta-btns">
-   <a href="https://be.autoclerk.com/premium/index.html?id_albergo=28289&dc=8648&lingua_int=usa&id_stile=21300" class="btn-p" target="_blank">Book Your Room Today</a>
-   <a href="tel:4357896625" class="btn-s" style="color:#fff;border-color:rgba(255,255,255,.5);">📞 (435) 789-6625</a>
+   <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+   <a href="tel:${BUSINESS.phoneTel}" class="btn-s" style="color:#fff;border-color:rgba(255,255,255,.5);">📞 (435) 789-6625</a>
  </div>
  <p class="cta-info">1935 South 1500 East, Vernal, UT 84078 &nbsp;|&nbsp; <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></p>
 </section>

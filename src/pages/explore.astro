@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
   {
@@ -485,8 +486,8 @@ const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users --
   <h2>Your Base Camp<br><em>for All of It.</em></h2>
   <p>Every adventure on this page starts and ends with a great night's rest. Best Western Vernal Inn has spacious rooms, free hot breakfast, and a welcome that makes you feel like you belong here.</p>
   <div class="ex-cta-btns">
-    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="ex-cta-book">Book Your Room</a>
-    <a href="tel:4357896625" class="ex-cta-call">📞 (435) 789-6625</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-call">📞 (435) 789-6625</a>
   </div>
 </div>
 
@@ -774,8 +775,8 @@ const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users --
   <h2>Ready to<br><em>Make Memories?</em></h2>
   <p>Book your stay at Best Western Vernal Inn — Vernal's most comfortable home base for everything this incredible corner of Utah has to offer.</p>
   <div class="ex-cta-btns">
-    <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="ex-cta-book">Book Your Room Today</a>
-    <a href="tel:4357896625" class="ex-cta-call">📞 (435) 789-6625</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-call">📞 (435) 789-6625</a>
   </div>
   <p class="ex-cta-address">1935 South 1500 East, Vernal, UT 84078 &nbsp;·&nbsp;
     <a href="https://bestwesternvernalinn.com" target="_blank">bestwesternvernalinn.com</a>

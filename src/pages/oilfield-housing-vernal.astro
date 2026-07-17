@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
   {
@@ -123,7 +124,7 @@ const bodyContent = `<div class="distance-bar">
       </div>
       <div class="tip-card">
         <span class="tip-icon">📞</span>
-        <p><strong>Direct line to management.</strong> Call <a href="tel:4357896625">(435) 789-6625</a> to speak with someone who can actually make decisions on pricing and logistics.</p>
+        <p><strong>Direct line to management.</strong> Call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> to speak with someone who can actually make decisions on pricing and logistics.</p>
       </div>
     </div>
   </section>
@@ -179,7 +180,7 @@ const bodyContent = `<div class="distance-bar">
     <h2>How to Book Housing for Your Crew</h2>
     <p>The simplest way is a phone call. Tell us how many people, how long the rotation, and whether you need corporate billing set up. We'll handle the rest.</p>
     <ul class="feat-list">
-      <li>Call <a href="tel:4357896625">(435) 789-6625</a> — speak directly with the front desk</li>
+      <li>Call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> — speak directly with the front desk</li>
       <li>Text the same number for quick confirmations</li>
       <li>Email available for formal corporate account setup</li>
       <li>Individual bookings also available at <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></li>
@@ -242,9 +243,9 @@ const bodyContent = `<div class="distance-bar">
   <h2>Book Oilfield Crew Housing in Vernal</h2>
   <p>Call us to discuss crew rates, corporate billing, and availability. We'll get your team set up right.</p>
   <div class="contact-options">
-    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
-    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">(435) 789-6625</span></a>
-    <a href="https://bestwesternvernalinn.com" class="contact-opt book"><span class="icon">🌐</span><span class="lbl">Book Online</span><span class="val">bestwesternvernalinn.com</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="sms:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt book"><span class="icon">📞</span><span class="lbl">${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</span><span class="val">Mention code ${BUSINESS.directBooking.promoCode}</span></a>
   </div>
 </div>
 
@@ -259,14 +260,14 @@ const bodyContent = `<div class="distance-bar">
       <div class="faq-list">
         <div class="faq-item"><button class="faq-q">Does Best Western Vernal offer housing for oilfield workers? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We regularly house oilfield workers, pipeline crews, drilling teams, and energy contractors working in the Uintah Basin. We offer weekly and monthly rates, truck parking, corporate billing, and the full amenity package.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is there truck and equipment parking on site? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We have on-site parking suitable for work trucks, trailers, and larger vehicles. This is a standard expectation for our oilfield and contractor guests.</p></div></div>
-        <div class="faq-item"><button class="faq-q">Can my company set up a billing account for the crew? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We work with companies to set up corporate accounts with invoicing and itemized billing. Call us at <a href="tel:4357896625">(435) 789-6625</a> to discuss your company's needs before the crew arrives.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Can my company set up a billing account for the crew? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We work with companies to set up corporate accounts with invoicing and itemized billing. Call us at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> to discuss your company's needs before the crew arrives.</p></div></div>
         <div class="faq-item"><button class="faq-q">What are the weekly rates for oilfield worker housing in Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Rates vary by season and room type. Call us directly for current crew pricing — extended stay rates are often not accurately reflected on third-party booking platforms.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is breakfast included for extended stay oilfield workers? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Hot breakfast is included with every stay regardless of rate tier. For crews with early start times, breakfast is available before the drive out to the field.</p></div></div>
         <div class="faq-item"><button class="faq-q">Can workers on rotating schedules share the same company account? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We can manage rotating personnel under a single company account. Workers check in and out as the rotation changes, with billing consolidated at the company level.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is there laundry available for field crews? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Washer and dryer facilities are available on property. For crews going back into the field, end-of-week laundry is straightforward without leaving the hotel.</p></div></div>
         <div class="faq-item"><button class="faq-q">Are pet-friendly rooms available for oilfield workers traveling with dogs? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Pet-friendly rooms are available. Let us know when booking that you'll have a pet with you.</p></div></div>
         <div class="faq-item"><button class="faq-q">How does the per diem work for oilfield workers staying at a hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Many oilfield workers receive a per diem that covers lodging. Our weekly rates are structured to be competitive with or within common per diem allowances. Call us to discuss your situation and we'll work with you on pricing that fits the per diem structure.</p></div></div>
-        <div class="faq-item"><button class="faq-q">How do I book rooms for a crew arriving on short notice? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Call us directly at <a href="tel:4357896625">(435) 789-6625</a>. We can often accommodate short-notice crew bookings faster over the phone than through online booking platforms. The earlier you call, the better — especially during busy basin periods.</p></div></div>
+        <div class="faq-item"><button class="faq-q">How do I book rooms for a crew arriving on short notice? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Call us directly at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a>. We can often accommodate short-notice crew bookings faster over the phone than through online booking platforms. The earlier you call, the better — especially during busy basin periods.</p></div></div>
       </div>
     </div>
   </div>

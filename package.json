@@ -20,7 +20,8 @@
     "test:visual:update": "playwright test --update-snapshots",
     "verify": "npm run build && npm run typecheck && npm run lint && npm run format:check",
     "verify:db": "node scripts/verify-db.mjs",
-    "report:import": "node scripts/import-report.mjs"
+    "report:import": "node scripts/import-report.mjs",
+    "reconcile:run": "node scripts/reconcile.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",

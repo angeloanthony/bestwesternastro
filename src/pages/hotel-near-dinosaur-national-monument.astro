@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
  {
@@ -26,8 +27,8 @@ const bodyContent = `<section class="page-hero">
  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Hotel Near Dinosaur<br>National Monument</h1>
  <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Best Western Vernal Inn is the closest full-service hotel to Dinosaur National Monument — with weekly rates from $588, free hot breakfast every morning, and full kitchenettes so you can explore on your schedule.</p>
  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">Book Your Stay</a>
-  <a href="tel:4357896625" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+  <a href="tel:${BUSINESS.phoneTel}" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+  <a href="tel:${BUSINESS.phoneTel}" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
  </div>
  </div>
 </section>
@@ -133,20 +134,20 @@ const bodyContent = `<section class="page-hero">
  <h2>Ready to Book?</h2>
  <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
  <div class="contact-options">
-  <a href="tel:4357896625" class="contact-opt">
+  <a href="tel:${BUSINESS.phoneTel}" class="contact-opt">
    <span class="icon">📞</span>
    <span class="lbl">Call Directly</span>
-   <span class="val">(435) 789-6625</span>
+   <span class="val">${BUSINESS.phoneDisplay}</span>
   </a>
   <a href="mailto:surestayplus53027@gmail.com" class="contact-opt">
    <span class="icon">✉️</span>
    <span class="lbl">Email</span>
    <span class="val">Send a Message</span>
   </a>
-  <a href="https://www.theworld24.com/booking/executiveinnsuites.php" target="_blank" class="contact-opt book">
-   <span class="icon">🔒</span>
-   <span class="lbl">Book Online</span>
-   <span class="val">Reserve Now</span>
+  <a href="tel:${BUSINESS.phoneTel}" class="contact-opt book">
+   <span class="icon">📞</span>
+   <span class="lbl">${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</span>
+   <span class="val">Mention code ${BUSINESS.directBooking.promoCode}</span>
   </a>
  </div>
 </div>`;

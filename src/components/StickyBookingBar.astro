@@ -23,12 +23,10 @@ const claims = BUSINESS.bookDirect.filter((c) => c.confirmed).map((c) => c.label
       </a>
       <a
         class="sbb-book"
-        href={BUSINESS.bookingUrl}
-        target="_blank"
-        rel="noopener"
+        href={`tel:${BUSINESS.phoneTel}`}
         data-track="book_click"
       >
-        Book Now
+        {BUSINESS.directBooking.ctaLabel} {BUSINESS.directBooking.discountPercent}%
       </a>
     </div>
   </div>
