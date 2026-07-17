@@ -23,7 +23,7 @@ const { lastUpdated = BUSINESS.lastUpdated } = Astro.props;
     <a href="weekly-hotel-rates-vernal-utah.html">Weekly Rates</a>
     <a href="faq.html">FAQ</a>
     <a href="video.html">Our Story</a>
-    <a href={`tel:${BUSINESS.phoneTel}`} data-track="phone_call_footer">Call &amp; Save {BUSINESS.directBooking.discountPercent}%</a>
+    <a href={`tel:${BUSINESS.phoneTel}`} data-track="phone_call_footer">{BUSINESS.directBooking.ctaLabel} {BUSINESS.directBooking.discountPercent}%</a>
   </div>
   <p>{BUSINESS.address.full} &nbsp;|&nbsp; <a href={`tel:${BUSINESS.phoneTel}`} data-track="phone_call_footer">{BUSINESS.phoneDisplay}</a></p>
   <p style="margin-top:10px;font-size:.85rem;opacity:.75">

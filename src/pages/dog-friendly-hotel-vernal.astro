@@ -1,4 +1,4 @@
-﻿---
+---
 // src/pages/dog-friendly-hotel-vernal.astro
 // MIGRATION of /dog-friendly-hotel-vernal.html — metadata, canonical, JSON-LD schema, body copy,
 // headings, and internal links preserved VERBATIM. Shared chrome
@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
   {
@@ -62,7 +63,7 @@ const bodyContent = `<div class="distance-bar">
       <li>Weekly and monthly rates available for pet-friendly rooms</li>
     </ul>
     <div class="pro-tip">
-      <p><strong>Heads up:</strong> Pet-friendly rooms are limited — especially during summer. Call ahead at <a href="tel:4357896625">(435) 789-6625</a> to confirm pet room availability before your arrival date, particularly on peak-season weekends.</p>
+      <p><strong>Heads up:</strong> Pet-friendly rooms are limited — especially during summer. Call ahead at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> to confirm pet room availability before your arrival date, particularly on peak-season weekends.</p>
     </div>
   </section>
 
@@ -151,7 +152,7 @@ const bodyContent = `<div class="distance-bar">
   <section class="content-section rv">
     <h2>Long-Term Stays With Your Dog</h2>
     <p>A significant number of our extended stay guests — oilfield workers, contractors, and traveling professionals — come with dogs. If you're on a multi-week rotation in the Uintah Basin and your dog makes the long work schedule easier to manage, bring them. Our weekly and monthly rates apply to pet-friendly rooms, and the property is set up to handle working dogs and larger breeds without drama.</p>
-    <p>Call us at <a href="tel:4357896625">(435) 789-6625</a> to discuss pet room availability and extended stay pricing for your situation.</p>
+    <p>Call us at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> to discuss pet room availability and extended stay pricing for your situation.</p>
   </section>
 
 </div><!-- /content-wrap -->
@@ -205,9 +206,9 @@ const bodyContent = `<div class="distance-bar">
   <h2>Book a Dog-Friendly Room in Vernal</h2>
   <p>Pet rooms are limited — call ahead to confirm availability and lock in your dates.</p>
   <div class="contact-options">
-    <a href="tel:4357896625" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">(435) 789-6625</span></a>
-    <a href="sms:4357896625" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">(435) 789-6625</span></a>
-    <a href="tel:4357896625" class="contact-opt book"><span class="icon">📞</span><span class="lbl">Call &amp; Save 10%</span><span class="val">Mention code ROCCO</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">📞</span><span class="lbl">Call Us</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="sms:${BUSINESS.phoneTel}" class="contact-opt"><span class="icon">💬</span><span class="lbl">Text or WhatsApp</span><span class="val">${BUSINESS.phoneDisplay}</span></a>
+    <a href="tel:${BUSINESS.phoneTel}" class="contact-opt book"><span class="icon">📞</span><span class="lbl">${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</span><span class="val">Mention code ${BUSINESS.directBooking.promoCode}</span></a>
   </div>
 </div>
 
@@ -221,7 +222,7 @@ const bodyContent = `<div class="distance-bar">
       </div>
       <div class="faq-list">
         <div class="faq-item"><button class="faq-q">Is Best Western Vernal a dog-friendly hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Best Western Extended Stay Vernal is a pet-friendly hotel with designated rooms for guests traveling with dogs and cats. Let us know you'll have a pet when you book, or call ahead to confirm pet room availability.</p></div></div>
-        <div class="faq-item"><button class="faq-q">Is there a pet fee at Best Western Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes, a pet fee applies. Call us at <a href="tel:4357896625">(435) 789-6625</a> for current pet fee information when you book your room.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Is there a pet fee at Best Western Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes, a pet fee applies. Call us at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> for current pet fee information when you book your room.</p></div></div>
         <div class="faq-item"><button class="faq-q">Are large dogs allowed at the hotel? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Call us to discuss your dog's size and breed. We'd rather have a conversation than have you leave your dog at home — we accommodate larger dogs whenever possible.</p></div></div>
         <div class="faq-item"><button class="faq-q">Are dogs allowed at Dinosaur National Monument? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Dogs are allowed in developed areas, parking lots, campgrounds, and along paved roads on leash. They are not permitted inside the Quarry Exhibit Hall or on most backcountry trails. Check nps.gov/dino for current pet policies before your visit.</p></div></div>
         <div class="faq-item"><button class="faq-q">Are dogs allowed at Flaming Gorge? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. Dogs are welcome throughout most of the Flaming Gorge National Recreation Area on leash. Great for walks at overlooks and along the reservoir shores.</p></div></div>

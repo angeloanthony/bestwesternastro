@@ -52,6 +52,8 @@ export const BUSINESS = {
     promoCode: 'ROCCO',
     discountPercent: 10,
     confirmed: true,
+    // Primary CTA label — combine with discountPercent, e.g. `${ctaLabel} ${discountPercent}%`.
+    ctaLabel: 'Book Direct & Save',
   },
 
   site: {

@@ -19,7 +19,7 @@ const { heading = 'Ready to Book?', tagline } = Astro.props;
   <div class="contact-options">
     <a href={`tel:${BUSINESS.phoneTel}`} class="contact-opt book" data-track="phone_call_cta">
       <span class="icon">📞</span>
-      <span class="lbl">Call &amp; Save {BUSINESS.directBooking.discountPercent}%</span>
+      <span class="lbl">{BUSINESS.directBooking.ctaLabel} {BUSINESS.directBooking.discountPercent}%</span>
       <span class="val">{BUSINESS.phoneDisplay}</span>
     </a>
     <a href={`mailto:${BUSINESS.email}`} class="contact-opt">
