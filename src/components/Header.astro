@@ -37,7 +37,7 @@ const homeClass = isHome ? 'nav-drop-trigger nav-active' : 'nav-drop-trigger';
     <li><a href="video.html">▶ Our Story</a></li>
   </ul>
   <a class="nav-phone" href={`tel:${BUSINESS.phoneTel}`}><strong>Book Directly</strong>📞 {BUSINESS.phoneDisplay}</a>
-  <a class="nav-cta" href={BUSINESS.bookingUrl} target="_blank">Book Now</a>
+  <a class="nav-cta" href={`tel:${BUSINESS.phoneTel}`}>Call &amp; Save {BUSINESS.directBooking.discountPercent}%</a>
   <button class="burger" id="burger">
     <span></span><span></span><span></span>
   </button>
@@ -50,6 +50,6 @@ const homeClass = isHome ? 'nav-drop-trigger nav-active' : 'nav-drop-trigger';
   <a href="things-to-do-vernal-utah.html" onclick="cm()">Things to Do</a>
   <a href="faq.html" style="color:var(--gold)">FAQ</a>
   <a href="video.html" style="color:var(--gold)">▶ Our Story</a>
-  <a href={BUSINESS.bookingUrl} target="_blank" style="color:var(--gold)">Book Now →</a>
+  <a href={`tel:${BUSINESS.phoneTel}`} style="color:var(--gold)">Call &amp; Save {BUSINESS.directBooking.discountPercent}% →</a>
   <a href={`tel:${BUSINESS.phoneTel}`} style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 {BUSINESS.phoneDisplay}</a>
 </div>
