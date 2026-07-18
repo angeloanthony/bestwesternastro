@@ -2275,10 +2275,12 @@ body.video-page { background: #000; }
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 @media (max-width: 600px) {
-  .pet-badge { width: 130px; bottom: 75px; right: 14px; border-radius: 14px; }
-  .pet-badge-img { height: 100px; }
-  .pet-label { font-size: .7rem; }
-  .pet-sub { font-size: .55rem; }
+  .pet-badge { width: 92px; top: 90px; right: 10px; bottom: auto; border-radius: 12px; }
+  .pet-badge-img { height: 68px; }
+  .pet-badge-footer { padding: 6px 8px; gap: 4px; }
+  .pet-paw-icon { font-size: .9rem; }
+  .pet-label { font-size: .58rem; }
+  .pet-sub { font-size: .46rem; }
 }
 
 /* ============================================================
