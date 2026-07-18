@@ -24,7 +24,12 @@
       "PowerShell(npm run verify 2>&1)",
       "Bash(git reset *)",
       "Bash(git commit -m '@ *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4331/)",
+      "Bash(cp \"/c/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-bestwesternastro/a7310006-faec-4149-a7b6-7f450118b907/scratchpad/hero-viewport-check.mjs\" \"c:/Users/deluc/Documents/bestwesternastro/_tmp-hero-check.mjs\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\deluc\\AppData\\Local\\Temp\\claude\\c--Users-deluc-Documents-bestwesternastro\\a7310006-faec-4149-a7b6-7f450118b907\\scratchpad"
     ]
   }
 }

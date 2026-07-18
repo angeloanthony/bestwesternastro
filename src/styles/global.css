@@ -1202,12 +1202,21 @@ footer a         { color: var(--gold); }
    ============================================================ */
 @media (max-width: 600px) {
   .gal-grid      { grid-template-columns: 1fr 1fr; }
-  .htitle        { font-size: 2.4rem; }
+  .eyebrow       { font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 10px; }
+  .htitle        { font-size: 2.4rem; margin-bottom: 12px; }
+  .hsub          { margin-bottom: 22px; }
   .amen-grid     { grid-template-columns: 1fr 1fr; }
   .cta-btns      { flex-direction: column; align-items: center; }
   #lbprev        { left: 6px; }
   #lbnext        { right: 6px; }
   .lbn           { width: 40px; height: 40px; font-size: 1rem; }
+}
+
+/* Short mobile viewports (e.g. iPhone SE, 667px tall): the hero is a fixed
+   100vh box with overflow:hidden, so on the shortest common phones the
+   scroll indicator is the first thing to sacrifice before real content clips. */
+@media (max-height: 700px) {
+  .scroll-hint { display: none; }
 }
 
 /* ============================================================
