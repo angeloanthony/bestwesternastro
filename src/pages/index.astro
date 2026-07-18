@@ -231,8 +231,7 @@ const bodyContent = `<!-- ══════════════════
     <span class="ei-dot"></span> We're Open!
   </div>
   <div class="ei-body">
-        This page previews the <em>exciting upgrades</em> coming as we transform into <strong>Best Western Vernal Inn</strong>.<br><br>  Not yet listed on BestWestern.com — book directly: <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 (435) 789-6625,</a>
-    brand new experience on the way! <strong>Discount Available</strong> for Best Western Members.
+        This page previews the <em>exciting upgrades</em> coming as we transform into <strong>Best Western Vernal Inn</strong>.<br><br>  Not yet listed on BestWestern.com — book directly and save ${BUSINESS.directBooking.discountPercent}% with discount code <strong>${BUSINESS.directBooking.promoCode}</strong>: <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-size:1.1rem;font-weight:900;letter-spacing:1px;">📞 ${BUSINESS.phoneDisplay}</a>
   </div>
 </div>
 
@@ -262,7 +261,11 @@ const bodyContent = `<!-- ══════════════════
  <a href="tel:${BUSINESS.phoneTel}" class="btn-p" data-track="phone_call_homepage">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  <a href="#rooms" class="btn-s">Explore Rooms</a>
  </div>
- <p style="font-size:.8rem;opacity:.85;margin-top:10px;">Mention "ROCCO" when you call to save 10%.</p>
+ <div style="display:inline-block;margin-top:14px;padding:8px 24px;border:2px solid var(--gold);border-radius:8px;background:rgba(0,0,0,.25);">
+ <div style="font-size:.62rem;letter-spacing:2px;text-transform:uppercase;opacity:.85;">🎟️ Website Exclusive — Discount Code</div>
+ <div style="font-size:1.35rem;font-weight:900;color:var(--gold);letter-spacing:3px;line-height:1.3;">${BUSINESS.directBooking.promoCode}</div>
+ <div style="font-size:.7rem;opacity:.85;">Use this code when you call to save ${BUSINESS.directBooking.discountPercent}%.</div>
+ </div>
  </div>
  <div class="hdots" id="hdots"></div>
  <div class="scroll-hint">Scroll</div>
