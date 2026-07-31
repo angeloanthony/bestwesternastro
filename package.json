@@ -21,7 +21,8 @@
     "verify": "npm run build && npm run typecheck && npm run lint && npm run format:check",
     "verify:db": "node scripts/verify-db.mjs",
     "report:import": "node scripts/import-report.mjs",
-    "reconcile:run": "node scripts/reconcile.mjs"
+    "reconcile:run": "node scripts/reconcile.mjs",
+    "verify:pages": "node scripts/verify-destination-pages.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",

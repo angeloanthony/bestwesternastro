@@ -6,89 +6,66 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FrontDeskInsight from '../components/FrontDeskInsight.astro';
+import { RATES, usd, perNight } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
  {
-   "@context": "https://schema.org",
-   "@type": "Hotel",
-   "name": "Best Western Vernal Inn",
-   "description": "Hotel near Jensen, Utah — 15 minutes from Dinosaur National Monument. Free hot breakfast, full kitchenettes, pet friendly rooms, free WiFi and parking.",
-   "url": "https://bestwesternvernalinn.com",
-   "telephone": "+14357896625",
-   "address": {
-     "@type": "PostalAddress",
-     "streetAddress": "1935 South 1500 East",
-     "addressLocality": "Vernal",
-     "addressRegion": "UT",
-     "postalCode": "84078",
-     "addressCountry": "US"
-   },
-   "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 40.4474,
-     "longitude": -109.5194
-   },
-   "amenityFeature": [
-     { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
-     { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
-     { "@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true },
-     { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
-     { "@type": "LocationFeatureSpecification", "name": "Kitchenette", "value": true }
-   ],
-   "priceRange": "$$",
-   "checkinTime": "15:00",
-   "checkoutTime": "11:00"
+  "@context":"https://schema.org",
+  "@type":"TouristAttraction",
+  "@id":"https://bestwesternvernalinn.com/hotel-near-jensen-utah#dinosaur-national-monument",
+  "name":"Dinosaur National Monument",
+  "description":"A national monument straddling the Utah-Colorado border. The Quarry Exhibit Hall, reached from Jensen, Utah via Utah State Highway 149, preserves roughly 1,500 dinosaur bones in a cliff face. The Utah side also holds the Cub Creek petroglyphs and the Josie Bassett Morris homestead.",
+  "url":"https://www.nps.gov/dino/index.htm",
+  "sameAs":[
+   "https://www.nps.gov/dino/index.htm",
+   "https://en.wikipedia.org/wiki/Dinosaur_National_Monument"
+  ],
+  "telephone":"+14357817700",
+  "address":{
+   "@type":"PostalAddress",
+   "streetAddress":"4545 Highway 40",
+   "addressLocality":"Dinosaur",
+   "addressRegion":"CO",
+   "postalCode":"81610",
+   "addressCountry":"US"
+  },
+  "containsPlace":[
+   {"@type":"Place","name":"Quarry Exhibit Hall","description":"Reached from Jensen, Utah via Utah State Highway 149."},
+   {"@type":"Place","name":"Cub Creek petroglyphs"},
+   {"@type":"Place","name":"Josie Bassett Morris homestead"},
+   {"@type":"Place","name":"Split Mountain"}
+  ],
+  "containedInPlace":[
+   {"@type":"AdministrativeArea","name":"Uintah County, Utah"},
+   {"@type":"State","name":"Utah"},
+   {"@type":"State","name":"Colorado"}
+  ]
  }
  </script>
 <script type="application/ld+json">
  {
-   "@context": "https://schema.org",
-   "@type": "BreadcrumbList",
-   "itemListElement": [
-     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bestwesternvernalinn.com/" },
-     { "@type": "ListItem", "position": 2, "name": "Hotel Near Jensen Utah", "item": "https://bestwesternvernalinn.com/hotel-near-jensen-utah.html" }
-   ]
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://bestwesternvernalinn.com/"},
+   {"@type":"ListItem","position":2,"name":"Visiting Dinosaur National Monument from Jensen","item":"https://bestwesternvernalinn.com/hotel-near-jensen-utah"}
+  ]
  }
  </script>
 <script type="application/ld+json">
  {
-   "@context": "https://schema.org",
-   "@type": "FAQPage",
-   "mainEntity": [
-     {
-       "@type": "Question",
-       "name": "What is the closest hotel to Jensen Utah?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Best Western Vernal Inn at 1935 South 1500 East, Vernal, UT 84078 is approximately 15 minutes from Jensen, Utah — the closest full-service hotel to Jensen and Dinosaur National Monument's Quarry Visitor Center."
-       }
-     },
-     {
-       "@type": "Question",
-       "name": "How far is Best Western Vernal Inn from Dinosaur National Monument?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Best Western Vernal Inn is approximately 15–20 minutes from the Quarry Visitor Center at Dinosaur National Monument, via US-40 East through Jensen, Utah."
-       }
-     },
-     {
-       "@type": "Question",
-       "name": "Is there a pet friendly hotel near Jensen Utah?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Yes. Best Western Vernal Inn is pet friendly — up to two dogs per room, 80 lb limit per dog. $30/day pet fee plus $100 refundable deposit. Located 15 minutes from Jensen, UT."
-       }
-     },
-     {
-       "@type": "Question",
-       "name": "Does the hotel near Jensen Utah include breakfast?",
-       "acceptedAnswer": {
-         "@type": "Answer",
-         "text": "Yes. Best Western Vernal Inn includes a free hot breakfast every morning — hot dishes, pancakes, pastries, fruit, juice, and coffee. Included in every stay at no extra charge."
-       }
-     }
-   ]
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+   {"@type":"Question","name":"Are there hotels in Jensen, Utah?","acceptedAnswer":{"@type":"Answer","text":"Jensen is a small community on US-40 with no full-service hotels of its own. Most visitors to the Utah side of Dinosaur National Monument stay in Vernal, about 13 miles west, which is the nearest town with hotels, groceries, fuel and restaurants."}},
+   {"@type":"Question","name":"How far is the Quarry Exhibit Hall from Jensen, Utah?","acceptedAnswer":{"@type":"Answer","text":"The Quarry Visitor Center is 7 miles north of Jensen, Utah, off Utah State Highway 149. From Vernal the total drive is roughly 20 miles."}},
+   {"@type":"Question","name":"How much does it cost to enter Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"The National Park Service charges $25.00 for a private vehicle, $20.00 for a motorcycle and $15.00 per person without a vehicle, each valid for seven consecutive days. Youth 15 and under are admitted free. An annual Dinosaur pass is $45.00. Check nps.gov/dino for current fees before travelling."}},
+   {"@type":"Question","name":"Do you drive to the Quarry Exhibit Hall or take a shuttle?","acceptedAnswer":{"@type":"Answer","text":"It depends on the season. In summer a free shuttle runs from the Quarry Visitor Center to the Exhibit Hall because parking at the hall is limited; outside peak season visitors can usually drive. Confirm current operation with the National Park Service before you go."}},
+   {"@type":"Question","name":"Can you visit Dinosaur National Monument and Ashley National Forest on the same trip?","acceptedAnswer":{"@type":"Answer","text":"Yes, from a single base in Vernal. They run in opposite directions - the monument is east through Jensen, Ashley National Forest is north - so they work best as separate days rather than one loop."}},
+   {"@type":"Question","name":"Is there camping on the Utah side of Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Yes. Green River Campground has 83 sites at about 4,750 feet elevation, with sites listed at $24 per night and reservations advised in peak season. Split Mountain Group Campground is open year round for group sites. Both are booked through Recreation.gov."}}
+  ]
  }
  </script>
 <style>
@@ -431,301 +408,195 @@ const headExtras = `<script type="application/ld+json">
    .map-sec iframe { width: 100%; height: 100%; border: 0; display: block; }
  </style>
 <link rel="icon" href="images/logo.webp" type="image/webp">`;
-const bodyContent = `<!-- NAV -->
-
-
-<!-- HERO -->
+const bodyTop = `
 <section class="seo-hero">
- <div class="seo-hero-bg" id="heroBg"></div>
+ <div class="seo-hero-bg"></div>
  <div class="seo-hero-ov"></div>
  <div class="seo-hero-cnt">
-   <p class="eyebrow">Hotel Near Jensen, Utah</p>
-   <h1>Your Base Camp for<br><em>Dinosaur Country.</em></h1>
-   <p>Just 15 minutes from Jensen, Utah and the Quarry Visitor Center at Dinosaur National Monument — Best Western Vernal Inn puts you perfectly placed for everything the Uintah Basin has to offer.</p>
-   <div class="seo-hero-btns">
-     <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-     <a href="tel:${BUSINESS.phoneTel}" class="btn-s">📞 Call Us</a>
-   </div>
- </div>
-</section>
-
-<!-- DISTANCE STRIP -->
-<div class="dist-strip">
- <div class="dist-strip-inner">
-   <div class="dist-card">
-     <div class="dist-icon">🦕</div>
-     <div class="dist-place">Jensen, Utah</div>
-     <div class="dist-time">~15 min</div>
-     <div class="dist-note">via US-40 East</div>
-   </div>
-   <div class="dist-card">
-     <div class="dist-icon">🏛️</div>
-     <div class="dist-place">Dinosaur National Monument</div>
-     <div class="dist-time">~20 min</div>
-     <div class="dist-note">Quarry Visitor Center</div>
-   </div>
-   <div class="dist-card">
-     <div class="dist-icon">✈️</div>
-     <div class="dist-place">Vernal Regional Airport</div>
-     <div class="dist-time">0.6 miles</div>
-     <div class="dist-note">Closest hotel to VEL</div>
-   </div>
-   <div class="dist-card">
-     <div class="dist-icon">🏔️</div>
-     <div class="dist-place">Red Fleet State Park</div>
-     <div class="dist-time">~10 min</div>
-     <div class="dist-note">North of Vernal</div>
-   </div>
-   <div class="dist-card">
-     <div class="dist-icon">🦴</div>
-     <div class="dist-place">Utah Field House Museum</div>
-     <div class="dist-time">~5 min</div>
-     <div class="dist-note">Downtown Vernal</div>
-   </div>
- </div>
-</div>
-
-<!-- INTRO -->
-<section class="intro-sec rv">
- <h2>The Closest Full-Service Hotel<br><em>to Jensen, Utah</em></h2>
- <p>Jensen is a small community on US-40, best known as the gateway to Dinosaur National Monument — home to one of the largest dinosaur fossil quarries in the world. There are no hotels in Jensen itself, which makes Best Western Vernal Inn your closest and most comfortable option.</p>
- <p>We're just 15 minutes west on US-40 — close enough to make an early morning run to the Quarry Visitor Center before the crowds arrive, and comfortable enough to come back to after a full day on the trails.</p>
-</section>
-
-<!-- JENSEN INFO -->
-<section class="jensen-sec">
- <div class="jensen-inner">
-   <div class="jensen-img rv">
-     <img src="images/61.webp" alt="Hotel near Jensen Utah — Best Western Vernal Inn exterior">
-   </div>
-   <div class="jensen-txt rv">
-     <span class="tag">✦ Gateway to Dinosaur Country</span>
-     <h2>Jensen, Utah —<br><em>Where the Fossils Are.</em></h2>
-     <p>Jensen, Utah sits right at the entrance to Dinosaur National Monument, one of America's most remarkable paleontological sites. The Quarry Exhibit Hall protects over 1,500 dinosaur bones still embedded in the cliff face — visible exactly as they were discovered.</p>
-     <p>From Best Western Vernal Inn, you're perfectly positioned to explore everything Jensen and the surrounding area has to offer:</p>
-     <ul class="jensen-list">
-       <li>Dinosaur National Monument — Quarry Visitor Center</li>
-       <li>Quarry Exhibit Hall — 1,500+ fossils in the rock face</li>
-       <li>Split Mountain Campground & Green River</li>
-       <li>Jones Hole National Fish Hatchery</li>
-       <li>Cub Creek Road scenic drive</li>
-       <li>Petroglyphs and ancient rock art sites</li>
-       <li>Green River rafting and kayaking put-ins</li>
-     </ul>
-   </div>
- </div>
-</section>
-
-<!-- WHY STAY WITH US -->
-<section class="why-sec">
- <div class="sh rv">
-   <p class="tag">✦ Why Best Western Vernal Inn</p>
-   <h2>Everything You Need.<br><em>Right Where You Need It.</em></h2>
-   <div class="gline"></div>
- </div>
- <div class="why-grid rv">
-   <div class="why-card">
-     <div class="wic">🍳</div>
-     <h3>Free Hot Breakfast Daily</h3>
-     <p>Fuel up before your drive to Jensen — hot dishes, pancakes, pastries, fruit, juice, and coffee every morning. Included in your stay, no extra charge.</p>
-   </div>
-   <div class="why-card">
-     <div class="wic">🍴</div>
-     <h3>Full Kitchenettes</h3>
-     <p>Most rooms include a stovetop, microwave, full-size refrigerator, and coffee maker. Cook your own meals and save — perfect for multi-night stays near Dinosaur National Monument.</p>
-   </div>
-   <div class="why-card">
-     <div class="wic">🐾</div>
-     <h3>Pet Friendly Rooms</h3>
-     <p>Bringing the dog on your Dinosaur Country adventure? We welcome up to two dogs per room (80 lb limit). Ground floor rooms with wood floors available.</p>
-   </div>
-   <div class="why-card">
-     <div class="wic">🅿️</div>
-     <h3>Free Parking — Always</h3>
-     <p>Pull in with your truck, trailer, or RV tow vehicle — our lot has plenty of space and parking is always free. No fees, no surprises.</p>
-   </div>
-   <div class="why-card">
-     <div class="wic">📶</div>
-     <h3>Fast Free WiFi</h3>
-     <p>Plan tomorrow's hike, upload your fossil photos, or just catch up on the news — fast, reliable WiFi in every room at no extra charge.</p>
-   </div>
-   <div class="why-card">
-     <div class="wic">🛁</div>
-     <h3>Jacuzzi Suites Available</h3>
-     <p>After a long day on the trails, soak in a private in-room jacuzzi tub. King Jacuzzi Suites and Jacuzzi Double Queen Suites available — call to reserve.</p>
-   </div>
- </div>
-</section>
-
-<!-- ROOMS PREVIEW -->
-<section class="rooms-preview">
- <div class="sh rv">
-   <p class="tag">✦ Our Rooms</p>
-   <h2>Pick Your Perfect Room<br><em>for Your Jensen Stay</em></h2>
-   <div class="gline"></div>
- </div>
- <div class="rp-grid rv">
-   <div class="rp-card">
-     <div class="rp-img">
-       <img src="images/41.webp" alt="Standard Queen Room — hotel near Jensen Utah">
-     </div>
-     <div class="rp-body">
-       <div class="rp-tag">✦ Standard Queen</div>
-       <h3>Queen Room</h3>
-       <p>Plush queen bed, flat-screen TV, free WiFi, and a warm, clean room ready for you after a day at Dinosaur National Monument.</p>
-       <div class="rp-price">$588 <span>+ tax · 7 nights</span></div>
-       <a href="tel:${BUSINESS.phoneTel}" class="rp-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-     </div>
-   </div>
-   <div class="rp-card">
-     <div class="rp-img">
-       <img src="images/38.webp" alt="Double Queen Room — family hotel near Jensen Utah">
-     </div>
-     <div class="rp-body">
-       <div class="rp-tag">✦ Double Queen</div>
-       <h3>Double Queen Room</h3>
-       <p>Two plush queen beds — perfect for families exploring Dinosaur National Monument together. Spacious, clean, and genuinely comfortable.</p>
-       <div class="rp-price">$660 <span>+ tax · 7 nights</span></div>
-       <a href="tel:${BUSINESS.phoneTel}" class="rp-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-     </div>
-   </div>
-   <div class="rp-card">
-     <div class="rp-img">
-       <img src="images/39.webp" alt="King Suite with kitchenette — extended stay near Jensen Utah">
-     </div>
-     <div class="rp-body">
-       <div class="rp-tag">✦ King Suite</div>
-       <h3>King Suite with Kitchenette</h3>
-       <p>Full kitchenette, king bed, and a separate living area. Ideal for longer stays near Jensen and Dinosaur National Monument.</p>
-       <div class="rp-price">Call for rate</div>
-       <a href="tel:${BUSINESS.phoneTel}" class="rp-book">📞 Call to Book</a>
-     </div>
-   </div>
- </div>
-</section>
-
-<!-- AMENITIES STRIP -->
-<div class="amen-strip">
- <div class="amen-strip-inner">
-   <div class="sh rv">
-     <p class="tag" style="color:var(--gold)">✦ Included in Every Stay</p>
-     <h2>Everything You Need. Nothing Hidden.</h2>
-     <div class="gline"></div>
-   </div>
-   <div class="amen-icons rv">
-     <div class="ai-item"><div class="ai-icon">🍳</div><div class="ai-label">Free Breakfast</div></div>
-     <div class="ai-item"><div class="ai-icon">📶</div><div class="ai-label">Free WiFi</div></div>
-     <div class="ai-item"><div class="ai-icon">🅿️</div><div class="ai-label">Free Parking</div></div>
-     <div class="ai-item"><div class="ai-icon">🍴</div><div class="ai-label">Kitchenettes</div></div>
-     <div class="ai-item"><div class="ai-icon">🐾</div><div class="ai-label">Pet Friendly</div></div>
-     <div class="ai-item"><div class="ai-icon">🛁</div><div class="ai-label">Jacuzzi Suites</div></div>
-     <div class="ai-item"><div class="ai-icon">🕐</div><div class="ai-label">24-Hr Front Desk</div></div>
-     <div class="ai-item"><div class="ai-icon">♿</div><div class="ai-label">ADA Accessible</div></div>
-   </div>
- </div>
-</div>
-
-<!-- FAQ -->
-<section class="faq-sec">
- <div class="sh rv">
-   <p class="tag">✦ Common Questions</p>
-   <h2>Hotel Near Jensen Utah —<br>Frequently Asked Questions</h2>
-   <div class="gline"></div>
- </div>
- <div class="rv">
-   <div class="faq-item">
-     <h3>What is the closest hotel to Jensen, Utah?</h3>
-     <p>Best Western Vernal Inn at 1935 South 1500 East, Vernal, UT 84078 is approximately 15 minutes from Jensen, Utah — the closest full-service hotel to Jensen and the Dinosaur National Monument Quarry Visitor Center.</p>
-   </div>
-   <div class="faq-item">
-     <h3>How far is Best Western Vernal Inn from Dinosaur National Monument?</h3>
-     <p>Approximately 15–20 minutes via US-40 East through Jensen, Utah. The Quarry Visitor Center and Quarry Exhibit Hall are a straightforward drive with no difficult roads.</p>
-   </div>
-   <div class="faq-item">
-     <h3>Is there a pet friendly hotel near Jensen, Utah?</h3>
-     <p>Yes. Best Western Vernal Inn welcomes up to two dogs per room (80 lb limit per dog). Pet fee is $30/day plus a $100 refundable deposit at check-in. Ground floor rooms with wood floors available for pets.</p>
-   </div>
-   <div class="faq-item">
-     <h3>Does the hotel near Jensen Utah include breakfast?</h3>
-     <p>Yes — a free hot breakfast is included every morning. Hot dishes, pancakes, pastries, fruit, juice, and coffee. No extra charge, served daily.</p>
-   </div>
-   <div class="faq-item">
-     <h3>Do rooms have kitchenettes near Jensen Utah?</h3>
-     <p>Most rooms include a full kitchenette with stovetop, microwave, full-size refrigerator, and coffee maker — ideal for multi-night stays while exploring Dinosaur National Monument and the Jensen area.</p>
-   </div>
-   <div class="faq-item">
-     <h3>What is the check-in time at Best Western Vernal Inn?</h3>
-     <p>Check-in is at 3:00 PM and check-out is at 11:00 AM. Early check-in and late check-out may be available — call (435) 789-6625 to arrange.</p>
-   </div>
- </div>
-</section>
-
-<!-- MAP -->
-<div class="map-sec">
- <iframe
-   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999!2d-109.5194!3d40.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8753f2f0b0b0b0b1%3A0x1!2s1935+S+1500+E%2C+Naples%2C+UT+84078!5e0!3m2!1sen!2sus!4v1"
-   width="100%" height="100%"
-   style="border:0; display:block;"
-   allowfullscreen=""
-   loading="lazy"
-   referrerpolicy="no-referrer-when-downgrade"
-   title="Best Western Vernal Inn — Hotel near Jensen Utah map">
- </iframe>
-</div>
-
-<!-- CTA -->
-<section class="cta-sec">
- <h2>Ready to Explore<br><em>Dinosaur Country?</em></h2>
- <p>Book your stay at Best Western Vernal Inn tonight — 15 minutes from Jensen, Utah and Dinosaur National Monument. Free breakfast, great rooms, and a warm welcome waiting.</p>
- <div class="cta-btns">
+  <p class="eyebrow">Dinosaur National Monument — Utah Side</p>
+  <h1>Visiting Dinosaur National Monument<br><em>from Jensen &amp; Vernal</em></h1>
+  <p>Jensen is the gateway to the Utah side of the monument — and it has no hotels. This is a practical guide to the fees, the shuttle, the Cub Creek drive, and where to base yourself.</p>
+  <div class="seo-hero-btns">
    <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-   <a href="tel:${BUSINESS.phoneTel}" class="btn-s" style="color:#fff;border-color:rgba(255,255,255,.5);">📞 (435) 789-6625</a>
+   <a href="tel:${BUSINESS.phoneTel}" class="btn-s">📞 ${BUSINESS.phoneDisplay}</a>
+  </div>
  </div>
- <p class="cta-info">1935 South 1500 East, Vernal, UT 84078 &nbsp;|&nbsp; <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></p>
 </section>
 
-<!-- FOOTER -->
+<div class="content-wrap">
+
+<div class="intro-pull"><strong>There are no hotels in Jensen, Utah.</strong> That is the single most useful fact for anyone planning this trip, and it is why almost everyone visiting the Utah side of Dinosaur National Monument sleeps in Vernal, about 13 miles west on US-40. Jensen is the turning — the Quarry Visitor Center is 7 miles north of it on Utah State Highway 149.<sup>1</sup> This page covers what you actually need to plan: fees, how the Exhibit Hall is reached, what else is on the Utah side, and how many days to allow.</div>
+
+<div class="content-section">
+ <h2>1. What Dinosaur National Monument Is — and Which Side You Want</h2>
+<p>Dinosaur National Monument straddles the Utah–Colorado border, and it has two visitor centers in two different states. This trips up more first-time visitors than anything else about the park.<sup>1</sup></p>
+<ul class="feat-list">
+ <li><strong>Quarry Visitor Center — Utah side</strong>, reached via Utah State Highway 149 from Jensen. This is the side with the dinosaur bones.<sup>1</sup></li>
+ <li><strong>Canyon Visitor Center — Colorado side</strong>, near Dinosaur, Colorado. Canyon and river scenery, no quarry.<sup>1</sup></li>
+</ul>
+<p>The fossils — the reason most people come — are on the <strong>Utah</strong> side, at the Quarry Exhibit Hall, where roughly 1,500 dinosaur bones remain embedded in the cliff face rather than removed to a museum. If you have driven to Dinosaur, Colorado expecting the wall of bones, you are about two hours from it.</p>
+<p><strong>Disambiguation.</strong> This page is about Dinosaur National Monument in Uintah County, Utah and Moffat County, Colorado — the one reached from Jensen, Utah. It is not Dinosaur Valley State Park in Texas, Dinosaur Provincial Park in Alberta, or Dinosaur Ridge in Colorado, all of which are separate places with similar names.</p>
+</div>
+
+<div class="content-section">
+ <h2>2. How Far It Is From Vernal</h2>
+<p>Jensen sits on US-40 roughly 13 miles east of Vernal. The Quarry Visitor Center is a further 7 miles north of Jensen on Utah State Highway 149,<sup>1</sup> making the total from ${BUSINESS.address.full} approximately 20 miles — call it half an hour with the turn. Distances here are approximate; the verified leg is the 7 miles from Jensen to the visitor center.</p>
+<p>Because Jensen has no lodging, groceries or full services, treat it as a waypoint rather than a destination: fuel and provision in Vernal, then drive out.</p>
+</div>
+
+<div class="content-section">
+ <h2>3. Fees and How You Reach the Exhibit Hall</h2>
+<p>Entrance is by pass, and the National Park Service publishes the amounts:<sup>2</sup></p>
+<ul class="feat-list">
+ <li><strong>$25.00</strong> — one private vehicle (15 passengers or fewer) and all occupants, valid 7 consecutive days<sup>2</sup></li>
+ <li><strong>$20.00</strong> — motorcycle, valid 7 days, admits up to 2 motorcycles with up to 4 total passengers<sup>2</sup></li>
+ <li><strong>$15.00</strong> — per person without a vehicle (cyclists, walkers). Youth 15 and under free<sup>2</sup></li>
+ <li><strong>$45.00</strong> — annual Dinosaur pass, valid one year through the month of purchase<sup>2</sup></li>
+ <li><strong>$80.00</strong> — America the Beautiful annual pass, covering federal sites nationwide<sup>2</sup></li>
+</ul>
+<p><strong>Getting to the Exhibit Hall.</strong> Parking at the Exhibit Hall itself is limited, so access depends on season: in summer a free shuttle carries visitors from the Quarry Visitor Center up to the hall, while outside peak season you can generally drive.<sup>1</sup> Shuttle operation and hours change year to year — confirm on the Park Service site before you set out rather than relying on this page.</p>
+</div>
+
+<div class="content-section">
+ <h2>4. Things To Do on the Utah Side</h2>
+<ul class="feat-list">
+ <li><strong>Quarry Exhibit Hall</strong> — roughly 1,500 dinosaur bones still in the rock face, the reason the monument exists</li>
+ <li><strong>Tour of the Tilted Rocks</strong> — a 10-mile scenic drive along Cub Creek Road, beginning at the Quarry Visitor Center and ending at Josie's cabin. Guidebooks are sold at either visitor center or at a self-service post near the entrance station<sup>3</sup></li>
+ <li><strong>Cub Creek petroglyphs</strong> — Fremont rock art distinguished by unusually large lizard figures, reached by a short but steep 0.2-mile trail<sup>3</sup></li>
+ <li><strong>Josie Bassett Morris homestead</strong> — Josie settled at Cub Creek in 1914 and lived there independently for about 50 years; the cabin, chicken coop, irrigation remnants and orchard trees survive<sup>3</sup></li>
+ <li><strong>Split Mountain and the Green River</strong> — river access, rafting put-ins and the eroded Split Mountain formation</li>
+</ul>
+</div>
+
+<div class="content-section">
+ <h2>5. Seasonal Planning</h2>
+<ul class="feat-list">
+ <li><strong>Summer</strong> — peak season. Expect the shuttle to the Exhibit Hall rather than driving,<sup>1</sup> and expect company on the Cub Creek drive. Campground reservations are advised.<sup>4</sup></li>
+ <li><strong>Spring and autumn</strong> — quieter, and you can often drive to the hall. Campground water and flush toilets are seasonal at the Utah-side campgrounds.<sup>4</sup></li>
+ <li><strong>Winter</strong> — the quietest time at the quarry. Services reduce and road conditions vary; check current conditions with the Park Service before travelling.</li>
+</ul>
+<div class="pro-tip"><p><strong>Two things change without notice:</strong> shuttle operation and road status. Both are published by the National Park Service at nps.gov/dino, and both are worth a look the morning you go. The monument's information line is (435) 781-7700.<sup>1</sup></p></div>
+</div>
+
+<div class="content-section">
+ <h2>6. Permits, Camping and Regulations</h2>
+<p>We link these rather than restate them, because fees, hours and river-permit rules change:</p>
+<ul class="feat-list">
+ <li><strong>Park hours, fees, shuttle operation and current conditions</strong> — <a href="https://www.nps.gov/dino/index.htm" rel="noopener" style="color:var(--navy);font-weight:700;">Dinosaur National Monument, National Park Service</a></li>
+ <li><strong>Camping</strong> — <strong>Green River Campground</strong> has 83 sites at about 4,750 ft, listed at $24 per night, with reservations advised in peak season; <strong>Split Mountain Group Campground</strong> is open year round for groups. Book via <a href="https://www.recreation.gov" rel="noopener" style="color:var(--navy);font-weight:700;">Recreation.gov</a><sup>4</sup></li>
+ <li><strong>Fishing licences</strong> on the Green River — <a href="https://wildlife.utah.gov/guidebooks" rel="noopener" style="color:var(--navy);font-weight:700;">Utah Division of Wildlife Resources</a></li>
+</ul>
+</div>
+
+<div class="content-section">
+ <h2>7. Planning Your Visit</h2>
+<h3>How many days should you allow?</h3>
+<p>The Exhibit Hall plus the 10-mile Cub Creek drive with stops<sup>3</sup> is a comfortable full day. Add a second day if you want the Colorado side, a river trip, or unhurried hiking. One night in Vernal covers a single quarry day; two nights is the realistic minimum if you want more than the fossils.</p>
+<h3>Can you combine it with Ashley National Forest?</h3>
+<p>Yes, and it is the natural pairing from a Vernal base. The monument is east through Jensen; <a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:700;">Ashley National Forest</a> is north on US-191. Opposite directions, so plan them as separate days rather than one loop.</p>
+<h3>What should you plan for?</h3>
+<ul class="feat-list">
+ <li><strong>Buy fuel and food in Vernal</strong> — Jensen has no full services and the monument has none</li>
+ <li><strong>Carry water</strong> — this is high desert; the quarry area is exposed</li>
+ <li><strong>Mobile coverage</strong> — treat it as unreliable once you leave US-40. Cell service at the Utah-side campgrounds is described as seasonal.<sup>4</sup> Download directions before leaving town</li>
+ <li><strong>Arrive with a pass or means to buy one</strong> — see the fees above<sup>2</sup></li>
+</ul>
+</div>
+
+<div class="content-section">
+ <h2>8. Staying in Vernal</h2>
+<p>Because Jensen has no hotels, Vernal is the practical base for the Utah side of the monument — the nearest town with lodging, groceries, fuel and restaurants, about 13 miles west on US-40.</p>
+<p>Best Western Vernal Inn is at ${BUSINESS.address.full}. For a monument trip, what usually matters is an early breakfast before the drive out, somewhere to park, and a kitchenette if you are packing lunches for a day with no food service.</p>
+<ul class="feat-list">
+ <li>Free hot breakfast — before the drive out to the quarry</li>
+ <li>Kitchenettes available — pack lunches for a day inside the monument</li>
+ <li>Free parking, including trucks and trailers</li>
+ <li>Pet friendly — ground-floor rooms available</li>
+ <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}) — see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
+</ul>
+</div>
+`;
+const bodyBottom = `
+<div class="content-section">
+ <h2>Frequently Asked Questions</h2>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Are there hotels in Jensen, Utah?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">No. Jensen is a small community on US-40 with no full-service hotels. Visitors to the Utah side of the monument generally stay in Vernal, about 13 miles west — the nearest town with lodging, groceries and fuel.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How far is the Quarry Exhibit Hall from Jensen?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The Quarry Visitor Center is 7 miles north of Jensen off Utah State Highway 149.<sup>1</sup> From Vernal the total drive is roughly 20 miles.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How much is entry to Dinosaur National Monument?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">$25.00 per private vehicle, $20.00 per motorcycle and $15.00 per person without a vehicle, each valid seven consecutive days; youth 15 and under free. An annual Dinosaur pass is $45.00.<sup>2</sup> Confirm current fees with the Park Service before travelling.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do you drive or take a shuttle to the Exhibit Hall?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">It depends on the season. Parking at the hall is limited, so in summer a free shuttle runs from the Quarry Visitor Center; outside peak season you can usually drive.<sup>1</sup> Check current operation before you go.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Which side of the monument has the dinosaur bones?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The Utah side. The Quarry Exhibit Hall is reached via Utah State Highway 149 from Jensen. The Canyon Visitor Center on the Colorado side has canyon and river scenery but no quarry.<sup>1</sup></p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is there camping on the Utah side?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Green River Campground has 83 sites at about 4,750 ft, listed at $24 per night, with reservations advised in peak season. Split Mountain Group Campground is open year round for groups. Both book through Recreation.gov.<sup>4</sup></p>
+ </details>
+</div>
+
+<div class="content-section" style="font-size:.9rem;color:var(--muted);">
+ <h2 style="font-size:1.1rem;">Sources</h2>
+ <ol style="line-height:1.9;padding-left:1.2rem;">
+  <li>Dinosaur National Monument, National Park Service — two visitor centers and their states, Quarry Visitor Center location 7 miles north of Jensen via Utah State Highway 149, seasonal shuttle versus private vehicle access, monument address and telephone. <a href="https://www.nps.gov/dino/index.htm" rel="noopener nofollow" style="color:var(--navy);">nps.gov/dino</a></li>
+  <li>Fees &amp; Passes, Dinosaur National Monument, National Park Service — entrance fee amounts and validity periods. <a href="https://www.nps.gov/dino/planyourvisit/fees.htm" rel="noopener nofollow" style="color:var(--navy);">nps.gov/dino/planyourvisit/fees.htm</a></li>
+  <li>Cub Creek Area and Tour of the Tilted Rocks, National Park Service — 10-mile drive, guidebook availability, Cub Creek petroglyph trail, Josie Bassett Morris homestead history. <a href="https://www.nps.gov/dino/planyourvisit/cubcreek.htm" rel="noopener nofollow" style="color:var(--navy);">nps.gov/dino/planyourvisit/cubcreek.htm</a></li>
+  <li>Recreation.gov — Green River Campground and Split Mountain Group Campground site counts, elevation, nightly fee, seasonal services and reservation windows. <a href="https://www.recreation.gov" rel="noopener nofollow" style="color:var(--navy);">recreation.gov</a></li>
+ </ol>
+ <p style="margin-top:.8rem;">Fees, hours and shuttle operation are set by the National Park Service and change. Confirm before travelling. Last reviewed ${BUSINESS.lastUpdated}.</p>
+</div>
+
 <!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
 <section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
  <div style="max-width:1180px;margin:0 auto;">
   <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
   <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
-  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
-      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
-      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
-      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
-      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
-      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
-      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
-      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
-      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
-      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
-      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
-      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
-      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
-      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
      </ul>
     </div>
   </div>
   <div style="text-align:center;margin-top:2.6rem;">
-   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
   </div>
  </div>
 </section>
@@ -733,8 +604,8 @@ const bodyContent = `<!-- NAV -->
 ---
 
 <BaseLayout
-  title=`Hotel Near Jensen Utah | Best Western Vernal Inn — 15 Min from Dinosaur National Monument`
-  description=`Looking for a hotel near Jensen, Utah? Best Western Vernal Inn is just 15 minutes away — free hot breakfast, full kitchenettes, pet friendly, free WiFi & parking. Call (435) 789-6625.`
+  title=`Dinosaur National Monument from Jensen, Utah — Visitor Guide | Best Western Vernal Inn`
+  description=`Planning Dinosaur National Monument from Jensen, Utah? Fees, the Quarry Exhibit Hall shuttle, the Cub Creek drive, camping, and why visitors base in Vernal — Jensen has no hotels. Call ${BUSINESS.phoneDisplay}.`
   canonical=`https://bestwesternvernalinn.com/hotel-near-jensen-utah`
   ogTitle=`Hotel Near Jensen Utah | Best Western Vernal Inn`
   ogDescription=`15 minutes from Jensen, Utah and Dinosaur National Monument. Free hot breakfast, kitchenettes, pet friendly. Book direct.`
@@ -743,5 +614,7 @@ const bodyContent = `<!-- NAV -->
   lastUpdated=`April 2026`
 >
   <Fragment slot="head" set:html={headExtras} />
-  <Fragment set:html={bodyContent} />
+  <Fragment set:html={bodyTop} />
+  <FrontDeskInsight slug="hotel-near-jensen-utah" />
+  <Fragment set:html={bodyBottom} />
 </BaseLayout>

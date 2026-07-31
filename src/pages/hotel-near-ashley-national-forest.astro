@@ -6,121 +6,268 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FrontDeskInsight from '../components/FrontDeskInsight.astro';
+import { RATES, usd, perNight } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
  {
   "@context":"https://schema.org",
+  "@type":"Place",
+  "@id":"https://bestwesternvernalinn.com/hotel-near-ashley-national-forest#ashley-national-forest",
+  "name":"Ashley National Forest",
+  "alternateName":"Ashley NF",
+  "description":"A U.S. National Forest of about 1.4 million acres in northeastern Utah and southwestern Wyoming, administered from Vernal, Utah. Contains 276,175 acres of the High Uintas Wilderness, Kings Peak (13,528 ft, the highest point in Utah), and the Flaming Gorge National Recreation Area.",
+  "url":"https://www.fs.usda.gov/r04/ashley",
+  "sameAs":[
+   "https://en.wikipedia.org/wiki/Ashley_National_Forest",
+   "https://www.fs.usda.gov/r04/ashley",
+   "https://www.nationalforests.org/our-forests/find-a-forest/ashley-national-forest"
+  ],
+  "address":{
+   "@type":"PostalAddress",
+   "streetAddress":"355 North Vernal Avenue",
+   "addressLocality":"Vernal",
+   "addressRegion":"UT",
+   "postalCode":"84078",
+   "addressCountry":"US"
+  },
+  "telephone":"+14357891181",
+  "containsPlace":[
+   {"@type":"Mountain","name":"Kings Peak","description":"Highest point in Utah at 13,528 feet."},
+   {"@type":"Place","name":"High Uintas Wilderness"},
+   {"@type":"Place","name":"Flaming Gorge National Recreation Area"}
+  ],
+  "containedInPlace":[
+   {"@type":"AdministrativeArea","name":"Uintah County, Utah"},
+   {"@type":"State","name":"Utah"}
+  ]
+ }
+ </script>
+<script type="application/ld+json">
+ {
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+   {"@type":"ListItem","position":1,"name":"Home","item":"https://bestwesternvernalinn.com/"},
+   {"@type":"ListItem","position":2,"name":"Visiting Ashley National Forest","item":"https://bestwesternvernalinn.com/hotel-near-ashley-national-forest"}
+  ]
+ }
+ </script>
+<script type="application/ld+json">
+ {
+  "@context":"https://schema.org",
   "@type":"FAQPage",
   "mainEntity":[
-   {"@type":"Question","name":"How close is the hotel to Ashley National Forest?","acceptedAnswer":{"@type":"Answer","text":"The forest boundary is approximately 15 miles north. Drive time to popular trailheads ranges from 20 minutes to about an hour depending on destination."}},
-    {"@type":"Question","name":"Is this a good hotel for hunters?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many fall guests are elk and deer hunters. We offer weekly rates from $588, early breakfast starting at 6 AM, free truck and trailer parking, and kitchenettes."}},
-    {"@type":"Question","name":"Can I park a horse trailer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free parking accommodates trucks, horse trailers, ATV trailers, and oversized vehicles."}},
-    {"@type":"Question","name":"Are dogs allowed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pet friendly with a small pet fee. Ground-floor rooms are available."}}
+   {"@type":"Question","name":"How far is Vernal from Ashley National Forest?","acceptedAnswer":{"@type":"Answer","text":"The nearest forest boundary is roughly 15 miles north of Vernal via US-191. Because the forest covers about 1.4 million acres, drive times to specific trailheads, campgrounds and lakes range from about 20 minutes to well over an hour."}},
+   {"@type":"Question","name":"Which road should I take into Ashley National Forest from Vernal?","acceptedAnswer":{"@type":"Answer","text":"US-191 north is the paved route and forms part of the Flaming Gorge-Uintas National Scenic Byway. The Red Cloud Loop, reached about 14 to 15 miles north of Vernal off US-191 or from Dry Fork Canyon near Maeser, is roughly 40 miles and largely unpaved, with portions closed in winter."}},
+   {"@type":"Question","name":"Is Flaming Gorge part of Ashley National Forest?","acceptedAnswer":{"@type":"Answer","text":"Yes. Flaming Gorge National Recreation Area is administered by Ashley National Forest."}},
+   {"@type":"Question","name":"Where is the Ashley National Forest office?","acceptedAnswer":{"@type":"Answer","text":"The Forest Supervisor's Office is in Vernal at 355 North Vernal Avenue, Vernal, UT 84078, telephone (435) 789-1181."}},
+   {"@type":"Question","name":"Do I need a permit to visit Ashley National Forest?","acceptedAnswer":{"@type":"Answer","text":"It depends on the activity and season. Check the U.S. Forest Service for forest use, campfire restrictions and closures, and the Utah Division of Wildlife Resources guidebooks for fishing and hunting licences, seasons and units."}},
+   {"@type":"Question","name":"Can I park a truck, horse trailer or ATV trailer at the hotel?","acceptedAnswer":{"@type":"Answer","text":"Yes. Parking at Best Western Vernal Inn is free and accommodates trucks, horse trailers, ATV trailers and oversized vehicles."}}
   ]
  }
  </script>`;
-const bodyContent = `<section class="page-hero">
+const bodyTop = `<section class="page-hero">
  <div class="page-hero-cnt">
- <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">Gateway to 1.3 Million Acres of Wilderness</p>
- <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Hotel Near<br>Ashley National Forest</h1>
- <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:620px;margin:0 auto 24px;font-weight:300;">Ashley National Forest begins just 15 miles north of Vernal and stretches across 1.3 million acres of the Uinta Mountains. Best Western Vernal Inn is your last-stop basecamp — weekly rates from $588, free breakfast, and kitchenettes for packing trail food.</p>
+ <p style="font-size:.85rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;color:var(--gold);font-weight:700;">Ashley National Forest — Headquartered in Vernal, Utah</p>
+ <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;margin-bottom:18px;line-height:1.15;">Visiting Ashley<br>National Forest</h1>
+ <p style="font-size:1.05rem;line-height:1.7;opacity:.88;max-width:660px;margin:0 auto 24px;font-weight:300;">A practical guide to the 1.4-million-acre forest on Vernal's doorstep — how to get in, which access road suits your trip, what is open when, and where to base yourself. Written for visitors staying in Vernal.</p>
  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
   <a href="tel:${BUSINESS.phoneTel}" style="background:var(--gold);color:var(--navy);padding:13px 32px;border-radius:4px;text-decoration:none;font-weight:900;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-  <a href="tel:${BUSINESS.phoneTel}" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 (435) 789-6625</a>
+  <a href="tel:${BUSINESS.phoneTel}" style="border:2px solid #fff;color:#fff;padding:12px 28px;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;">📞 ${BUSINESS.phoneDisplay}</a>
  </div>
  </div>
 </section>
-<div class="distance-bar">📍 FOREST BOUNDARY BEGINS APPROXIMATELY 15 MILES NORTH OF VERNAL</div>
+<div class="distance-bar">📍 FOREST BOUNDARY ≈15 MI NORTH OF VERNAL VIA US-191 · FOREST HQ IS IN VERNAL</div>
 <div class="content-wrap">
-<div class="intro-pull"><strong>Ashley National Forest is in Vernal's backyard.</strong> The forest boundary starts approximately 15 miles north of Best Western Vernal Inn along Highway 191. Whether you're here for elk hunting season, backpacking the High Uintas, fly fishing mountain streams, or riding ATV trails through forest roads, our hotel is the last full-service lodging before you head into the backcountry. Stock up in town, sleep in a real bed, and hit the trailhead fresh. Rates start at $84/night, or $588 for a full week.</div>
+
+<div class="intro-pull"><strong>Vernal is not merely near Ashley National Forest — it is the forest's administrative home.</strong> The Ashley National Forest Supervisor's Office sits at 355 North Vernal Avenue, in town, and the Vernal Ranger District is one of its districts.<sup>1</sup> If you are planning a trip into the Uintas, the practical questions are which road to take, what is open in the season you are travelling, and where to sleep the night before an early start. This page answers those in order.</div>
+
 <div class="content-section">
- <h2>Your Basecamp for the Uintas</h2>
-<p>From Best Western Vernal Inn, the Ashley National Forest boundary is approximately 15 miles north on Highway 191. From there, access roads lead to trailheads, campgrounds, fishing streams, and some of the most remote wilderness in the lower 48 — the High Uintas Wilderness Area, home to Kings Peak, Utah's highest point at 13,528 feet. Vernal is the last town with hotels, groceries, gas, and outfitters before you enter the forest.</p>
+ <h2>1. What Ashley National Forest Is</h2>
+<p>Ashley National Forest covers about 1.4 million acres across northeastern Utah and southwestern Wyoming.<sup>1</sup> It is not a single block of trees: the forest spans three distinct landscapes — the northern and southern slopes of the Uinta Mountains, the Wyoming Basin, and the Tavaputs Plateau.<sup>2</sup></p>
+<p>The elevation range is what makes trip planning here unusual. The forest runs from roughly 5,500 feet on the Green River to 13,528 feet at the summit of Kings Peak, the highest point in Utah.<sup>1</sup> A day that is warm and dry at the trailhead can be snowing above treeline.</p>
 <ul class="feat-list">
- <li>~15 miles to the forest boundary via Hwy 191</li>
- <li>Access to High Uintas Wilderness trailheads</li>
- <li>Free hot breakfast — fuel up before trailhead drives</li>
- <li>Kitchenettes — pack lunches and prep camp meals</li>
- <li>Pet friendly — bring your hunting or hiking dog</li>
- <li>Free parking for trucks, trailers, ATVs, and horse trailers</li>
- <li>Weekly rates from $588 — ideal for hunting season</li>
+ <li>About 1.4 million acres, northeastern Utah and southwestern Wyoming<sup>1</sup></li>
+ <li>276,175 acres of the High Uintas Wilderness lie within this forest<sup>1</sup></li>
+ <li>Elevation 5,500 ft (Green River) to 13,528 ft (Kings Peak, Utah's highest)<sup>1</sup></li>
+ <li>Flaming Gorge National Recreation Area is administered by Ashley National Forest<sup>1</sup></li>
+ <li>Ranger districts include Vernal, Duchesne, Roosevelt, and Flaming Gorge (Manila, UT and Green River, WY)<sup>2</sup></li>
+ <li>Forest Supervisor's Office: 355 North Vernal Avenue, Vernal, UT 84078 · (435) 789-1181<sup>1</sup></li>
+</ul>
+<p><strong>A note on the name.</strong> Several national forests share similar names and many share the phrase "national forest" in visitor searches. This page is about the <em>Ashley</em> National Forest in northeastern Utah and southwestern Wyoming — the one whose headquarters is in Vernal, Uintah County, and which contains Kings Peak and Flaming Gorge. It is not the Ashley River area of South Carolina, and it is unrelated to national forests of similar profile in other states.</p>
+</div>
+
+<div class="content-section">
+ <h2>2. How Far It Is From Vernal</h2>
+<p>From ${BUSINESS.address.full}, the nearest forest boundary is approximately 15 miles north via US-191. Driving times vary widely by destination because the forest is large and much of it is reached on unpaved roads — a boundary crossing is 20-odd minutes, while a High Uintas trailhead or the far side of the Red Cloud Loop is considerably longer.</p>
+<p>The three routes below cover most visits. Which one you want depends entirely on what you came to do.</p>
+</div>
+
+<div class="content-section">
+ <h2>3. Which Access Route Should You Use?</h2>
+<h3>US-191 north — the main paved access</h3>
+<p>US-191 leaving Vernal to the north is the primary paved route into the forest and on to Flaming Gorge. It forms part of the Flaming Gorge–Uintas National Scenic Byway, locally known as the Drive Through the Ages for the roadside geology markers along it.<sup>3</sup> The byway runs roughly 80 miles from Vernal north through the forest toward Manila and the Flaming Gorge area; as a round trip from Vernal with stops it is at least 150 miles and about five hours.<sup>3</sup> It is open year round, though ice and snow create hazards in winter.<sup>3</sup></p>
+<p><strong>Use this if:</strong> you want paved road the whole way, you are heading for Flaming Gorge, or you have a passenger car.</p>
+
+<h3>Red Cloud Loop — the unpaved scenic loop</h3>
+<p>The Red Cloud Loop is roughly a 40-mile route through the forest north of Vernal. It can be picked up about 14 to 15 miles north of Vernal off US-191, or entered from the Dry Fork Canyon side near Maeser, just northwest of Vernal.<sup>4</sup> The majority of the route is unpaved, and portions close in winter.<sup>4</sup></p>
+<p><strong>Use this if:</strong> you want canyon, aspen and meadow scenery and High Uintas views, and you have a vehicle suited to gravel roads. Check current conditions before committing — this is the route most affected by season and weather.</p>
+
+<h3>District office first — the underrated option</h3>
+<p>Because the Forest Supervisor's Office and the Vernal Ranger District are both in town,<sup>1</sup> you can get current road, fire and closure information in person before you drive, rather than discovering a gate on a forest road an hour out. For a first visit, or any trip in shoulder season, this is the single most useful stop in Vernal.</p>
+</div>
+
+<div class="content-section">
+ <h2>4. Things To Do</h2>
+<ul class="feat-list">
+ <li><strong>Hiking and backpacking</strong> — the High Uintas Wilderness, including the approach to Kings Peak at 13,528 ft<sup>1</sup></li>
+ <li><strong>Fishing</strong> — mountain streams and lakes across the forest, plus the Green River and Flaming Gorge Reservoir</li>
+ <li><strong>Camping</strong> — developed Forest Service campgrounds and dispersed camping; sites and fees are listed on Recreation.gov<sup>5</sup></li>
+ <li><strong>Scenic driving</strong> — the Flaming Gorge–Uintas National Scenic Byway and the Red Cloud Loop<sup>3,4</sup></li>
+ <li><strong>Boating and water recreation</strong> — Flaming Gorge Reservoir, administered by this forest<sup>1</sup></li>
+ <li><strong>Wildlife viewing</strong> — the byway is themed around wildlife and habitat interpretation<sup>3</sup></li>
+ <li><strong>Hunting</strong> — a major autumn draw in the Uintah Basin; seasons, units and permits are set by Utah DWR, not the Forest Service (see section 6)</li>
+ <li><strong>Winter recreation</strong> — snowmobiling and cross-country skiing where roads and trails permit</li>
 </ul>
 </div>
+
 <div class="content-section">
- <h2>What Brings Guests to Ashley National Forest</h2>
-<p>Ashley National Forest draws visitors year-round. The biggest draws are fall hunting season — elk, mule deer, and moose tags bring thousands to the Uintah Basin every September and October — and summer backpacking in the High Uintas. The forest also offers hundreds of miles of ATV and OHV trails, mountain lake fishing for brook, brown, and cutthroat trout, and horseback pack trips into some of the most pristine alpine terrain in Utah.</p>
+ <h2>5. Seasonal Planning</h2>
+<p>Elevation, not the calendar, governs this forest. The 8,000-foot difference between the Green River and Kings Peak<sup>1</sup> means low-country and high-country seasons run on different schedules in the same week.</p>
 <ul class="feat-list">
- <li>Elk, mule deer, and moose hunting — fall season</li>
- <li>High Uintas Wilderness backpacking</li>
- <li>Kings Peak summit — Utah's highest point at 13,528 ft</li>
- <li>Mountain lake fishing — brook, brown, cutthroat trout</li>
- <li>ATV and OHV trail riding on forest roads</li>
- <li>Horseback riding and pack trips</li>
- <li>Snowmobiling and cross-country skiing in winter</li>
+ <li><strong>Spring</strong> — lower elevations open first. High country and unpaved routes such as the Red Cloud Loop may still be snowbound or closed.<sup>4</sup> Verify road status before driving.</li>
+ <li><strong>Summer</strong> — the full road network is generally available and High Uintas trailheads are reachable. Afternoon thunderstorms are a normal mountain risk at altitude.</li>
+ <li><strong>Autumn</strong> — aspen colour along the byway and the Red Cloud Loop, and the busiest hunting period in the basin. Lodging in Vernal is at its tightest; book well ahead.</li>
+ <li><strong>Winter</strong> — the US-191 byway stays open year round but ice and snow create hazards;<sup>3</sup> portions of the Red Cloud Loop close.<sup>4</sup></li>
+</ul>
+<div class="pro-tip"><p><strong>Before any shoulder-season trip:</strong> confirm road status with the Ashley National Forest office in Vernal, (435) 789-1181,<sup>1</sup> or on the forest website. Conditions on unpaved forest roads change faster than any web page — including this one.</p></div>
+</div>
+
+<div class="content-section">
+ <h2>6. Permits and Regulations</h2>
+<p>We deliberately do not restate regulations here. Getting a rule wrong has real consequences for a visitor, and both agencies below update their guidance more often than a hotel page can track. Use the primary sources:</p>
+<ul class="feat-list">
+ <li><strong>Forest use</strong> — camping, campfire and fire restrictions, motor-vehicle use maps, and any seasonal closures: <a href="https://www.fs.usda.gov/r04/ashley" rel="noopener" style="color:var(--navy);font-weight:700;">Ashley National Forest, U.S. Forest Service</a></li>
+ <li><strong>Campground reservations and fees</strong> — <a href="https://www.recreation.gov" rel="noopener" style="color:var(--navy);font-weight:700;">Recreation.gov</a></li>
+ <li><strong>Fishing and hunting licences, seasons, units and permits</strong> — <a href="https://wildlife.utah.gov/guidebooks" rel="noopener" style="color:var(--navy);font-weight:700;">Utah Division of Wildlife Resources guidebooks</a>. Season dates and permit numbers change year to year; always read the current guidebook.</li>
 </ul>
 </div>
-<div class="pro-tip"><p><strong>Pro Tip:</strong> During September and October elk season, Vernal hotels fill up fast. Book early and lock in a weekly rate — hunters who stay the full rifle season save hundreds at $588/week compared to nightly pricing, and our free breakfast means one less meal to worry about before dawn.</p></div>
+
+<div class="content-section">
+ <h2>7. Planning Your Visit</h2>
+<h3>How many days should you allow?</h3>
+<p>A scenic-drive day on the byway needs about five hours of driving plus stops, as a round trip from Vernal.<sup>3</sup> The Red Cloud Loop is a comfortable half to full day given its length and surface.<sup>4</sup> Backcountry trips into the High Uintas are multi-day by nature. Two nights in Vernal covers a drive day plus one full day on foot or on the water; three or more suits hunting, fishing or backpacking.</p>
+<h3>Can you combine it with Dinosaur National Monument?</h3>
+<p>Yes, and most visitors staying in Vernal do. The two run in opposite directions from town — the forest is north, Dinosaur National Monument is east toward Jensen — so they work best as separate days from one base rather than as a single loop.</p>
+<h3>What should you plan for?</h3>
+<ul class="feat-list">
+ <li><strong>Fuel and supplies</strong> — buy in Vernal. Services inside the forest are limited and seasonal.</li>
+ <li><strong>Mobile coverage</strong> — treat the backcountry as having none. Download maps before leaving town and leave a plan with someone.</li>
+ <li><strong>Weather at altitude</strong> — pack for conditions at your highest point, not at the trailhead. The elevation spread here is extreme.<sup>1</sup></li>
+ <li><strong>Road surface</strong> — know whether your route is paved before you commit. Much of the forest road network is not.<sup>4</sup></li>
+</ul>
+</div>
+
+<div class="content-section">
+ <h2>8. Staying in Vernal</h2>
+<p>Vernal is the practical base for this forest: it is the largest town at its edge, it holds the forest's own headquarters,<sup>1</sup> and it is where you will find fuel, groceries, and outfitting before an early start.</p>
+<p>Best Western Vernal Inn is at ${BUSINESS.address.full}. For forest trips specifically, what tends to matter is an early breakfast before a trailhead drive, somewhere to leave a truck and trailer, a kitchenette for packing food, and a weekly rate if you are here for a hunting or fishing season rather than a weekend.</p>
+<ul class="feat-list">
+ <li>Free hot breakfast — before a trailhead start</li>
+ <li>Free parking for trucks, trailers, ATV trailers and horse trailers</li>
+ <li>Kitchenettes available — pack trail food and prep camp meals</li>
+ <li>Pet friendly — ground-floor rooms available</li>
+ <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}) — see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
+ <li>24-hour front desk — check in around a hunting or shift schedule</li>
+</ul>
+</div>
+
+<!-- FRONT DESK INSIGHT SLOT — renders only after local review (see src/data/frontDeskInsights.ts) -->
+`;
+const bodyBottom = `
 <div class="content-section">
  <h2>Frequently Asked Questions</h2>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How close is the hotel to Ashley National Forest?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The forest boundary is approximately 15 miles north. Drive time to popular trailheads ranges from 20 minutes to about an hour depending on destination.</p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How far is Vernal from Ashley National Forest?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The nearest forest boundary is roughly 15 miles north of Vernal via US-191. Because the forest covers about 1.4 million acres,<sup>1</sup> drive times to specific trailheads, campgrounds and lakes vary from around 20 minutes to well over an hour.</p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is this a good hotel for hunters?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Many fall guests are elk and deer hunters. We offer weekly rates from $588, early breakfast starting at 6 AM, free truck and trailer parking, and kitchenettes.</p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Which road should I take into the forest?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">US-191 north is the paved route and part of the Flaming Gorge–Uintas National Scenic Byway.<sup>3</sup> The Red Cloud Loop, picked up about 14 to 15 miles north of Vernal or from Dry Fork Canyon near Maeser, is largely unpaved with portions closed in winter.<sup>4</sup></p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Can I park a horse trailer?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Free parking accommodates trucks, horse trailers, ATV trailers, and oversized vehicles.</p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is Flaming Gorge part of Ashley National Forest?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Flaming Gorge National Recreation Area is administered by Ashley National Forest.<sup>1</sup></p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Are dogs allowed?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Pet friendly with a small pet fee. Ground-floor rooms are available.</p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Where is the Ashley National Forest office?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The Forest Supervisor's Office is in Vernal at 355 North Vernal Avenue, Vernal, UT 84078, telephone (435) 789-1181.<sup>1</sup> It is a useful stop for current road and closure information before heading up.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do I need a permit?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">It depends on the activity and the season. Check the <a href="https://www.fs.usda.gov/r04/ashley" rel="noopener" style="color:var(--navy);font-weight:700;">Forest Service</a> for forest use and closures, and <a href="https://wildlife.utah.gov/guidebooks" rel="noopener" style="color:var(--navy);font-weight:700;">Utah DWR</a> for fishing and hunting. We do not restate regulations here because they change.</p>
+ </details>
+ <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Can I park a truck, horse trailer or ATV trailer at the hotel?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Parking is free and accommodates trucks, horse trailers, ATV trailers and oversized vehicles.</p>
  </details>
 </div>
+
+<div class="content-section" style="font-size:.9rem;color:var(--muted);">
+ <h2 style="font-size:1.1rem;">Sources</h2>
+ <ol style="line-height:1.9;padding-left:1.2rem;">
+  <li>Ashley National Forest, U.S. Forest Service — acreage, elevation range, High Uintas Wilderness acreage, Flaming Gorge administration, Supervisor's Office address and telephone. <a href="https://www.fs.usda.gov/r04/ashley" rel="noopener nofollow" style="color:var(--navy);">fs.usda.gov/r04/ashley</a></li>
+  <li>National Forest Foundation — forest landscape regions and ranger district locations. <a href="https://www.nationalforests.org/our-forests/find-a-forest/ashley-national-forest" rel="noopener nofollow" style="color:var(--navy);">nationalforests.org</a></li>
+  <li>Flaming Gorge–Uintas National Scenic Byway — route length, round-trip time, year-round access with winter hazards. <a href="https://nsbfoundation.com/nb/flaming-gorge-uintas-national-scenic-byway/" rel="noopener nofollow" style="color:var(--navy);">National Scenic Byway Foundation</a></li>
+  <li>Red Cloud / Dry Fork Scenic Backway — route length, access points, unpaved surface, winter closures. <a href="https://www.flaminggorgecountry.com/Red-Cloud-Dry-Fork-Scenic-Backway/" rel="noopener nofollow" style="color:var(--navy);">flaminggorgecountry.com</a></li>
+  <li>Recreation.gov — Ashley National Forest campground listings, availability and fees. <a href="https://www.recreation.gov" rel="noopener nofollow" style="color:var(--navy);">recreation.gov</a></li>
+ </ol>
+ <p style="margin-top:.8rem;">Road, fire and closure conditions change frequently. Confirm with the Forest Service before travelling. Last reviewed ${BUSINESS.lastUpdated}.</p>
+</div>
+
 <!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
 <section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
  <div style="max-width:1180px;margin:0 auto;">
   <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
   <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
-  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
-      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
-      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
-      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
-      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
-      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
-      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
-      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
-      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
-      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
-      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
-      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
-      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
-      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
      </ul>
     </div>
   </div>
   <div style="text-align:center;margin-top:2.6rem;">
-   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
   </div>
  </div>
 </section>
@@ -128,7 +275,7 @@ const bodyContent = `<section class="page-hero">
 </div>
 <div class="cta-contact">
  <h2>Ready to Book?</h2>
- <p>Weekly rates from $588 · Free hot breakfast · Free parking · Pet friendly</p>
+ <p>Weekly rates from ${usd(RATES.weekly.standardQueen)} · Free hot breakfast · Free parking · Pet friendly</p>
  <div class="contact-options">
   <a href="tel:${BUSINESS.phoneTel}" class="contact-opt">
    <span class="icon">📞</span>
@@ -150,17 +297,19 @@ const bodyContent = `<section class="page-hero">
 ---
 
 <BaseLayout
-  title=`Hotel Near Ashley National Forest | Best Western Vernal Inn — From $84/Night`
-  description=`Best Western Vernal Inn — closest hotel to Ashley National Forest. Hiking, fishing, hunting base camp. 15 miles to the forest boundary. Weekly rates from $588, free breakfast. Call (435) 789-6625.`
+  title=`Ashley National Forest, Utah — Visitor Guide from Vernal | Best Western Vernal Inn`
+  description=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Weekly rates from ${usd(RATES.weekly.standardQueen)}. Call ${BUSINESS.phoneDisplay}.`
   canonical=`https://bestwesternvernalinn.com/hotel-near-ashley-national-forest`
-  ogTitle=`Hotel Near Ashley National Forest | Best Western Vernal Inn — From $84/Night`
-  ogDescription=`Best Western Vernal Inn — closest hotel to Ashley National Forest. Hiking, fishing, hunting base camp. 15 miles to the forest boundary. Weekly rates from $588, free breakfast. Call (435) 789-6625.`
+  ogTitle=`Ashley National Forest, Utah — Visitor Guide from Vernal | Best Western Vernal Inn`
+  ogDescription=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Weekly rates from ${usd(RATES.weekly.standardQueen)}. Call ${BUSINESS.phoneDisplay}.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
-  twitterTitle=`Hotel Near Ashley National Forest | Best Western Vernal Inn — From $84/Night`
-  twitterDescription=`Best Western Vernal Inn — closest hotel to Ashley National Forest. Hiking, fishing, hunting base camp. 15 miles to the forest boundary. Weekly rates from $588, free breakfast. Call (435) 789-6625.`
+  twitterTitle=`Ashley National Forest, Utah — Visitor Guide from Vernal | Best Western Vernal Inn`
+  twitterDescription=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Weekly rates from ${usd(RATES.weekly.standardQueen)}. Call ${BUSINESS.phoneDisplay}.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   lastUpdated=`April 2026`
 >
   <Fragment slot="head" set:html={headExtras} />
-  <Fragment set:html={bodyContent} />
+  <Fragment set:html={bodyTop} />
+  <FrontDeskInsight slug="hotel-near-ashley-national-forest" />
+  <Fragment set:html={bodyBottom} />
 </BaseLayout>
