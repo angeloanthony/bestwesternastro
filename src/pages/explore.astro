@@ -6,10 +6,12 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hotelNode, hotelRef, ldScript } from '../data/schema.ts';
 import { RATES, usd } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
-const headExtras = `<script type="application/ld+json">
+const headExtras = `${ldScript(hotelNode())}
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "TouristDestination",
@@ -22,20 +24,7 @@ const headExtras = `<script type="application/ld+json">
       "latitude": 40.4474,
       "longitude": -109.5194
     },
-    "isPartOf": {
-      "@type": "Hotel",
-      "name": "Best Western Extended Stay Vernal",
-      "url": "https://bestwesternvernalinn.com",
-      "telephone": "+14357896625",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "1935 South 1500 East",
-        "addressLocality": "Vernal",
-        "addressRegion": "UT",
-        "postalCode": "84078",
-        "addressCountry": "US"
-      }
-    },
+    "isPartOf": ${JSON.stringify(hotelRef())},
     "containsPlace": [
       {
         "@type": "TouristAttraction",
@@ -78,11 +67,7 @@ const headExtras = `<script type="application/ld+json">
     "jobTitle": "Owner / Manager",
     "description": "Local Vernal owner and guide to the Uintah Basin who transformed the former Executive Inn into Best Western Extended Stay.",
     "url": "https://bestwesternvernalinn.com/video",
-    "worksFor": {
-      "@type": "Hotel",
-      "name": "Best Western Extended Stay Vernal",
-      "url": "https://bestwesternvernalinn.com"
-    }
+    "worksFor": ${JSON.stringify(hotelRef())}
   }
   </script>
 <style>

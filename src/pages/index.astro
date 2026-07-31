@@ -6,126 +6,13 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hotelNodeFull, hotelRef, ldScript } from '../data/schema.ts';
 import { RATES, usd, perNight } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
-const headExtras = `<script type="application/ld+json">
- {
- "@context": "https://schema.org",
- "@type": ["Hotel", "LodgingBusiness"],
- "name": "Best Western Vernal Inn",
- "description": "Newly transformed Best Western Inn in Vernal, Utah. Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.",
- "url": "https://bestwesternvernalinn.com",
- "telephone": "+14357896625",
- "email": "surestayplus53027@gmail.com",
- "address": {
- "@type": "PostalAddress",
- "streetAddress": "1935 South 1500 East",
- "addressLocality": "Vernal",
- "addressRegion": "UT",
- "postalCode": "84078",
- "addressCountry": "US"
- },
- "geo": {
- "@type": "GeoCoordinates",
- "latitude": 40.4474,
- "longitude": -109.5194
- },
- "checkinTime": "15:00",
- "checkoutTime": "11:00",
- "petsAllowed": true,
- "priceRange": "$$",
- "currenciesAccepted": "USD",
- "paymentAccepted": "Cash, Credit Card",
- "openingHours": "Mo-Su 00:00-23:59",
- "image": [
- "https://bestwesternvernalinn.com/images/35.webp",
- "https://bestwesternvernalinn.com/images/61.webp",
- "https://bestwesternvernalinn.com/images/59.webp"
- ],
- "amenityFeature": [
- { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Kitchenette", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Jacuzzi Suite", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "24-Hour Front Desk", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Laundry Service", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Business Center", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "ADA Accessible Rooms", "value": true }
- ],
- "numberOfRooms": "50",
- "starRating": {
- "@type": "Rating",
- "ratingValue": "3"
- },
- "brand": {
- "@type": "Brand",
- "name": "Best Western"
- },
- "aggregateRating": {
- "@type": "AggregateRating",
- "ratingValue": "4.5",
- "reviewCount": "47",
- "bestRating": "5",
- "worstRating": "1"
- },
- "makesOffer": [
- {
- "@type": "Offer",
- "name": "Weekly Extended Stay — Standard Queen",
- "itemOffered": {
- "@type": "Service",
- "name": "Standard Queen Room — 7-Night Extended Stay",
- "description": "Standard Queen room with free hot breakfast, free WiFi, free parking. Perfect for solo travelers and couples."
- },
- "priceSpecification": {
- "@type": "UnitPriceSpecification",
- "price": ${RATES.weekly.standardQueen},
- "priceCurrency": "USD",
- "unitCode": "WEE"
- },
- "availability": "https://schema.org/InStock",
- "url": "https://bestwesternvernalinn.com"
- },
- {
- "@type": "Offer",
- "name": "Weekly Extended Stay — Double Queen",
- "itemOffered": {
- "@type": "Service",
- "name": "Double Queen Room — 7-Night Extended Stay",
- "description": "Double Queen room with two beds, free hot breakfast, free WiFi, free parking. Ideal for families and groups."
- },
- "priceSpecification": {
- "@type": "UnitPriceSpecification",
- "price": ${RATES.weekly.doubleQueen},
- "priceCurrency": "USD",
- "unitCode": "WEE"
- },
- "availability": "https://schema.org/InStock",
- "url": "https://bestwesternvernalinn.com"
- },
- {
- "@type": "Offer",
- "name": "Weekly Extended Stay — Standard King",
- "itemOffered": {
- "@type": "Service",
- "name": "Standard King Room — 7-Night Extended Stay",
- "description": "Standard King room with free hot breakfast, free WiFi, free parking. Great for business travelers and longer stays."
- },
- "priceSpecification": {
- "@type": "UnitPriceSpecification",
- "price": ${RATES.weekly.standardKing},
- "priceCurrency": "USD",
- "unitCode": "WEE"
- },
- "availability": "https://schema.org/InStock",
- "url": "https://bestwesternvernalinn.com"
- }
- ]
- }
- </script>
+const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
+
+const headExtras = `${ldScript(hotelNodeFull(hotelDescription))}
 <script type="application/ld+json">
  {
  "@context": "https://schema.org",
@@ -148,11 +35,7 @@ const headExtras = `<script type="application/ld+json">
  "jobTitle": "Owner / Manager",
  "description": "Local Vernal owner who transformed the former Executive Inn into Best Western Vernal Inn, committed to warm hospitality in the Uintah Basin.",
  "url": "https://bestwesternvernalinn.com/video",
- "worksFor": {
- "@type": "Hotel",
- "name": "Best Western Vernal Inn",
- "url": "https://bestwesternvernalinn.com"
- }
+ "worksFor": ${JSON.stringify(hotelRef())}
  }
  </script>
 <script type="application/ld+json">

@@ -22,7 +22,8 @@
     "verify:db": "node scripts/verify-db.mjs",
     "report:import": "node scripts/import-report.mjs",
     "reconcile:run": "node scripts/reconcile.mjs",
-    "verify:pages": "node scripts/verify-destination-pages.mjs"
+    "verify:pages": "node scripts/verify-destination-pages.mjs",
+    "verify:schema": "node scripts/verify-schema-entity.mjs"
   },
   "dependencies": {
     "@astrojs/preact": "^4.1.3",

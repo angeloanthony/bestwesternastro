@@ -29,13 +29,16 @@ function checkPage(slug) {
   const html = readFileSync(file, 'utf8');
   const text = strip(html);
   const headings = [...html.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)].map((m) =>
-    m[1].replace(/<[^>]+>/g, '').trim().toLowerCase(),
+    m[1]
+      .replace(/<[^>]+>/g, '')
+      .trim()
+      .toLowerCase()
   );
   const has = (re) => headings.some((h) => re.test(h));
 
-  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(
-    (m) => m[1],
-  );
+  const blocks = [
+    ...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g),
+  ].map((m) => m[1]);
   let parsed = [];
   let jsonOk = true;
   for (const b of blocks) {

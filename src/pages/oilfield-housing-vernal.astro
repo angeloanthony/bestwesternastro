@@ -6,34 +6,11 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hotelNode, ldScript } from '../data/schema.ts';
 import { RATES, usd } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
-const headExtras = `<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LodgingBusiness",
-    "name": "Best Western Extended Stay Vernal",
-    "url": "https://bestwesternvernalinn.com",
-    "telephone": "+18015971696",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Vernal",
-      "addressRegion": "UT",
-      "addressCountry": "US"
-    },
-    "description": "Oilfield and energy worker housing in Vernal, Utah. Weekly and monthly hotel rates, truck parking, hot breakfast, laundry, and corporate billing for crews in the Uintah Basin.",
-    "priceRange": "$$",
-    "amenityFeature": [
-      { "@type": "LocationFeatureSpecification", "name": "Weekly Rates", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Monthly Rates", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Truck Parking", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Laundry Facilities", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Corporate Billing", "value": true }
-    ]
-  }
-  </script>`;
+const headExtras = `${ldScript(hotelNode())}`;
 const bodyContent = `<div class="distance-bar">
   ⛽ Serving oilfield, pipeline, and energy crews working the Uintah Basin — call (435) 789-6625 for crew and corporate pricing
 </div>

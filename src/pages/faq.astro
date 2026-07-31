@@ -6,19 +6,17 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hotelNode, hotelRef, ldScript } from '../data/schema.ts';
 import { RATES, usd } from '../data/rates.ts';
 
-const headExtras = `<script type="application/ld+json">
+const headExtras = `${ldScript(hotelNode())}
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Paresh Ghandi",
     "jobTitle": "Owner / Manager",
-    "worksFor": {
-      "@type": "Hotel",
-      "name": "Best Western Extended Stay Vernal",
-      "url": "https://bestwesternvernalinn.com"
-    }
+    "worksFor": ${JSON.stringify(hotelRef())}
   }
   </script>
 <script type="application/ld+json">

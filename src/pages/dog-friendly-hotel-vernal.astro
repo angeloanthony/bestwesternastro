@@ -6,33 +6,11 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hotelNode, ldScript } from '../data/schema.ts';
 import { RATES, usd } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
-const headExtras = `<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LodgingBusiness",
-    "name": "Best Western Extended Stay Vernal",
-    "url": "https://bestwesternvernalinn.com",
-    "telephone": "+18015971696",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Vernal",
-      "addressRegion": "UT",
-      "addressCountry": "US"
-    },
-    "description": "Dog friendly hotel in Vernal, Utah. Pets welcome at Best Western Extended Stay Vernal. Near Dinosaur National Monument, Flaming Gorge, and dog-friendly trails throughout northeastern Utah.",
-    "priceRange": "$$",
-    "amenityFeature": [
-      { "@type": "LocationFeatureSpecification", "name": "Pets Allowed", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Dogs Allowed", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Extended Stay Rates", "value": true }
-    ]
-  }
-  </script>`;
+const headExtras = `${ldScript(hotelNode())}`;
 const bodyContent = `<div class="distance-bar">
   🐾 Pets welcome — let us know you're traveling with a dog when you book
 </div>
