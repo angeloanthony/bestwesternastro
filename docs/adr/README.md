@@ -19,6 +19,7 @@ Short records of significant, hard‑to‑reverse decisions for AdventureOS. Eac
 | [010](ADR-010-confidence-and-visibility-are-independent.md) | Confidence and Visibility Are Independent Axes | Accepted |
 | [011](ADR-011-editorial-data-separate-from-rendering.md) | Editorial Data Is Stored Independently of Page Rendering | Accepted |
 | [012](ADR-012-one-hotel-entity-one-id.md) | One Hotel Entity, One `@id` | Accepted |
+| [013](ADR-013-operational-knowledge-is-acquired.md) | Operational Knowledge Is Acquired, Never Authored | Accepted |
 
 **008–011 are the editorial system.** They were written together and are best read in order: 011 says
 where knowledge lives, 010 says what is recorded about it, 008 says what may publish, 009 says what is

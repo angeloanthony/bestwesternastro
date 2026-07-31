@@ -513,6 +513,20 @@ A single sheet can legitimately mix the two — staff have stood at the trailhea
 - **Every sheet needs a name and a date.** Unsigned local knowledge cannot be published — the site enforces this in code.
 - **Do not state regulations.** Hunting seasons, fishing limits, and permit rules change annually. Point to the official source instead; §8 handles the annual re-check.
 
+#### 5.2a Two questions that unlock the rest
+
+The eleven standing questions are the record. These two are how you get people talking, and they belong in the conversation rather than on the form. Whatever they produce gets written into whichever of the eleven it actually answers — usually `guest_questions` or `local_knowledge`.
+
+> **"What advice do you find yourself repeating every single week?"**
+
+Not every month — every week. If the answer comes back with no hesitation, that is almost certainly website content: repetition at that frequency means a large number of guests need it and are not finding it anywhere else.
+
+> **"A guest says they're heading to \_\_\_\_\_ tomorrow morning. What do you tell them, in the order you'd tell them?"**
+
+The order matters as much as the content. What someone says first is what they have learned matters most, and it rarely matches the order the eleven questions are printed in.
+
+**Write down what is said, not a tidied version of it.** The plain phrasing is the value (§5.2, first rule), and tidying is the first step toward composing — which [ADR-013](adr/ADR-013-operational-knowledge-is-acquired.md) prohibits outright.
+
 ### 5.3 How this reaches the website
 
 `src/data/frontDeskInsights.ts` carries all eleven questions with the IDs above, and a blank record for every subject in §7. **Built and verified 2026-07-31.**
