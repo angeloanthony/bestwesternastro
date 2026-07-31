@@ -6,6 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { RATES, usd } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
@@ -187,7 +188,7 @@ const bodyContent = `<div class="distance-bar">
       <li>Free parking — trucks, trailers, and tow vehicles welcome</li>
       <li>Full kitchenettes — pack your own lunch and save</li>
       <li>Pet friendly — bring the dog on the trail</li>
-      <li>Weekly rates from $588 — stay longer, spend less</li>
+      <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} — stay longer, spend less</li>
       <li>24-hour front desk — local knowledge always available</li>
     </ul>
     <div class="pro-tip">
@@ -202,42 +203,42 @@ const bodyContent = `<div class="distance-bar">
  <div style="max-width:1180px;margin:0 auto;">
   <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
   <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
-  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="index.html" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="extended-stay-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from $588</span></li>
-      <li><a href="weekly-hotel-rates-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
-      <li><a href="workforce-housing-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
-      <li><a href="oilfield-housing-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
-      <li><a href="pet-friendly-hotel-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
-      <li><a href="dog-friendly-hotel-vernal.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="hotel-near-vernal-airport.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
-      <li><a href="hotel-near-dinosaur-national-monument.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
-      <li><a href="hotel-near-flaming-gorge.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
-      <li><a href="hotel-near-red-fleet-state-park.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
-      <li><a href="hotel-near-ashley-national-forest.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
-      <li><a href="hotel-near-jensen-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="vernal-utah-travel-guide.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
-      <li><a href="things-to-do-vernal-utah.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
-      <li><a href="explore.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
-      <li><a href="faq.html" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
+      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
      </ul>
     </div>
   </div>
   <div style="text-align:center;margin-top:2.6rem;">
-   <a href="index.html" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
+   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
   </div>
  </div>
 </section>
@@ -309,7 +310,7 @@ const bodyContent = `<div class="distance-bar">
 
         <div class="faq-item">
           <button class="faq-q">Are there weekly rates available for longer stays in Vernal? <span class="faq-arrow">▼</span></button>
-          <div class="faq-a"><p>Yes. Weekly rates start at $588 + tax for a Standard Queen (7 nights). Monthly rates are also available. Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-weight:700">(435) 789-6625</a> for long-term pricing.</p></div>
+          <div class="faq-a"><p>Yes. Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen (7 nights). Monthly rates are also available. Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-weight:700">(435) 789-6625</a> for long-term pricing.</p></div>
         </div>
 
       </div>

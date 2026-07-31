@@ -14,5 +14,14 @@ Short records of significant, hard‑to‑reverse decisions for AdventureOS. Eac
 | [005](ADR-005-ai-scope-limited-to-vernal.md) | AI Concierge Scope Limited to Vernal | Accepted |
 | [006](ADR-006-passwordless-identity.md) | Passwordless, Magic-Link Identity | Accepted |
 | [007](ADR-007-attraction-catalogue-in-typescript.md) | Attraction Catalogue in TypeScript; Favorites Keyed by Slug | Accepted |
+| [008](ADR-008-truth-gates-fail-closed.md) | Truth Gates Fail Closed | Accepted |
+| [009](ADR-009-freshness-never-blocks-publication.md) | Freshness Never Blocks Publication | Accepted |
+| [010](ADR-010-confidence-and-visibility-are-independent.md) | Confidence and Visibility Are Independent Axes | Accepted |
+| [011](ADR-011-editorial-data-separate-from-rendering.md) | Editorial Data Is Stored Independently of Page Rendering | Accepted |
+| [012](ADR-012-one-hotel-entity-one-id.md) | One Hotel Entity, One `@id` | Accepted |
+
+**008–011 are the editorial system.** They were written together and are best read in order: 011 says
+where knowledge lives, 010 says what is recorded about it, 008 says what may publish, 009 says what is
+reported but never enforced. Each records a rejected alternative that will look attractive again later.
 
 See also: [`../TECHNICAL_BASELINE.md`](../TECHNICAL_BASELINE.md) — the project's reference contract.

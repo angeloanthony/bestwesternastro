@@ -6,125 +6,13 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hotelNodeFull, hotelRef, ldScript } from '../data/schema.ts';
+import { RATES, usd, perNight } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
-const headExtras = `<script type="application/ld+json">
- {
- "@context": "https://schema.org",
- "@type": ["Hotel", "LodgingBusiness"],
- "name": "Best Western Vernal Inn",
- "description": "Newly transformed Best Western Inn in Vernal, Utah. Weekly rates from $588 (7 nights). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.",
- "url": "https://bestwesternvernalinn.com",
- "telephone": "+14357896625",
- "email": "surestayplus53027@gmail.com",
- "address": {
- "@type": "PostalAddress",
- "streetAddress": "1935 South 1500 East",
- "addressLocality": "Vernal",
- "addressRegion": "UT",
- "postalCode": "84078",
- "addressCountry": "US"
- },
- "geo": {
- "@type": "GeoCoordinates",
- "latitude": 40.4474,
- "longitude": -109.5194
- },
- "checkinTime": "15:00",
- "checkoutTime": "11:00",
- "petsAllowed": true,
- "priceRange": "$$",
- "currenciesAccepted": "USD",
- "paymentAccepted": "Cash, Credit Card",
- "openingHours": "Mo-Su 00:00-23:59",
- "image": [
- "https://bestwesternvernalinn.com/images/35.webp",
- "https://bestwesternvernalinn.com/images/61.webp",
- "https://bestwesternvernalinn.com/images/59.webp"
- ],
- "amenityFeature": [
- { "@type": "LocationFeatureSpecification", "name": "Free Breakfast", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Free Parking", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Pet Friendly", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Kitchenette", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Jacuzzi Suite", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "24-Hour Front Desk", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Laundry Service", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "Business Center", "value": true },
- { "@type": "LocationFeatureSpecification", "name": "ADA Accessible Rooms", "value": true }
- ],
- "numberOfRooms": "50",
- "starRating": {
- "@type": "Rating",
- "ratingValue": "3"
- },
- "brand": {
- "@type": "Brand",
- "name": "Best Western"
- },
- "aggregateRating": {
- "@type": "AggregateRating",
- "ratingValue": "4.5",
- "reviewCount": "47",
- "bestRating": "5",
- "worstRating": "1"
- },
- "makesOffer": [
- {
- "@type": "Offer",
- "name": "Weekly Extended Stay — Standard Queen",
- "itemOffered": {
- "@type": "Service",
- "name": "Standard Queen Room — 7-Night Extended Stay",
- "description": "Standard Queen room with free hot breakfast, free WiFi, free parking. Perfect for solo travelers and couples."
- },
- "priceSpecification": {
- "@type": "UnitPriceSpecification",
- "price": 588,
- "priceCurrency": "USD",
- "unitCode": "WEE"
- },
- "availability": "https://schema.org/InStock",
- "url": "https://bestwesternvernalinn.com"
- },
- {
- "@type": "Offer",
- "name": "Weekly Extended Stay — Double Queen",
- "itemOffered": {
- "@type": "Service",
- "name": "Double Queen Room — 7-Night Extended Stay",
- "description": "Double Queen room with two beds, free hot breakfast, free WiFi, free parking. Ideal for families and groups."
- },
- "priceSpecification": {
- "@type": "UnitPriceSpecification",
- "price": 660,
- "priceCurrency": "USD",
- "unitCode": "WEE"
- },
- "availability": "https://schema.org/InStock",
- "url": "https://bestwesternvernalinn.com"
- },
- {
- "@type": "Offer",
- "name": "Weekly Extended Stay — Standard King",
- "itemOffered": {
- "@type": "Service",
- "name": "Standard King Room — 7-Night Extended Stay",
- "description": "Standard King room with free hot breakfast, free WiFi, free parking. Great for business travelers and longer stays."
- },
- "priceSpecification": {
- "@type": "UnitPriceSpecification",
- "price": 700,
- "priceCurrency": "USD",
- "unitCode": "WEE"
- },
- "availability": "https://schema.org/InStock",
- "url": "https://bestwesternvernalinn.com"
- }
- ]
- }
- </script>
+const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
+
+const headExtras = `${ldScript(hotelNodeFull(hotelDescription))}
 <script type="application/ld+json">
  {
  "@context": "https://schema.org",
@@ -146,12 +34,8 @@ const headExtras = `<script type="application/ld+json">
  "name": "Paresh Ghandi",
  "jobTitle": "Owner / Manager",
  "description": "Local Vernal owner who transformed the former Executive Inn into Best Western Vernal Inn, committed to warm hospitality in the Uintah Basin.",
- "url": "https://bestwesternvernalinn.com/video.html",
- "worksFor": {
- "@type": "Hotel",
- "name": "Best Western Vernal Inn",
- "url": "https://bestwesternvernalinn.com"
- }
+ "url": "https://bestwesternvernalinn.com/video",
+ "worksFor": ${JSON.stringify(hotelRef())}
  }
  </script>
 <script type="application/ld+json">
@@ -164,7 +48,7 @@ const headExtras = `<script type="application/ld+json">
  "name": "What are the weekly rates at Best Western Vernal Inn?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Weekly rates start at $588 + tax for a Standard Queen (7 nights), $660 + tax for a Double Queen, and $700 + tax for a Standard King. Monthly rates and corporate billing for long-term stays are available — call (435) 789-6625."
+ "text": "Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen (7 nights), ${usd(RATES.weekly.doubleQueen)} + tax for a Double Queen, and ${usd(RATES.weekly.standardKing)} + tax for a Standard King. Monthly rates and corporate billing for long-term stays are available — call (435) 789-6625."
  }
  },
  {
@@ -239,7 +123,7 @@ const bodyContent = `<!-- ══════════════════
 
 <!-- PAGE SUMMARY BAR — AI-extractable content, visible to all crawlers -->
 <div class="page-summary-bar" role="complementary" aria-label="Quick summary">
- <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Weekly rates from $588 (7 nights · Queen room). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
+ <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights · Queen room). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
 </div>
 
 <!-- NAV -->
@@ -325,7 +209,7 @@ const bodyContent = `<!-- ══════════════════
  <div class="wr-card">
  <div class="wr-icon">🛏️</div>
  <div class="wr-type">Queen Room</div>
- <div class="wr-price">$588</div>
+ <div class="wr-price">${usd(RATES.weekly.standardQueen)}</div>
  <div class="wr-period">+ tax · 7 nights</div>
  <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
@@ -333,14 +217,14 @@ const bodyContent = `<!-- ══════════════════
  <div class="wr-badge">Most Popular</div>
  <div class="wr-icon">👥</div>
  <div class="wr-type">Double Queen</div>
- <div class="wr-price">$660</div>
+ <div class="wr-price">${usd(RATES.weekly.doubleQueen)}</div>
  <div class="wr-period">+ tax · 7 nights</div>
  <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
  <div class="wr-card">
  <div class="wr-icon">👑</div>
  <div class="wr-type">King Room</div>
- <div class="wr-price">$700</div>
+ <div class="wr-price">${usd(RATES.weekly.standardKing)}</div>
  <div class="wr-period">+ tax · 7 nights</div>
  <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
  </div>
@@ -362,22 +246,22 @@ const bodyContent = `<!-- ══════════════════
  <tr>
  <td><strong>Standard Queen</strong></td>
  <td>1–2</td>
- <td><span class="rate-price">$588</span><div class="rate-note">+ tax</div></td>
- <td>~$84/night</td>
+ <td><span class="rate-price">${usd(RATES.weekly.standardQueen)}</span><div class="rate-note">+ tax</div></td>
+ <td>~${perNight(RATES.weekly.standardQueen)}/night</td>
  <td>Solo travelers, couples</td>
  </tr>
  <tr>
  <td><strong>Double Queen</strong></td>
  <td>1–4</td>
- <td><span class="rate-price">$660</span><div class="rate-note">+ tax</div></td>
- <td>~$94/night</td>
+ <td><span class="rate-price">${usd(RATES.weekly.doubleQueen)}</span><div class="rate-note">+ tax</div></td>
+ <td>~${perNight(RATES.weekly.doubleQueen)}/night</td>
  <td>Families, road trips</td>
  </tr>
  <tr>
  <td><strong>Standard King</strong></td>
  <td>1–2</td>
- <td><span class="rate-price">$700</span><div class="rate-note">+ tax</div></td>
- <td>~$100/night</td>
+ <td><span class="rate-price">${usd(RATES.weekly.standardKing)}</span><div class="rate-note">+ tax</div></td>
+ <td>~${perNight(RATES.weekly.standardKing)}/night</td>
  <td>Business travelers, couples</td>
  </tr>
  <tr>
@@ -404,7 +288,7 @@ const bodyContent = `<!-- ══════════════════
  <tr>
  <td><strong>Pet Friendly King / Double Queen</strong></td>
  <td>1–4</td>
- <td>From $588</td>
+ <td>From ${usd(RATES.weekly.standardQueen)}</td>
  <td>~$84+/night</td>
  <td>Guests with dogs (up to 80 lbs)</td>
  </tr>
@@ -425,7 +309,7 @@ const bodyContent = `<!-- ══════════════════
  <p class="sb-eyebrow">✦ See the Transformation ✦</p>
  <h2 class="sb-title">Watch Our Story</h2>
  <p class="sb-sub">From the Executive Inn to Best Western Vernal Inn — a warm, cinematic look at everything that's new, beautiful, and waiting for you.</p>
- <a href="video.html" class="sb-play-btn" aria-label="Watch presentation">
+ <a href="/video" class="sb-play-btn" aria-label="Watch presentation">
  <span class="sb-play-ring"></span>
  <span class="sb-play-icon">▶</span>
  </a>
@@ -939,27 +823,27 @@ const bodyContent = `<!-- ══════════════════
    <div>
     <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin:0 0 1rem;text-align:center;letter-spacing:.01em;"><span style="color:var(--gold);">✦</span> By Stay Type</h3>
     <div style="display:grid;gap:.85rem;">
-    <a href="extended-stay-hotel-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/extended-stay-hotel-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Extended Stay</div>
-     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Weekly &amp; monthly stays from $588</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</div>
     </a>
-    <a href="weekly-hotel-rates-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/weekly-hotel-rates-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Weekly Rates</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">7-night discount pricing</div>
     </a>
-    <a href="workforce-housing-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/workforce-housing-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Workforce Housing</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Crew lodging &amp; corporate billing</div>
     </a>
-    <a href="oilfield-housing-vernal.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/oilfield-housing-vernal" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Oilfield Housing</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Truck parking, flexible billing</div>
     </a>
-    <a href="pet-friendly-hotel-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/pet-friendly-hotel-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Pet Friendly</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Dogs welcome, ground-floor rooms</div>
     </a>
-    <a href="dog-friendly-hotel-vernal.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/dog-friendly-hotel-vernal" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Dog Friendly</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Hardwood floors, direct outdoor access</div>
     </a>
@@ -968,27 +852,27 @@ const bodyContent = `<!-- ══════════════════
    <div>
     <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin:0 0 1rem;text-align:center;letter-spacing:.01em;"><span style="color:var(--gold);">✦</span> By Destination</h3>
     <div style="display:grid;gap:.85rem;">
-    <a href="hotel-near-vernal-airport.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/hotel-near-vernal-airport" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Vernal Airport</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">0.6 miles</div>
     </a>
-    <a href="hotel-near-dinosaur-national-monument.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/hotel-near-dinosaur-national-monument" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Dinosaur Nat'l Monument</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">20 miles</div>
     </a>
-    <a href="hotel-near-flaming-gorge.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/hotel-near-flaming-gorge" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Flaming Gorge</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">40 miles</div>
     </a>
-    <a href="hotel-near-red-fleet-state-park.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/hotel-near-red-fleet-state-park" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Red Fleet State Park</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">12 miles</div>
     </a>
-    <a href="hotel-near-ashley-national-forest.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/hotel-near-ashley-national-forest" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Ashley National Forest</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">15 miles</div>
     </a>
-    <a href="hotel-near-jensen-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/hotel-near-jensen-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Near Jensen, Utah</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">10 miles</div>
     </a>
@@ -997,19 +881,19 @@ const bodyContent = `<!-- ══════════════════
    <div>
     <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin:0 0 1rem;text-align:center;letter-spacing:.01em;"><span style="color:var(--gold);">✦</span> Plan Your Visit</h3>
     <div style="display:grid;gap:.85rem;">
-    <a href="vernal-utah-travel-guide.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/vernal-utah-travel-guide" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Vernal Travel Guide</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Plan your trip</div>
     </a>
-    <a href="things-to-do-vernal-utah.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/things-to-do-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Things to Do</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Activities &amp; attractions</div>
     </a>
-    <a href="explore.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/explore" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Explore Vernal</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Restaurants &amp; adventures</div>
     </a>
-    <a href="faq.html" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
+    <a href="/faq" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">FAQ</div>
      <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Common questions</div>
     </a>
@@ -1184,14 +1068,14 @@ if (ownerOverlay && ownerIframe) {
 ---
 
 <BaseLayout
-  title=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn — Weekly Rates from $84/night`
-  description=`Best Western Inn in Vernal, Utah — weekly rates from $588 (7 nights), free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
+  title=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn — Weekly Rates from ${perNight(RATES.weekly.standardQueen)}/night`
+  description=`Best Western Inn in Vernal, Utah — weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights), free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
   canonical=`https://bestwesternvernalinn.com/`
   ogTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
-  ogDescription=`Weekly rates from $588 (7 nights). Free hot breakfast, full kitchenettes, jacuzzi suites, pet friendly. 0.6 miles from Vernal Regional Airport.`
+  ogDescription=`Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast, full kitchenettes, jacuzzi suites, pet friendly. 0.6 miles from Vernal Regional Airport.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
-  twitterDescription=`Weekly rates from $588. Free hot breakfast, kitchenettes, jacuzzi suites, pet friendly. Near Dinosaur National Monument.`
+  twitterDescription=`Weekly rates from ${usd(RATES.weekly.standardQueen)}. Free hot breakfast, kitchenettes, jacuzzi suites, pet friendly. Near Dinosaur National Monument.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   hreflang=`https://bestwesternvernalinn.com/`
   isHome={true}

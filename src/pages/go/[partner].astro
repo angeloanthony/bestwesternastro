@@ -8,6 +8,9 @@
 // is never blocked.
 import { PARTNER_SLUGS, getPartner } from '../../data/partners';
 import GoRedirect from '../../islands/GoRedirect.tsx';
+// This page skips BaseLayout, so it needs the Google tag wired in directly —
+// otherwise it would be the one page on the site without measurement.
+import Analytics from '../../components/Analytics.astro';
 
 export function getStaticPaths() {
   return PARTNER_SLUGS.map((partner) => ({ params: { partner } }));
@@ -25,6 +28,7 @@ const partner = getPartner(slug)!;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Redirecting to booking… | {partner.name}</title>
+    <Analytics />
   </head>
   <body style="margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#fff;">
     <GoRedirect slug={slug} client:only="preact" />

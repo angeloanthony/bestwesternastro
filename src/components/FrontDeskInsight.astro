@@ -1,0 +1,86 @@
+---
+// src/components/FrontDeskInsight.astro
+// Renders the first-hand local-knowledge block on a destination page — but ONLY
+// when a named person at the property has reviewed it (see src/data/frontDeskInsights.ts).
+//
+// Unreviewed records render nothing at all. That is deliberate: an empty section is
+// invisible to a guest, while a fabricated "local tip" is a trust liability and the
+// exact thing that makes a page read as a template rather than as expertise.
+//
+// v2: shows PROVENANCE. Whether an answer comes from someone who has been there, or
+// from a published source, is the difference between experience and research — and it
+// is the reader's to judge, not ours to hide. Collecting `personallyVerified` and then
+// not surfacing it would be bookkeeping; surfacing it is the E-E-A-T signal.
+import { getPublishedInsights, getPublishedInsightsForPage } from '../data/frontDeskInsights.ts';
+
+interface Props {
+  /** Page slug. Resolves every record whose `pages` includes it. */
+  slug: string;
+  /** Render all matching records rather than only the first. */
+  all?: boolean;
+  /** Optional heading override. */
+  heading?: string;
+}
+
+const { slug, all = false, heading = 'From Our Front Desk' } = Astro.props;
+
+const records = all
+  ? getPublishedInsightsForPage(slug)
+  : [getPublishedInsights(slug)].filter((r) => r !== null);
+---
+
+{
+  records.map((block) => (
+    <div class="content-section fd-insight">
+      <h2>{heading}</h2>
+      <p class="fd-note">
+        Answers from the people who check in visitors to this area every week — reviewed by{' '}
+        {block.reviewedBy} on {block.reviewedOn}.
+        {block.allPersonallyVerified && ' Every answer below comes from staff who have been there.'}
+      </p>
+      {block.insights.map((i) => (
+        <div class="fd-item">
+          <h3>{i.prompt}</h3>
+          <p>{i.answer}</p>
+          {i.personallyVerified === false && i.basedOn && (
+            <p class="fd-source">Not from personal visit — based on {i.basedOn}.</p>
+          )}
+        </div>
+      ))}
+    </div>
+  ))
+}
+
+<style>
+  .fd-insight {
+    border-left: 4px solid var(--gold);
+    padding-left: 1.4rem;
+  }
+  .fd-note {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .fd-item {
+    margin-bottom: 1.3rem;
+  }
+  .fd-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin: 0 0 0.4rem;
+  }
+  .fd-item p {
+    margin: 0;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .fd-source {
+    font-size: 0.82rem;
+    font-style: italic;
+    opacity: 0.75;
+    margin-top: 0.35rem !important;
+  }
+</style>
