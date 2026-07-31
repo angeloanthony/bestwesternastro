@@ -643,6 +643,16 @@ Copy this block for each subject. Every field maps to a field in the data model.
 
 **Personally verified:** Yes / No — *if No, source:* ________________________
 
+**More than one person can fill in one sheet.** Housekeeping, maintenance, breakfast, and the
+front desk each see the property from a different angle, and the interesting answers are often
+not the owner's. Where a row comes from someone other than the person signing the sheet, write
+their role next to the answer — *"(housekeeping)"*, *"(breakfast, 5:30 shift)"*. It lands in
+that answer's `basedOn` field and survives into the record.
+
+This does **not** change who signs. One person authorises publication for the whole sheet — that
+is `reviewedBy`, and it should be the owner or GM. Contribution and authorisation are different
+acts, and only the second one puts words on the public site.
+
 **Default confidence:** Local Knowledge *(this instrument collects experience by nature)*
 **Default visibility:** Public *(override per answer where it differs)*
 **Default review cycle:** ______________ *(annual unless the subject drifts faster)*
@@ -686,6 +696,32 @@ Copy this block for each subject. Every field maps to a field in the data model.
 | Which road closes seasonally, and roughly when? | | |
 | What is the elevation difference between Vernal and the forest? | | |
 | What is one thing true of *this* forest and no other? | | |
+| Which GPS route sends guests wrong, and where does it send them? | | |
+| **Does cell service drop, and roughly where does it stop?** | | |
+| When do the roads turn to mud, and when do fall colours peak? | | |
+| Do guests underestimate the distance — and by how much? | | |
+
+**⚠ The cell-service row is not optional.** `frontDeskInsights.ts` currently carries an Ashley
+`local_knowledge` answer about downloading maps before you drive up, marked **`pending`** and
+therefore unpublishable. It came from a remark about "recreation areas" generally, not about
+Ashley. This row is what decides whether that answer becomes true of *this* forest or gets
+deleted. Answer it either way — "no, coverage is fine" is a perfectly good answer and closes
+the record just as well.
+
+**The scenario question — ask this one out loud, not on paper.**
+
+> A guest at the desk says: *"We're heading up to the forest tomorrow morning."*
+> What do you tell them, in the order you'd tell them?
+
+Whatever comes out of that is the sheet. It is the closest thing to a transcript of the
+expertise this page is missing, and it tends to produce answers the numbered questions above
+do not — take it down verbatim rather than tidying it into prose.
+
+**Why this sheet is now the top of the queue.** The 2026‑07‑31 owner interview produced usable
+answers for Dinosaur National Monument, Flaming Gorge, and property operations — and **nothing
+for Ashley**. The facts on that page are already right; the experience is what is absent, and
+it is the page carrying 36% of site impressions at zero clicks. This is a dedicated
+conversation, not a question tacked onto another meeting.
 
 ### Sheet 14 — Vernal Regional Airport (VEL)
 

@@ -305,6 +305,34 @@ function blank(
   };
 }
 
+/** Fill answers on a blank sheet, keyed by `questionId`.
+ *
+ *  Exists because `blank()` produces all eleven answers and an interview only ever
+ *  answers some of them — writing the full array by hand each time invites the
+ *  position-keyed mistakes that stable `questionId`s were introduced to prevent.
+ *  Merging by id means an unanswered question stays a blank string (reported by
+ *  `validateInsights()`) rather than being silently dropped from the sheet.
+ *
+ *  Throws on an unknown id: a typo here would otherwise fail closed and silently,
+ *  which is the one failure mode this file's gates cannot distinguish from
+ *  "nobody has answered that yet". */
+function withAnswers(
+  record: InsightRecord,
+  filled: Record<string, Omit<InsightAnswer, 'questionId'>>,
+): InsightRecord {
+  for (const id of Object.keys(filled)) {
+    if (!QUESTION_BY_ID.has(id)) throw new Error(`withAnswers: unknown questionId "${id}"`);
+  }
+  return {
+    ...record,
+    answers: record.answers.map((a) => (filled[a.questionId] ? { ...a, ...filled[a.questionId] } : a)),
+  };
+}
+
+/** Every answer below traces to this one source. Cited on each sheet whose
+ *  `personallyVerified` is false — which, for now, is all of them. */
+const OWNER_INTERVIEW = 'Owner interview, 2026-07-31 (see docs/BUSINESS_KNOWLEDGE_WORKBOOK.md)';
+
 // ─── The records ─────────────────────────────────────────────────────────────
 //
 // Blank records are created for everything we expect to cover this year. An empty
@@ -315,36 +343,97 @@ function blank(
 
 export const FRONT_DESK_INSIGHTS: InsightRecord[] = [
   // ── Priority 1–8: the sheets that unblock existing or planned pages ──────────
-  blank(
-    'ashley-national-forest',
-    'Ashley National Forest',
-    'attraction',
-    ['ashley-national-forest'],
-    ['hotel-near-ashley-national-forest'],
-    'HIGHEST PRIORITY. The page ranks nationally for forests in Missouri, North Carolina, ' +
+  withAnswers(
+    blank(
+      'ashley-national-forest',
+      'Ashley National Forest',
+      'attraction',
+      ['ashley-national-forest'],
+      ['hotel-near-ashley-national-forest'],
+      'HIGHEST PRIORITY. The page ranks nationally for forests in Missouri, North Carolina, ' +
       'Arkansas and Texas because its copy could describe any national forest. Answers here ' +
       'must name THIS forest specifically: which access point our guests actually use, the ' +
       'measured drive time to it, which road closes and roughly when. See the extra questions ' +
-      'on Sheet 1 of the workbook.',
-    'seasonal', // road and campground access changes every year
+      'on Sheet 1 of the workbook. ' +
+      'THE 2026-07-31 INTERVIEW DID NOT ANSWER THIS SHEET. The one answer below is a general ' +
+      'remark about "recreation areas" that may or may not describe Ashley — it is marked ' +
+        'pending for exactly that reason. This sheet is still the highest-value blank in the file.',
+      'seasonal', // road and campground access changes every year
+    ),
+    {
+      local_knowledge: {
+        answer:
+          'Download your maps to your phone before you drive up. Cell coverage gets unreliable once you are into the recreation areas.',
+        // PENDING, and it must stay pending until the owner confirms it of THIS forest.
+        // The interview said "many recreation areas" — applying that to Ashley specifically
+        // is our inference, not his statement, and this page's whole problem is copy that
+        // could describe any national forest. Publishing an unverified generic here would
+        // deepen the exact failure the sheet exists to fix.
+        confidence: 'pending',
+        basedOn: OWNER_INTERVIEW,
+      },
+    },
   ),
-  blank(
-    'dinosaur-national-monument',
-    'Dinosaur National Monument',
-    'attraction',
-    ['dinosaur-national-monument', 'dnm-cub-creek-petroglyphs', 'dnm-sound-of-silence-trail'],
-    ['hotel-near-dinosaur-national-monument'],
-    'Largest draw in the area. Quarry Exhibit Hall vs. the Colorado side is the single most ' +
-      'common point of guest confusion — worth capturing under common_mistake.',
+  withAnswers(
+    blank(
+      'dinosaur-national-monument',
+      'Dinosaur National Monument',
+      'attraction',
+      ['dinosaur-national-monument', 'dnm-cub-creek-petroglyphs', 'dnm-sound-of-silence-trail'],
+      ['hotel-near-dinosaur-national-monument'],
+      'Largest draw in the area. Quarry Exhibit Hall vs. the Colorado side is the single most ' +
+        'common point of guest confusion — worth capturing under common_mistake. ' +
+        'FROM 2026-07-31 INTERVIEW: the entrance confusion was confirmed as a recurring, ' +
+        'first-hand front-desk observation. Remaining blanks are genuinely unanswered.',
+    ),
+    {
+      guest_questions: {
+        answer:
+          'Which entrance to Dinosaur National Monument has the Quarry Exhibit Hall — the wall of fossils. It is one of the questions we answer most often at the desk.',
+        basedOn: OWNER_INTERVIEW,
+      },
+      common_mistake: {
+        answer:
+          'Driving to the Colorado entrance expecting to see the fossil wall. The Quarry Exhibit Hall is on the Utah side near Jensen, and the two entrances are far enough apart that the mistake costs most of a day.',
+        basedOn: OWNER_INTERVIEW,
+      },
+      local_knowledge: {
+        answer:
+          'Decide which side you are going to before you leave the hotel. The monument spans two states and the Utah and Colorado sides are separate visits, not two doors to the same place.',
+        // The geography does not change; park operations do, but this answer does not depend on them.
+        reviewCycle: 'never',
+        basedOn: OWNER_INTERVIEW,
+      },
+    },
   ),
-  blank(
-    'flaming-gorge',
-    'Flaming Gorge',
-    'attraction',
-    ['flaming-gorge', 'flaming-gorge-dam-visitor-center', 'flaming-gorge-marina', 'red-canyon-overlook'],
-    ['hotel-near-flaming-gorge'],
-    'not_right_for matters here: at 40 miles it is not a practical afternoon trip for a ' +
-      'one-night guest, and saying so plainly is worth more than the booking it might cost.',
+  withAnswers(
+    blank(
+      'flaming-gorge',
+      'Flaming Gorge',
+      'attraction',
+      ['flaming-gorge', 'flaming-gorge-dam-visitor-center', 'flaming-gorge-marina', 'red-canyon-overlook'],
+      ['hotel-near-flaming-gorge'],
+      'not_right_for matters here: at 40 miles it is not a practical afternoon trip for a ' +
+        'one-night guest, and saying so plainly is worth more than the booking it might cost. ' +
+        'STILL UNANSWERED after the 2026-07-31 interview — ask it directly at review.',
+    ),
+    {
+      guest_questions: {
+        answer:
+          'Whether their phone will work once they are out there. It comes up almost every time someone tells us they are heading to Flaming Gorge.',
+        basedOn: OWNER_INTERVIEW,
+      },
+      local_knowledge: {
+        answer:
+          'Download your maps to your phone on our WiFi before you leave town. Cell coverage is unreliable across a lot of the recreation area, and people do not think about it until the map stops loading.',
+        // Carriers extend coverage; this is true today and worth re-checking yearly.
+        reviewCycle: 'annual',
+        basedOn: OWNER_INTERVIEW,
+      },
+      // what_to_bring is deliberately EMPTY. The interview supports downloaded maps only.
+      // "Bring water, fill your gas tank" appeared in a draft written for us, not in
+      // anything the owner said — so it is not recorded here. Ask at review.
+    },
   ),
   blank(
     'fantasy-canyon',
@@ -389,6 +478,77 @@ export const FRONT_DESK_INSIGHTS: InsightRecord[] = [
     [],
     'On private land with visitor etiquette expectations that are poorly documented elsewhere. ' +
       'High-value local knowledge.',
+  ),
+
+  // ── The property itself ──────────────────────────────────────────────────────
+  //
+  // The first `facility` sheet about THIS building rather than somewhere to drive to.
+  // It exists because the 2026-07-31 interview's strongest material was operational,
+  // not geographic: how the property is actually run for people who stay weeks.
+  //
+  // NAMING: this sheet is deliberately brand-free. The owner states the property is
+  // currently Executive Inn & Suites Extended Stay, with Best Western pending franchise
+  // approval, so neither name is safe to bake into a durable record yet. `subject` is a
+  // permanent contract (append-only, never renamed) — putting an unapproved brand in it
+  // would be the one mistake here that cannot be quietly corrected later.
+  withAnswers(
+    blank(
+      'extended-stay-operations',
+      'Staying Here Long-Term',
+      'facility',
+      [],
+      // NOT surfaced yet: no page imports FrontDeskInsight for these routes. Wiring that
+      // is a page edit, deliberately deferred until this sheet is reviewed — there is no
+      // point rendering a component that is gated shut.
+      [
+        'extended-stay-hotel-vernal-utah',
+        'workforce-housing-vernal-utah',
+        'oilfield-housing-vernal',
+        'weekly-hotel-rates-vernal-utah',
+      ],
+      'The differentiator no OTA listing can reproduce: the property serves long-term ' +
+        'industrial crews and family tourists at the same time, on purpose. ' +
+        'not_right_for and complaints are both EMPTY and both matter — the honest negative ' +
+        'is the highest-trust answer on any sheet, and complaints (never published) is what ' +
+        'tells the desk what to pre-empt at check-in. Ask for both at review.',
+      'on-change', // operating practice, not a calendar — it changes when the practice changes
+    ),
+    {
+      local_knowledge: {
+        answer:
+          'Crews working night shifts get put in the quietest part of the building whenever we can manage it, so a rotation sleeping through the middle of the day is not next to a family checking out.',
+        basedOn: OWNER_INTERVIEW,
+      },
+      parking: {
+        answer:
+          'The lot is large and takes trucks and trailers, and most rooms open to the outside, so you can park at your door and unload work gear without carrying it through a lobby.',
+        basedOn: OWNER_INTERVIEW,
+      },
+      surprises: {
+        answer:
+          'How hot and how strong the showers are. It is the thing guests mention to us most often, and it is not what people expect from an extended-stay property.',
+        // MAPPING TO CONFIRM: the interview recorded this as a recurring guest COMPLIMENT.
+        // There is no compliments question in STANDARD_QUESTIONS, and `surprises` is the
+        // closest honest fit — but it is our mapping, not the owner's words. Confirm at
+        // review, or leave it out. Not folded into a new question: adding one to the
+        // standing instrument changes every sheet in the file and every printed workbook.
+        confidence: 'pending',
+        basedOn: OWNER_INTERVIEW,
+      },
+      guest_questions: {
+        answer:
+          'Long-stay guests ask about kitchenettes, whether we can bill their company directly, and where to put a work truck or trailer.',
+        basedOn: OWNER_INTERVIEW,
+      },
+      // DELIBERATELY NOT RECORDED — comparative and superlative claims from the interview
+      // ("we bridge that gap better than anyone else in town", "best in Vernal", "nobody
+      // else does this", "our plumbing can handle a full house at 6:00 AM"). Each asserts
+      // something about competitors or about mechanical capacity that nobody has measured.
+      // They are omitted rather than entered as `pending`: a pending answer is a real
+      // answer awaiting verification, and none of these is verifiable as written. The
+      // supporting FACTS — trailer parking, exterior access, quiet placement — are above,
+      // and they are more persuasive than the claims were.
+    },
   ),
 
   // ── Priority 9+: blank now, filled over the year ────────────────────────────
