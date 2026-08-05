@@ -52,7 +52,8 @@
       "Bash(npx tsx *)"
     ],
     "additionalDirectories": [
-      "C:\\Users\\deluc\\AppData\\Local\\Temp\\claude\\c--Users-deluc-Documents-bestwesternastro\\a7310006-faec-4149-a7b6-7f450118b907\\scratchpad"
+      "C:\\Users\\deluc\\AppData\\Local\\Temp\\claude\\c--Users-deluc-Documents-bestwesternastro\\a7310006-faec-4149-a7b6-7f450118b907\\scratchpad",
+      "c:\\Users\\deluc\\.claude\\projects\\c--Users-deluc-Documents-bestwesternastro\\memory"
     ]
   }
 }
