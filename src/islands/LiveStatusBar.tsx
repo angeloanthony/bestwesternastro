@@ -236,7 +236,11 @@ export default function LiveStatusBar({ lat, lon, timeZone = 'America/Denver' }:
             {icon}
           </span>
           <span class="lsb-text">
-            <span class="lsb-label">Vernal</span>
+            {/* .lsb-place, not .lsb-label — the place name survives the phone
+                breakpoint. Without it the row reads as the visitor's OWN local
+                weather, which is the one misreading worth spending pixels to
+                prevent. */}
+            <span class="lsb-place">Vernal</span>
             <strong>{data.tempF}°F</strong>
             <span class="lsb-cond">{label}</span>
           </span>

@@ -135,12 +135,23 @@
 @media (max-width: 700px) {
   .lsb-inner {
     justify-content: center;
-    gap: 0 1.35rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.2px;
+    gap: 0 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1px;
+    padding-left: calc(0.6rem + env(safe-area-inset-left));
+    padding-right: calc(0.6rem + env(safe-area-inset-right));
+  }
+  .lsb-item {
+    gap: 0.28rem;
+  }
+  .lsb-text {
+    gap: 0.26rem;
   }
   .lsb-item + .lsb-item::before {
-    left: -0.72rem;
+    left: -0.55rem;
+  }
+  .lsb-icon {
+    font-size: 0.82rem;
   }
   /* All four readings will not fit a phone at full length, and a strip you
      have to swipe is not an at-a-glance strip. Drop the descriptors and the
