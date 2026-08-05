@@ -56,7 +56,8 @@
       "Bash(node scripts/check-encoding.mjs)",
       "Bash(echo \" exit=$? \\(expect 1\\)\")",
       "Bash(rm -f .encoding-regression-sample.astro)",
-      "Bash(curl -s https://api.github.com/repos/angeloanthony/bestwesternastro/actions/runs/31052258002/jobs -o C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-bestwesternastro/aa5e5246-03a9-4092-b51b-15bb625fbf22/scratchpad/j.json)"
+      "Bash(curl -s https://api.github.com/repos/angeloanthony/bestwesternastro/actions/runs/31052258002/jobs -o C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-bestwesternastro/aa5e5246-03a9-4092-b51b-15bb625fbf22/scratchpad/j.json)",
+      "Bash(curl -s https://api.github.com/repos/angeloanthony/bestwesternastro/pulls?state=open -o C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-bestwesternastro/aa5e5246-03a9-4092-b51b-15bb625fbf22/scratchpad/prs.json)"
     ],
     "additionalDirectories": [
       "C:\\Users\\deluc\\AppData\\Local\\Temp\\claude\\c--Users-deluc-Documents-bestwesternastro\\a7310006-faec-4149-a7b6-7f450118b907\\scratchpad",
