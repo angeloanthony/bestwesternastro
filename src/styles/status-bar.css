@@ -93,6 +93,15 @@
   opacity: 0.75;
 }
 
+/* Words inside one reading — spaced by gap rather than literal whitespace so
+   hiding a child on small screens collapses cleanly. */
+.lsb-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.32rem;
+  white-space: nowrap;
+}
+
 .lsb-item strong {
   color: var(--gold, #c9a84c);
   font-weight: 700;
