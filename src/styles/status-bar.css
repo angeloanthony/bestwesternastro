@@ -1,0 +1,151 @@
+/* Live Vernal Status Bar — the conditions strip pinned beneath the nav.
+ *
+ * ADDITIVE ONLY, same posture as conversion.css: consumes the design tokens
+ * declared in global.css and adds no rule that reaches outside `.lsb`.
+ *
+ * Lives here rather than inside the island so the styles ship in the page's
+ * existing stylesheet. The strip therefore paints in its final form the
+ * instant the island hydrates — no unstyled flash, and no CSS inside the JS
+ * chunk.
+ *
+ * LAYOUT: `position: fixed`, so the bar is out of flow and CANNOT shift the
+ * page when it appears after hydration. Cumulative Layout Shift is zero by
+ * construction. It floats over the hero exactly as #nav does.
+ *
+ * Z-ORDER: #nav is 1000 and .mmenu is 999 (global.css). The strip sits at 998
+ * so the open mobile menu always covers it.
+ */
+
+:root {
+  --lsb-top: 72px; /* matches #nav height */
+  --lsb-top-scrolled: 60px; /* matches #nav.scrolled height */
+  --lsb-h: 31px; /* fixed row height, so offsets below are derivable */
+}
+
+.lsb {
+  position: fixed;
+  top: var(--lsb-top);
+  left: 0;
+  right: 0;
+  z-index: 998;
+  /* Follows the nav's own height transition (.3s) so no gap opens up. */
+  transition: top 0.3s;
+  background: rgba(var(--navy-dark-rgb, 14, 28, 51), 0.62);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* The hairline rules above and below — the strip reads as a rule of text,
+     not as a boxed widget. */
+  border-top: 1px solid rgba(var(--gold-rgb, 201, 168, 76), 0.28);
+  border-bottom: 1px solid rgba(var(--gold-rgb, 201, 168, 76), 0.28);
+  pointer-events: none; /* purely informational — never intercepts a tap */
+}
+
+/* Keep the strip flush under the nav once the nav shrinks on scroll. The
+   island is mounted in .lsb-mount immediately after <Header /> in BaseLayout,
+   so it is a following sibling of #nav. */
+#nav.scrolled ~ .lsb-mount .lsb {
+  top: var(--lsb-top-scrolled);
+}
+
+.lsb-inner {
+  max-width: 1100px;
+  min-height: var(--lsb-h);
+  margin: 0 auto;
+  padding: 0.42rem calc(1rem + env(safe-area-inset-right)) 0.42rem
+    calc(1rem + env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 1.6rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.4px;
+  color: rgba(var(--cream-rgb, 253, 248, 240), 0.92);
+  /* Narrow screens scroll the row rather than wrapping it into two lines,
+     which would double the bar's height and crowd the hero. */
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  pointer-events: auto;
+}
+.lsb-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.lsb-item {
+  position: relative;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Gold dot between items — a pseudo-element so screen readers never
+   announce the separator. */
+.lsb-item + .lsb-item::before {
+  content: '';
+  position: absolute;
+  left: -0.85rem;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold, #c9a84c);
+  opacity: 0.75;
+}
+
+.lsb-item strong {
+  color: var(--gold, #c9a84c);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+}
+
+.lsb-lead {
+  font-weight: 700;
+}
+
+.lsb-icon {
+  font-size: 0.92rem;
+  line-height: 1;
+}
+
+.lsb-loading {
+  opacity: 0.55;
+  animation: lsb-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes lsb-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 700px) {
+  .lsb-inner {
+    justify-content: flex-start;
+    gap: 0 1.35rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.2px;
+  }
+  .lsb-item + .lsb-item::before {
+    left: -0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lsb {
+    transition: none;
+  }
+  .lsb-loading {
+    animation: none;
+  }
+}
+
+@media print {
+  .lsb {
+    display: none;
+  }
+}

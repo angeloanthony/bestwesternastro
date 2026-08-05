@@ -13,9 +13,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '../components/Analytics.astro';
 import StickyBookingBar from '../components/StickyBookingBar.astro';
+import LiveStatusBar from '../islands/LiveStatusBar.tsx';
+import { BUSINESS } from '../data/business.ts';
 import '../styles/global.css';
 // AdventureOS conversion layer (Prompt 3) — additive; global.css untouched.
 import '../styles/conversion.css';
+// Live Vernal conditions strip — additive; scoped entirely to `.lsb`.
+import '../styles/status-bar.css';
 
 interface Props {
   /** Exact <title> from the legacy page. */
@@ -108,6 +112,21 @@ const {
 </head>
 <body>
   <Header isHome={isHome} />
+
+  <!-- Live Vernal conditions strip. `client:idle` keeps it off the critical
+       path: the island hydrates only once the browser is otherwise free, and
+       it renders null until then, so the static HTML is byte-for-byte
+       unchanged for crawlers and no-JS visitors. Coordinates are passed as
+       props so business.ts stays server-side and out of the client bundle.
+       The .lsb-mount wrapper is the stable sibling of #nav that status-bar.css
+       hangs the scrolled-nav offset on. -->
+  <div class="lsb-mount">
+    <LiveStatusBar
+      client:idle
+      lat={BUSINESS.geo.latitude}
+      lon={BUSINESS.geo.longitude}
+    />
+  </div>
 
   <!-- Page body -->
   <slot />
