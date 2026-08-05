@@ -49,7 +49,14 @@
       "Bash(grep -oE \"name=[\\\\\"'][a-zA-Z]+[\\\\\"']|label[^>]*>[^<]{3,40}\" src/islands/CorporateRateForm.tsx)",
       "Bash(sed 's/.*>//')",
       "Bash(grep -oE '\"\\(name|question\\)\":\"[^\"]{10,90}\"' src/pages/faq.astro)",
-      "Bash(npx tsx *)"
+      "Bash(npx tsx *)",
+      "Bash(curl -s \"https://api.github.com/repos/angeloanthony/bestwesternastro/actions/runs?per_page=5\" -o /tmp/runs.json -w \"http=%{http_code}\\\\n\")",
+      "Bash(curl -s https://api.github.com/repos/angeloanthony/bestwesternastro/actions/runs?per_page=8 -o C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-bestwesternastro/aa5e5246-03a9-4092-b51b-15bb625fbf22/scratchpad/runs.json)",
+      "Bash(git fetch *)",
+      "Bash(node scripts/check-encoding.mjs)",
+      "Bash(echo \" exit=$? \\(expect 1\\)\")",
+      "Bash(rm -f .encoding-regression-sample.astro)",
+      "Bash(curl -s https://api.github.com/repos/angeloanthony/bestwesternastro/actions/runs/31052258002/jobs -o C:/Users/deluc/AppData/Local/Temp/claude/c--Users-deluc-Documents-bestwesternastro/aa5e5246-03a9-4092-b51b-15bb625fbf22/scratchpad/j.json)"
     ],
     "additionalDirectories": [
       "C:\\Users\\deluc\\AppData\\Local\\Temp\\claude\\c--Users-deluc-Documents-bestwesternastro\\a7310006-faec-4149-a7b6-7f450118b907\\scratchpad",
