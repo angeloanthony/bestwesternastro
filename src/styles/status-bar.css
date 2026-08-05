@@ -30,7 +30,13 @@
   z-index: 998;
   /* Follows the nav's own height transition (.3s) so no gap opens up. */
   transition: top 0.3s;
-  background: rgba(var(--navy-dark-rgb, 14, 28, 51), 0.62);
+  /* Alpha is a CONTRAST constraint, not a taste decision. The strip is fixed,
+     so below the hero it composites against cream/white page content rather
+     than the dark hero overlay. At 0.62 the gold temperature measured 2.12:1
+     against a 4.5:1 requirement for 12.5px text, and body copy 4.16:1 — both
+     failing WCAG AA. 0.85 restores gold to ~4.7:1 and body copy well clear.
+     Do not lower this without re-measuring over a light background. */
+  background: rgba(var(--navy-dark-rgb, 14, 28, 51), 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   /* The hairline rules above and below — the strip reads as a rule of text,

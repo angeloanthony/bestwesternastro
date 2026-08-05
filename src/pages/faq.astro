@@ -1,6 +1,6 @@
-﻿---
+---
 // src/pages/faq.astro
-// MIGRATION of /faq.html â€” metadata, canonical, JSON-LD schema, body copy,
+// MIGRATION of /faq.html — metadata, canonical, JSON-LD schema, body copy,
 // headings, and internal links preserved VERBATIM. Shared chrome
 // (nav / mobile menu / footer / scroll-top + burger script) is provided by
 // BaseLayout; page-specific <style>/schema go in the head slot and
@@ -24,13 +24,13 @@ const headExtras = `${ldScript(hotelNode())}
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "What are the weekly rates at Best Western Vernal Inn?", "acceptedAnswer": { "@type": "Answer", "text": "Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen room (7 nights), ${usd(RATES.weekly.doubleQueen)} + tax for a Double Queen, and $700 + tax for a Standard King. Monthly rates and long-term corporate billing are available â€” call (435) 789-6625 for pricing." }},
-      { "@type": "Question", "name": "Is the hotel pet friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Best Western Vernal Inn welcomes up to two dogs per room with an 80 lb limit per dog. Pet fee is $30.00 USD per day plus a refundable $100.00 damage deposit due at check-in. Other pets may be allowed with prior approval â€” call (435) 789-6625." }},
+      { "@type": "Question", "name": "What are the weekly rates at Best Western Vernal Inn?", "acceptedAnswer": { "@type": "Answer", "text": "Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen room (7 nights), ${usd(RATES.weekly.doubleQueen)} + tax for a Double Queen, and $700 + tax for a Standard King. Monthly rates and long-term corporate billing are available — call (435) 789-6625 for pricing." }},
+      { "@type": "Question", "name": "Is the hotel pet friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Best Western Vernal Inn welcomes up to two dogs per room with an 80 lb limit per dog. Pet fee is $30.00 USD per day plus a refundable $100.00 damage deposit due at check-in. Other pets may be allowed with prior approval — call (435) 789-6625." }},
       { "@type": "Question", "name": "Does Best Western Vernal Inn include free breakfast?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, a free hot breakfast is included with every stay, served daily." }},
       { "@type": "Question", "name": "What time is check-in and check-out?", "acceptedAnswer": { "@type": "Answer", "text": "Check-in is at 3:00 PM. Check-out is at 11:00 AM." }},
       { "@type": "Question", "name": "Do the rooms have kitchenettes?", "acceptedAnswer": { "@type": "Answer", "text": "Most rooms at Best Western Vernal Inn include a full kitchenette with a stovetop, microwave, full-size refrigerator, and coffee maker." }},
       { "@type": "Question", "name": "Is WiFi free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, fast free WiFi is available throughout the entire hotel and in every guest room." }},
-      { "@type": "Question", "name": "Is parking free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, complimentary parking is available for all guests including trucks and work vehicles. Pull right up to your room â€” no fees, ever." }},
+      { "@type": "Question", "name": "Is parking free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, complimentary parking is available for all guests including trucks and work vehicles. Pull right up to your room — no fees, ever." }},
       { "@type": "Question", "name": "Do you have jacuzzi suites?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Best Western Vernal Inn offers King Jacuzzi Suites and Jacuzzi Double Queen Suites, each featuring a private in-room soaking tub." }},
       { "@type": "Question", "name": "Are ADA accessible rooms available?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, ADA accessible king rooms are available with wide doorways, roll-in showers, lowered fixtures, and ground-floor access." }},
       { "@type": "Question", "name": "Do you offer monthly rates or long-term housing for contractors and oil field workers?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, monthly rates and long-term stays are available for contractors, oil field workers, and corporate guests in the Uintah Basin. Call (435) 789-6625 for pricing." }},
@@ -66,14 +66,14 @@ const headExtras = `${ldScript(hotelNode())}
   </style>
 <link rel="icon" href="images/logo.webp" type="image/webp">`;
 const bodyContent = `<div class="page-summary-bar" role="complementary" aria-label="Quick summary">
-  <strong>FAQ â€” Best Western Vernal Inn.</strong> Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily. Pet friendly (2 dogs, 80 lb limit, $30/day + $100 refundable deposit). Check-in 3:00 PM Â· Check-out 11:00 AM. Full kitchenettes, jacuzzi suites, ADA accessible rooms, free WiFi, free parking. Monthly rates and contractor housing available. Located at 1935 South 1500 East, Vernal, UT 84078. Call <strong>(435) 789-6625</strong>.
+  <strong>FAQ — Best Western Vernal Inn.</strong> Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily. Pet friendly (2 dogs, 80 lb limit, $30/day + $100 refundable deposit). Check-in 3:00 PM · Check-out 11:00 AM. Full kitchenettes, jacuzzi suites, ADA accessible rooms, free WiFi, free parking. Monthly rates and contractor housing available. Located at 1935 South 1500 East, Vernal, UT 84078. Call <strong>(435) 789-6625</strong>.
 </div>
 
 
 
 <div class="faq-hero">
   <div class="faq-hero-bg"></div>
-  <p class="tag">âœ¦ Guest Information</p>
+  <p class="tag">✦ Guest Information</p>
   <h1>Frequently Asked<br><em>Questions</em></h1>
   <p>Everything you need to know before your stay at Best Western Vernal Inn.</p>
   <div class="faq-hero-divider"></div>
@@ -83,16 +83,16 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
   <div class="faq-categories">
 
     <div>
-      <h2 class="faq-cat-title">ðŸ’² Rates &amp; Booking</h2>
+      <h2 class="faq-cat-title">💲 Rates &amp; Booking</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">What are the weekly rates? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">What are the weekly rates? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Weekly extended stay rates (7 nights + tax): <strong>Standard Queen â€” ${usd(RATES.weekly.standardQueen)}</strong>, <strong>Double Queen â€” ${usd(RATES.weekly.doubleQueen)}</strong>, <strong>Standard King â€” $700</strong>. Monthly rates and long-term corporate billing are also available â€” call <a href="tel:4357896625">(435) 789-6625</a> for pricing.
+            Weekly extended stay rates (7 nights + tax): <strong>Standard Queen — ${usd(RATES.weekly.standardQueen)}</strong>, <strong>Double Queen — ${usd(RATES.weekly.doubleQueen)}</strong>, <strong>Standard King — $700</strong>. Monthly rates and long-term corporate billing are also available — call <a href="tel:4357896625">(435) 789-6625</a> for pricing.
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Do you offer monthly rates or long-term housing? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Do you offer monthly rates or long-term housing? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
             Yes! Monthly rates are available for long-term guests, oil field workers, contractors, and corporate travelers in the Uintah Basin. Company billing arrangements can also be discussed. Call <a href="tel:4357896625">(435) 789-6625</a> for monthly pricing and availability.
           </div>
@@ -101,24 +101,24 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
     </div>
 
     <div>
-      <h2 class="faq-cat-title">ðŸ³ Dining</h2>
+      <h2 class="faq-cat-title">🍳 Dining</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">Does the hotel offer breakfast? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Does the hotel offer breakfast? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes! A free hot breakfast is included with every stay, served daily. Start your morning with warm dishes, fresh pastries, pancakes, fruit, coffee, and more â€” all on us, every single day.
+            Yes! A free hot breakfast is included with every stay, served daily. Start your morning with warm dishes, fresh pastries, pancakes, fruit, coffee, and more — all on us, every single day.
           </div>
         </div>
       </div>
     </div>
 
     <div>
-      <h2 class="faq-cat-title">ðŸ¾ Pet Policy</h2>
+      <h2 class="faq-cat-title">🐾 Pet Policy</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">Is the hotel pet friendly? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Is the hotel pet friendly? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes, we welcome up to <strong>two dogs per room</strong> with an 80 lb limit per dog. Other pet types (such as cats) may be allowed with prior hotel approval â€” please contact us before arrival.<br><br>
+            Yes, we welcome up to <strong>two dogs per room</strong> with an 80 lb limit per dog. Other pet types (such as cats) may be allowed with prior hotel approval — please contact us before arrival.<br><br>
             <strong>Pet fees:</strong> $30.00 USD per day, plus a refundable $100.00 damage deposit due at check-in. If damage occurs or excessive cleaning is needed, the deposit may become non-refundable and additional charges may apply.
           </div>
         </div>
@@ -126,76 +126,76 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
     </div>
 
     <div>
-      <h2 class="faq-cat-title">ðŸ•’ Check-In &amp; Check-Out</h2>
+      <h2 class="faq-cat-title">🕒 Check-In &amp; Check-Out</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">What time is check-in? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">What time is check-in? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Check-in time is <strong>3:00 PM</strong>. If you arrive early, we'll do our best to accommodate you â€” just give us a call at <a href="tel:4357896625">(435) 789-6625</a>.
+            Check-in time is <strong>3:00 PM</strong>. If you arrive early, we'll do our best to accommodate you — just give us a call at <a href="tel:4357896625">(435) 789-6625</a>.
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">What time is check-out? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">What time is check-out? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Check-out time is <strong>11:00 AM</strong>. Late check-out may be available upon request â€” contact the front desk the evening before your departure.
+            Check-out time is <strong>11:00 AM</strong>. Late check-out may be available upon request — contact the front desk the evening before your departure.
           </div>
         </div>
       </div>
     </div>
 
     <div>
-      <h2 class="faq-cat-title">ðŸ“¶ Connectivity &amp; Parking</h2>
+      <h2 class="faq-cat-title">📶 Connectivity &amp; Parking</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">Is Wi-Fi free? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Is Wi-Fi free? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes â€” fast, free Wi-Fi is available throughout the entire hotel and in every guest room. No passwords to hunt down, no fees, no limits.
+            Yes — fast, free Wi-Fi is available throughout the entire hotel and in every guest room. No passwords to hunt down, no fees, no limits.
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Is parking free? Do you have room for trucks? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Is parking free? Do you have room for trucks? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes â€” complimentary parking is available for all guests including trucks and work vehicles. Pull right up to your room, no fees, ever.
+            Yes — complimentary parking is available for all guests including trucks and work vehicles. Pull right up to your room, no fees, ever.
           </div>
         </div>
       </div>
     </div>
 
     <div>
-      <h2 class="faq-cat-title">ðŸ›ï¸ Rooms &amp; Suites</h2>
+      <h2 class="faq-cat-title">🛏️ Rooms &amp; Suites</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">Do the rooms have kitchenettes? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Do the rooms have kitchenettes? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Most of our rooms include a full kitchenette with a stovetop, microwave, full-size refrigerator, and coffee maker â€” perfect for extended stays.
+            Most of our rooms include a full kitchenette with a stovetop, microwave, full-size refrigerator, and coffee maker — perfect for extended stays.
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Do you have jacuzzi suites? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Do you have jacuzzi suites? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes! We offer both King Jacuzzi Suites and Jacuzzi Double Queen Suites â€” featuring a private in-room soaking tub. Call us to check availability: <a href="tel:4357896625">(435) 789-6625</a>.
+            Yes! We offer both King Jacuzzi Suites and Jacuzzi Double Queen Suites — featuring a private in-room soaking tub. Call us to check availability: <a href="tel:4357896625">(435) 789-6625</a>.
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Are ADA accessible rooms available? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">Are ADA accessible rooms available? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes â€” we offer ADA accessible king rooms with wide doorways, roll-in showers, lowered fixtures, and ground-floor access.
+            Yes — we offer ADA accessible king rooms with wide doorways, roll-in showers, lowered fixtures, and ground-floor access.
           </div>
         </div>
       </div>
     </div>
 
     <div>
-      <h2 class="faq-cat-title">ðŸ“ Location</h2>
+      <h2 class="faq-cat-title">📍 Location</h2>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-q">How far is the hotel from Vernal Regional Airport? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">How far is the hotel from Vernal Regional Airport? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
             Best Western Vernal Inn is located just <strong>0.6 miles</strong> from Vernal Regional Airport (VEL) at 1935 South 1500 East, Vernal, UT 84078.
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">How far is the hotel from Dinosaur National Monument? <span class="faq-arrow">â–¼</span></button>
+          <button class="faq-q">How far is the hotel from Dinosaur National Monument? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
             Dinosaur National Monument is approximately <strong>20 minutes</strong> from our front door. We're an ideal base camp for exploring Dinosaur Country.
           </div>
@@ -205,58 +205,58 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
 
     <div class="faq-cta">
       <h3>Still Have Questions?</h3>
-      <p>Our front desk team is here 24 hours a day â€” give us a call or send us an email and we'll be happy to help.</p>
-      <p style="margin-top:8px;font-size:0.9rem;">Or explore: <a href="/#rooms">our rooms</a> Â· <a href="/#amenities">amenities</a> Â· <a href="/explore">things to do in Vernal</a></p>
+      <p>Our front desk team is here 24 hours a day — give us a call or send us an email and we'll be happy to help.</p>
+      <p style="margin-top:8px;font-size:0.9rem;">Or explore: <a href="/#rooms">our rooms</a> · <a href="/#amenities">amenities</a> · <a href="/explore">things to do in Vernal</a></p>
       <div class="faq-cta-btns">
-        <a href="tel:4357896625" class="call">ðŸ“ž (435) 789-6625</a>
-        <a href="/cdn-cgi/l/email-protection#e583978a8b918180968ea5878096919280969180978b9380978b8489cb868a88" class="email">âœ‰ï¸ Email Us</a>
+        <a href="tel:4357896625" class="call">📞 (435) 789-6625</a>
+        <a href="/cdn-cgi/l/email-protection#e583978a8b918180968ea5878096919280969180978b9380978b8489cb868a88" class="email">✉️ Email Us</a>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ===== MESH: Plan Your Stay in Vernal â€” pillar+sibling cluster ===== -->
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
 <section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
  <div style="max-width:1180px;margin:0 auto;">
-  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">âœ¦ Plan Your Stay</p>
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
   <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
-  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work â€” we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">â€” Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
-      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">â€” 7-night discount pricing</span></li>
-      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">â€” Crew lodging &amp; corporate billing</span></li>
-      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">â€” Truck parking, flexible billing</span></li>
-      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">â€” Dogs welcome, ground-floor rooms</span></li>
-      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">â€” Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">â€” 0.6 miles</span></li>
-      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">â€” 20 miles</span></li>
-      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">â€” 40 miles</span></li>
-      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">â€” 12 miles</span></li>
-      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">â€” 15 miles</span></li>
-      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">â€” 10 miles</span></li>
+      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">â€” Plan your trip</span></li>
-      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">â€” Activities &amp; attractions</span></li>
-      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">â€” Restaurants &amp; adventures</span></li>
-      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">â€” Common questions</span></li>
+      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
      </ul>
     </div>
   </div>
   <div style="text-align:center;margin-top:2.6rem;">
-   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">â† Back to Best Western Vernal Inn</a>
+   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
   </div>
  </div>
 </section>
@@ -268,13 +268,13 @@ const pageScripts = ``;
 ---
 
 <BaseLayout
-  title=`FAQ â€” Extended Stay Hotel Vernal UT | Best Western Vernal Inn Questions Answered`
+  title=`FAQ — Extended Stay Hotel Vernal UT | Best Western Vernal Inn Questions Answered`
   description=`Answers to the most common questions about Best Western Inn in Vernal, Utah. Weekly rates, pet policy, breakfast, check-in times, kitchenettes, jacuzzi suites, and more.`
   canonical=`https://bestwesternvernalinn.com/faq`
-  ogTitle=`FAQ â€” Best Western Vernal Inn`
+  ogTitle=`FAQ — Best Western Vernal Inn`
   ogDescription=`Everything you need to know: weekly rates from ${usd(RATES.weekly.standardQueen)}, free hot breakfast, pet policy, check-in times, jacuzzi suites, kitchenettes, and monthly rates. Call (435) 789-6625.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
-  twitterTitle=`FAQ â€” Best Western Vernal Inn`
+  twitterTitle=`FAQ — Best Western Vernal Inn`
   twitterDescription=`Weekly rates from ${usd(RATES.weekly.standardQueen)}, pet policy, free breakfast, check-in times, kitchenettes, monthly contractor rates. Call (435) 789-6625.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   hreflang=`https://bestwesternvernalinn.com/faq`

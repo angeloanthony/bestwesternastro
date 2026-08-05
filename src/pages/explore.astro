@@ -1,6 +1,6 @@
-﻿---
+---
 // src/pages/explore.astro
-// MIGRATION of /explore.html â€” metadata, canonical, JSON-LD schema, body copy,
+// MIGRATION of /explore.html — metadata, canonical, JSON-LD schema, body copy,
 // headings, and internal links preserved VERBATIM. Shared chrome
 // (nav / mobile menu / footer / scroll-top + burger script) is provided by
 // BaseLayout; page-specific <style>/schema go in the head slot and
@@ -15,7 +15,7 @@ const headExtras = `${ldScript(hotelNode())}
   {
     "@context": "https://schema.org",
     "@type": "TouristDestination",
-    "name": "Vernal, Utah â€” Dinosaurland",
+    "name": "Vernal, Utah — Dinosaurland",
     "description": "Vernal, Utah is home to Dinosaur National Monument, Flaming Gorge, McConkie Ranch petroglyphs, Red Fleet State Park, and world-class outdoor adventure.",
     "url": "https://bestwesternvernalinn.com/explore",
     "touristType": ["Families", "Outdoor Enthusiasts", "History Buffs", "Adventure Seekers"],
@@ -133,7 +133,7 @@ const headExtras = `${ldScript(hotelNode())}
     }
   </style>
 <link rel="icon" href="images/logo.webp" type="image/webp">`;
-const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to users -->
+const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users -->
 <div class="visually-hidden">
   Best Western Vernal Inn | Extended stay hotel with weekly rates from ${usd(RATES.weekly.standardQueen)}, full kitchenettes, pet friendly ($30/day + $100 refundable deposit), free breakfast, free parking for trucks. Located at 1935 South 1500 East, Vernal, UT 84078. Phone (435) 789-6625. 20 min to Dinosaur National Monument, 40 min to Flaming Gorge. Book direct at bestwesternvernalinn.com.
 </div>
@@ -152,9 +152,9 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
   </div>
   <div class="ex-hero-ov"></div>
   <div class="ex-hero-cnt rv">
-    <p class="ex-hero-eyebrow">âœ¦ Welcome to Dinosaurland âœ¦</p>
+    <p class="ex-hero-eyebrow">✦ Welcome to Dinosaurland ✦</p>
     <h1 class="ex-hero-title">Explore<br><em>Vernal, Utah</em></h1>
-    <p class="ex-hero-sub">Ancient fossils, wild rivers, stunning red rock, and genuine small-town warmth. This is one of Utah's best-kept secrets â€” and Best Western puts you right in the middle of it all.</p>
+    <p class="ex-hero-sub">Ancient fossils, wild rivers, stunning red rock, and genuine small-town warmth. This is one of Utah's best-kept secrets — and Best Western puts you right in the middle of it all.</p>
     <div class="ex-hero-btns">
       <a href="#adventures" class="btn-p">Adventures</a>
       <a href="#restaurants" class="btn-s" style="color:#fff;border-color:rgba(255,255,255,0.5);">Restaurants</a>
@@ -165,35 +165,35 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
 <!-- QUICK NAV PILLS -->
 <div class="ex-pill-wrap">
   <div class="ex-pill-nav rv">
-    <a href="#delivery" class="ex-pill">ðŸ›µ Room Delivery</a>
-    <a href="#adventures" class="ex-pill">ðŸ¦• Dinosaur Country</a>
-    <a href="#outdoors" class="ex-pill">ðŸ”ï¸ Outdoors</a>
-    <a href="#utv" class="ex-pill">ðŸŽï¸ UTV Tours</a>
-    <a href="#restaurants" class="ex-pill">ðŸ½ï¸ Restaurants</a>
-    <a href="#book" class="ex-pill">ðŸ›ï¸ Book a Room</a>
+    <a href="#delivery" class="ex-pill">🛵 Room Delivery</a>
+    <a href="#adventures" class="ex-pill">🦕 Dinosaur Country</a>
+    <a href="#outdoors" class="ex-pill">🏔️ Outdoors</a>
+    <a href="#utv" class="ex-pill">🏎️ UTV Tours</a>
+    <a href="#restaurants" class="ex-pill">🍽️ Restaurants</a>
+    <a href="#book" class="ex-pill">🛏️ Book a Room</a>
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     SECTION 4b â€” FOOD DELIVERY
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ═══════════════════════════════════
+     SECTION 4b — FOOD DELIVERY
+════════════════════════════════════ -->
 <div id="delivery" class="ex-delivery-wrap">
 <div class="ex-sec rv">
-  <p class="ex-tag">âœ¦ Too Tired to Go Out?</p>
+  <p class="ex-tag">✦ Too Tired to Go Out?</p>
   <h2 class="ex-title">Get Food Delivered<br><em>Right to Your Room</em></h2>
   <p class="ex-intro">Long day on the trails? Just arrived late? Both DoorDash and Uber Eats deliver to our hotel. Tap the button below and your food comes straight to you.</p>
 
   <!-- Delivery App Buttons -->
   <div class="delivery-btns">
     <a href="https://www.doordash.com/food-delivery/vernal-ut-restaurants/" target="_blank" class="del-app-btn del-doordash">
-      <span class="del-app-icon">ðŸš—</span>
+      <span class="del-app-icon">🚗</span>
       <div>
         <div>Order on DoorDash</div>
         <div class="del-app-sub">Deliver to 1935 S 1500 E</div>
       </div>
     </a>
     <a href="https://www.ubereats.com/city/vernal-ut" target="_blank" class="del-app-btn del-ubereats">
-      <span class="del-app-icon">ðŸ›µ</span>
+      <span class="del-app-icon">🛵</span>
       <div>
         <div>Order on Uber Eats</div>
         <div class="del-app-sub">Deliver to 1935 S 1500 E</div>
@@ -207,16 +207,16 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
     <!-- Local Favorites on Delivery -->
     <div class="rv">
       <h3 class="del-col-title">Local Favorites</h3>
-      <p class="del-col-sub">May be available on DoorDash or Uber Eats â€” availability varies, check apps</p>
+      <p class="del-col-sub">May be available on DoorDash or Uber Eats — availability varies, check apps</p>
       <div class="del-list">
-        <div class="del-row"><span class="del-icon">ðŸ•</span><div><strong>Antica Forma</strong><span class="del-type">Italian Â· Pizza Â· Pasta</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸŒ®</span><div><strong>Plaza Mexicana</strong><span class="del-type">Mexican Â· Best Mole in Utah</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸº</span><div><strong>Vernal Brewing Co</strong><span class="del-type">American Â· Burgers Â· Craft Beer</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸœ</span><div><strong>Khao Hom Thai Kitchen</strong><span class="del-type">Thai Â· Asian Fusion</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸŒ¯</span><div><strong>Cafe Rio</strong><span class="del-type">Fast-casual Mexican</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ–</span><div><strong>Dinosaur Brew Haus</strong><span class="del-type">BBQ Â· Burgers Â· Bar Food</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ¥©</span><div><strong>The Valley Steakhouse</strong><span class="del-type">Steakhouse Â· American</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ›</span><div><strong>Canton City</strong><span class="del-type">Chinese Â· Best in the Basin</span></div></div>
+        <div class="del-row"><span class="del-icon">🍕</span><div><strong>Antica Forma</strong><span class="del-type">Italian · Pizza · Pasta</span></div></div>
+        <div class="del-row"><span class="del-icon">🌮</span><div><strong>Plaza Mexicana</strong><span class="del-type">Mexican · Best Mole in Utah</span></div></div>
+        <div class="del-row"><span class="del-icon">🍺</span><div><strong>Vernal Brewing Co</strong><span class="del-type">American · Burgers · Craft Beer</span></div></div>
+        <div class="del-row"><span class="del-icon">🍜</span><div><strong>Khao Hom Thai Kitchen</strong><span class="del-type">Thai · Asian Fusion</span></div></div>
+        <div class="del-row"><span class="del-icon">🌯</span><div><strong>Cafe Rio</strong><span class="del-type">Fast-casual Mexican</span></div></div>
+        <div class="del-row"><span class="del-icon">🍖</span><div><strong>Dinosaur Brew Haus</strong><span class="del-type">BBQ · Burgers · Bar Food</span></div></div>
+        <div class="del-row"><span class="del-icon">🥩</span><div><strong>The Valley Steakhouse</strong><span class="del-type">Steakhouse · American</span></div></div>
+        <div class="del-row"><span class="del-icon">🍛</span><div><strong>Canton City</strong><span class="del-type">Chinese · Best in the Basin</span></div></div>
       </div>
     </div>
 
@@ -225,32 +225,32 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
       <h3 class="del-col-title">Always Available</h3>
       <p class="del-col-sub">Chains with reliable delivery in Vernal</p>
       <div class="del-list">
-        <div class="del-row"><span class="del-icon">ðŸ”</span><div><strong>McDonald's</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ•</span><div><strong>Domino's</strong><span class="del-type">Own app + DoorDash</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ•</span><div><strong>Pizza Hut</strong><span class="del-type">Own app + Uber Eats</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ—</span><div><strong>KFC</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ¥ª</span><div><strong>Arby's</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ”</span><div><strong>Freddy's</strong><span class="del-type">Steakburgers &amp; Custard</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ¥¤</span><div><strong>Sonic Drive-In</strong><span class="del-type">DoorDash</span></div></div>
-        <div class="del-row"><span class="del-icon">ðŸ§‡</span><div><strong>Denny's</strong><span class="del-type">24-hr delivery option</span></div></div>
+        <div class="del-row"><span class="del-icon">🍔</span><div><strong>McDonald's</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🍕</span><div><strong>Domino's</strong><span class="del-type">Own app + DoorDash</span></div></div>
+        <div class="del-row"><span class="del-icon">🍕</span><div><strong>Pizza Hut</strong><span class="del-type">Own app + Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🍗</span><div><strong>KFC</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🥪</span><div><strong>Arby's</strong><span class="del-type">DoorDash &amp; Uber Eats</span></div></div>
+        <div class="del-row"><span class="del-icon">🍔</span><div><strong>Freddy's</strong><span class="del-type">Steakburgers &amp; Custard</span></div></div>
+        <div class="del-row"><span class="del-icon">🥤</span><div><strong>Sonic Drive-In</strong><span class="del-type">DoorDash</span></div></div>
+        <div class="del-row"><span class="del-icon">🧇</span><div><strong>Denny's</strong><span class="del-type">24-hr delivery option</span></div></div>
       </div>
     </div>
 
   </div>
 
   <div class="tip-box rv">
-    <span class="tip-icon">ðŸ“</span>
+    <span class="tip-icon">📍</span>
     <div class="tip-text">
       <h4>Delivery Address</h4>
-      <p>When ordering, use our address: <strong>1935 South 1500 East, Vernal, UT 84078</strong>. Our front desk is staffed 24 hours â€” if you have a delivery arriving late, just let them know and they'll make sure it gets to you.</p>
+      <p>When ordering, use our address: <strong>1935 South 1500 East, Vernal, UT 84078</strong>. Our front desk is staffed 24 hours — if you have a delivery arriving late, just let them know and they'll make sure it gets to you.</p>
     </div>
   </div>
 </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     SECTION 3 â€” ADVENTURE TOURS VERNAL
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ═══════════════════════════════════
+     SECTION 3 — ADVENTURE TOURS VERNAL
+════════════════════════════════════ -->
 <div id="utv" class="feature-strip">
   <div class="feature-video-wrap">
     <iframe class="feature-video"
@@ -262,36 +262,36 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
   <div class="feature-video-ov"></div>
   <div class="feature-inner">
     <div class="feature-left rv">
-      <p class="ex-tag">âœ¦ Locally Owned Â· Vernal's Best</p>
+      <p class="ex-tag">✦ Locally Owned · Vernal's Best</p>
       <h2 class="ex-title feature-title">Adventure Tours<br><em>Vernal</em></h2>
-      <p class="feature-desc">Experience the red rock canyon country of northeastern Utah the way it was meant to be seen â€” wide open, off-road, and with a guide who knows every trail. Our UTV tours take you through stunning terrain you'd never find on your own.</p>
+      <p class="feature-desc">Experience the red rock canyon country of northeastern Utah the way it was meant to be seen — wide open, off-road, and with a guide who knows every trail. Our UTV tours take you through stunning terrain you'd never find on your own.</p>
       <div class="feature-highlights">
-        <div class="fh"><span class="fh-icon">ðŸŽï¸</span>Guided UTV tours through canyon country</div>
-        <div class="fh"><span class="fh-icon">ðŸ“¸</span>Photo stops at the best viewpoints</div>
-        <div class="fh"><span class="fh-icon">ðŸ‘¨â€ðŸ‘©â€ðŸ‘§</span>Family friendly â€” all ages welcome</div>
-        <div class="fh"><span class="fh-icon">ðŸ—ºï¸</span>Local guides who know every inch of the terrain</div>
-        <div class="fh"><span class="fh-icon">â­</span>Highly rated on TripAdvisor</div>
+        <div class="fh"><span class="fh-icon">🏎️</span>Guided UTV tours through canyon country</div>
+        <div class="fh"><span class="fh-icon">📸</span>Photo stops at the best viewpoints</div>
+        <div class="fh"><span class="fh-icon">👨‍👩‍👧</span>Family friendly — all ages welcome</div>
+        <div class="fh"><span class="fh-icon">🗺️</span>Local guides who know every inch of the terrain</div>
+        <div class="fh"><span class="fh-icon">⭐</span>Highly rated on TripAdvisor</div>
       </div>
       <a href="https://adventuretoursvernal.com/booking" target="_blank" rel="noopener" class="btn-p" style="display:inline-block;">Book a UTV Tour</a>
     </div>
     <div class="feature-right rv">
       <div class="fcard">
-        <div class="fcard-icon">ðŸŒ…</div>
+        <div class="fcard-icon">🌅</div>
         <div class="fcard-label">Sunrise Tours</div>
         <div class="fcard-sub">Golden hour canyon views</div>
       </div>
       <div class="fcard">
-        <div class="fcard-icon">ðŸŒ„</div>
+        <div class="fcard-icon">🌄</div>
         <div class="fcard-label">Half Day Trips</div>
         <div class="fcard-sub">3-4 hours of adventure</div>
       </div>
       <div class="fcard">
-        <div class="fcard-icon">ðŸœï¸</div>
+        <div class="fcard-icon">🏜️</div>
         <div class="fcard-label">Full Day</div>
         <div class="fcard-sub">Deep canyon exploration</div>
       </div>
       <div class="fcard">
-        <div class="fcard-icon">ðŸ¾</div>
+        <div class="fcard-icon">🐾</div>
         <div class="fcard-label">Pet Friendly</div>
         <div class="fcard-sub">Bring the whole crew</div>
       </div>
@@ -300,12 +300,12 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
 </div>
 
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     SECTION 1 â€” MUST-SEE LANDMARKS
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ═══════════════════════════════════
+     SECTION 1 — MUST-SEE LANDMARKS
+════════════════════════════════════ -->
 <div id="adventures">
 <div class="ex-sec rv">
-  <p class="ex-tag">âœ¦ Must-See Attractions</p>
+  <p class="ex-tag">✦ Must-See Attractions</p>
   <h2 class="ex-title">Dinosaur Country<br><em>Right Outside Your Door</em></h2>
   <p class="ex-intro">Vernal sits at the heart of one of the most geologically and paleontologically rich regions on earth. Here's what you absolutely can't miss.</p>
 
@@ -318,14 +318,14 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
           title="Dinosaur National Monument" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <span class="card-badge">â­ Top Attraction</span>
+        <span class="card-badge">⭐ Top Attraction</span>
         <span class="card-dist">~20 min</span>
       </div>
       <div class="card-body">
         <p class="card-cat">National Monument</p>
         <h3 class="card-name">Dinosaur National Monument</h3>
-        <p class="card-desc">The crown jewel of Vernal. The Quarry Exhibit Hall puts you face-to-face with 1,500+ dinosaur bones still embedded in the cliff face â€” exactly where they were discovered. Add in canyon hikes, petroglyphs, and the Green River and you'll easily spend a full day here.</p>
-        <a href="https://www.nps.gov/dino/index.htm" target="_blank" class="card-link">Plan Your Visit â†’</a>
+        <p class="card-desc">The crown jewel of Vernal. The Quarry Exhibit Hall puts you face-to-face with 1,500+ dinosaur bones still embedded in the cliff face — exactly where they were discovered. Add in canyon hikes, petroglyphs, and the Green River and you'll easily spend a full day here.</p>
+        <a href="https://www.nps.gov/dino/index.htm" target="_blank" class="card-link">Plan Your Visit →</a>
       </div>
     </div>
 
@@ -340,10 +340,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">In Town</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">Museum Â· State Park</p>
+        <p class="card-cat">Museum · State Park</p>
         <h3 class="card-name">Utah Field House of Natural History</h3>
         <p class="card-desc">Walk through 200 million years of geologic time on the famous ramp exhibit. Life-sized dinosaur replicas greet you outside. Inside: real fossils, a working fossil prep lab you can watch through glass, and a knowledgeable staff that doubles as an informal visitor center.</p>
-        <a href="https://stateparks.utah.gov/parks/field-house/" target="_blank" class="card-link">Learn More â†’</a>
+        <a href="https://stateparks.utah.gov/parks/field-house/" target="_blank" class="card-link">Learn More →</a>
       </div>
     </div>
 
@@ -358,10 +358,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~15 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">Historic Site Â· Petroglyphs</p>
+        <p class="card-cat">Historic Site · Petroglyphs</p>
         <h3 class="card-name">McConkie Ranch Petroglyphs</h3>
-        <p class="card-desc">One of Utah's best-kept secrets. Near-life-sized Fremont culture figures carved into canyon sandstone â€” asks only a $5 donation. The main trail requires a short climb but rewards you with some of the most stunning ancient rock art in the American West.</p>
-        <a href="https://utah.com/vernal/mcconkie-ranch-petroglyphs" target="_blank" class="card-link">Get Directions â†’</a>
+        <p class="card-desc">One of Utah's best-kept secrets. Near-life-sized Fremont culture figures carved into canyon sandstone — asks only a $5 donation. The main trail requires a short climb but rewards you with some of the most stunning ancient rock art in the American West.</p>
+        <a href="https://utah.com/vernal/mcconkie-ranch-petroglyphs" target="_blank" class="card-link">Get Directions →</a>
       </div>
     </div>
 
@@ -378,8 +378,8 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
       <div class="card-body">
         <p class="card-cat">National Recreation Area</p>
         <h3 class="card-name">Flaming Gorge</h3>
-        <p class="card-desc">200,000+ acres of stunning red canyon, emerald reservoir, and world-class fishing. Boat, waterski, camp, hike, or simply drive the Flaming Gorgeâ€“Uintas National Scenic Byway. The dam tour is surprisingly fascinating. Often called "the crown of the Uinta Mountains."</p>
-        <a href="https://www.fs.usda.gov/detail/ashley/recreation/?cid=fsm9_004244" target="_blank" class="card-link">Explore Flaming Gorge â†’</a>
+        <p class="card-desc">200,000+ acres of stunning red canyon, emerald reservoir, and world-class fishing. Boat, waterski, camp, hike, or simply drive the Flaming Gorge–Uintas National Scenic Byway. The dam tour is surprisingly fascinating. Often called "the crown of the Uinta Mountains."</p>
+        <a href="https://www.fs.usda.gov/detail/ashley/recreation/?cid=fsm9_004244" target="_blank" class="card-link">Explore Flaming Gorge →</a>
       </div>
     </div>
 
@@ -394,10 +394,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~10 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">State Park Â· Hiking</p>
+        <p class="card-cat">State Park · Hiking</p>
         <h3 class="card-name">Red Fleet State Park</h3>
-        <p class="card-desc">Known as "Little Lake Powell," Red Fleet offers a stunning sandstone lake setting. Hike the Dinosaur Trackway â€” a 3-mile round trip across sandstone formations to real 200-million-year-old dinosaur footprints, ending at a beautiful swimming spot on the reservoir. Kayak rentals available.</p>
-        <a href="https://stateparks.utah.gov/parks/red-fleet/" target="_blank" class="card-link">Park Info â†’</a>
+        <p class="card-desc">Known as "Little Lake Powell," Red Fleet offers a stunning sandstone lake setting. Hike the Dinosaur Trackway — a 3-mile round trip across sandstone formations to real 200-million-year-old dinosaur footprints, ending at a beautiful swimming spot on the reservoir. Kayak rentals available.</p>
+        <a href="https://stateparks.utah.gov/parks/red-fleet/" target="_blank" class="card-link">Park Info →</a>
       </div>
     </div>
 
@@ -414,8 +414,8 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
       <div class="card-body">
         <p class="card-cat">Scenic Wonder</p>
         <h3 class="card-name">Fantasy Canyon</h3>
-        <p class="card-desc">One of the most bizarre and beautiful places in Utah â€” otherworldly sandstone formations that look like they belong on another planet. About an hour south of Vernal, accessible by passenger car. Visit near sunset for extraordinary photography. Small but absolutely unforgettable.</p>
-        <a href="https://www.blm.gov/visit/fantasy-canyon" target="_blank" class="card-link">Directions â†’</a>
+        <p class="card-desc">One of the most bizarre and beautiful places in Utah — otherworldly sandstone formations that look like they belong on another planet. About an hour south of Vernal, accessible by passenger car. Visit near sunset for extraordinary photography. Small but absolutely unforgettable.</p>
+        <a href="https://www.blm.gov/visit/fantasy-canyon" target="_blank" class="card-link">Directions →</a>
       </div>
     </div>
 
@@ -430,10 +430,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~8 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">Hiking Â· Nature</p>
+        <p class="card-cat">Hiking · Nature</p>
         <h3 class="card-name">Moonshine Arch</h3>
-        <p class="card-desc">A stunning 40-foot-tall, 85-foot-wide sandstone arch just 8 miles from town â€” easy 2-mile round-trip hike with views of Steinaker Reservoir. Shaded caverns behind the arch are perfect for a picnic. Moab doesn't have a monopoly on Utah arches â€” this one is spectacular and never crowded.</p>
-        <a href="https://www.alltrails.com/trail/us/utah/moonshine-arch-trail" target="_blank" class="card-link">Trail Info â†’</a>
+        <p class="card-desc">A stunning 40-foot-tall, 85-foot-wide sandstone arch just 8 miles from town — easy 2-mile round-trip hike with views of Steinaker Reservoir. Shaded caverns behind the arch are perfect for a picnic. Moab doesn't have a monopoly on Utah arches — this one is spectacular and never crowded.</p>
+        <a href="https://www.alltrails.com/trail/us/utah/moonshine-arch-trail" target="_blank" class="card-link">Trail Info →</a>
       </div>
     </div>
 
@@ -448,20 +448,20 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~30 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">Nature Â· Hiking</p>
+        <p class="card-cat">Nature · Hiking</p>
         <h3 class="card-name">Jones Hole Fish Hatchery</h3>
-        <p class="card-desc">A beautiful drive leads to a working fish hatchery where you can watch thousands of trout up close. From here, the Jones Hole Trail follows a stunning creek through canyon walls to Ely Creek Waterfall â€” one of the most rewarding hikes in the region. Kids love the fish.</p>
-        <a href="https://www.fws.gov/office/jones-hole-national-fish-hatchery" target="_blank" class="card-link">Plan Visit â†’</a>
+        <p class="card-desc">A beautiful drive leads to a working fish hatchery where you can watch thousands of trout up close. From here, the Jones Hole Trail follows a stunning creek through canyon walls to Ely Creek Waterfall — one of the most rewarding hikes in the region. Kids love the fish.</p>
+        <a href="https://www.fws.gov/office/jones-hole-national-fish-hatchery" target="_blank" class="card-link">Plan Visit →</a>
       </div>
     </div>
 
   </div>
 
   <div class="tip-box rv">
-    <span class="tip-icon">ðŸ’¡</span>
+    <span class="tip-icon">💡</span>
     <div class="tip-text">
       <h4>Best Western Pro Tip</h4>
-      <p>Dinosaur National Monument is just 20 minutes from our front door. Our front desk team is happy to share the best times to visit, trail recommendations for kids and pets, and which roads are passable. Stop by â€” we know this place like home. Or <a href="/faq">check the FAQ</a> for more tips.</p>
+      <p>Dinosaur National Monument is just 20 minutes from our front door. Our front desk team is happy to share the best times to visit, trail recommendations for kids and pets, and which roads are passable. Stop by — we know this place like home. Or <a href="/faq">check the FAQ</a> for more tips.</p>
     </div>
   </div>
 </div>
@@ -472,18 +472,18 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
   <h2>Your Base Camp<br><em>for All of It.</em></h2>
   <p>Every adventure on this page starts and ends with a great night's rest. Best Western Vernal Inn has spacious rooms, free hot breakfast, and a welcome that makes you feel like you belong here.</p>
   <div class="ex-cta-btns">
-    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-book">ðŸ“ž ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-call">ðŸ“ž (435) 789-6625</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-call">📞 (435) 789-6625</a>
   </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     SECTION 2 â€” OUTDOOR ADVENTURES
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ═══════════════════════════════════
+     SECTION 2 — OUTDOOR ADVENTURES
+════════════════════════════════════ -->
 <div class="stripe" id="outdoors">
 <div class="ex-sec rv">
-  <p class="ex-tag">âœ¦ Get Outside</p>
-  <h2 class="ex-title">More Than Dinosaurs â€”<br><em>Vernal is an Outdoor Paradise</em></h2>
+  <p class="ex-tag">✦ Get Outside</p>
+  <h2 class="ex-title">More Than Dinosaurs —<br><em>Vernal is an Outdoor Paradise</em></h2>
   <p class="ex-intro">Over 100 miles of mountain biking trails, whitewater on the Green River, kayaking, paddleboarding, ATV tracks, and hiking that rivals anything in Utah. All of it within an hour of your pillow.</p>
 
   <div class="cards-grid">
@@ -499,11 +499,11 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~20 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">Rafting Â· Adventure</p>
+        <p class="card-cat">Rafting · Adventure</p>
         <h3 class="card-name">Green River Rafting</h3>
         <p class="card-desc">Raft through the breathtaking canyons of Dinosaur National Monument on the legendary Green River. Single-day and multi-day trips available. Dinosaur River Expeditions is Vernal's only locally owned outfitter (since 1979). OARS and Adrift Adventures also offer excellent guided trips.</p>
-        <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
-        <a href="https://www.dinosaurriverexpeditions.com" target="_blank" class="card-link">Book a Trip â†’</a>
+        <div class="stars-sm">★★★★★</div>
+        <a href="https://www.dinosaurriverexpeditions.com" target="_blank" class="card-link">Book a Trip →</a>
       </div>
     </div>
 
@@ -520,8 +520,8 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
       <div class="card-body">
         <p class="card-cat">Mountain Biking</p>
         <h3 class="card-name">McCoy Flats &amp; Trail Network</h3>
-        <p class="card-desc">Vernal's mountain biking is gaining a devoted following â€” and for good reason. 40+ miles at McCoy Flats alone, plus the Red Fleet Complex, Lapoint Trail System, and the aspen-lined Dry Fork Flume Trail. All without the Moab crowds. Stop at Altitude Cycle on Main Street for maps and advice.</p>
-        <a href="https://www.imba.com/trails/mccoy-flats" target="_blank" class="card-link">Trail Info â†’</a>
+        <p class="card-desc">Vernal's mountain biking is gaining a devoted following — and for good reason. 40+ miles at McCoy Flats alone, plus the Red Fleet Complex, Lapoint Trail System, and the aspen-lined Dry Fork Flume Trail. All without the Moab crowds. Stop at Altitude Cycle on Main Street for maps and advice.</p>
+        <a href="https://www.imba.com/trails/mccoy-flats" target="_blank" class="card-link">Trail Info →</a>
       </div>
     </div>
 
@@ -536,10 +536,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~10 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">State Park Â· Water</p>
+        <p class="card-cat">State Park · Water</p>
         <h3 class="card-name">Steinaker State Park</h3>
-        <p class="card-desc">Swimming, wakeboarding, kayaking, ATV trails, and camping â€” all centered around a beautiful reservoir just minutes from town. One of three state parks in the Vernal area. Great for families with kids who need to burn energy after a day of museum-going.</p>
-        <a href="https://stateparks.utah.gov/parks/steinaker/" target="_blank" class="card-link">Park Details â†’</a>
+        <p class="card-desc">Swimming, wakeboarding, kayaking, ATV trails, and camping — all centered around a beautiful reservoir just minutes from town. One of three state parks in the Vernal area. Great for families with kids who need to burn energy after a day of museum-going.</p>
+        <a href="https://stateparks.utah.gov/parks/steinaker/" target="_blank" class="card-link">Park Details →</a>
       </div>
     </div>
 
@@ -554,10 +554,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~5 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">ATV Â· Multi-Sport</p>
+        <p class="card-cat">ATV · Multi-Sport</p>
         <h3 class="card-name">Buckskin Hills Recreation Complex</h3>
-        <p class="card-desc">Vernal's year-round outdoor sports hub. Mountain biking, ATV trails, motocross, shooting range, drag strip, speedway, camping â€” and in winter, a ski and snow tubing hill. There is genuinely something for everyone here, in every season.</p>
-        <a href="https://www.dinoland.com" target="_blank" class="card-link">Learn More â†’</a>
+        <p class="card-desc">Vernal's year-round outdoor sports hub. Mountain biking, ATV trails, motocross, shooting range, drag strip, speedway, camping — and in winter, a ski and snow tubing hill. There is genuinely something for everyone here, in every season.</p>
+        <a href="https://www.dinoland.com" target="_blank" class="card-link">Learn More →</a>
       </div>
     </div>
 
@@ -572,10 +572,10 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <span class="card-dist">~40 min</span>
       </div>
       <div class="card-body">
-        <p class="card-cat">Fishing Â· Recreation</p>
+        <p class="card-cat">Fishing · Recreation</p>
         <h3 class="card-name">Flaming Gorge Fishing</h3>
-        <p class="card-desc">Widely considered some of the best fishing in the western United States â€” record-breaking lake trout, rainbow and brown trout, smallmouth bass, and more in the reservoir and Green River tailwaters. Guided trips available. Bring a license and come prepared to be amazed.</p>
-        <a href="https://www.utah.gov/fishing" target="_blank" class="card-link">Fishing Info â†’</a>
+        <p class="card-desc">Widely considered some of the best fishing in the western United States — record-breaking lake trout, rainbow and brown trout, smallmouth bass, and more in the reservoir and Green River tailwaters. Guided trips available. Bring a license and come prepared to be amazed.</p>
+        <a href="https://www.utah.gov/fishing" target="_blank" class="card-link">Fishing Info →</a>
       </div>
     </div>
 
@@ -593,7 +593,7 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
         <p class="card-cat">Golf</p>
         <h3 class="card-name">Dinaland Golf Course</h3>
         <p class="card-desc">Vernal's local 18-hole golf course set against stunning high-desert scenery. Consistently well-maintained and very reasonably priced. A perfect way to spend a morning before heading out to explore the canyon country. Just minutes from Best Western.</p>
-        <a href="https://www.golflink.com/golf-courses/ut/vernal/dinaland-golf-course" target="_blank" class="card-link">Tee Times â†’</a>
+        <a href="https://www.golflink.com/golf-courses/ut/vernal/dinaland-golf-course" target="_blank" class="card-link">Tee Times →</a>
       </div>
     </div>
 
@@ -601,128 +601,128 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
 </div>
 </div>
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-     SECTION 4 â€” RESTAURANTS
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ═══════════════════════════════════
+     SECTION 4 — RESTAURANTS
+════════════════════════════════════ -->
 <div id="restaurants">
 <div class="ex-sec rv">
-  <p class="ex-tag">âœ¦ Where to Eat</p>
+  <p class="ex-tag">✦ Where to Eat</p>
   <h2 class="ex-title">Vernal's Best<br><em>Restaurants</em></h2>
-  <p class="ex-intro">Vernal's dining scene is genuinely impressive for a small town. From New York-trained Italian chefs to the best Thai food you'll find in rural Utah â€” here are the places worth making a reservation for.</p>
+  <p class="ex-intro">Vernal's dining scene is genuinely impressive for a small town. From New York-trained Italian chefs to the best Thai food you'll find in rural Utah — here are the places worth making a reservation for.</p>
 
   <div class="resto-grid">
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">Italian Â· Pizza Â· Pasta</p><h3 class="rcard-name">Antica Forma</h3></div>
-        <span style="font-size:1.6rem;">ðŸ•</span>
+        <div><p class="rcard-cuisine">Italian · Pizza · Pasta</p><h3 class="rcard-name">Antica Forma</h3></div>
+        <span style="font-size:1.6rem;">🍕</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
-      <p class="rcard-desc">Vernal's crown jewel of dining. The chef trained at a top New York pizza institution and it shows â€” housemade mozzarella, wood-fired crust with the perfect char, handmade pasta, and a balsamic dressing made in-house. Consistently ranked the #1 restaurant in Vernal. The pistachio pizza is legendary.</p>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Vernal's crown jewel of dining. The chef trained at a top New York pizza institution and it shows — housemade mozzarella, wood-fired crust with the perfect char, handmade pasta, and a balsamic dressing made in-house. Consistently ranked the #1 restaurant in Vernal. The pistachio pizza is legendary.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$$ Â· Dinner</span>
-        <a href="https://anticaforma.com/" target="_blank" rel="noopener" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$$ · Dinner</span>
+        <a href="https://anticaforma.com/" target="_blank" rel="noopener" class="rcard-link">View →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">Craft Beer Â· American</p><h3 class="rcard-name">Vernal Brewing Company</h3></div>
-        <span style="font-size:1.6rem;">ðŸº</span>
+        <div><p class="rcard-cuisine">Craft Beer · American</p><h3 class="rcard-name">Vernal Brewing Company</h3></div>
+        <span style="font-size:1.6rem;">🍺</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
-      <p class="rcard-desc">Right across from the Utah Field House â€” the perfect post-museum stop. A dozen craft beers on tap including the adventure-themed series with GPS coordinates for local trails on the cans. Great pub menu, warm atmosphere, and a root beer that'll win over non-drinkers too. Beloved by locals and visitors alike.</p>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Right across from the Utah Field House — the perfect post-museum stop. A dozen craft beers on tap including the adventure-themed series with GPS coordinates for local trails on the cans. Great pub menu, warm atmosphere, and a root beer that'll win over non-drinkers too. Beloved by locals and visitors alike.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$$ Â· Lunch &amp; Dinner</span>
-        <a href="https://www.vernalbrewing.com" target="_blank" class="rcard-link">Website â†’</a>
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.vernalbrewing.com" target="_blank" class="rcard-link">Website →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">Thai Â· Asian</p><h3 class="rcard-name">Khao Hom Thai Kitchen</h3></div>
-        <span style="font-size:1.6rem;">ðŸœ</span>
+        <div><p class="rcard-cuisine">Thai · Asian</p><h3 class="rcard-name">Khao Hom Thai Kitchen</h3></div>
+        <span style="font-size:1.6rem;">🍜</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
-      <p class="rcard-desc">Consistently ranked the #1 restaurant in Vernal on multiple platforms. Authentic Thai food â€” attentive service, incredible cashew chicken, Pad Thai, and curries that reviewers from Denver say rivals the best Thai restaurants there. A genuine surprise in northeastern Utah and an absolute must-visit.</p>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Consistently ranked the #1 restaurant in Vernal on multiple platforms. Authentic Thai food — attentive service, incredible cashew chicken, Pad Thai, and curries that reviewers from Denver say rivals the best Thai restaurants there. A genuine surprise in northeastern Utah and an absolute must-visit.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$$ Â· Lunch &amp; Dinner</span>
-        <a href="https://www.facebook.com/KhaoHomThaiKitchen/" target="_blank" rel="noopener" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.facebook.com/KhaoHomThaiKitchen/" target="_blank" rel="noopener" class="rcard-link">View →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">American Â· Breakfast</p><h3 class="rcard-name">Betty's Cafe</h3></div>
-        <span style="font-size:1.6rem;">â˜•</span>
+        <div><p class="rcard-cuisine">American · Breakfast</p><h3 class="rcard-name">Betty's Cafe</h3></div>
+        <span style="font-size:1.6rem;">☕</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…Â½</div>
-      <p class="rcard-desc">The best breakfast in Vernal â€” full stop. Colossal homemade biscuits with strawberry jam, perfect poached eggs, honest coffee, and genuinely kind staff. A beloved local institution with a warm western atmosphere. Regulars fill it every morning. Get here early â€” the biscuits run out.</p>
+      <div class="stars-sm">★★★★½</div>
+      <p class="rcard-desc">The best breakfast in Vernal — full stop. Colossal homemade biscuits with strawberry jam, perfect poached eggs, honest coffee, and genuinely kind staff. A beloved local institution with a warm western atmosphere. Regulars fill it every morning. Get here early — the biscuits run out.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$ Â· Breakfast &amp; Lunch</span>
-        <a href="https://sites.google.com/bettys-cafe.com/bettys/home" target="_blank" rel="noopener" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$ · Breakfast &amp; Lunch</span>
+        <a href="https://sites.google.com/bettys-cafe.com/bettys/home" target="_blank" rel="noopener" class="rcard-link">View →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">Mexican Â· Authentic</p><h3 class="rcard-name">Plaza Mexicana</h3></div>
-        <span style="font-size:1.6rem;">ðŸŒ®</span>
+        <div><p class="rcard-cuisine">Mexican · Authentic</p><h3 class="rcard-name">Plaza Mexicana</h3></div>
+        <span style="font-size:1.6rem;">🌮</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
-      <p class="rcard-desc">Reviewers call it the best Mexican food in Utah â€” a high bar. The Chimichangas Mole are legendary, the portions are enormous, and the atmosphere is lively and authentic. Multiple visitors returned two nights in a row. The margaritas and pina coladas are excellent. Huge portions, warm service.</p>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Reviewers call it the best Mexican food in Utah — a high bar. The Chimichangas Mole are legendary, the portions are enormous, and the atmosphere is lively and authentic. Multiple visitors returned two nights in a row. The margaritas and pina coladas are excellent. Huge portions, warm service.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$$ Â· Lunch &amp; Dinner</span>
-        <a href="https://www.facebook.com/pages/Plaza-Mexicana/671750472935056?_rdr" target="_blank" rel="noopener" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.facebook.com/pages/Plaza-Mexicana/671750472935056?_rdr" target="_blank" rel="noopener" class="rcard-link">View →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">Mexican Â· Authentic</p><h3 class="rcard-name">La CabaÃ±a</h3></div>
-        <span style="font-size:1.6rem;">ðŸŒ®</span>
+        <div><p class="rcard-cuisine">Mexican · Authentic</p><h3 class="rcard-name">La Cabaña</h3></div>
+        <span style="font-size:1.6rem;">🌮</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
-      <p class="rcard-desc">Authentic Mexican in Vernal â€” and home of the famous "Dino Dog": a bacon-wrapped hotdog on a toasted bun served with fries ($11.99), dressed however you like from a huge list of toppings, from pico de gallo and birria salsas to guacamole, jalapeÃ±os, and chile verde. A fun, flavor-packed stop that fits right into dinosaur country.</p>
+      <div class="stars-sm">★★★★★</div>
+      <p class="rcard-desc">Authentic Mexican in Vernal — and home of the famous "Dino Dog": a bacon-wrapped hotdog on a toasted bun served with fries ($11.99), dressed however you like from a huge list of toppings, from pico de gallo and birria salsas to guacamole, jalapeños, and chile verde. A fun, flavor-packed stop that fits right into dinosaur country.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$$ Â· Lunch &amp; Dinner</span>
-        <a href="https://www.facebook.com/profile.php?id=100046371085036" target="_blank" rel="noopener" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.facebook.com/profile.php?id=100046371085036" target="_blank" rel="noopener" class="rcard-link">View →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">BBQ Â· American</p><h3 class="rcard-name">Swain Brothers</h3></div>
-        <span style="font-size:1.6rem;">ðŸ«™</span>
+        <div><p class="rcard-cuisine">BBQ · American</p><h3 class="rcard-name">Swain Brothers</h3></div>
+        <span style="font-size:1.6rem;">🫙</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…â˜…</div>
+      <div class="stars-sm">★★★★★</div>
       <p class="rcard-desc">Brisket mac &amp; cheese, smoked meats, and a server named Jamie who smokes the meat herself and takes immense pride in every plate. Described as a hidden gem by visitors who expected a bar but found extraordinary BBQ. The brisket and house-smoked meats are exceptional. A local treasure.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$$ Â· Lunch &amp; Dinner</span>
-        <a href="https://www.yelp.com/biz/swain-brothers-vernal" target="_blank" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$$ · Lunch &amp; Dinner</span>
+        <a href="https://www.yelp.com/biz/swain-brothers-vernal" target="_blank" class="rcard-link">View →</a>
       </div>
     </div>
 
     <div class="rcard rv">
       <div class="rcard-top">
-        <div><p class="rcard-cuisine">Breakfast Â· CafÃ©</p><h3 class="rcard-name">Abby's Cafe</h3></div>
-        <span style="font-size:1.6rem;">ðŸ¥ž</span>
+        <div><p class="rcard-cuisine">Breakfast · Café</p><h3 class="rcard-name">Abby's Cafe</h3></div>
+        <span style="font-size:1.6rem;">🥞</span>
       </div>
-      <div class="stars-sm">â˜…â˜…â˜…â˜…Â½</div>
+      <div class="stars-sm">★★★★½</div>
       <p class="rcard-desc">Plate-sized pancakes, great Rueben sandwiches, homemade vegetable soup, and the best scone in Vernal. A cozy, locally-loved spot that surprised more than a few visitors who called it their new favorite. Warm, personal service and honest food at prices that make Vernal feel like a deal.</p>
       <div class="rcard-foot">
-        <span class="rcard-price">$ Â· Breakfast &amp; Lunch</span>
-        <a href="https://www.facebook.com/p/Abbys-Cafe-100066940454961/" target="_blank" rel="noopener" class="rcard-link">View â†’</a>
+        <span class="rcard-price">$ · Breakfast &amp; Lunch</span>
+        <a href="https://www.facebook.com/p/Abbys-Cafe-100066940454961/" target="_blank" rel="noopener" class="rcard-link">View →</a>
       </div>
     </div>
 
   </div>
 
   <div class="tip-box rv">
-    <span class="tip-icon">ðŸ³</span>
+    <span class="tip-icon">🍳</span>
     <div class="tip-text">
-      <h4>Don't Forget â€” Free Breakfast Included at Best Western</h4>
-      <p>Every stay includes our free hot breakfast every morning â€” hot dishes, pancakes, pastries, fresh fruit, juice, and coffee. Save your appetite for these restaurants at lunch and dinner, and let us take care of your mornings. <a href="/faq#dining">FAQ: breakfast details â†’</a></p>
+      <h4>Don't Forget — Free Breakfast Included at Best Western</h4>
+      <p>Every stay includes our free hot breakfast every morning — hot dishes, pancakes, pastries, fresh fruit, juice, and coffee. Save your appetite for these restaurants at lunch and dinner, and let us take care of your mornings. <a href="/faq#dining">FAQ: breakfast details →</a></p>
     </div>
   </div>
 </div>
@@ -731,9 +731,9 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
 <!-- LOCATION MAP -->
 <div class="stripe">
 <div class="ex-sec rv">
-  <p class="ex-tag">âœ¦ Location</p>
+  <p class="ex-tag">✦ Location</p>
   <h2 class="ex-title">Everything Within<br><em>Easy Reach</em></h2>
-  <p class="ex-intro">Best Western Vernal Inn sits right in Naples part of Vernal â€” a perfect base camp for every attraction on this page.</p>
+  <p class="ex-intro">Best Western Vernal Inn sits right in Naples part of Vernal — a perfect base camp for every attraction on this page.</p>
 
   <div class="map-wrap">
     <iframe
@@ -744,14 +744,14 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
   </div>
 
   <div class="dist-bar rv">
-    <div class="dist-pill">ðŸ¦• <strong>Dinosaur Nat'l Monument</strong> â€” 20 min</div>
-    <div class="dist-pill">ðŸ›ï¸ <strong>Utah Field House</strong> â€” In Town</div>
-    <div class="dist-pill">ðŸ”¥ <strong>Flaming Gorge</strong> â€” 40 min</div>
-    <div class="dist-pill">ðŸª¨ <strong>McConkie Ranch</strong> â€” 15 min</div>
-    <div class="dist-pill">ðŸ¦¶ <strong>Red Fleet State Park</strong> â€” 10 min</div>
-    <div class="dist-pill">ðŸŒ‰ <strong>Moonshine Arch</strong> â€” 8 min</div>
-    <div class="dist-pill">âœˆï¸ <strong>Vernal Airport</strong> â€” 2 min</div>
-    <div class="dist-pill">â›³ <strong>Dinaland Golf</strong> â€” 5 min</div>
+    <div class="dist-pill">🦕 <strong>Dinosaur Nat'l Monument</strong> — 20 min</div>
+    <div class="dist-pill">🏛️ <strong>Utah Field House</strong> — In Town</div>
+    <div class="dist-pill">🔥 <strong>Flaming Gorge</strong> — 40 min</div>
+    <div class="dist-pill">🪨 <strong>McConkie Ranch</strong> — 15 min</div>
+    <div class="dist-pill">🦶 <strong>Red Fleet State Park</strong> — 10 min</div>
+    <div class="dist-pill">🌉 <strong>Moonshine Arch</strong> — 8 min</div>
+    <div class="dist-pill">✈️ <strong>Vernal Airport</strong> — 2 min</div>
+    <div class="dist-pill">⛳ <strong>Dinaland Golf</strong> — 5 min</div>
   </div>
 </div>
 </div>
@@ -759,58 +759,58 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
 <!-- FINAL BOOK CTA -->
 <section class="ex-cta">
   <h2>Ready to<br><em>Make Memories?</em></h2>
-  <p>Book your stay at Best Western Vernal Inn â€” Vernal's most comfortable home base for everything this incredible corner of Utah has to offer.</p>
+  <p>Book your stay at Best Western Vernal Inn — Vernal's most comfortable home base for everything this incredible corner of Utah has to offer.</p>
   <div class="ex-cta-btns">
-    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-book">ðŸ“ž ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
-    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-call">ðŸ“ž (435) 789-6625</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-book">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+    <a href="tel:${BUSINESS.phoneTel}" class="ex-cta-call">📞 (435) 789-6625</a>
   </div>
-  <p class="ex-cta-address">1935 South 1500 East, Vernal, UT 84078 &nbsp;Â·&nbsp;
+  <p class="ex-cta-address">1935 South 1500 East, Vernal, UT 84078 &nbsp;·&nbsp;
     <a href="https://bestwesternvernalinn.com" target="_blank">bestwesternvernalinn.com</a>
   </p>
 </section>
 
 <!-- FOOTER -->
-<!-- ===== MESH: Plan Your Stay in Vernal â€” pillar+sibling cluster ===== -->
+<!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
 <section class="mesh-cluster" style="background:var(--cream);padding:3.5rem 1.5rem;border-top:1px solid rgba(var(--gold-rgb),0.25);border-bottom:1px solid rgba(var(--gold-rgb),0.25);margin:2rem 0 0;">
  <div style="max-width:1180px;margin:0 auto;">
-  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">âœ¦ Plan Your Stay</p>
+  <p style="font-size:.95rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-align:center;margin:0 0 .4rem;font-weight:700;">✦ Plan Your Stay</p>
   <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);color:var(--navy);text-align:center;margin:0 0 .6rem;">Find the Right Room for Your Trip</h2>
-  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work â€” we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
+  <p style="text-align:center;color:var(--muted);max-width:680px;margin:0 auto 2.4rem;font-size:1.02rem;">Whether you're staying a night or a month, exploring Dinosaur Country, or here for work — we have a page with the details you need. Start with our <a href="/" style="color:var(--navy);font-weight:700;border-bottom:1.5px solid var(--gold);text-decoration:none;">main hotel page</a> or jump straight to your situation:</p>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.2rem;">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">â€” Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
-      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">â€” 7-night discount pricing</span></li>
-      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">â€” Crew lodging &amp; corporate billing</span></li>
-      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">â€” Truck parking, flexible billing</span></li>
-      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">â€” Dogs welcome, ground-floor rooms</span></li>
-      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">â€” Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
+      <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
+      <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
+      <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
+      <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Destination</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">â€” 0.6 miles</span></li>
-      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">â€” 20 miles</span></li>
-      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">â€” 40 miles</span></li>
-      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">â€” 12 miles</span></li>
-      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">â€” 15 miles</span></li>
-      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">â€” 10 miles</span></li>
+      <li><a href="/hotel-near-vernal-airport" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Vernal Airport</a> <span style="color:var(--muted);font-size:.88em;">— 0.6 miles</span></li>
+      <li><a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Dinosaur Nat'l Monument</a> <span style="color:var(--muted);font-size:.88em;">— 20 miles</span></li>
+      <li><a href="/hotel-near-flaming-gorge" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Flaming Gorge</a> <span style="color:var(--muted);font-size:.88em;">— 40 miles</span></li>
+      <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
+      <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
+      <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
      </ul>
     </div>
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">Plan Your Visit</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">â€” Plan your trip</span></li>
-      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">â€” Activities &amp; attractions</span></li>
-      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">â€” Restaurants &amp; adventures</span></li>
-      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">â€” Common questions</span></li>
+      <li><a href="/vernal-utah-travel-guide" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Vernal Travel Guide</a> <span style="color:var(--muted);font-size:.88em;">— Plan your trip</span></li>
+      <li><a href="/things-to-do-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Things to Do</a> <span style="color:var(--muted);font-size:.88em;">— Activities &amp; attractions</span></li>
+      <li><a href="/explore" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Explore Vernal</a> <span style="color:var(--muted);font-size:.88em;">— Restaurants &amp; adventures</span></li>
+      <li><a href="/faq" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">FAQ</a> <span style="color:var(--muted);font-size:.88em;">— Common questions</span></li>
      </ul>
     </div>
   </div>
   <div style="text-align:center;margin-top:2.6rem;">
-   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">â† Back to Best Western Vernal Inn</a>
+   <a href="/" style="display:inline-block;background:var(--gold);color:var(--navy);font-weight:700;padding:.85rem 1.8rem;border-radius:4px;text-decoration:none;letter-spacing:.04em;">← Back to Best Western Vernal Inn</a>
   </div>
  </div>
 </section>
@@ -818,14 +818,14 @@ const bodyContent = `<!-- PAGE SUMMARY â€” AI-extractable, invisible to use
 ---
 
 <BaseLayout
-  title=`Explore Vernal Utah â€” Things To Do, Restaurants &amp; Adventures Near Best Western`
-  description=`Discover the best things to do in Vernal, Utah. Dinosaur National Monument, Flaming Gorge, McConkie Ranch petroglyphs, UTV tours, whitewater rafting, top-rated restaurants and more â€” all near Best Western Vernal Inn.`
+  title=`Explore Vernal Utah — Things To Do, Restaurants &amp; Adventures Near Best Western`
+  description=`Discover the best things to do in Vernal, Utah. Dinosaur National Monument, Flaming Gorge, McConkie Ranch petroglyphs, UTV tours, whitewater rafting, top-rated restaurants and more — all near Best Western Vernal Inn.`
   canonical=`https://bestwesternvernalinn.com/explore`
-  ogTitle=`Explore Vernal Utah â€” Things To Do Near Best Western Vernal Inn`
-  ogDescription=`The complete guide to Vernal, Utah: dinosaur monuments, river rafting, UTV adventures, top restaurants, and hidden gems â€” all within minutes of Best Western Vernal Inn.`
+  ogTitle=`Explore Vernal Utah — Things To Do Near Best Western Vernal Inn`
+  ogDescription=`The complete guide to Vernal, Utah: dinosaur monuments, river rafting, UTV adventures, top restaurants, and hidden gems — all within minutes of Best Western Vernal Inn.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
-  twitterTitle=`Explore Vernal Utah â€” Things To Do Near Best Western`
-  twitterDescription=`Dinosaur National Monument, Flaming Gorge, UTV tours, top restaurants â€” all minutes from your room at Best Western Vernal Inn.`
+  twitterTitle=`Explore Vernal Utah — Things To Do Near Best Western`
+  twitterDescription=`Dinosaur National Monument, Flaming Gorge, UTV tours, top restaurants — all minutes from your room at Best Western Vernal Inn.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   hreflang=`https://bestwesternvernalinn.com/explore`
   lastUpdated=`April 2026`
