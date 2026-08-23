@@ -1207,7 +1207,15 @@ footer a         { color: var(--gold); }
   .gal-grid      { grid-template-columns: 1fr 1fr; }
   .eyebrow       { font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 10px; }
   .htitle        { font-size: 2.4rem; margin-bottom: 12px; }
-  .hsub          { margin-bottom: 22px; }
+  /* Phone hero: the sticky booking bar (.sbb) already pins Call + Book Direct
+     to the bottom of every page, so the hero's own long subtitle, duplicate
+     Book Direct button, and promo-code callout are redundant weight on a
+     small screen — trim to headline + one action (Explore Rooms). */
+  .hero .hsub          { display: none; }
+  .hero .hbtns .btn-p  { display: none; }
+  /* !important: the element also carries an inline display:inline-block
+     (index.astro), which otherwise outranks this stylesheet rule. */
+  .hero .promo-callout { display: none !important; }
   .amen-grid     { grid-template-columns: 1fr 1fr; }
   .cta-btns      { flex-direction: column; align-items: center; }
   #lbprev        { left: 6px; }
@@ -2287,12 +2295,10 @@ body.video-page { background: #000; }
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 @media (max-width: 600px) {
-  .pet-badge { width: 92px; top: 90px; right: 10px; bottom: auto; border-radius: 12px; }
-  .pet-badge-img { height: 68px; }
-  .pet-badge-footer { padding: 6px 8px; gap: 4px; }
-  .pet-paw-icon { font-size: .9rem; }
-  .pet-label { font-size: .58rem; }
-  .pet-sub { font-size: .46rem; }
+  /* The hero is already tight on phone-width real estate and "Pet Friendly"
+     is covered on this page by the amenities list further down — drop the
+     floating badge on mobile rather than keep shrinking it. */
+  .pet-badge { display: none; }
 }
 
 /* ============================================================
