@@ -25,12 +25,14 @@ const bodyContent = `<div class="distance-bar">
 
 <div class="content-wrap">
 
+  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;line-height:1.15;color:var(--navy);text-align:center;margin:0 0 1.2rem;">Oilfield Worker Housing in Vernal, Utah</h1>
+
   <div class="intro-pull rv">
     The Uintah Basin is one of the most productive energy regions in the western United States, and Vernal is its hub. Best Western Vernal Inn has been housing oilfield workers, pipeline crews, drilling teams, and energy contractors for years. We know what a field crew needs — and we've built our operation around delivering it reliably, week after week.
   </div>
 
   <section class="content-section rv">
-    <h2>Why Crews Choose Best Western Vernal</h2>
+    <h2>Why Crews Choose Best Western Vernal Inn</h2>
     <p>There's a difference between a hotel that tolerates work crews and one that's genuinely set up for them. We're in the second category. Our team understands the rhythm of oilfield rotations — early starts, late arrivals, extended stays, and schedules that change without much notice.</p>
     <ul class="feat-list">
       <li>Weekly and monthly rates well below nightly pricing</li>
@@ -86,7 +88,7 @@ const bodyContent = `<div class="distance-bar">
 
   <section class="content-section rv">
     <h2>Corporate &amp; Company Billing</h2>
-    <p>We work directly with companies, drilling contractors, pipeline operators, and project managers to set up billing arrangements that make the administrative side easy. If you're booking for a crew, we can handle it as a single account.</p>
+    <p>We work directly with companies, drilling contractors, pipeline operators, and project managers to set up billing arrangements that make the administrative side easy. If you're booking for a crew, we can handle it as a single account. If you'd rather start in writing, you can <a href="/corporate-rates" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">request a corporate rate or set up an account</a> and we'll follow up with the details.</p>
     <div class="tips-grid">
       <div class="tip-card">
         <span class="tip-icon">🏢</span>
@@ -158,10 +160,10 @@ const bodyContent = `<div class="distance-bar">
     <h2>How to Book Housing for Your Crew</h2>
     <p>The simplest way is a phone call. Tell us how many people, how long the rotation, and whether you need corporate billing set up. We'll handle the rest.</p>
     <ul class="feat-list">
-      <li>Call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> — speak directly with the front desk</li>
+      <li>Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">(435) 789-6625</a> — speak directly with the front desk</li>
       <li>Text the same number for quick confirmations</li>
       <li>Email available for formal corporate account setup</li>
-      <li>Individual bookings also available at <a href="https://bestwesternvernalinn.com">bestwesternvernalinn.com</a></li>
+      <li>Individual bookings also available at <a href="https://bestwesternvernalinn.com" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">bestwesternvernalinn.com</a></li>
       <li>Book early during busy basin periods — rooms fill fast</li>
       <li>Let us know about pets, parking needs, or special requirements upfront</li>
     </ul>
@@ -236,7 +238,7 @@ const bodyContent = `<div class="distance-bar">
         <div class="gline"></div>
       </div>
       <div class="faq-list">
-        <div class="faq-item"><button class="faq-q">Does Best Western Vernal offer housing for oilfield workers? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We regularly house oilfield workers, pipeline crews, drilling teams, and energy contractors working in the Uintah Basin. We offer weekly and monthly rates, truck parking, corporate billing, and the full amenity package.</p></div></div>
+        <div class="faq-item"><button class="faq-q">Does Best Western Vernal Inn offer housing for oilfield workers? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We regularly house oilfield workers, pipeline crews, drilling teams, and energy contractors working in the Uintah Basin. We offer weekly and monthly rates, truck parking, corporate billing, and the full amenity package.</p></div></div>
         <div class="faq-item"><button class="faq-q">Is there truck and equipment parking on site? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We have on-site parking suitable for work trucks, trailers, and larger vehicles. This is a standard expectation for our oilfield and contractor guests.</p></div></div>
         <div class="faq-item"><button class="faq-q">Can my company set up a billing account for the crew? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Yes. We work with companies to set up corporate accounts with invoicing and itemized billing. Call us at <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> to discuss your company's needs before the crew arrives.</p></div></div>
         <div class="faq-item"><button class="faq-q">What are the weekly rates for oilfield worker housing in Vernal? <span class="faq-arrow">▼</span></button><div class="faq-a"><p>Rates vary by season and room type. Call us directly for current crew pricing — extended stay rates are often not accurately reflected on third-party booking platforms.</p></div></div>
@@ -254,7 +256,7 @@ const bodyContent = `<div class="distance-bar">
 
 <BaseLayout
   title=`Oilfield Worker Housing in Vernal, Utah | Best Western Vernal Inn`
-  description=`Oilfield and energy worker housing in Vernal, Utah. Best Western Extended Stay offers weekly and monthly rates, truck parking, early breakfast, laundry, and flexible billing for crews working the Uintah Basin. Call (435) 789-6625.`
+  description=`Oilfield and energy worker housing in Vernal, Utah. ${BUSINESS.name} offers weekly and monthly rates, truck parking, early breakfast, laundry, and flexible billing for crews working the Uintah Basin. Call (435) 789-6625.`
   canonical=`https://bestwesternvernalinn.com/oilfield-housing-vernal`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`

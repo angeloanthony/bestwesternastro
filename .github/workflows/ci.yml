@@ -21,6 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Runs before the others: mojibake is valid UTF-8 and valid Astro, so
+      # prettier/eslint/build all pass on it. Only a byte-level check sees it.
+      # Guards against a repeat of 60a7552, where a find-and-replace using the
+      # platform default encoding corrupted five pages (BOM + CP1252 mojibake)
+      # and shipped 212 broken sequences into visible copy and JSON-LD.
+      - name: Check encoding (no BOMs, no mojibake)
+        run: node scripts/check-encoding.mjs --verbose
+
       - name: Check formatting (new code only; existing site is prettier-ignored)
         run: npx prettier --check .
 
