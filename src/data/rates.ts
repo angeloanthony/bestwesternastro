@@ -26,12 +26,10 @@ export const RATES = {
   weekly: {
     standardQueen: 588,
     doubleQueen: 660,
-    /** Published on the homepage (rate card, rate table, and an Offer in JSON-LD) but
-     *  MISSING from /weekly-hotel-rates-vernal-utah, which is the page that ranks for
-     *  rate queries. The gap is on the rate page, not here — add the row when the
-     *  cluster is rewritten. */
     standardKing: 700,
-    /** Homepage rate table says "Call for rate"; no number has ever been published. */
+    /** Covers every suite type — King Suite (Kitchenette), King Jacuzzi Suite and
+     *  Jacuzzi Double Queen Suite are all listed as "Call for rate" on the homepage.
+     *  No number has ever been published for any of them, so one null gates them all. */
     jacuzziSuite: null as number | null,
   },
 
