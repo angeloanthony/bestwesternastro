@@ -13,7 +13,11 @@ import { join } from 'node:path';
 const DIST = 'dist';
 
 /** Pages held to the destination standard. Add a slug here when a page is rewritten. */
-const DESTINATION_PAGES = ['hotel-near-ashley-national-forest', 'hotel-near-jensen-utah'];
+const DESTINATION_PAGES = [
+  'hotel-near-ashley-national-forest',
+  'hotel-near-jensen-utah',
+  'hotel-near-dinosaur-national-monument',
+];
 
 const strip = (h) =>
   h

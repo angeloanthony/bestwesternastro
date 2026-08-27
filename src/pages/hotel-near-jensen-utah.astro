@@ -13,35 +13,37 @@ import { BUSINESS } from '../data/business.ts';
 const headExtras = `<script type="application/ld+json">
  {
   "@context":"https://schema.org",
-  "@type":"TouristAttraction",
-  "@id":"https://bestwesternvernalinn.com/hotel-near-jensen-utah#dinosaur-national-monument",
-  "name":"Dinosaur National Monument",
-  "description":"A national monument straddling the Utah-Colorado border. The Quarry Exhibit Hall, reached from Jensen, Utah via Utah State Highway 149, preserves roughly 1,500 dinosaur bones in a cliff face. The Utah side also holds the Cub Creek petroglyphs and the Josie Bassett Morris homestead.",
-  "url":"https://www.nps.gov/dino/index.htm",
+  "@type":"Place",
+  "@id":"https://bestwesternvernalinn.com/hotel-near-jensen-utah#jensen-utah",
+  "name":"Jensen, Utah",
+  "description":"A small community on US-40 in Uintah County, Utah, roughly 13 miles east of Vernal. Jensen is the turning for Utah State Highway 149, which runs 7 miles north to the Quarry Visitor Center at Dinosaur National Monument. Jensen has no hotels, groceries or full services.",
   "sameAs":[
-   "https://www.nps.gov/dino/index.htm",
-   "https://en.wikipedia.org/wiki/Dinosaur_National_Monument"
+   "https://en.wikipedia.org/wiki/Jensen,_Utah"
   ],
-  "telephone":"+14357817700",
   "address":{
    "@type":"PostalAddress",
-   "streetAddress":"4545 Highway 40",
-   "addressLocality":"Dinosaur",
-   "addressRegion":"CO",
-   "postalCode":"81610",
+   "addressLocality":"Jensen",
+   "addressRegion":"UT",
    "addressCountry":"US"
   },
-  "containsPlace":[
-   {"@type":"Place","name":"Quarry Exhibit Hall","description":"Reached from Jensen, Utah via Utah State Highway 149."},
-   {"@type":"Place","name":"Cub Creek petroglyphs"},
-   {"@type":"Place","name":"Josie Bassett Morris homestead"},
-   {"@type":"Place","name":"Split Mountain"}
-  ],
   "containedInPlace":[
    {"@type":"AdministrativeArea","name":"Uintah County, Utah"},
-   {"@type":"State","name":"Utah"},
-   {"@type":"State","name":"Colorado"}
+   {"@type":"State","name":"Utah"}
+  ],
+  "amenityFeature":[
+   {"@type":"LocationFeatureSpecification","name":"Hotels","value":false},
+   {"@type":"LocationFeatureSpecification","name":"Groceries","value":false}
   ]
+ }
+ </script>
+<script type="application/ld+json">
+ {
+  "@context":"https://schema.org",
+  "@type":"TouristAttraction",
+  "@id":"https://bestwesternvernalinn.com/hotel-near-dinosaur-national-monument#dinosaur-national-monument",
+  "name":"Dinosaur National Monument",
+  "url":"https://www.nps.gov/dino/index.htm",
+  "sameAs":["https://www.nps.gov/dino/index.htm"]
  }
  </script>
 <script type="application/ld+json">
@@ -50,7 +52,7 @@ const headExtras = `<script type="application/ld+json">
   "@type":"BreadcrumbList",
   "itemListElement":[
    {"@type":"ListItem","position":1,"name":"Home","item":"https://bestwesternvernalinn.com/"},
-   {"@type":"ListItem","position":2,"name":"Visiting Dinosaur National Monument from Jensen","item":"https://bestwesternvernalinn.com/hotel-near-jensen-utah"}
+   {"@type":"ListItem","position":2,"name":"Jensen, Utah","item":"https://bestwesternvernalinn.com/hotel-near-jensen-utah"}
   ]
  }
  </script>
@@ -61,10 +63,9 @@ const headExtras = `<script type="application/ld+json">
   "mainEntity":[
    {"@type":"Question","name":"Are there hotels in Jensen, Utah?","acceptedAnswer":{"@type":"Answer","text":"Jensen is a small community on US-40 with no full-service hotels of its own. Most visitors to the Utah side of Dinosaur National Monument stay in Vernal, about 13 miles west, which is the nearest town with hotels, groceries, fuel and restaurants."}},
    {"@type":"Question","name":"How far is the Quarry Exhibit Hall from Jensen, Utah?","acceptedAnswer":{"@type":"Answer","text":"The Quarry Visitor Center is 7 miles north of Jensen, Utah, off Utah State Highway 149. From Vernal the total drive is roughly 20 miles."}},
-   {"@type":"Question","name":"How much does it cost to enter Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"The National Park Service charges $25.00 for a private vehicle, $20.00 for a motorcycle and $15.00 per person without a vehicle, each valid for seven consecutive days. Youth 15 and under are admitted free. An annual Dinosaur pass is $45.00. Check nps.gov/dino for current fees before travelling."}},
-   {"@type":"Question","name":"Do you drive to the Quarry Exhibit Hall or take a shuttle?","acceptedAnswer":{"@type":"Answer","text":"It depends on the season. In summer a free shuttle runs from the Quarry Visitor Center to the Exhibit Hall because parking at the hall is limited; outside peak season visitors can usually drive. Confirm current operation with the National Park Service before you go."}},
-   {"@type":"Question","name":"Can you visit Dinosaur National Monument and Ashley National Forest on the same trip?","acceptedAnswer":{"@type":"Answer","text":"Yes, from a single base in Vernal. They run in opposite directions - the monument is east through Jensen, Ashley National Forest is north - so they work best as separate days rather than one loop."}},
-   {"@type":"Question","name":"Is there camping on the Utah side of Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"Yes. Green River Campground has 83 sites at about 4,750 feet elevation, with sites listed at $24 per night and reservations advised in peak season. Split Mountain Group Campground is open year round for group sites. Both are booked through Recreation.gov."}}
+   {"@type":"Question","name":"Does Jensen, Utah have any services?","acceptedAnswer":{"@type":"Answer","text":"Jensen has no hotels, no groceries and no full services. Fuel and provision in Vernal, 13 miles west on US-40, before driving out to the monument."}},
+   {"@type":"Question","name":"Is Jensen the right turning for Dinosaur National Monument?","acceptedAnswer":{"@type":"Answer","text":"For the Utah side, yes. Utah State Highway 149 leaves US-40 at Jensen and runs 7 miles north to the Quarry Visitor Center, the side with the dinosaur bones. The Colorado side is reached separately near Dinosaur, Colorado."}},
+   {"@type":"Question","name":"Should I stay in Jensen or Vernal?","acceptedAnswer":{"@type":"Answer","text":"Vernal, because Jensen has no lodging. Vernal is 13 miles west on US-40 and is the nearest town with hotels, groceries, fuel and restaurants."}}
   ]
  }
  </script>
@@ -413,9 +414,9 @@ const bodyTop = `
  <div class="seo-hero-bg"></div>
  <div class="seo-hero-ov"></div>
  <div class="seo-hero-cnt">
-  <p class="eyebrow">Dinosaur National Monument — Utah Side</p>
-  <h1>Visiting Dinosaur National Monument<br><em>from Jensen &amp; Vernal</em></h1>
-  <p>Jensen is the gateway to the Utah side of the monument — and it has no hotels. This is a practical guide to the fees, the shuttle, the Cub Creek drive, and where to base yourself.</p>
+  <p class="eyebrow">Uintah County, Utah — 13 Miles East of Vernal on US-40</p>
+  <h1>Jensen, Utah<br><em>and the Road to the Quarry</em></h1>
+  <p>Jensen is the turning for the Utah side of Dinosaur National Monument — and it has no hotels, no groceries and no full services. This page covers what Jensen actually is, what the approach involves, and why visitors base in Vernal.</p>
   <div class="seo-hero-btns">
    <a href="tel:${BUSINESS.phoneTel}" class="btn-p">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
    <a href="tel:${BUSINESS.phoneTel}" class="btn-s">📞 ${BUSINESS.phoneDisplay}</a>
@@ -425,95 +426,79 @@ const bodyTop = `
 
 <div class="content-wrap">
 
-<div class="intro-pull"><strong>There are no hotels in Jensen, Utah.</strong> That is the single most useful fact for anyone planning this trip, and it is why almost everyone visiting the Utah side of Dinosaur National Monument sleeps in Vernal, about 13 miles west on US-40. Jensen is the turning — the Quarry Visitor Center is 7 miles north of it on Utah State Highway 149.<sup>1</sup> This page covers what you actually need to plan: fees, how the Exhibit Hall is reached, what else is on the Utah side, and how many days to allow.</div>
+<div class="intro-pull"><strong>There are no hotels in Jensen, Utah.</strong> That is the single most useful fact about the place, and it is why almost everyone visiting the Utah side of Dinosaur National Monument sleeps in Vernal, about 13 miles west on US-40. Jensen is the turning — the Quarry Visitor Center is 7 miles north of it on Utah State Highway 149.<sup>1</sup> This page is about Jensen and the approach. For the monument itself — fees, the Exhibit Hall shuttle, the Cub Creek drive, camping and how many days to allow — see our <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument guide</a>.</div>
 
 <div class="content-section">
- <h2>1. What Dinosaur National Monument Is — and Which Side You Want</h2>
-<p>Dinosaur National Monument straddles the Utah–Colorado border, and it has two visitor centers in two different states. This trips up more first-time visitors than anything else about the park.<sup>1</sup></p>
+ <h2>1. What Jensen, Utah Actually Is</h2>
+<p>Jensen is a small community on US-40 in Uintah County, Utah, roughly 13 miles east of Vernal, where the Green River crosses the highway. Visitors encounter it as a junction rather than a town: it is the point at which Utah State Highway 149 leaves US-40 and runs north toward Dinosaur National Monument.<sup>1</sup></p>
+<p>What matters for planning is what Jensen does not have. There is no hotel, no supermarket and no full service centre. A visitor who arrives in Jensen expecting a base has misjudged the geography — the nearest town with lodging, groceries, fuel and restaurants is Vernal, back the way you came.</p>
+<p><strong>Disambiguation.</strong> This page is about Jensen in Uintah County, Utah — the community on US-40 at the Utah State Highway 149 turning for Dinosaur National Monument. It is not Jensen Beach in Florida, and it is a separate place from the town of Dinosaur, Colorado, which sits on the far side of the monument in Moffat County, Colorado.</p>
+</div>
+
+<div class="content-section">
+ <h2>2. How Far Jensen Is — From Vernal and From the Quarry</h2>
+<p>Jensen sits on US-40 roughly 13 miles east of Vernal. The Quarry Visitor Center is a further 7 miles north of Jensen on Utah State Highway 149,<sup>1</sup> making the total from ${BUSINESS.address.full} approximately 20 miles — call it half an hour with the turn. Distances here are approximate; the verified leg is the 7 miles from Jensen to the visitor center.<sup>1</sup></p>
+<p>The practical consequence is that Jensen is a waypoint, not a destination. You pass through it twice in a day: once outbound with a full tank and a packed lunch, once inbound on the way back to a room.</p>
+</div>
+
+<div class="content-section">
+ <h2>3. The Highway 149 Approach</h2>
+<p>Utah State Highway 149 is the road that matters here. It leaves US-40 at Jensen and runs 7 miles north to the Quarry Visitor Center, which is the Utah side of the monument — the side with the dinosaur bones.<sup>1</sup></p>
+<p>Two things are worth knowing before you make the turn:</p>
 <ul class="feat-list">
- <li><strong>Quarry Visitor Center — Utah side</strong>, reached via Utah State Highway 149 from Jensen. This is the side with the dinosaur bones.<sup>1</sup></li>
- <li><strong>Canyon Visitor Center — Colorado side</strong>, near Dinosaur, Colorado. Canyon and river scenery, no quarry.<sup>1</sup></li>
+ <li><strong>This is the Utah approach, not the Colorado one.</strong> The monument has two visitor centers in two different states, and only the Utah side has the quarry.<sup>1</sup> If your plan involves the wall of bones, Jensen is the correct turning.</li>
+ <li><strong>Entry is by pass, and it is charged at the monument, not at Jensen.</strong> Arrive with a pass or the means to buy one — the amounts are on our <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument guide</a>, along with how the Exhibit Hall itself is reached, which changes by season.<sup>1</sup></li>
 </ul>
-<p>The fossils — the reason most people come — are on the <strong>Utah</strong> side, at the Quarry Exhibit Hall, where roughly 1,500 dinosaur bones remain embedded in the cliff face rather than removed to a museum. If you have driven to Dinosaur, Colorado expecting the wall of bones, you are about two hours from it.</p>
-<p><strong>Disambiguation.</strong> This page is about Dinosaur National Monument in Uintah County, Utah and Moffat County, Colorado — the one reached from Jensen, Utah. It is not Dinosaur Valley State Park in Texas, Dinosaur Provincial Park in Alberta, or Dinosaur Ridge in Colorado, all of which are separate places with similar names.</p>
 </div>
 
 <div class="content-section">
- <h2>2. How Far It Is From Vernal</h2>
-<p>Jensen sits on US-40 roughly 13 miles east of Vernal. The Quarry Visitor Center is a further 7 miles north of Jensen on Utah State Highway 149,<sup>1</sup> making the total from ${BUSINESS.address.full} approximately 20 miles — call it half an hour with the turn. Distances here are approximate; the verified leg is the 7 miles from Jensen to the visitor center.</p>
-<p>Because Jensen has no lodging, groceries or full services, treat it as a waypoint rather than a destination: fuel and provision in Vernal, then drive out.</p>
-</div>
-
-<div class="content-section">
- <h2>3. Fees and How You Reach the Exhibit Hall</h2>
-<p>Entrance is by pass, and the National Park Service publishes the amounts:<sup>2</sup></p>
+ <h2>4. Things To Do Around Jensen</h2>
+<p>Jensen itself is a junction, so the answer is mostly "keep driving" — but two things are close enough to be worth naming:</p>
 <ul class="feat-list">
- <li><strong>$25.00</strong> — one private vehicle (15 passengers or fewer) and all occupants, valid 7 consecutive days<sup>2</sup></li>
- <li><strong>$20.00</strong> — motorcycle, valid 7 days, admits up to 2 motorcycles with up to 4 total passengers<sup>2</sup></li>
- <li><strong>$15.00</strong> — per person without a vehicle (cyclists, walkers). Youth 15 and under free<sup>2</sup></li>
- <li><strong>$45.00</strong> — annual Dinosaur pass, valid one year through the month of purchase<sup>2</sup></li>
- <li><strong>$80.00</strong> — America the Beautiful annual pass, covering federal sites nationwide<sup>2</sup></li>
-</ul>
-<p><strong>Getting to the Exhibit Hall.</strong> Parking at the Exhibit Hall itself is limited, so access depends on season: in summer a free shuttle carries visitors from the Quarry Visitor Center up to the hall, while outside peak season you can generally drive.<sup>1</sup> Shuttle operation and hours change year to year — confirm on the Park Service site before you set out rather than relying on this page.</p>
-</div>
-
-<div class="content-section">
- <h2>4. Things To Do on the Utah Side</h2>
-<ul class="feat-list">
- <li><strong>Quarry Exhibit Hall</strong> — roughly 1,500 dinosaur bones still in the rock face, the reason the monument exists</li>
- <li><strong>Tour of the Tilted Rocks</strong> — a 10-mile scenic drive along Cub Creek Road, beginning at the Quarry Visitor Center and ending at Josie's cabin. Guidebooks are sold at either visitor center or at a self-service post near the entrance station<sup>3</sup></li>
- <li><strong>Cub Creek petroglyphs</strong> — Fremont rock art distinguished by unusually large lizard figures, reached by a short but steep 0.2-mile trail<sup>3</sup></li>
- <li><strong>Josie Bassett Morris homestead</strong> — Josie settled at Cub Creek in 1914 and lived there independently for about 50 years; the cabin, chicken coop, irrigation remnants and orchard trees survive<sup>3</sup></li>
- <li><strong>Split Mountain and the Green River</strong> — river access, rafting put-ins and the eroded Split Mountain formation</li>
+ <li><strong>The monument, 7 miles north.</strong> The Quarry Exhibit Hall, the Cub Creek drive, the petroglyphs and the Josie Bassett Morris homestead are all covered on the <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument page</a> rather than repeated here.</li>
+ <li><strong>The Green River.</strong> The river crosses US-40 at Jensen, and Split Mountain upstream is the main river access on the Utah side.</li>
 </ul>
 </div>
 
 <div class="content-section">
  <h2>5. Seasonal Planning</h2>
+<p>Nothing about Jensen changes by season — it is a highway junction. What changes is the approach beyond it:</p>
 <ul class="feat-list">
- <li><strong>Summer</strong> — peak season. Expect the shuttle to the Exhibit Hall rather than driving,<sup>1</sup> and expect company on the Cub Creek drive. Campground reservations are advised.<sup>4</sup></li>
- <li><strong>Spring and autumn</strong> — quieter, and you can often drive to the hall. Campground water and flush toilets are seasonal at the Utah-side campgrounds.<sup>4</sup></li>
- <li><strong>Winter</strong> — the quietest time at the quarry. Services reduce and road conditions vary; check current conditions with the Park Service before travelling.</li>
+ <li><strong>Summer</strong> — peak season on the monument side. Expect a shuttle rather than driving the last stretch to the Exhibit Hall,<sup>1</sup> which affects where you leave the car after the Highway 149 turn.</li>
+ <li><strong>Spring and autumn</strong> — quieter, and the drive up Highway 149 is usually the whole journey.</li>
+ <li><strong>Winter</strong> — services on the monument side reduce and road conditions on US-40 and Highway 149 vary. Check current conditions with the Park Service before travelling.</li>
 </ul>
-<div class="pro-tip"><p><strong>Two things change without notice:</strong> shuttle operation and road status. Both are published by the National Park Service at nps.gov/dino, and both are worth a look the morning you go. The monument's information line is (435) 781-7700.<sup>1</sup></p></div>
+<div class="pro-tip"><p><strong>Whatever the season, Jensen will not rescue a plan.</strong> There is no fuel stop you can rely on and nowhere to buy lunch. Sort both in Vernal before you leave — 13 miles west, and the last full services before the monument.</p></div>
 </div>
 
 <div class="content-section">
- <h2>6. Permits, Camping and Regulations</h2>
-<p>We link these rather than restate them, because fees, hours and river-permit rules change:</p>
+ <h2>6. Permits and Regulations</h2>
+<p>Nothing is permitted or regulated in Jensen itself. Everything that is applies at the monument, and we link it rather than restate it, because fees, hours and river-permit rules change:</p>
 <ul class="feat-list">
  <li><strong>Park hours, fees, shuttle operation and current conditions</strong> — <a href="https://www.nps.gov/dino/index.htm" rel="noopener" style="color:var(--navy);font-weight:700;">Dinosaur National Monument, National Park Service</a></li>
- <li><strong>Camping</strong> — <strong>Green River Campground</strong> has 83 sites at about 4,750 ft, listed at $24 per night, with reservations advised in peak season; <strong>Split Mountain Group Campground</strong> is open year round for groups. Book via <a href="https://www.recreation.gov" rel="noopener" style="color:var(--navy);font-weight:700;">Recreation.gov</a><sup>4</sup></li>
+ <li><strong>Camping on the Utah side</strong> — book via <a href="https://www.recreation.gov" rel="noopener" style="color:var(--navy);font-weight:700;">Recreation.gov</a></li>
  <li><strong>Fishing licences</strong> on the Green River — <a href="https://wildlife.utah.gov/guidebooks" rel="noopener" style="color:var(--navy);font-weight:700;">Utah Division of Wildlife Resources</a></li>
 </ul>
 </div>
 
 <div class="content-section">
  <h2>7. Planning Your Visit</h2>
-<h3>How many days should you allow?</h3>
-<p>The Exhibit Hall plus the 10-mile Cub Creek drive with stops<sup>3</sup> is a comfortable full day. Add a second day if you want the Colorado side, a river trip, or unhurried hiking. One night in Vernal covers a single quarry day; two nights is the realistic minimum if you want more than the fossils.</p>
-<h3>Can you combine it with Ashley National Forest?</h3>
-<p>Yes, and it is the natural pairing from a Vernal base. The monument is east through Jensen; <a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:700;">Ashley National Forest</a> is north on US-191. Opposite directions, so plan them as separate days rather than one loop.</p>
-<h3>What should you plan for?</h3>
+<h3>How should you stage the day?</h3>
+<p>Treat Vernal as the base and Jensen as the halfway marker. Breakfast and fuel in Vernal, the 13 miles east on US-40, the turn north onto Highway 149, then 7 miles to the visitor center.<sup>1</sup> Reverse it in the evening. How long to allow at the monument itself is covered on the <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">monument guide</a>.</p>
+<h3>What has to be done before you reach Jensen?</h3>
 <ul class="feat-list">
- <li><strong>Buy fuel and food in Vernal</strong> — Jensen has no full services and the monument has none</li>
- <li><strong>Carry water</strong> — this is high desert; the quarry area is exposed</li>
- <li><strong>Mobile coverage</strong> — treat it as unreliable once you leave US-40. Cell service at the Utah-side campgrounds is described as seasonal.<sup>4</sup> Download directions before leaving town</li>
- <li><strong>Arrive with a pass or means to buy one</strong> — see the fees above<sup>2</sup></li>
+ <li><strong>Fuel</strong> — fill in Vernal. Do not plan on Jensen.</li>
+ <li><strong>Food and water</strong> — nothing is sold at the monument, and Jensen is not a substitute. This is high desert; carry more water than feels necessary.</li>
+ <li><strong>Your entry pass</strong> — or the means to buy one at the monument. Nothing is sold in Jensen.</li>
+ <li><strong>Directions</strong> — download them. Coverage is unreliable once you leave US-40.</li>
 </ul>
+<p>All four are Vernal errands. That is the practical argument for basing there rather than pressing east and hoping.</p>
 </div>
 
 <div class="content-section">
- <h2>8. Staying in Vernal</h2>
-<p>Because Jensen has no hotels, Vernal is the practical base for the Utah side of the monument — the nearest town with lodging, groceries, fuel and restaurants, about 13 miles west on US-40.</p>
-<p>Best Western Vernal Inn is at ${BUSINESS.address.full}. For a monument trip, what usually matters is an early breakfast before the drive out, somewhere to park, and a kitchenette if you are packing lunches for a day with no food service.</p>
-<ul class="feat-list">
- <li>Free hot breakfast — before the drive out to the quarry</li>
- <li>Kitchenettes available — pack lunches for a day inside the monument</li>
- <li>Free parking, including trucks and trailers</li>
- <li>Pet friendly — ground-floor rooms available</li>
- <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}) — see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
-</ul>
+ <h2>8. Where This Leaves You for Lodging</h2>
+<p>Jensen has no answer to the lodging question, so the answer is Vernal — 13 miles back west, and the only town on this stretch of US-40 with hotels, groceries, fuel and restaurants.</p>
+<p>Best Western Vernal Inn is at ${BUSINESS.address.full}, which puts the Highway 149 turning about twenty minutes east. What that proximity buys you on a monument day is covered on our <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument guide</a>, along with weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}).</p>
 </div>
 `;
 const bodyBottom = `
@@ -528,20 +513,20 @@ const bodyBottom = `
   <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The Quarry Visitor Center is 7 miles north of Jensen off Utah State Highway 149.<sup>1</sup> From Vernal the total drive is roughly 20 miles.</p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">How much is entry to Dinosaur National Monument?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">$25.00 per private vehicle, $20.00 per motorcycle and $15.00 per person without a vehicle, each valid seven consecutive days; youth 15 and under free. An annual Dinosaur pass is $45.00.<sup>2</sup> Confirm current fees with the Park Service before travelling.</p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Does Jensen have fuel, groceries or restaurants?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Not reliably, and nothing you should plan around. Treat Vernal, 13 miles west on US-40, as the last full services before the monument.</p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do you drive or take a shuttle to the Exhibit Hall?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">It depends on the season. Parking at the hall is limited, so in summer a free shuttle runs from the Quarry Visitor Center; outside peak season you can usually drive.<sup>1</sup> Check current operation before you go.</p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is Jensen the right turning for the dinosaur bones?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes, for the Utah side. Utah State Highway 149 leaves US-40 at Jensen and runs 7 miles north to the Quarry Visitor Center.<sup>1</sup> The Canyon Visitor Center on the Colorado side has canyon and river scenery but no quarry.<sup>1</sup></p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Which side of the monument has the dinosaur bones?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">The Utah side. The Quarry Exhibit Hall is reached via Utah State Highway 149 from Jensen. The Canyon Visitor Center on the Colorado side has canyon and river scenery but no quarry.<sup>1</sup></p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What does it cost to enter the monument, and how do you reach the Exhibit Hall?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Both are set by the National Park Service and are covered on our <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument guide</a>, including the seasonal shuttle. Nothing is sold in Jensen — arrive with a pass or the means to buy one.</p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
-  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Is there camping on the Utah side?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Yes. Green River Campground has 83 sites at about 4,750 ft, listed at $24 per night, with reservations advised in peak season. Split Mountain Group Campground is open year round for groups. Both book through Recreation.gov.<sup>4</sup></p>
+  <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Should I stay in Jensen or Vernal?</summary>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Vernal — Jensen has no lodging at all. Vernal is 13 miles west on US-40 and is the nearest town with hotels, groceries, fuel and restaurants.</p>
  </details>
 </div>
 
@@ -549,11 +534,8 @@ const bodyBottom = `
  <h2 style="font-size:1.1rem;">Sources</h2>
  <ol style="line-height:1.9;padding-left:1.2rem;">
   <li>Dinosaur National Monument, National Park Service — two visitor centers and their states, Quarry Visitor Center location 7 miles north of Jensen via Utah State Highway 149, seasonal shuttle versus private vehicle access, monument address and telephone. <a href="https://www.nps.gov/dino/index.htm" rel="noopener nofollow" style="color:var(--navy);">nps.gov/dino</a></li>
-  <li>Fees &amp; Passes, Dinosaur National Monument, National Park Service — entrance fee amounts and validity periods. <a href="https://www.nps.gov/dino/planyourvisit/fees.htm" rel="noopener nofollow" style="color:var(--navy);">nps.gov/dino/planyourvisit/fees.htm</a></li>
-  <li>Cub Creek Area and Tour of the Tilted Rocks, National Park Service — 10-mile drive, guidebook availability, Cub Creek petroglyph trail, Josie Bassett Morris homestead history. <a href="https://www.nps.gov/dino/planyourvisit/cubcreek.htm" rel="noopener nofollow" style="color:var(--navy);">nps.gov/dino/planyourvisit/cubcreek.htm</a></li>
-  <li>Recreation.gov — Green River Campground and Split Mountain Group Campground site counts, elevation, nightly fee, seasonal services and reservation windows. <a href="https://www.recreation.gov" rel="noopener nofollow" style="color:var(--navy);">recreation.gov</a></li>
  </ol>
- <p style="margin-top:.8rem;">Fees, hours and shuttle operation are set by the National Park Service and change. Confirm before travelling. Last reviewed ${BUSINESS.lastUpdated}.</p>
+ <p style="margin-top:.8rem;">Fees, hours and shuttle operation for the monument are set by the National Park Service and change. Confirm before travelling. Last reviewed ${BUSINESS.lastUpdated}.</p>
 </div>
 
 <!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
@@ -572,6 +554,8 @@ const bodyBottom = `
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
       <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
       <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/cheap-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Affordable Rooms</a> <span style="color:var(--muted);font-size:.88em;">— Best value in Vernal, no hidden fees</span></li>
+      <li><a href="/best-hotel-in-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Compare Vernal Hotels</a> <span style="color:var(--muted);font-size:.88em;">— How we compare on value</span></li>
      </ul>
     </div>
     <div>
@@ -583,6 +567,7 @@ const bodyBottom = `
       <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
       <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
       <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+      <li><a href="/naples-utah-hotel" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Naples, Utah</a> <span style="color:var(--muted);font-size:.88em;">— Minutes away — no hotel in Naples itself</span></li>
      </ul>
     </div>
     <div>
@@ -604,8 +589,8 @@ const bodyBottom = `
 ---
 
 <BaseLayout
-  title=`Dinosaur National Monument from Jensen, Utah — Visitor Guide | Best Western Vernal Inn`
-  description=`Planning Dinosaur National Monument from Jensen, Utah? Fees, the Quarry Exhibit Hall shuttle, the Cub Creek drive, camping, and why visitors base in Vernal — Jensen has no hotels. Call ${BUSINESS.phoneDisplay}.`
+  title=`Jensen, Utah — The Highway 149 Turning for Dinosaur National Monument | Best Western Vernal Inn`
+  description=`Jensen, Utah has no hotels, groceries or full services. What Jensen is, the 7-mile Highway 149 approach to the Quarry Visitor Center, and why visitors to Dinosaur National Monument base in Vernal. Call ${BUSINESS.phoneDisplay}.`
   canonical=`https://bestwesternvernalinn.com/hotel-near-jensen-utah`
   ogTitle=`Hotel Near Jensen Utah | Best Western Vernal Inn`
   ogDescription=`15 minutes from Jensen, Utah and Dinosaur National Monument. Free hot breakfast, kitchenettes, pet friendly. Book direct.`
