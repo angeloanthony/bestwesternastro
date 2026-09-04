@@ -2159,7 +2159,7 @@ body.video-page { background: #000; }
 }
 .faq-hero-bg {
   position: absolute; inset: 0;
-  background-image: url('images/35.webp');
+  background-image: url('/images/35.webp');
   background-size: cover; background-position: center;
   opacity: .60; z-index: 0;
 }
@@ -2251,7 +2251,7 @@ body.video-page { background: #000; }
 }
 .ex-hero-bg {
   position: absolute; inset: 0; overflow: hidden;
-  background-image: url('images/35.webp');
+  background-image: url('/images/35.webp');
   background-size: cover; background-position: center;
   opacity: 1; z-index: 0;
 }
@@ -2711,7 +2711,7 @@ body.video-page { background: #000; }
 /* ── Page Hero (shared across all SEO pages) ── */
 .page-hero {
   background: linear-gradient(to bottom, rgba(10,20,45,.55), rgba(10,20,45,.82)),
-              url('images/35.webp') center/cover no-repeat;
+              url('/images/35.webp') center/cover no-repeat;
   min-height: 54vh;
   display: flex;
   align-items: center;

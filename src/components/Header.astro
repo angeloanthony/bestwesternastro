@@ -19,7 +19,12 @@ const homeClass = isHome ? 'nav-drop-trigger nav-active' : 'nav-drop-trigger';
 <nav id="nav">
   <a class="nav-logo" href={logoHref}>
     <!-- TODO: Replace image asset -->
-    <img src="images/logo.webp" alt="Best Western Vernal Inn" class="nav-logo-img" />
+    <!-- Root-relative, NOT "images/logo.webp". Every nav link beside it is
+         already root-relative; the logo was the one exception, and it only
+         worked because every page lived at the site root. On a nested page it
+         resolves against the directory — /rooms/studio-king asked for
+         /rooms/images/logo.webp and got a 404 and a broken-image icon. -->
+    <img src="/images/logo.webp" alt="Best Western Vernal Inn" class="nav-logo-img" />
     Best Western · Vernal
   </a>
   <ul class="nav-links">
