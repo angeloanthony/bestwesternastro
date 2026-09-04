@@ -193,7 +193,7 @@
 .rm-hero-cnt::before {
   z-index: -1;
   background: radial-gradient(
-    58% 118% at 33% 50%,
+    66% 118% at 33% 50%,
     rgba(var(--rm-cloud), var(--rm-cloud-core)) 0%,
     rgba(var(--rm-cloud), var(--rm-cloud-core)) 62%,
     rgba(var(--rm-cloud), var(--rm-cloud-mid)) 84%,
@@ -210,14 +210,14 @@
   -webkit-backdrop-filter: blur(22px) saturate(0.9) brightness(1.06);
   backdrop-filter: blur(22px) saturate(0.9) brightness(1.06);
   -webkit-mask-image: radial-gradient(
-    58% 118% at 33% 50%,
+    66% 118% at 33% 50%,
     #000 0%,
     #000 60%,
     rgba(0, 0, 0, 0.5) 84%,
     transparent 100%
   );
   mask-image: radial-gradient(
-    58% 118% at 33% 50%,
+    66% 118% at 33% 50%,
     #000 0%,
     #000 60%,
     rgba(0, 0, 0, 0.5) 84%,
@@ -244,8 +244,20 @@
   margin: 0 0 22px;
   /* Wraps the long names — "Handicap / Accessible Studio King" — onto a second
      line so the heading stays inside the cloud rather than running out onto the
-     photograph. Short names still fit on one line. */
+     photograph. Short names still fit on one line.
+     This value is not free: the cloud's solid core reaches ~600px in from the
+     text column on a full-width desktop, and the heading has to stay inside it.
+     See the tablet override below, where the cloud is narrower. */
   max-width: min(100%, 560px);
+}
+/* Between the mobile breakpoint and a laptop the cloud is narrower than its
+   desktop cap, so the heading has to be too — measured at 768px the first line
+   of "Handicap / Accessible Studio King" ran past the solid core onto the
+   photograph at 1.38:1. */
+@media (min-width: 721px) and (max-width: 1023px) {
+  .rm-hero h1 {
+    max-width: min(100%, 390px);
+  }
 }
 
 /* Price block — shared by the hero and the pricing section. */
