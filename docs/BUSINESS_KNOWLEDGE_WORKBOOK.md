@@ -352,6 +352,36 @@ The code enforces rules 4 and 5 structurally rather than by convention: `RATES.w
 | Do we price-match competitors? | | | Public |
 | Deposit required for long stays? | | | Public |
 
+### 2.6 Room photography — asset audit
+
+**Audited: September 3, 2026.** Every file in `public/images/` was opened and inspected, and all 66 room-folder files were hashed. This section records what the hotel actually has, because the gap between "we have pictures of that room" and "we have pictures of a room that looks like it" is what puts a mismatched photograph on a booking page.
+
+| Room type | Real photographs? | Where | Gallery |
+|---|---|---|---|
+| Studio King | Yes — bed + bathroom only | `King-Studio/` | 5 |
+| Studio Two Queen | Yes — full coverage | `Double-Queen-Studio/` | 11 |
+| Handicap / Accessible Studio King | Yes — incl. accessible bathroom | `Handicapped-Studio/` | 10 |
+| Pet-Friendly Studio Two Queen | Yes — full coverage | `Pet-Friendly-Double-Queen/` | 11 |
+| **Pet-Friendly Room ($135)** | **No — none exist** | — | 0 (page says so) |
+| **Jacuzzi Suite** | **No — CGI renders only** | `37/44/49/49a.webp` | no page |
+
+**Three findings that change what the website may say:**
+
+1. **Every numbered image (`1.webp` … `54.webp`) is a CGI render, not a photograph.** Most carry a caption baked into the pixels. Two exceptions are real photographs but have a person standing in frame (`39a.webp`, a king bed on wood-style floors; `26.webp`, a standard bathroom), which makes them unusable as room photography. Renders must never sit in a gallery beside real photographs of the same room.
+
+2. **The owner's room folders are not reliably filed.** Sixteen groups of byte-identical duplicates cross room types. `Double-Queen11/12/14.jpeg` show a single **king** bed; `PetFriendly-Double-Queen12.jpeg` is byte-identical to `King-Studio/King-Studio.jpeg`. Folder membership is not evidence — the contents of the frame are.
+
+3. **The standard bathroom was photographed once** and filed under King, Double Queen and Pet-Friendly. It is legitimately reused across those galleries. **The accessible bathroom is a different room** and its photographs are used only on the accessible page.
+
+**Open photography requests for the GM:**
+
+| Request | Why it matters |
+|---|---|
+| Photograph the **$135 Pet-Friendly Room** | Its page currently carries no gallery at all. It is the only priced room with no photography. |
+| Photograph the **Studio King kitchenette** | The King folder has the bed and the bathroom only. Its kitchenette photograph is borrowed from another studio and labelled as such. |
+| Photograph a **Jacuzzi Suite** | Only CGI renders exist. Needed before a suite page can be built — as is a confirmed rate (§2.2). |
+| Re-shoot `39a.webp` / `26.webp` **without a person in frame** | Both are real and usable otherwise. |
+
 ---
 
 ## Section 3 — Corporate Travel
@@ -891,6 +921,7 @@ The annual review is a backstop, not the main mechanism. Update the workbook **i
 | Date | Section | What changed | Changed by | Website updated? |
 |---|---|---|---|---|
 | 2026-09-03 | §2.2, §2.4, fast-path #3 | Nightly rate card confirmed and recorded — Studio King $108, Studio Two Queen $120, Handicap / Accessible Studio King $108, Pet-Friendly Studio Two Queen $155, Pet-Friendly Room $135. Weekly rates **withdrawn from publication**: $588 / $660 / $700 retired and moved to the historical table in §2.2, replaced everywhere by "Weekly Rates — Call for Price". Derived "$84/night" retired with them. | GM (rate card) | Yes — `src/data/rates.ts` (`nightly` filled, `weekly` set to `null`), homepage hero reel and Special Weekly Rates section, and 20 content pages. Weekly `Offer` nodes no longer emitted in JSON-LD. |
+| 2026-09-03 | §2.6 (new) | Room photography audited — every file in `public/images/` opened, all 66 room-folder files hashed. Recorded: all numbered images are CGI renders (two are real but have a person in frame); the owner room folders contain 16 duplicate groups and misfiled images that cross room types; the standard bathroom was shot once and is legitimately shared, the accessible bathroom is not. No photograph exists of the $135 Pet-Friendly Room or of any Jacuzzi Suite. | Site audit | Yes — `src/data/rooms.ts` galleries curated from 50 candidate files to 37; /rooms/pet-friendly-room keeps its no-photography notice. |
 | | | | | |
 | | | | | |
 
