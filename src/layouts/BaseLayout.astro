@@ -8,6 +8,27 @@
 // are PASSED IN per page so each page keeps its exact legacy metadata.
 // Pages that had bespoke OG/Twitter copy pass it explicitly; otherwise
 // sensible derivations from title/description are used.
+//
+// FAVICON — declared once in the <head> below, for every page on the site.
+// Five pages used to carry their own <link rel="icon"> pointing at the
+// 1536x1024 logo.webp, which left the other 26 (including all five nested
+// /rooms/* pages) with no favicon at all. Root-relative, so it resolves the
+// same from /faq as from /rooms/studio-king.
+//
+// Which asset, and why, after rendering all four at 16/32/64/128px:
+//   favicon.ico  PRIMARY. 3.9 KB, natively 30x32, so it is pixel-crisp at the
+//                16 and 32px a favicon is actually drawn at.
+//   favicon.PNG  apple-touch-icon. 137x146, the only clean raster we have;
+//                iOS wants a raster for the home screen.
+//   favicon.svg  DELIBERATELY NOT DECLARED. It is a machine trace of the same
+//                artwork: 90.5 KB (23x the .ico), with visible faceting on the
+//                orb and a mangled drop shadow. Browsers prefer an SVG icon
+//                when one is offered, so declaring it would make the favicon
+//                both heavier and visibly worse.
+//   logo.webp    Not a favicon. 1536x1024 wordmark; it was only ever a
+//                stand-in.
+// This note lives in the frontmatter, not in an HTML comment, so it is not
+// shipped to all 31 pages.
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -76,6 +97,10 @@ const {
   <meta name="author" content="Best Western Vernal Inn" />
   <link rel="canonical" href={canonical} />
   {hreflang && <link rel="alternate" hreflang="en-us" href={hreflang} />}
+
+  <!-- Favicon (see the note in the frontmatter above) -->
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/images/favicon.PNG" />
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />

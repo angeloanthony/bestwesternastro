@@ -8,7 +8,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BUSINESS } from '../data/business.ts';
 
-const headExtras = `<link rel="icon" href="/images/logo.webp" type="image/webp">`;
+// No headExtras: this page's only head content was its own favicon link, which
+// BaseLayout now declares for every page. The head slot goes with it.
 const bodyContent = `<!-- LOADER -->
 <div id="loader">
  <div class="loader-logo">Best Western</div>
@@ -484,7 +485,6 @@ document.getElementById('stage').addEventListener('touchend', e => {
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   lastUpdated=`April 2026`
 >
-  <Fragment slot="head" set:html={headExtras} />
   <Fragment set:html={bodyContent} />
   <Fragment slot="scripts" set:html={pageScripts} />
 </BaseLayout>
