@@ -42,7 +42,10 @@ export const HOTEL_ID = `${BUSINESS.site.domain}/#hotel` as const;
  *
  *  Provenance of the four that were not already on the homepage:
  *    Truck Parking     — oilfield-housing, naples; also BUSINESS.bookDirect 'free-parking' (confirmed)
- *    Weekly Rates      — oilfield-housing, naples, dog-friendly; RATES.weekly is published
+ *    Weekly Rates      — oilfield-housing, naples, dog-friendly. NOTE: RATES.weekly
+ *                        is now all-null (quoted by phone), so weeklyOffers()
+ *                        below emits nothing. The amenity still advertises that
+ *                        weekly rates EXIST, which is true and is the point.
  *    Monthly Rates     — oilfield-housing; homepage FAQ already states monthly rates are available
  *    Corporate Billing — oilfield-housing; homepage FAQ already states corporate billing is available
  *

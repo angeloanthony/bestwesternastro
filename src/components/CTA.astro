@@ -7,7 +7,8 @@ import { BUSINESS } from '../data/business.ts';
 
 interface Props {
   heading?: string;
-  /** Per-page benefits line, e.g. "Weekly rates from $588 · Free hot breakfast · …" */
+  /** Per-page benefits line, e.g. "Weekly Rates — Call for Price · Free hot breakfast · …".
+   *  Never put a weekly dollar amount here — see the note at the top of rates.ts. */
   tagline: string;
 }
 const { heading = 'Ready to Book?', tagline } = Astro.props;

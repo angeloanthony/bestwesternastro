@@ -7,7 +7,7 @@
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrontDeskInsight from '../components/FrontDeskInsight.astro';
-import { RATES, usd, perNight } from '../data/rates.ts';
+import { RATES, LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
@@ -168,7 +168,7 @@ const bodyTop = `<section class="page-hero">
  <li>Kitchenettes available — pack lunches for a day inside the monument</li>
  <li>Free parking, including trucks and trailers</li>
  <li>Pet friendly — ground-floor rooms available</li>
- <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}) — see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
+ <li>${WEEKLY_CALL_LINE} — nightly from ${LOWEST_NIGHTLY} (${RATES.taxNote}); see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
 </ul>
 </div>
 
@@ -227,7 +227,7 @@ const bodyBottom = `
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
@@ -268,7 +268,7 @@ const bodyBottom = `
 </div>
 <div class="cta-contact">
  <h2>Ready to Book?</h2>
- <p>Weekly rates from ${usd(RATES.weekly.standardQueen)} · Free hot breakfast · Free parking · Pet friendly</p>
+ <p>${WEEKLY_CALL_LINE} · Free hot breakfast · Free parking · Pet friendly</p>
  <div class="contact-options">
   <a href="tel:${BUSINESS.phoneTel}" class="contact-opt">
    <span class="icon">📞</span>
@@ -294,7 +294,7 @@ const bodyBottom = `
   description=`Planning Dinosaur National Monument from Vernal, Utah? Which side has the bones, entry fees, the Quarry Exhibit Hall shuttle, the Cub Creek drive, camping, and how many nights to book. Call ${BUSINESS.phoneDisplay}.`
   canonical=`https://bestwesternvernalinn.com/hotel-near-dinosaur-national-monument`
   ogTitle=`Hotel Near Dinosaur National Monument | Best Western Vernal Inn`
-  ogDescription=`20 miles from the Quarry Exhibit Hall. Weekly rates from ${usd(RATES.weekly.standardQueen)}, free breakfast, kitchenettes, pet friendly. Book direct.`
+  ogDescription=`20 miles from the Quarry Exhibit Hall. Nightly rates from ${LOWEST_NIGHTLY}, weekly rates by phone, free breakfast, kitchenettes, pet friendly. Book direct.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   lastUpdated=`April 2026`

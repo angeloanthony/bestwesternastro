@@ -6,7 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { RATES, usd, perNight } from '../data/rates.ts';
+import { LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
@@ -17,7 +17,7 @@ const headExtras = `<script type="application/ld+json">
    {"@type":"Question","name":"How far is Best Western Vernal Inn from Red Fleet State Park?","acceptedAnswer":{"@type":"Answer","text":"Only about 12 miles — a 15-minute drive north on Highway 191."}},
     {"@type":"Question","name":"Can I swim at Red Fleet?","acceptedAnswer":{"@type":"Answer","text":"Yes. Red Fleet Reservoir is one of the best swimming spots in the Vernal area, popular from late May through September."}},
     {"@type":"Question","name":"Are the dinosaur tracks real?","acceptedAnswer":{"@type":"Answer","text":"Yes. Over 200 preserved dilophosaurus footprints in Navajo sandstone, dating back approximately 200 million years."}},
-    {"@type":"Question","name":"What are your rates?","acceptedAnswer":{"@type":"Answer","text":"Nightly rates start at $84. Weekly stays start at ${usd(RATES.weekly.standardQueen)} for 7 nights. Free breakfast, WiFi, and parking always included."}}
+    {"@type":"Question","name":"What are your rates?","acceptedAnswer":{"@type":"Answer","text":"Nightly rates start at ${LOWEST_NIGHTLY} + tax. Weekly stays are quoted by phone — call (435) 789-6625 for a weekly price. Free breakfast, WiFi, and parking always included."}}
   ]
  }
  </script>`;
@@ -34,10 +34,10 @@ const bodyContent = `<section class="page-hero">
 </section>
 <div class="distance-bar">📍 ONLY 12 MILES NORTH — ABOUT 15 MINUTES VIA HWY 191</div>
 <div class="content-wrap">
-<div class="intro-pull"><strong>Red Fleet State Park is one of Vernal's best-kept secrets.</strong> Located just 12 miles (about 15 minutes) north of Best Western Vernal Inn on Highway 191, Red Fleet features a stunning red-rock reservoir with real dinosaur trackways you can walk right up to. Whether you're here to swim, kayak, paddleboard, or camp — our hotel is the closest full-service lodging with weekly rates starting at ${usd(RATES.weekly.standardQueen)}, free breakfast every morning, and the comfort of a real bed after a day on the water.</div>
+<div class="intro-pull"><strong>Red Fleet State Park is one of Vernal's best-kept secrets.</strong> Located just 12 miles (about 15 minutes) north of Best Western Vernal Inn on Highway 191, Red Fleet features a stunning red-rock reservoir with real dinosaur trackways you can walk right up to. Whether you're here to swim, kayak, paddleboard, or camp — our hotel is the closest full-service lodging, with nightly rates from ${LOWEST_NIGHTLY}, weekly rates on request, free breakfast every morning, and the comfort of a real bed after a day on the water.</div>
 <div class="content-section">
  <h2>Why Stay With Us for Red Fleet Visits</h2>
-<p>Red Fleet State Park doesn't have lodges or cabins — it's a day-use and camping park. Guests who want hot showers, a real breakfast, and a comfortable room choose Best Western Vernal Inn as their base. At just 12 miles (15 minutes) north of the hotel, you can be at the reservoir before most campers wake up. Rates start at ${perNight(RATES.weekly.standardQueen)}/night, or ${usd(RATES.weekly.standardQueen)} for a full week.</p>
+<p>Red Fleet State Park doesn't have lodges or cabins — it's a day-use and camping park. Guests who want hot showers, a real breakfast, and a comfortable room choose Best Western Vernal Inn as their base. At just 12 miles (15 minutes) north of the hotel, you can be at the reservoir before most campers wake up. Rates start at ${LOWEST_NIGHTLY}/night; for a full week, call the front desk for the weekly price.</p>
 <ul class="feat-list">
  <li>12 miles — 15-minute drive to Red Fleet on Hwy 191</li>
  <li>Closest full-service hotel to the park</li>
@@ -77,7 +77,7 @@ const bodyContent = `<section class="page-hero">
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
   <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What are your rates?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Nightly rates start at $84. Weekly stays start at ${usd(RATES.weekly.standardQueen)} for 7 nights. Free breakfast, WiFi, and parking always included.</p>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Nightly rates start at ${LOWEST_NIGHTLY} + tax. Weekly stays are quoted by phone — call (435) 789-6625 for a weekly price. Free breakfast, WiFi, and parking always included.</p>
  </details>
 </div>
 <!-- ===== MESH: Plan Your Stay in Vernal — pillar+sibling cluster ===== -->
@@ -90,7 +90,7 @@ const bodyContent = `<section class="page-hero">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
@@ -131,7 +131,7 @@ const bodyContent = `<section class="page-hero">
 </div>
 <div class="cta-contact">
  <h2>Ready to Book?</h2>
- <p>Weekly rates from ${usd(RATES.weekly.standardQueen)} · Free hot breakfast · Free parking · Pet friendly</p>
+ <p>${WEEKLY_CALL_LINE} · Free hot breakfast · Free parking · Pet friendly</p>
  <div class="contact-options">
   <a href="tel:${BUSINESS.phoneTel}" class="contact-opt">
    <span class="icon">📞</span>
@@ -153,14 +153,14 @@ const bodyContent = `<section class="page-hero">
 ---
 
 <BaseLayout
-  title=`Hotel Near Red Fleet State Park | Best Western Vernal Inn — From $84/Night`
-  description=`Best Western Vernal Inn — closest hotel to Red Fleet State Park. Only 12 miles north. Dinosaur tracks, red rock swimming. Weekly rates from ${usd(RATES.weekly.standardQueen)}, free breakfast. Call (435) 789-6625.`
+  title=`Hotel Near Red Fleet State Park | Best Western Vernal Inn — From ${LOWEST_NIGHTLY}/Night`
+  description=`Best Western Vernal Inn — closest hotel to Red Fleet State Park. Only 12 miles north. Dinosaur tracks, red rock swimming. Nightly from ${LOWEST_NIGHTLY}, weekly rates by phone, free breakfast. Call (435) 789-6625.`
   canonical=`https://bestwesternvernalinn.com/hotel-near-red-fleet-state-park`
-  ogTitle=`Hotel Near Red Fleet State Park | Best Western Vernal Inn — From $84/Night`
-  ogDescription=`Best Western Vernal Inn — closest hotel to Red Fleet State Park. Only 12 miles north. Dinosaur tracks, red rock swimming. Weekly rates from ${usd(RATES.weekly.standardQueen)}, free breakfast. Call (435) 789-6625.`
+  ogTitle=`Hotel Near Red Fleet State Park | Best Western Vernal Inn — From ${LOWEST_NIGHTLY}/Night`
+  ogDescription=`Best Western Vernal Inn — closest hotel to Red Fleet State Park. Only 12 miles north. Dinosaur tracks, red rock swimming. Nightly from ${LOWEST_NIGHTLY}, weekly rates by phone, free breakfast. Call (435) 789-6625.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
-  twitterTitle=`Hotel Near Red Fleet State Park | Best Western Vernal Inn — From $84/Night`
-  twitterDescription=`Best Western Vernal Inn — closest hotel to Red Fleet State Park. Only 12 miles north. Dinosaur tracks, red rock swimming. Weekly rates from ${usd(RATES.weekly.standardQueen)}, free breakfast. Call (435) 789-6625.`
+  twitterTitle=`Hotel Near Red Fleet State Park | Best Western Vernal Inn — From ${LOWEST_NIGHTLY}/Night`
+  twitterDescription=`Best Western Vernal Inn — closest hotel to Red Fleet State Park. Only 12 miles north. Dinosaur tracks, red rock swimming. Nightly from ${LOWEST_NIGHTLY}, weekly rates by phone, free breakfast. Call (435) 789-6625.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   lastUpdated=`April 2026`
 >

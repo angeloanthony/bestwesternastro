@@ -6,7 +6,7 @@
 // BaseLayout; page-specific <style>/schema go in the head slot and
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { RATES, usd } from '../data/rates.ts';
+import { LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
@@ -190,7 +190,7 @@ const bodyContent = `<div class="distance-bar">
       <li>Free parking — trucks, trailers, and tow vehicles welcome</li>
       <li>Full kitchenettes — pack your own lunch and save</li>
       <li>Pet friendly — bring the dog on the trail</li>
-      <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} — stay longer, spend less</li>
+      <li>${WEEKLY_CALL_LINE} — stay longer, spend less</li>
       <li>24-hour front desk — local knowledge always available</li>
     </ul>
     <div class="pro-tip">
@@ -210,7 +210,7 @@ const bodyContent = `<div class="distance-bar">
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
@@ -315,7 +315,7 @@ const bodyContent = `<div class="distance-bar">
 
         <div class="faq-item">
           <button class="faq-q">Are there weekly rates available for longer stays in Vernal? <span class="faq-arrow">▼</span></button>
-          <div class="faq-a"><p>Yes. Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen (7 nights). Monthly rates are also available. Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-weight:700">(435) 789-6625</a> for long-term pricing.</p></div>
+          <div class="faq-a"><p>Yes. Weekly and monthly rates are both quoted by phone rather than published, and nightly rates start at ${LOWEST_NIGHTLY} + tax. Call <a href="tel:${BUSINESS.phoneTel}" style="color:var(--gold);font-weight:700">(435) 789-6625</a> for long-term pricing.</p></div>
         </div>
 
       </div>

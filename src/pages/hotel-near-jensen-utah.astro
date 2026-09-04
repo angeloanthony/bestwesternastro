@@ -7,7 +7,7 @@
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrontDeskInsight from '../components/FrontDeskInsight.astro';
-import { RATES, usd, perNight } from '../data/rates.ts';
+import { RATES, LOWEST_NIGHTLY } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
@@ -498,7 +498,7 @@ const bodyTop = `
 <div class="content-section">
  <h2>8. Where This Leaves You for Lodging</h2>
 <p>Jensen has no answer to the lodging question, so the answer is Vernal — 13 miles back west, and the only town on this stretch of US-40 with hotels, groceries, fuel and restaurants.</p>
-<p>Best Western Vernal Inn is at ${BUSINESS.address.full}, which puts the Highway 149 turning about twenty minutes east. What that proximity buys you on a monument day is covered on our <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument guide</a>, along with weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}).</p>
+<p>Best Western Vernal Inn is at ${BUSINESS.address.full}, which puts the Highway 149 turning about twenty minutes east. What that proximity buys you on a monument day is covered on our <a href="/hotel-near-dinosaur-national-monument" style="color:var(--navy);font-weight:700;">Dinosaur National Monument guide</a>, along with nightly rates from ${LOWEST_NIGHTLY} (${RATES.taxNote}) and weekly rates quoted by the front desk.</p>
 </div>
 `;
 const bodyBottom = `
@@ -548,7 +548,7 @@ const bodyBottom = `
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>

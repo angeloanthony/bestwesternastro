@@ -7,7 +7,7 @@
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FrontDeskInsight from '../components/FrontDeskInsight.astro';
-import { RATES, usd, perNight } from '../data/rates.ts';
+import { RATES, LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `<script type="application/ld+json">
@@ -178,7 +178,7 @@ const bodyTop = `<section class="page-hero">
  <li>Free parking for trucks, trailers, ATV trailers and horse trailers</li>
  <li>Kitchenettes available — pack trail food and prep camp meals</li>
  <li>Pet friendly — ground-floor rooms available</li>
- <li>Weekly rates from ${usd(RATES.weekly.standardQueen)} (${perNight(RATES.weekly.standardQueen)}/night, ${RATES.taxNote}) — see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
+ <li>${WEEKLY_CALL_LINE} — nightly from ${LOWEST_NIGHTLY} (${RATES.taxNote}); see <a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:700;">weekly rates</a></li>
  <li>24-hour front desk — check in around a hunting or shift schedule</li>
 </ul>
 </div>
@@ -236,7 +236,7 @@ const bodyBottom = `
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
@@ -277,7 +277,7 @@ const bodyBottom = `
 </div>
 <div class="cta-contact">
  <h2>Ready to Book?</h2>
- <p>Weekly rates from ${usd(RATES.weekly.standardQueen)} · Free hot breakfast · Free parking · Pet friendly</p>
+ <p>${WEEKLY_CALL_LINE} · Free hot breakfast · Free parking · Pet friendly</p>
  <div class="contact-options">
   <a href="tel:${BUSINESS.phoneTel}" class="contact-opt">
    <span class="icon">📞</span>
@@ -300,13 +300,13 @@ const bodyBottom = `
 
 <BaseLayout
   title=`Ashley National Forest from Vernal, Utah — Visitor & Lodging Guide | Best Western Vernal Inn`
-  description=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Weekly rates from ${usd(RATES.weekly.standardQueen)}. Call ${BUSINESS.phoneDisplay}.`
+  description=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Nightly rates from ${LOWEST_NIGHTLY}; weekly rates by phone. Call ${BUSINESS.phoneDisplay}.`
   canonical=`https://bestwesternvernalinn.com/hotel-near-ashley-national-forest`
   ogTitle=`Ashley National Forest, Utah — Visitor Guide from Vernal | Best Western Vernal Inn`
-  ogDescription=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Weekly rates from ${usd(RATES.weekly.standardQueen)}. Call ${BUSINESS.phoneDisplay}.`
+  ogDescription=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Nightly rates from ${LOWEST_NIGHTLY}; weekly rates by phone. Call ${BUSINESS.phoneDisplay}.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterTitle=`Ashley National Forest, Utah — Visitor Guide from Vernal | Best Western Vernal Inn`
-  twitterDescription=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Weekly rates from ${usd(RATES.weekly.standardQueen)}. Call ${BUSINESS.phoneDisplay}.`
+  twitterDescription=`Planning a trip into Ashley National Forest in northeastern Utah? 1.4 million acres, headquartered in Vernal. Access routes via US-191 and the Red Cloud Loop, seasonal road closures, permits, and where to stay. Nightly rates from ${LOWEST_NIGHTLY}; weekly rates by phone. Call ${BUSINESS.phoneDisplay}.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   lastUpdated=`April 2026`
 >

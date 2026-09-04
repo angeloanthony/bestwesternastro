@@ -1,9 +1,33 @@
 # Commercial Booking Cluster — Strategy & Architecture
 
 **Best Western Vernal Inn · bestwesternvernalinn.com**
-Status: design document. No pages written yet.
+Status: design document. No pages written yet. **Pricing herein is SUPERSEDED — see §0.**
 Author: SEO/IA strategy pass, 2026-07-31.
 Companion docs: `docs/DESTINATION_PAGE_STANDARD.md` (editorial standard, already in force).
+
+---
+
+## 0. SUPERSEDED — September 3, 2026
+
+> **The pricing information in this document is historical and must not be used as current hotel pricing.**
+
+For current pricing, use `docs/BUSINESS_KNOWLEDGE_WORKBOOK.md`:
+
+- **§2.2 — Rate grid.** The rate card confirmed by the hotel on 3 September 2026.
+- **§2.4 — Nightly and weekly are independent.** The standing rule for how rates may be published.
+
+The weekly rates quoted throughout this document are **WITHDRAWN**. Current weekly pricing is **Call for Price** — the hotel quotes weekly stays by phone, and no weekly dollar amount is published anywhere on the website.
+
+| | As written here (2026-07-31) | Confirmed 2026-09-03 |
+|---|---|---|
+| Weekly — Standard Queen | ~~$588~~ | **Call for Price** |
+| Weekly — Double Queen | ~~$660~~ | **Call for Price** |
+| Weekly — Standard King | ~~$700~~ | **Call for Price** |
+| Nightly "from" price | ~~$84~~ *(was $588 ÷ 7 — never a rate the front desk quoted)* | **$108** (Studio King) |
+
+Confirmed nightly rates are $108 Studio King · $120 Studio Two Queen · $108 Handicap / Accessible Studio King · $155 Pet-Friendly Studio Two Queen · $135 Pet-Friendly Room. The room names also changed with the rate card; the four older names above no longer appear on the site.
+
+**What this notice does and does not do.** The analysis below is left exactly as written on 2026-07-31, old figures included, because those figures are the evidence the reasoning rests on — a cannibalization audit that quoted no prices would not be checkable. They are a record of what the site published at that time, not a price list. What is void is any *recommendation* here that depends on publishing a weekly rate: §10's "add the Standard King row at $700/week" is superseded, and the Owner Review Packet question "are $588 / $660 / $700 current?" has since been answered — no, they are withdrawn.
 
 ---
 

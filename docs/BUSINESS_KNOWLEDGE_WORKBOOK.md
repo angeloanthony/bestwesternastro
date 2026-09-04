@@ -19,6 +19,8 @@ It is **not** an SEO checklist. The website is one consumer of this workbook, no
 
 Not the other way around. A change made directly on the website — or in a data file — without a workbook entry is how a business loses track of what it actually promises. Within a year, nobody remembers whether the $588 weekly rate was approved or inherited.
 
+> That example stopped being hypothetical on **2026-09-03**: the $588 / $660 / $700 weekly rates were confirmed as *not current* and withdrawn from the website, along with a "$84/night" figure that had been derived from them and never quoted by anyone. See §2.2 for the record and §2.4 for the rules that now prevent it.
+
 ### The workbook is internal. The website is public.
 
 Two different things, and the difference matters:
@@ -97,11 +99,11 @@ These are currently blocking nine planned web pages and several front-desk probl
 |---|---|---|---|---|
 | 1 | What is the exact **legal entity name** that appears on a W-9? | | | Internal |
 | 2 | Is the property currently branded **Best Western Vernal Inn**, or something else? *(see §1.2 — three different names appear in our own systems)* | | | Public |
-| 3 | Are the weekly rates **$588 Standard Queen / $660 Double Queen / $700 Standard King** still current? | | | Public |
+| 3 | ~~Are the weekly rates **$588 Standard Queen / $660 Double Queen / $700 Standard King** still current?~~ | **ANSWERED 2026-09-03 — WITHDRAWN.** No. Those three figures are no longer current pricing and are not to be published. Weekly stays are quoted by the front desk: **Weekly Rates — Call for Price.** Confirmed nightly rates recorded in §2.2. | GM Approved | Public |
 | 4 | What is the **monthly rate** for a Standard Queen? | | | Public |
 | 5 | Is that monthly rate **28 or 30 nights**? | | | Public |
 | 6 | What is the **highest** monthly rate charged in peak season? *(this becomes the published "from" price — see §2.4)* | | | Public |
-| 7 | What is the **Jacuzzi Suite** weekly rate? | | | Public |
+| 7 | What is the **Jacuzzi Suite** weekly rate? *(still open — but see the note below: no weekly rate is published for any room type, so the answer is now On request, not Public)* | | | On request |
 | 8 | Is guest **laundry free or coin-operated**? *(our own pages currently contradict each other)* | | | Public |
 | 9 | What is the **pet fee** — exact amount, per night or per stay? | | | Public |
 | 10 | What is the **cancellation policy**? | | | Public |
@@ -117,6 +119,8 @@ These are currently blocking nine planned web pages and several front-desk probl
 | 20 | What **response time** can we actually commit to on a corporate inquiry? | | | Public |
 
 > **Note on #6:** we publish the *peak* monthly rate as the "from" price, not the lowest. That way the published number can be honored in any month of the year. A rate the front desk cannot honor is worse than no rate at all.
+
+> **Note on #3 and #7 (2026-09-03):** weekly rates are no longer published for **any** room type. The hotel quotes them by phone, so questions #3 and #7 are answered for publication purposes — nothing goes on the website either way. #7 stays open because the front desk still needs the internal number; its visibility changed from Public to On request. The confirmed nightly rate card is in §2.2, and the rules that go with it are in §2.4.
 
 ---
 
@@ -204,10 +208,13 @@ Three different property identities currently appear in our own systems. A procu
 
 **Owner:** GM · **Review:** whenever a rate changes, and at minimum annually
 **Feeds:** `src/data/rates.ts`
+**Last confirmed:** 2026-09-03 — nightly rate card confirmed, weekly rates withdrawn from publication (§2.2)
 
 Do not answer "what is the monthly rate." Answer the structure below — season, minimum stay, and exceptions — because those are what the front desk actually needs at 11 p.m., and they are what makes a published rate honest.
 
 ### 2.1 Room inventory
+
+> The room names below predate the September 2026 rate card, which uses Studio King, Studio Two Queen, Handicap / Accessible Studio King, Pet-Friendly Studio Two Queen and Pet-Friendly Room. Answer the counts against **those** names — see §2.2.
 
 | Question | Answer | Confidence | Visibility |
 |---|---|---|---|
@@ -224,43 +231,78 @@ Do not answer "what is the monthly rate." Answer the structure below — season,
 
 ### 2.2 Rate grid
 
+**Confirmed: September 3, 2026.** Nightly rates below were given by the hotel and are published on the website. Weekly rates are **not published for any room type** — see §2.4 for the rules that go with that, and the withdrawal record at the end of this section.
+
 Fill one row per room type. Leave a cell blank rather than guessing — blank renders as "Call for pricing," which is safe.
 
-**Standard Queen**
+Room names are the hotel's own, taken from the September 2026 rate card. They differ from the older names in §2.1 (Standard Queen / Double Queen / Standard King); when the inventory counts in §2.1 are filled in, use these names.
+
+**Studio King**
 
 | Rate type | Peak season | Off season | Minimum stay | Confidence |
 |---|---|---|---|---|
-| Nightly | | | | |
-| Weekly (7 nights) | *(currently published: $588)* | | | |
+| Nightly | **$108** | | | GM Approved |
+| Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
 | Monthly | | | | |
 | Typical negotiated corporate | | | | |
 
-**Double Queen**
+**Studio Two Queen**
 
 | Rate type | Peak season | Off season | Minimum stay | Confidence |
 |---|---|---|---|---|
-| Nightly | | | | |
-| Weekly (7 nights) | *(currently published: $660)* | | | |
+| Nightly | **$120** | | | GM Approved |
+| Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
 | Monthly | | | | |
 | Typical negotiated corporate | | | | |
 
-**Standard King**
+**Handicap / Accessible Studio King**
 
 | Rate type | Peak season | Off season | Minimum stay | Confidence |
 |---|---|---|---|---|
-| Nightly | | | | |
-| Weekly (7 nights) | *(currently published: $700)* | | | |
+| Nightly | **$108** | | | GM Approved |
+| Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
 | Monthly | | | | |
 | Typical negotiated corporate | | | | |
 
-**Jacuzzi Suite**
+**Pet-Friendly Studio Two Queen**
 
 | Rate type | Peak season | Off season | Minimum stay | Confidence |
 |---|---|---|---|---|
-| Nightly | | | | |
-| Weekly (7 nights) | *(never published — no number on file)* | | | |
+| Nightly | **$155** | | | GM Approved |
+| Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
 | Monthly | | | | |
 | Typical negotiated corporate | | | | |
+
+**Pet-Friendly Room**
+
+| Rate type | Peak season | Off season | Minimum stay | Confidence |
+|---|---|---|---|---|
+| Nightly | **$135** | | | GM Approved |
+| Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
+| Monthly | | | | |
+| Typical negotiated corporate | | | | |
+
+**Jacuzzi Suite** *(King Suite with kitchenette, King Jacuzzi, Jacuzzi Double Queen)*
+
+| Rate type | Peak season | Off season | Minimum stay | Confidence |
+|---|---|---|---|---|
+| Nightly | *(no number on file)* | | | Pending |
+| Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
+| Monthly | | | | |
+| Typical negotiated corporate | | | | |
+
+#### Withdrawn rates — historical only, do not restore
+
+Kept as a record of what the website used to publish, so that a future reader who finds these numbers in an old page, an archived crawl, or a customer email can see immediately that they were retired on purpose.
+
+| Rate | Figure | Status | Withdrawn | Note |
+|---|---|---|---|---|
+| Standard Queen, weekly (7 nights) | ~~$588~~ | **WITHDRAWN — not current** | 2026-09-03 | Superseded by "call for price" |
+| Double Queen, weekly (7 nights) | ~~$660~~ | **WITHDRAWN — not current** | 2026-09-03 | Superseded by "call for price" |
+| Standard King, weekly (7 nights) | ~~$700~~ | **WITHDRAWN — not current** | 2026-09-03 | Superseded by "call for price" |
+| "From $84/night" | ~~$84~~ | **WITHDRAWN — never a real rate** | 2026-09-03 | Was $588 ÷ 7. Never a nightly price the desk quoted; it undercut the confirmed floor of $108 by $24 |
+
+**None of these four figures may be published again.** They are not stale versions of a current rate — they are retired. The current answer for a weekly stay is *Call for Price*, and the current nightly floor is $108.
 
 ### 2.3 Seasons
 
@@ -285,6 +327,18 @@ Fill one row per room type. Leave a cell blank rather than guessing — blank re
 | Conditions to print beside the monthly rate | | | Public |
 
 > **Why the peak rate becomes the "from" price:** a "from" number is only honest if the front desk can honor it in any month. Setting it at the peak rate guarantees that. Setting it at the off-season rate creates a promise that fails every summer.
+
+#### Nightly and weekly are independent — the standing rule (2026-09-03)
+
+Five rules, agreed with the hotel. They exist because breaking the last two is exactly how the retired "$84/night" ended up on ten pages and in structured data.
+
+1. **The nightly rates in §2.2 are confirmed** and are published: $108 / $120 / $108 / $155 / $135.
+2. **Weekly rates are not published.** No weekly dollar amount appears anywhere customer-facing — not in body copy, page titles, meta descriptions, FAQ answers, rate tables, or JSON-LD.
+3. **Guests call for weekly pricing.** The published wording is exactly **"Weekly Rates — Call for Price"**, held once in code as `WEEKLY_CALL_LINE` in `src/data/rates.ts`.
+4. **Never calculate a weekly rate from a nightly rate.** Multiplying $108 by seven is not the weekly price and must never be presented as one.
+5. **Never derive a nightly rate by dividing a weekly rate by seven.** That is where "$84/night" came from. It was never quoted by the front desk, and it undersold the real floor by $24 a night for as long as it was live.
+
+The code enforces rules 4 and 5 structurally rather than by convention: `RATES.weekly` is all `null`, and `nightlyQuote()` no longer accepts a weekly rate as an argument, so neither derivation can be written back in by accident.
 
 ### 2.5 Discounts and exceptions
 
@@ -836,7 +890,7 @@ The annual review is a backstop, not the main mechanism. Update the workbook **i
 
 | Date | Section | What changed | Changed by | Website updated? |
 |---|---|---|---|---|
-| | | | | |
+| 2026-09-03 | §2.2, §2.4, fast-path #3 | Nightly rate card confirmed and recorded — Studio King $108, Studio Two Queen $120, Handicap / Accessible Studio King $108, Pet-Friendly Studio Two Queen $155, Pet-Friendly Room $135. Weekly rates **withdrawn from publication**: $588 / $660 / $700 retired and moved to the historical table in §2.2, replaced everywhere by "Weekly Rates — Call for Price". Derived "$84/night" retired with them. | GM (rate card) | Yes — `src/data/rates.ts` (`nightly` filled, `weekly` set to `null`), homepage hero reel and Special Weekly Rates section, and 20 content pages. Weekly `Offer` nodes no longer emitted in JSON-LD. |
 | | | | | |
 | | | | | |
 
