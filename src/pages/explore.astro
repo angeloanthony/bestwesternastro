@@ -7,7 +7,7 @@
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { hotelNode, hotelRef, ldScript } from '../data/schema.ts';
-import { RATES, usd } from '../data/rates.ts';
+import { LOWEST_NIGHTLY } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 
 const headExtras = `${ldScript(hotelNode())}
@@ -135,7 +135,7 @@ const headExtras = `${ldScript(hotelNode())}
 <link rel="icon" href="images/logo.webp" type="image/webp">`;
 const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users -->
 <div class="visually-hidden">
-  Best Western Vernal Inn | Extended stay hotel with weekly rates from ${usd(RATES.weekly.standardQueen)}, full kitchenettes, pet friendly ($30/day + $100 refundable deposit), free breakfast, free parking for trucks. Located at 1935 South 1500 East, Vernal, UT 84078. Phone (435) 789-6625. 20 min to Dinosaur National Monument, 40 min to Flaming Gorge. Book direct at bestwesternvernalinn.com.
+  Best Western Vernal Inn | Extended stay hotel, nightly rates from ${LOWEST_NIGHTLY} + tax and weekly rates by phone, full kitchenettes, pet friendly ($30/day + $100 refundable deposit), free breakfast, free parking for trucks. Located at 1935 South 1500 East, Vernal, UT 84078. Phone (435) 789-6625. 20 min to Dinosaur National Monument, 40 min to Flaming Gorge. Book direct at bestwesternvernalinn.com.
 </div>
 
 <!-- NAV -->
@@ -780,12 +780,14 @@ const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users --
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
       <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
       <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/cheap-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Affordable Rooms</a> <span style="color:var(--muted);font-size:.88em;">— Best value in Vernal, no hidden fees</span></li>
+      <li><a href="/best-hotel-in-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Compare Vernal Hotels</a> <span style="color:var(--muted);font-size:.88em;">— How we compare on value</span></li>
      </ul>
     </div>
     <div>
@@ -797,6 +799,7 @@ const bodyContent = `<!-- PAGE SUMMARY — AI-extractable, invisible to users --
       <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
       <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
       <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+      <li><a href="/naples-utah-hotel" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Naples, Utah</a> <span style="color:var(--muted);font-size:.88em;">— Minutes away — no hotel in Naples itself</span></li>
      </ul>
     </div>
     <div>

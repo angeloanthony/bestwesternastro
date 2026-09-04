@@ -349,15 +349,270 @@ body {
   flex-wrap: wrap;
 }
 
-/* Hero dots */
-.hdots {
+/* ============================================================
+   HERO ROOM SHOWCASE — rate ribbon, arrows, indicators
+   ------------------------------------------------------------
+   Two constraints shape this layout, and both are other people's furniture:
+     • #ei-badge is position:fixed, 520 x 394, pinned over the LEFT of the
+       viewport, and .pet-badge sits over the bottom RIGHT. A rate card in
+       either corner is unreadable on a 768px-tall laptop.
+     • .sbb (conversion.css) is fixed over the bottom --sbb-h of every page.
+   So the rate ribbon is the last item in the hero's own centre column and
+   every piece of hero furniture is measured up from --hero-floor.
+   ============================================================ */
+.hero {
+  --hero-floor: calc(var(--sbb-h, 76px) + 14px);
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 22px;
+  padding-bottom: calc(var(--hero-floor) + 58px);
+}
+
+/* On a room slide the flat wash of .hero-ov leaves the photograph looking hazy
+   and the ribbon short of contrast. Swap it for a directional scrim: dark along
+   the bottom where the ribbon and controls are, near-clear across the upper
+   middle so the room itself stays rich. */
+.hero.hero-has-room .hero-ov {
+  background:
+    linear-gradient(to top, rgba(10, 20, 45, .78) 0%, rgba(10, 20, 45, .5) 22%, rgba(10, 20, 45, .16) 55%, rgba(10, 20, 45, .34) 100%),
+    linear-gradient(100deg, rgba(10, 20, 45, .34) 0%, rgba(10, 20, 45, 0) 45%);
+}
+
+/* Panels are stacked in one grid cell so the layer is as tall as the tallest
+   panel and nothing shifts as the reel advances. */
+.hroom-layer {
+  position: relative;
+  z-index: 6;
+  display: grid;
+  width: min(840px, calc(100vw - 80px));
+}
+.hroom {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity .7s ease, transform .7s ease, visibility .7s;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  text-align: left;
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--gold-rgb), .5);
+  background: linear-gradient(160deg, rgba(var(--navy-dark-rgb), .78), rgba(var(--navy-dark-rgb), .92));
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .5), 0 1px 0 rgba(255, 255, 255, .07) inset;
+}
+.hroom.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* — identity — */
+.hroom-id { flex: 1 1 auto; min-width: 0; }
+.hroom-kicker {
+  font-size: .6rem;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: .9;
+  margin: 0 0 4px;
+}
+.hroom-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  line-height: 1.15;
+  margin: 0;
+  color: #fff;
+}
+.hroom-feats {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: 9px 0 0;
+}
+.hroom-feats li {
+  font-size: .62rem;
+  letter-spacing: .4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .14);
+  white-space: nowrap;
+}
+
+/* — price — */
+.hroom-price {
+  flex: 0 0 auto;
+  text-align: center;
+  padding: 0 24px;
+  border-left: 1px solid rgba(var(--gold-rgb), .3);
+  border-right: 1px solid rgba(var(--gold-rgb), .3);
+}
+.hroom-rate {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+}
+.hroom-from {
+  font-size: .62rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: .75;
+}
+/* The glow pulse lives on the amount alone, runs 4.5s and never moves the text
+   — a discount-motel blink is exactly what this must not read as. */
+.hroom-amt {
+  font-size: clamp(1.9rem, 2.6vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gold-light);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .55);
+  animation: ratePulse 4.5s ease-in-out infinite;
+}
+.hroom-amt--call {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+.hroom-per {
+  font-size: .7rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: .9;
+}
+@keyframes ratePulse {
+  0%, 100% { text-shadow: 0 2px 14px rgba(0, 0, 0, .55); }
+  50%      { text-shadow: 0 2px 14px rgba(0, 0, 0, .55), 0 0 22px rgba(var(--gold-rgb), .75); }
+}
+.hroom-fine {
+  font-size: .64rem;
+  opacity: .72;
+  margin: 7px 0 0;
+  line-height: 1.4;
+}
+
+/* — weekly message + booking action — */
+.hroom-act {
+  flex: 0 0 auto;
+  width: 232px;
+  text-align: center;
+}
+.hroom-weekly {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: var(--gold);
+  margin: 0;
+  line-height: 1.35;
+}
+.hroom-foot {
+  font-size: .62rem;
+  opacity: .68;
+  margin: 5px 0 0;
+}
+.hroom-cta {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 10px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: .72rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: background var(--t), transform .2s;
+}
+.hroom-cta:hover,
+.hroom-cta:focus-visible {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+/* Previous / next / indicators — one centred row clear of the sticky booking
+   bar. Vertically-centred side arrows would sit under #ei-badge on the left and
+   .pet-badge on the right, so the whole control set lives at the bottom middle
+   where nothing else in the hero reaches. */
+.hctrls {
   position: absolute;
-  bottom: 30px;
+  bottom: var(--hero-floor);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.hnav {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(var(--navy-dark-rgb), .42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  transition: background .25s, border-color .25s, color .25s;
+}
+.hnav:hover,
+.hnav:focus-visible {
+  background: rgba(var(--navy-dark-rgb), .72);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Short desktops (a 768px-tall laptop is the tight case) cannot hold the full
+   headline block AND the rate ribbon above the controls. Drop the promo
+   callout, then the subtitle — the same two elements the phone rule below
+   drops, for the same reason: the sticky bar, the nav CTA and the Book Direct
+   section immediately under the hero all carry the ROCCO code already. */
+@media (min-width: 601px) and (max-height: 920px) {
+  .hero .promo-callout { display: none !important; }
+}
+@media (min-width: 601px) and (max-height: 800px) {
+  .hero .hsub { display: none; }
+  /* Losing the subtitle pulls the buttons up into #ei-badge's fixed 520px-wide
+     panel. Drop the duplicate Book Direct button with it — the ribbon's own
+     Book Now and the sticky bar both carry the same call — so only the centred
+     Explore Rooms button remains, clear of the panel. */
+  .hero .hbtns .btn-p { display: none; }
+}
+
+
+/* The pulse is the one piece of motion in the ribbon. Drop it — and the panel
+   slide-in — for anyone who has asked the OS for less movement. */
+@media (prefers-reduced-motion: reduce) {
+  .hroom-amt { animation: none; }
+  .hroom {
+    transform: none;
+    transition: opacity .3s ease, visibility .3s;
+  }
+}
+
+/* Hero dots */
+.hdots {
   display: flex;
   gap: 10px;
-  z-index: 5;
 }
 .hdot {
   width: 8px;
@@ -1178,6 +1433,36 @@ footer a         { color: var(--gold); }
   color: rgba(255, 255, 255, .4);
 }
 
+/* Below 900px there is no room for three columns of ribbon — the same content
+   stacks into a card. Everything stays: room name, price, the qualifier that
+   keeps the price honest, the weekly line, and Book Now. */
+@media (max-width: 900px) {
+  .hroom-layer { width: min(430px, calc(100vw - 32px)); }
+  .hroom {
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+    padding: 16px 18px 18px;
+  }
+  .hroom-id { flex: 0 0 auto; width: 100%; }
+  .hroom-feats { justify-content: center; }
+  .hroom-price {
+    width: 100%;
+    padding: 12px 0 0;
+    margin-top: 12px;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid rgba(var(--gold-rgb), .3);
+  }
+  .hroom-act {
+    width: 100%;
+    padding-top: 12px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(var(--gold-rgb), .3);
+  }
+  .hnav { width: 40px; height: 40px; font-size: 1.45rem; }
+}
+
 /* ============================================================
    RESPONSIVE — TABLET (≤ 900px)
    ============================================================ */
@@ -1216,6 +1501,19 @@ footer a         { color: var(--gold); }
   /* !important: the element also carries an inline display:inline-block
      (index.astro), which otherwise outranks this stylesheet rule. */
   .hero .promo-callout { display: none !important; }
+  /* Phone hero budget: headline + photo + price + Book Now must all fit inside
+     one 100vh screen, so the card sheds its amenity chips (the perks bar
+     immediately below the hero repeats them anyway) and tightens up. The rate,
+     its qualifier fine print and the weekly line never go — a price without
+     "on a 7-night stay" next to it is the drift rates.ts exists to prevent. */
+  .hero          { gap: 14px; padding-bottom: calc(var(--hero-floor) + 62px); }
+  .hroom         { padding: 14px 16px 16px; border-radius: 12px; }
+  .hroom-feats   { display: none; }
+  .hroom-name    { font-size: 1.15rem; }
+  .hroom-amt     { font-size: 2rem; }
+  .hroom-price   { padding-top: 10px; margin-top: 10px; }
+  .hroom-act     { padding-top: 10px; margin-top: 10px; }
+  .hroom-cta     { margin-top: 9px; padding: 10px 14px; font-size: .72rem; }
   .amen-grid     { grid-template-columns: 1fr 1fr; }
   .cta-btns      { flex-direction: column; align-items: center; }
   #lbprev        { left: 6px; }
@@ -1228,6 +1526,23 @@ footer a         { color: var(--gold); }
    scroll indicator is the first thing to sacrifice before real content clips. */
 @media (max-height: 700px) {
   .scroll-hint { display: none; }
+}
+
+/* Shortest phones (iPhone SE, 360 x 667): #ei-badge drops in over the top of
+   the hero and the control row holds the bottom, leaving roughly 200px of clear
+   band for the rate card. Tighten it to fit rather than let the badge cover the
+   price. The rate, its "on a 7-night stay" qualifier and the weekly line still
+   never go. */
+@media (max-width: 600px) and (max-height: 700px) {
+  .hero          { padding-bottom: calc(var(--hero-floor) + 42px); }
+  .hero .hbtns   { display: none; }
+  .hroom-kicker  { display: none; }
+  .hroom         { padding: 12px 14px 14px; }
+  .hroom-name    { font-size: 1.05rem; }
+  .hroom-amt     { font-size: 1.7rem; }
+  .hroom-price,
+  .hroom-act     { padding-top: 8px; margin-top: 8px; }
+  .hroom-cta     { margin-top: 7px; padding: 9px 12px; }
 }
 
 /* ============================================================
@@ -1812,6 +2127,10 @@ body.video-page { background: #000; }
 }
 .wr-price { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: #fff; line-height: 1; }
 .wr-card.featured .wr-price { color: var(--gold); }
+/* "Call for Price" stands in for the weekly dollar amount, which the hotel
+   quotes by phone. Same slot, same font, sized so a three-word phrase does not
+   wrap the way a 3rem number-sized string would. */
+.wr-price-call { font-size: 1.6rem; letter-spacing: .01em; }
 .wr-period { font-size: .75rem; color: rgba(var(--white-rgb),.4); letter-spacing: 1px; margin: 8px 0 24px; }
 .wr-btn {
   display: inline-block; background: var(--gold); color: var(--navy);
@@ -2294,10 +2613,13 @@ body.video-page { background: #000; }
   from { opacity: 0; transform: translateX(60px) scale(0.85); }
   to   { opacity: 1; transform: translateX(0) scale(1); }
 }
-@media (max-width: 600px) {
-  /* The hero is already tight on phone-width real estate and "Pet Friendly"
-     is covered on this page by the amenities list further down — drop the
-     floating badge on mobile rather than keep shrinking it. */
+/* The hero is already tight on real estate and "Pet Friendly" is covered on
+   this page by the amenities list further down — drop the floating badge rather
+   than keep shrinking it. Raised from 600px to 1280px when the hero gained its
+   rate ribbon: below that width the 175px badge lands on top of the ribbon's
+   Book Now button, and the reel now carries a full Pet-Friendly slide of its
+   own — photo, price and "Dogs welcome" — which says the same thing better. */
+@media (max-width: 1280px) {
   .pet-badge { display: none; }
 }
 
@@ -2343,7 +2665,10 @@ body.video-page { background: #000; }
   font-size: 1.3rem; cursor: pointer; line-height: 1; padding: 4px 7px; transition: color 0.2s;
 }
 #ei-badge-close:hover { color: #fff; }
-@media (min-width: 641px) and (max-width: 900px) {
+/* Ceiling raised from 900px to 1100px with the hero rate ribbon: at 520px wide
+   the panel reaches past the centre of a 1024px screen and covers the hero's
+   own buttons. The compact 320px form leaves them readable. */
+@media (min-width: 641px) and (max-width: 1100px) {
   #ei-badge { width: 320px; padding: 28px 24px 24px 22px; }
   #ei-badge .ei-header { font-size: 1.3rem; margin-bottom: 12px; }
   #ei-badge .ei-body { font-size: 0.95rem; }

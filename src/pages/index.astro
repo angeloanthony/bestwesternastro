@@ -7,10 +7,11 @@
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { hotelNodeFull, hotelRef, ldScript } from '../data/schema.ts';
-import { RATES, usd, perNight } from '../data/rates.ts';
+import { RATES, usd, LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
+import { HERO_SLIDES } from '../data/heroShowcase.ts';
 
-const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
+const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates available — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
 
 const headExtras = `${ldScript(hotelNodeFull(hotelDescription))}
 <script type="application/ld+json">
@@ -48,7 +49,7 @@ const headExtras = `${ldScript(hotelNodeFull(hotelDescription))}
  "name": "What are the weekly rates at Best Western Vernal Inn?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen (7 nights), ${usd(RATES.weekly.doubleQueen)} + tax for a Double Queen, and ${usd(RATES.weekly.standardKing)} + tax for a Standard King. Monthly rates and corporate billing for long-term stays are available — call (435) 789-6625."
+ "text": "Weekly rates are quoted by phone — call (435) 789-6625 for current weekly pricing. Published nightly rates start at ${LOWEST_NIGHTLY} + tax for a Studio King. Monthly rates and corporate billing for long-term stays are also available by phone."
  }
  },
  {
@@ -123,16 +124,18 @@ const bodyContent = `<!-- ══════════════════
 
 <!-- PAGE SUMMARY BAR — AI-extractable content, visible to all crawlers -->
 <div class="page-summary-bar" role="complementary" aria-label="Quick summary">
- <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights · Queen room). Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
+ <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax (Studio King). Weekly rates — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
 </div>
 
 <!-- NAV -->
 
 
-<!-- HERO SLIDESHOW — cinematic Ken Burns backgrounds -->
-<section class="hero">
- <div class="hero-slide kb-right active"><div class="hero-kb" style="background-image:url('images/31a.webp')"></div></div>
- <div class="hero-slide kb-left"><div class="hero-kb" style="background-image:url('images/35.webp')"></div></div>
+<!-- HERO SLIDESHOW — cinematic Ken Burns backgrounds.
+     Opens on the two property shots, then walks one room type per slide with
+     its rate laid over the photograph. Slides and rates both come from
+     src/data/heroShowcase.ts → src/data/rates.ts; nothing is hardcoded here. -->
+<section class="hero" id="hero" aria-roledescription="carousel" aria-label="Best Western Vernal Inn — rooms and rates">
+${HERO_SLIDES.map((s, i) => `<div class="hero-slide ${s.kb}${i === 0 ? ' active' : ''}" role="img" aria-label="${s.alt}"><div class="hero-kb" style="background-image:url('${s.image}')"></div></div>`).join('\n')}
  <div class="hero-ov"></div>
  <div class="hero-cnt">
  <p class="eyebrow">Coming Soon in Vernal, Utah as</p>
@@ -148,7 +151,46 @@ const bodyContent = `<!-- ══════════════════
  <div style="font-size:.7rem;opacity:.85;">Use this code when you call to save ${BUSINESS.directBooking.discountPercent}%.</div>
  </div>
  </div>
- <div class="hdots" id="hdots"></div>
+
+ <!-- ROOM RATE RIBBON — one panel per room slide, cross-faded in step with the
+      photo. It sits at the foot of the hero column rather than floating in a
+      corner: #ei-badge is position:fixed over the left edge and .pet-badge over
+      the right, and between them a corner card is unreadable on any laptop-height
+      screen. Three blocks on desktop, stacked on phones. -->
+ <div class="hroom-layer" id="hroom-layer">
+${HERO_SLIDES.map((s, i) => {
+  if (!s.room) return '';
+  const r = s.room;
+  const rate = r.nightly.published
+    ? `<p class="hroom-rate">${r.nightly.qualifier ? `<span class="hroom-from">${r.nightly.qualifier}</span>` : ''}<span class="hroom-amt">${r.nightly.price}</span><span class="hroom-per">/ night</span></p>`
+    : `<p class="hroom-rate hroom-rate--call"><span class="hroom-amt hroom-amt--call">${r.nightly.price}</span></p>`;
+  return ` <article class="hroom" data-slide="${i}" aria-hidden="true">
+   <div class="hroom-id">
+    <p class="hroom-kicker">${r.sleeps}</p>
+    <h2 class="hroom-name">${r.name}</h2>
+    <ul class="hroom-feats">${r.features.map((f) => `<li>${f}</li>`).join('')}</ul>
+   </div>
+   <div class="hroom-price">
+    ${rate}
+    <p class="hroom-fine">${r.nightly.note}</p>
+   </div>
+   <div class="hroom-act">
+    <p class="hroom-weekly">${r.weekly}</p>
+    ${r.footnote ? `<p class="hroom-foot">${r.footnote}</p>` : ''}
+    <a href="tel:${BUSINESS.phoneTel}" class="hroom-cta" data-track="phone_call_homepage">Book Now · ${BUSINESS.phoneDisplay}</a>
+   </div>
+  </article>`;
+}).join('\n')}
+ </div>
+
+ <!-- Controls sit as one row at the bottom centre: the left edge of the hero is
+      taken by the "We're Open!" notice and the right by the pet badge, and both
+      would swallow a vertically-centred arrow. -->
+ <div class="hctrls">
+  <button class="hnav" id="hprev" type="button" aria-controls="hero" aria-label="Previous room">‹</button>
+  <div class="hdots" id="hdots" role="tablist" aria-label="Choose a room"></div>
+  <button class="hnav" id="hnext" type="button" aria-controls="hero" aria-label="Next room">›</button>
+ </div>
  <div class="scroll-hint">Scroll</div>
 
  <!-- PET FRIENDLY BADGE -->
@@ -201,100 +243,111 @@ const bodyContent = `<!-- ══════════════════
  <div class="wr-inner">
  <p class="wr-eyebrow">✦ Extended Stay Savings ✦</p>
  <h2 class="wr-title">Special <em>Weekly Rates</em></h2>
- <p class="wr-sub">Stay 7 nights and save — our best rates for extended stays in Vernal, Utah.</p>
+ <p class="wr-sub">Staying 7 nights or longer? Weekly rates are quoted by the front desk — call and we'll give you the current price for your dates and room type.</p>
  <div class="wr-cards">
  <div class="wr-card">
  <div class="wr-icon">🛏️</div>
- <div class="wr-type">Queen Room</div>
- <div class="wr-price">${usd(RATES.weekly.standardQueen)}</div>
- <div class="wr-period">+ tax · 7 nights</div>
- <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+ <div class="wr-type">Studio King</div>
+ <div class="wr-price wr-price-call">Call for Price</div>
+ <div class="wr-period">7-night weekly rate</div>
+ <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.phoneDisplay}</a>
  </div>
  <div class="wr-card featured">
  <div class="wr-badge">Most Popular</div>
  <div class="wr-icon">👥</div>
- <div class="wr-type">Double Queen</div>
- <div class="wr-price">${usd(RATES.weekly.doubleQueen)}</div>
- <div class="wr-period">+ tax · 7 nights</div>
- <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+ <div class="wr-type">Studio Two Queen</div>
+ <div class="wr-price wr-price-call">Call for Price</div>
+ <div class="wr-period">7-night weekly rate</div>
+ <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.phoneDisplay}</a>
  </div>
  <div class="wr-card">
- <div class="wr-icon">👑</div>
- <div class="wr-type">King Room</div>
- <div class="wr-price">${usd(RATES.weekly.standardKing)}</div>
- <div class="wr-period">+ tax · 7 nights</div>
- <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%</a>
+ <div class="wr-icon">🐾</div>
+ <div class="wr-type">Pet-Friendly Rooms</div>
+ <div class="wr-price wr-price-call">Call for Price</div>
+ <div class="wr-period">7-night weekly rate</div>
+ <a href="tel:${BUSINESS.phoneTel}">📞 ${BUSINESS.phoneDisplay}</a>
  </div>
  </div>
 
- <!-- STRUCTURED RATES TABLE — for AI extraction and featured snippets -->
+ <!-- STRUCTURED RATES TABLE — for AI extraction and featured snippets.
+      Nightly prices read from RATES.nightly (confirmed 2026-09-03). The weekly
+      column is deliberately "Call for price" on every row: the hotel quotes
+      weekly stays by phone, and this table is exactly the surface an assistant
+      would scrape a stale number off. -->
  <div class="rates-table-wrap">
- <table class="rates-table" aria-label="Extended Stay Weekly Rates — Best Western Vernal Inn Utah">
+ <table class="rates-table" aria-label="Room Rates — Best Western Vernal Inn Utah">
  <thead>
  <tr>
  <th>Room Type</th>
  <th>Sleeps</th>
- <th>7-Night Rate</th>
- <th>Est. per Night</th>
+ <th>Nightly Rate</th>
+ <th>Weekly Rate</th>
  <th>Best For</th>
  </tr>
  </thead>
  <tbody>
  <tr>
- <td><strong>Standard Queen</strong></td>
+ <td><strong>Studio King</strong></td>
  <td>1–2</td>
- <td><span class="rate-price">${usd(RATES.weekly.standardQueen)}</span><div class="rate-note">+ tax</div></td>
- <td>~${perNight(RATES.weekly.standardQueen)}/night</td>
- <td>Solo travelers, couples</td>
+ <td><span class="rate-price">${usd(RATES.nightly.studioKing)}</span><div class="rate-note">${RATES.taxNote}</div></td>
+ <td>Call for price</td>
+ <td>Business travelers, couples</td>
  </tr>
  <tr>
- <td><strong>Double Queen</strong></td>
+ <td><strong>Studio Two Queen</strong></td>
  <td>1–4</td>
- <td><span class="rate-price">${usd(RATES.weekly.doubleQueen)}</span><div class="rate-note">+ tax</div></td>
- <td>~${perNight(RATES.weekly.doubleQueen)}/night</td>
+ <td><span class="rate-price">${usd(RATES.nightly.studioTwoQueen)}</span><div class="rate-note">${RATES.taxNote}</div></td>
+ <td>Call for price</td>
  <td>Families, road trips</td>
  </tr>
  <tr>
- <td><strong>Standard King</strong></td>
+ <td><strong>Handicap / Accessible Studio King</strong></td>
  <td>1–2</td>
- <td><span class="rate-price">${usd(RATES.weekly.standardKing)}</span><div class="rate-note">+ tax</div></td>
- <td>~${perNight(RATES.weekly.standardKing)}/night</td>
- <td>Business travelers, couples</td>
+ <td><span class="rate-price">${usd(RATES.nightly.accessibleStudioKing)}</span><div class="rate-note">${RATES.taxNote}</div></td>
+ <td>Call for price</td>
+ <td>Guests needing ADA access</td>
+ </tr>
+ <tr>
+ <td><strong>Pet-Friendly Studio Two Queen</strong></td>
+ <td>1–4</td>
+ <td><span class="rate-price">${usd(RATES.nightly.petFriendlyStudioTwoQueen)}</span><div class="rate-note">${RATES.taxNote}</div></td>
+ <td>Call for price</td>
+ <td>Guests with dogs (up to 80 lbs)</td>
+ </tr>
+ <tr>
+ <td><strong>Pet-Friendly Room</strong></td>
+ <td>—</td>
+ <td><span class="rate-price">${usd(RATES.nightly.petFriendlyRoom)}</span><div class="rate-note">${RATES.taxNote}</div></td>
+ <td>Call for price</td>
+ <td>Guests with dogs (up to 80 lbs)</td>
  </tr>
  <tr>
  <td><strong>King Suite (Kitchenette)</strong></td>
  <td>1–2</td>
  <td>Call for rate</td>
- <td>—</td>
+ <td>Call for price</td>
  <td>Extended stays, contractors</td>
  </tr>
  <tr>
  <td><strong>King Jacuzzi Suite</strong></td>
  <td>1–2</td>
  <td>Call for rate</td>
- <td>—</td>
+ <td>Call for price</td>
  <td>Romance, special occasions</td>
  </tr>
  <tr>
  <td><strong>Jacuzzi Double Queen Suite</strong></td>
  <td>1–4</td>
  <td>Call for rate</td>
- <td>—</td>
+ <td>Call for price</td>
  <td>Families wanting luxury</td>
- </tr>
- <tr>
- <td><strong>Pet Friendly King / Double Queen</strong></td>
- <td>1–4</td>
- <td>From ${usd(RATES.weekly.standardQueen)}</td>
- <td>~$84+/night</td>
- <td>Guests with dogs (up to 80 lbs)</td>
  </tr>
  </tbody>
  </table>
- <p class="rates-monthly-note">📞 Monthly rates available — call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a> for long-term pricing and corporate / company billing options.</p>
+ <p class="rates-monthly-note">📞 Weekly and monthly rates available — call <a href="tel:${BUSINESS.phoneTel}">${BUSINESS.phoneDisplay}</a> for extended-stay pricing and corporate / company billing options.</p>
  </div>
 
- <p class="wr-note">📞 To book weekly rates call <a href="tel:${BUSINESS.phoneTel}">(435) 789-6625</a></p>
+ <p class="wr-note">📞 ${WEEKLY_CALL_LINE} — call <a href="tel:${BUSINESS.phoneTel}">${BUSINESS.phoneDisplay}</a></p>
  </div>
 </section>
 
@@ -822,7 +875,7 @@ const bodyContent = `<!-- ══════════════════
     <div style="display:grid;gap:.85rem;">
     <a href="/extended-stay-hotel-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Extended Stay</div>
-     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</div>
+     <div style="font-size:.92rem;color:var(--muted);line-height:1.5;">Weekly &amp; monthly stays — call for price</div>
     </a>
     <a href="/weekly-hotel-rates-vernal-utah" class="topic-card" style="display:block;padding:1.4rem 1.3rem;background:#fff;border:1px solid rgba(var(--gold-rgb),0.35);border-radius:6px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s;">
      <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--navy);margin-bottom:.3rem;">Weekly Rates</div>
@@ -947,37 +1000,86 @@ const pageScripts = `<script>
 </script>
 <script>
 // Hero Slideshow — Ken Burns backgrounds
-const slides = document.querySelectorAll('.hero-slide');
-const dc     = document.getElementById('hdots');
+/* ── Hero room reel ──
+   Two property shots then one slide per room type. The rate card layer is a
+   separate stack of <article>s keyed by data-slide, so the price cross-fades in
+   step with the photo without being re-rendered. Autoplay pauses on hover, on
+   focus, and while the tab is hidden. */
+const slides  = document.querySelectorAll('.hero-slide');
+const dc      = document.getElementById('hdots');
+const rooms   = document.querySelectorAll('.hroom');
+const heroEl  = document.getElementById('hero');
+const hlabels = ${JSON.stringify(HERO_SLIDES.map((s) => s.label))};
+const hstill  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cs = 0;
+let htimer = null;
+
 if (slides.length && dc) {
   slides.forEach((_, i) => {
     const d = document.createElement('button');
+    d.type = 'button';
     d.className = 'hdot' + (i === 0 ? ' active' : '');
-    d.onclick = () => gs(i);
+    d.setAttribute('role', 'tab');
+    d.setAttribute('aria-label', hlabels[i] || ('Slide ' + (i + 1)));
+    d.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    d.onclick = () => { gs(i); hrestart(); };
     dc.appendChild(d);
   });
 }
+
+/* Show the rate card belonging to slide n, if that slide has one. Hidden cards
+   keep their CTA out of the tab order — it is a real phone link, not decoration. */
+function hcard(n) {
+  let shown = false;
+  rooms.forEach(c => {
+    const on = Number(c.dataset.slide) === n;
+    if (on) shown = true;
+    c.classList.toggle('active', on);
+    c.setAttribute('aria-hidden', on ? 'false' : 'true');
+    const cta = c.querySelector('.hroom-cta');
+    if (cta) cta.tabIndex = on ? 0 : -1;
+  });
+  if (heroEl) heroEl.classList.toggle('hero-has-room', shown);
+}
+
 function gs(n) {
   slides[cs].classList.remove('active');
   dc.children[cs].classList.remove('active');
+  dc.children[cs].setAttribute('aria-selected', 'false');
   cs = n;
   slides[cs].classList.add('active');
   dc.children[cs].classList.add('active');
+  dc.children[cs].setAttribute('aria-selected', 'true');
+  hcard(cs);
   const kb = slides[cs].querySelector('.hero-kb');
+  if (hstill) { kb.style.transition = 'none'; kb.style.transform = 'scale(1)'; return; }
   kb.style.transition = 'none';
   kb.style.transform  = 'scale(1.08)';
   kb.offsetHeight;
   kb.style.transition = 'transform 8s ease-out';
   kb.style.transform  = 'scale(1)';
 }
+
+function hstep(d)  { gs((cs + d + slides.length) % slides.length); }
+function hstop()   { clearInterval(htimer); htimer = null; }
+function hstart()  { if (!htimer && slides.length > 1) htimer = setInterval(() => hstep(1), 6000); }
+function hrestart(){ hstop(); hstart(); }
+
 if (slides.length) {
-  setInterval(() => gs((cs + 1) % slides.length), 6000);
-  (function() {
-    const kb = slides[0].querySelector('.hero-kb');
-    kb.style.transition = 'transform 8s ease-out';
-    kb.style.transform  = 'scale(1)';
-  })();
+  hcard(0);
+  document.getElementById('hprev')?.addEventListener('click', () => { hstep(-1); hrestart(); });
+  document.getElementById('hnext')?.addEventListener('click', () => { hstep(1);  hrestart(); });
+  if (heroEl) {
+    heroEl.addEventListener('mouseenter', hstop);
+    heroEl.addEventListener('mouseleave', hstart);
+    heroEl.addEventListener('focusin',  hstop);
+    heroEl.addEventListener('focusout', hstart);
+  }
+  document.addEventListener('visibilitychange', () => { document.hidden ? hstop() : hstart(); });
+  hstart();
+  const kb0 = slides[0].querySelector('.hero-kb');
+  kb0.style.transition = hstill ? 'none' : 'transform 8s ease-out';
+  kb0.style.transform  = 'scale(1)';
 }
 
 // Room Tabs
@@ -1065,14 +1167,14 @@ if (ownerOverlay && ownerIframe) {
 ---
 
 <BaseLayout
-  title=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn — Weekly Rates from ${perNight(RATES.weekly.standardQueen)}/night`
-  description=`Best Western Inn in Vernal, Utah — weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights), free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
+  title=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn — Rooms from ${LOWEST_NIGHTLY}/night`
+  description=`Best Western Inn in Vernal, Utah — nightly rates from ${LOWEST_NIGHTLY} + tax, weekly rates by phone, free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
   canonical=`https://bestwesternvernalinn.com/`
   ogTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
-  ogDescription=`Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast, full kitchenettes, jacuzzi suites, pet friendly. 0.6 miles from Vernal Regional Airport.`
+  ogDescription=`Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast, full kitchenettes, jacuzzi suites, pet friendly. 0.6 miles from Vernal Regional Airport.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
-  twitterDescription=`Weekly rates from ${usd(RATES.weekly.standardQueen)}. Free hot breakfast, kitchenettes, jacuzzi suites, pet friendly. Near Dinosaur National Monument.`
+  twitterDescription=`Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast, kitchenettes, jacuzzi suites, pet friendly. Near Dinosaur National Monument.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   hreflang=`https://bestwesternvernalinn.com/`
   isHome={true}

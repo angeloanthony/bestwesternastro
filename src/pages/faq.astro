@@ -7,7 +7,7 @@
 // page-specific scripts in the scripts slot, both emitted unchanged.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { hotelNode, hotelRef, ldScript } from '../data/schema.ts';
-import { RATES, usd } from '../data/rates.ts';
+import { LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 
 const headExtras = `${ldScript(hotelNode())}
 <script type="application/ld+json">
@@ -24,7 +24,7 @@ const headExtras = `${ldScript(hotelNode())}
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "What are the weekly rates at Best Western Vernal Inn?", "acceptedAnswer": { "@type": "Answer", "text": "Weekly rates start at ${usd(RATES.weekly.standardQueen)} + tax for a Standard Queen room (7 nights), ${usd(RATES.weekly.doubleQueen)} + tax for a Double Queen, and $700 + tax for a Standard King. Monthly rates and long-term corporate billing are available — call (435) 789-6625 for pricing." }},
+      { "@type": "Question", "name": "What are the weekly rates at Best Western Vernal Inn?", "acceptedAnswer": { "@type": "Answer", "text": "Weekly rates are quoted by the front desk rather than published — call (435) 789-6625 with your dates and room type for the current weekly price. Published nightly rates start at ${LOWEST_NIGHTLY} + tax. Monthly rates and long-term corporate billing are also arranged by phone." }},
       { "@type": "Question", "name": "Is the hotel pet friendly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Best Western Vernal Inn welcomes up to two dogs per room with an 80 lb limit per dog. Pet fee is $30.00 USD per day plus a refundable $100.00 damage deposit due at check-in. Other pets may be allowed with prior approval — call (435) 789-6625." }},
       { "@type": "Question", "name": "Does Best Western Vernal Inn include free breakfast?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, a free hot breakfast is included with every stay, served daily." }},
       { "@type": "Question", "name": "What time is check-in and check-out?", "acceptedAnswer": { "@type": "Answer", "text": "Check-in is at 3:00 PM. Check-out is at 11:00 AM." }},
@@ -66,7 +66,7 @@ const headExtras = `${ldScript(hotelNode())}
   </style>
 <link rel="icon" href="images/logo.webp" type="image/webp">`;
 const bodyContent = `<div class="page-summary-bar" role="complementary" aria-label="Quick summary">
-  <strong>FAQ — Best Western Vernal Inn.</strong> Weekly rates from ${usd(RATES.weekly.standardQueen)} (7 nights). Free hot breakfast daily. Pet friendly (2 dogs, 80 lb limit, $30/day + $100 refundable deposit). Check-in 3:00 PM · Check-out 11:00 AM. Full kitchenettes, jacuzzi suites, ADA accessible rooms, free WiFi, free parking. Monthly rates and contractor housing available. Located at 1935 South 1500 East, Vernal, UT 84078. Call <strong>(435) 789-6625</strong>.
+  <strong>FAQ — Best Western Vernal Inn.</strong> Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast daily. Pet friendly (2 dogs, 80 lb limit, $30/day + $100 refundable deposit). Check-in 3:00 PM · Check-out 11:00 AM. Full kitchenettes, jacuzzi suites, ADA accessible rooms, free WiFi, free parking. Monthly rates and contractor housing available. Located at 1935 South 1500 East, Vernal, UT 84078. Call <strong>(435) 789-6625</strong>.
 </div>
 
 
@@ -88,7 +88,7 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
         <div class="faq-item">
           <button class="faq-q">What are the weekly rates? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Weekly extended stay rates (7 nights + tax): <strong>Standard Queen — ${usd(RATES.weekly.standardQueen)}</strong>, <strong>Double Queen — ${usd(RATES.weekly.doubleQueen)}</strong>, <strong>Standard King — $700</strong>. Monthly rates and long-term corporate billing are also available — call <a href="tel:4357896625">(435) 789-6625</a> for pricing.
+            <strong>${WEEKLY_CALL_LINE}.</strong> Weekly stays are quoted against your dates and room type rather than published, so call <a href="tel:4357896625">(435) 789-6625</a> for the current weekly price. Published nightly rates start at ${LOWEST_NIGHTLY} + tax. Monthly rates and long-term corporate billing are arranged the same way.
           </div>
         </div>
         <div class="faq-item">
@@ -226,12 +226,14 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
     <div>
      <h3 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--navy);margin:0 0 .8rem;border-bottom:2px solid var(--gold);padding-bottom:.4rem;">By Stay Type</h3>
      <ul style="list-style:none;padding:0;margin:0;line-height:1.95;">
-      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays from ${usd(RATES.weekly.standardQueen)}</span></li>
+      <li><a href="/extended-stay-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Extended Stay</a> <span style="color:var(--muted);font-size:.88em;">— Weekly &amp; monthly stays, priced by phone</span></li>
       <li><a href="/weekly-hotel-rates-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Weekly Rates</a> <span style="color:var(--muted);font-size:.88em;">— 7-night discount pricing</span></li>
       <li><a href="/workforce-housing-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Workforce Housing</a> <span style="color:var(--muted);font-size:.88em;">— Crew lodging &amp; corporate billing</span></li>
       <li><a href="/oilfield-housing-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Oilfield Housing</a> <span style="color:var(--muted);font-size:.88em;">— Truck parking, flexible billing</span></li>
       <li><a href="/pet-friendly-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Pet Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Dogs welcome, ground-floor rooms</span></li>
       <li><a href="/dog-friendly-hotel-vernal" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Dog Friendly</a> <span style="color:var(--muted);font-size:.88em;">— Hardwood floors, direct outdoor access</span></li>
+      <li><a href="/cheap-hotel-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Affordable Rooms</a> <span style="color:var(--muted);font-size:.88em;">— Best value in Vernal, no hidden fees</span></li>
+      <li><a href="/best-hotel-in-vernal-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Compare Vernal Hotels</a> <span style="color:var(--muted);font-size:.88em;">— How we compare on value</span></li>
      </ul>
     </div>
     <div>
@@ -243,6 +245,7 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
       <li><a href="/hotel-near-red-fleet-state-park" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Red Fleet State Park</a> <span style="color:var(--muted);font-size:.88em;">— 12 miles</span></li>
       <li><a href="/hotel-near-ashley-national-forest" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Ashley National Forest</a> <span style="color:var(--muted);font-size:.88em;">— 15 miles</span></li>
       <li><a href="/hotel-near-jensen-utah" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Jensen, Utah</a> <span style="color:var(--muted);font-size:.88em;">— 10 miles</span></li>
+      <li><a href="/naples-utah-hotel" style="color:var(--navy);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),0.5);">Near Naples, Utah</a> <span style="color:var(--muted);font-size:.88em;">— Minutes away — no hotel in Naples itself</span></li>
      </ul>
     </div>
     <div>
@@ -272,10 +275,10 @@ const pageScripts = ``;
   description=`Answers to the most common questions about Best Western Inn in Vernal, Utah. Weekly rates, pet policy, breakfast, check-in times, kitchenettes, jacuzzi suites, and more.`
   canonical=`https://bestwesternvernalinn.com/faq`
   ogTitle=`FAQ — Best Western Vernal Inn`
-  ogDescription=`Everything you need to know: weekly rates from ${usd(RATES.weekly.standardQueen)}, free hot breakfast, pet policy, check-in times, jacuzzi suites, kitchenettes, and monthly rates. Call (435) 789-6625.`
+  ogDescription=`Everything you need to know: nightly rates from ${LOWEST_NIGHTLY}, weekly rates by phone, free hot breakfast, pet policy, check-in times, jacuzzi suites, kitchenettes, and monthly rates. Call (435) 789-6625.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterTitle=`FAQ — Best Western Vernal Inn`
-  twitterDescription=`Weekly rates from ${usd(RATES.weekly.standardQueen)}, pet policy, free breakfast, check-in times, kitchenettes, monthly contractor rates. Call (435) 789-6625.`
+  twitterDescription=`Nightly rates from ${LOWEST_NIGHTLY}, weekly rates by phone, pet policy, free breakfast, check-in times, kitchenettes. Call (435) 789-6625.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   hreflang=`https://bestwesternvernalinn.com/faq`
   lastUpdated=`April 2026`
