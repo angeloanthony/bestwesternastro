@@ -1,0 +1,485 @@
+/* Room detail pages (/rooms/*) — ADDITIVE ONLY.
+ *
+ * Imported by src/pages/rooms/[slug].astro alone, never by BaseLayout, so no
+ * existing page loads a byte of it. Every selector is prefixed `.rm-` and no
+ * rule in this file touches an element, a global class or a token defined in
+ * global.css — it only reads the tokens (--navy, --gold, --cream, --muted …)
+ * so the room pages inherit the site's palette and type rather than restating
+ * it. The page uses the site's Playfair Display / Lato pairing throughout.
+ */
+
+/* ── HERO ─────────────────────────────────────────────────────────────────── */
+.rm-hero {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 120px 24px 56px;
+  overflow: hidden;
+}
+.rm-hero-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+}
+.rm-hero-ov {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(var(--navy-dark-rgb), 0.94) 0%,
+    rgba(var(--navy-dark-rgb), 0.72) 38%,
+    rgba(var(--navy-dark-rgb), 0.34) 100%
+  );
+}
+.rm-hero-cnt {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: #fff;
+}
+.rm-eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 0 0 14px;
+}
+.rm-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5.4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  margin: 0 0 22px;
+}
+
+/* Price block — shared by the hero and the pricing section. */
+.rm-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rm-price-amt {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.1rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.rm-price-per {
+  font-size: 0.82rem;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.rm-price-tax {
+  font-size: 0.82rem;
+  opacity: 0.75;
+  font-weight: 300;
+}
+.rm-weekly {
+  margin: 14px 0 0;
+  padding: 9px 16px;
+  display: inline-block;
+  border: 1px solid rgba(var(--gold-rgb), 0.55);
+  border-radius: 3px;
+  font-size: 0.82rem;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+}
+.rm-foot {
+  margin: 12px 0 0;
+  font-size: 0.86rem;
+  opacity: 0.82;
+  font-weight: 300;
+}
+
+.rm-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+.rm-btn {
+  display: inline-block;
+  padding: 14px 30px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 900;
+  transition: var(--t);
+}
+.rm-btn-p {
+  background: var(--gold);
+  color: var(--navy);
+}
+.rm-btn-p:hover,
+.rm-btn-p:focus-visible {
+  background: var(--gold-light);
+}
+.rm-btn-s {
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: #fff;
+  padding: 12px 28px;
+}
+.rm-btn-s:hover,
+.rm-btn-s:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* ── SECTION SHELL ────────────────────────────────────────────────────────── */
+.rm-sec {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.4rem 24px;
+}
+.rm-sec + .rm-sec {
+  border-top: 1px solid #e8e4dc;
+}
+.rm-sec h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--navy);
+  margin: 0 0 0.4rem;
+}
+.rm-sec-note {
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  margin: 0 0 1.6rem;
+}
+.rm-sec p {
+  color: var(--muted);
+  line-height: 1.85;
+  font-weight: 300;
+  margin: 0 0 0.95rem;
+}
+.rm-sec p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── GALLERY ──────────────────────────────────────────────────────────────── */
+/* Fixed row height rather than per-tile aspect ratios: the opening shot spans
+ * two columns AND two rows, so it stays flush with the tiles beside it instead
+ * of pushing the following row out of alignment. */
+.rm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 178px;
+  gap: 12px;
+}
+.rm-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #ded8cd;
+  cursor: zoom-in;
+}
+.rm-grid .rm-tile:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.rm-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.rm-tile:hover img,
+.rm-tile:focus-visible img {
+  transform: scale(1.06);
+}
+.rm-tile:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+.rm-tile-cap {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 26px 12px 10px;
+  background: linear-gradient(to top, rgba(var(--navy-dark-rgb), 0.9), transparent);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.4;
+  text-align: left;
+  opacity: 0;
+  transition: opacity var(--t);
+}
+.rm-tile:hover .rm-tile-cap,
+.rm-tile:focus-visible .rm-tile-cap {
+  opacity: 1;
+}
+
+.rm-notice {
+  background: var(--soft);
+  border-left: 3px solid var(--gold);
+  padding: 1.4rem 1.6rem;
+  border-radius: 3px;
+}
+.rm-notice p {
+  margin: 0;
+}
+
+/* ── LIGHTBOX ─────────────────────────────────────────────────────────────── */
+.rm-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(8, 14, 26, 0.96);
+  display: none;
+  flex-direction: column;
+  padding: 56px 16px 24px;
+}
+.rm-lb.open {
+  display: flex;
+}
+.rm-lb-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rm-lb-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 3px;
+}
+.rm-lb-cap {
+  color: #f2eee6;
+  text-align: center;
+  max-width: 760px;
+  margin: 14px auto 0;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.rm-lb-count {
+  display: block;
+  color: var(--gold);
+  font-size: 0.74rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.rm-lb button {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--t);
+}
+.rm-lb button:hover,
+.rm-lb button:focus-visible {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+}
+.rm-lb-x {
+  top: 12px;
+  right: 14px;
+}
+.rm-lb-prev {
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.rm-lb-next {
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ── FEATURES ─────────────────────────────────────────────────────────────── */
+.rm-feats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.6rem 1.6rem;
+}
+.rm-feats li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.rm-feats li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* ── PRICING ──────────────────────────────────────────────────────────────── */
+.rm-pricing {
+  background: var(--navy);
+  color: #fff;
+}
+.rm-pricing .rm-sec {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.rm-pricing h2 {
+  color: #fff;
+}
+.rm-pricing p {
+  color: rgba(255, 255, 255, 0.82);
+}
+.rm-pricing .rm-sec + .rm-sec {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+.rm-rate-card {
+  display: flex;
+  gap: 2.4rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 1.6rem 0 1.4rem;
+}
+.rm-rate-card > div {
+  min-width: 220px;
+}
+.rm-rate-lbl {
+  font-size: 0.75rem;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 0 0 8px;
+}
+
+/* ── DIFFERENCE CALLOUT ───────────────────────────────────────────────────── */
+.rm-diff {
+  background: var(--soft);
+  border-left: 3px solid var(--gold);
+  padding: 1.2rem 1.5rem;
+  border-radius: 3px;
+  margin: 1.6rem 0 0;
+}
+.rm-diff p {
+  margin: 0;
+  color: var(--navy);
+  font-weight: 400;
+}
+
+/* ── RELATED ROOMS ────────────────────────────────────────────────────────── */
+.rm-related {
+  background: var(--cream);
+  border-top: 1px solid rgba(var(--gold-rgb), 0.25);
+}
+.rm-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+  margin-top: 1.6rem;
+}
+.rm-card {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e8e4dc;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: var(--t);
+}
+.rm-card:hover,
+.rm-card:focus-visible {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(var(--navy-rgb), 0.12);
+}
+.rm-card img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+}
+.rm-card-b {
+  padding: 0.9rem 1rem 1.1rem;
+}
+.rm-card-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.06rem;
+  color: var(--navy);
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+.rm-card-p {
+  font-size: 0.86rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin: 0;
+}
+.rm-card-p strong {
+  color: var(--gold);
+  font-weight: 900;
+}
+
+/* ── MOBILE ───────────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .rm-hero {
+    min-height: 60vh;
+    padding: 100px 20px 40px;
+  }
+  .rm-sec {
+    padding: 2.4rem 20px;
+  }
+  .rm-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: 118px;
+    gap: 8px;
+  }
+  .rm-grid .rm-tile:first-child {
+    grid-column: 1 / -1;
+    grid-row: span 2;
+  }
+  /* Captions can't be hovered on a touch screen — show them in the lightbox
+     instead, which is one tap away, and keep the grid clean here. */
+  .rm-tile-cap {
+    display: none;
+  }
+  .rm-lb {
+    padding: 52px 10px 18px;
+  }
+  .rm-lb button {
+    width: 40px;
+    height: 40px;
+  }
+  .rm-lb-prev {
+    left: 6px;
+  }
+  .rm-lb-next {
+    right: 6px;
+  }
+  .rm-rate-card {
+    gap: 1.4rem;
+  }
+}

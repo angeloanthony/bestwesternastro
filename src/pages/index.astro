@@ -10,6 +10,28 @@ import { hotelNodeFull, hotelRef, ldScript } from '../data/schema.ts';
 import { RATES, usd, LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 import { HERO_SLIDES } from '../data/heroShowcase.ts';
+// Detailed room pages (/rooms/*). Slugs live in rooms.ts, so the links below
+// and the pages themselves can never drift apart.
+import { roomBySlideId, roomHref, ROOMS } from '../data/rooms.ts';
+
+/** Root-relative link to a room's detail page, by its hero-reel slide id. */
+const slideRoomHref = (slideId: string): string | null => {
+  const r = roomBySlideId(slideId);
+  return r ? roomHref(r.slug) : null;
+};
+/** Root-relative link to a room's detail page, by its rate-card name. */
+const nameRoomHref = (name: string): string | null => {
+  const r = ROOMS.find((x) => x.name === name);
+  return r ? roomHref(r.slug) : null;
+};
+/** Rate-table room-name cell: a link where a detail page exists, plain text
+ *  otherwise (the suites have no confirmed rate and so no page). */
+const rateCell = (name: string): string => {
+  const href = nameRoomHref(name);
+  return href
+    ? `<a href="${href}" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),.65);">${name}</a>`
+    : `<strong>${name}</strong>`;
+};
 
 const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates available — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
 
@@ -161,6 +183,12 @@ ${HERO_SLIDES.map((s, i) => `<div class="hero-slide ${s.kb}${i === 0 ? ' active'
 ${HERO_SLIDES.map((s, i) => {
   if (!s.room) return '';
   const r = s.room;
+  // Link the slide to its detailed room page. Inline-styled rather than given a
+  // new global class: the brief is to link the existing reel, not restyle it.
+  const href = slideRoomHref(s.id);
+  const more = href
+    ? `<a href="${href}" class="hroom-more" style="display:inline-block;margin-top:8px;color:var(--gold);font-size:.72rem;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),.5);padding-bottom:2px;">View room details →</a>`
+    : '';
   const rate = r.nightly.published
     ? `<p class="hroom-rate">${r.nightly.qualifier ? `<span class="hroom-from">${r.nightly.qualifier}</span>` : ''}<span class="hroom-amt">${r.nightly.price}</span><span class="hroom-per">/ night</span></p>`
     : `<p class="hroom-rate hroom-rate--call"><span class="hroom-amt hroom-amt--call">${r.nightly.price}</span></p>`;
@@ -178,6 +206,7 @@ ${HERO_SLIDES.map((s, i) => {
     <p class="hroom-weekly">${r.weekly}</p>
     ${r.footnote ? `<p class="hroom-foot">${r.footnote}</p>` : ''}
     <a href="tel:${BUSINESS.phoneTel}" class="hroom-cta" data-track="phone_call_homepage">Book Now · ${BUSINESS.phoneDisplay}</a>
+    ${more}
    </div>
   </article>`;
 }).join('\n')}
@@ -287,35 +316,35 @@ ${HERO_SLIDES.map((s, i) => {
  </thead>
  <tbody>
  <tr>
- <td><strong>Studio King</strong></td>
+ <td>${rateCell('Studio King')}</td>
  <td>1–2</td>
  <td><span class="rate-price">${usd(RATES.nightly.studioKing)}</span><div class="rate-note">${RATES.taxNote}</div></td>
  <td>Call for price</td>
  <td>Business travelers, couples</td>
  </tr>
  <tr>
- <td><strong>Studio Two Queen</strong></td>
+ <td>${rateCell('Studio Two Queen')}</td>
  <td>1–4</td>
  <td><span class="rate-price">${usd(RATES.nightly.studioTwoQueen)}</span><div class="rate-note">${RATES.taxNote}</div></td>
  <td>Call for price</td>
  <td>Families, road trips</td>
  </tr>
  <tr>
- <td><strong>Handicap / Accessible Studio King</strong></td>
+ <td>${rateCell('Handicap / Accessible Studio King')}</td>
  <td>1–2</td>
  <td><span class="rate-price">${usd(RATES.nightly.accessibleStudioKing)}</span><div class="rate-note">${RATES.taxNote}</div></td>
  <td>Call for price</td>
  <td>Guests needing ADA access</td>
  </tr>
  <tr>
- <td><strong>Pet-Friendly Studio Two Queen</strong></td>
+ <td>${rateCell('Pet-Friendly Studio Two Queen')}</td>
  <td>1–4</td>
  <td><span class="rate-price">${usd(RATES.nightly.petFriendlyStudioTwoQueen)}</span><div class="rate-note">${RATES.taxNote}</div></td>
  <td>Call for price</td>
  <td>Guests with dogs (up to 80 lbs)</td>
  </tr>
  <tr>
- <td><strong>Pet-Friendly Room</strong></td>
+ <td>${rateCell('Pet-Friendly Room')}</td>
  <td>—</td>
  <td><span class="rate-price">${usd(RATES.nightly.petFriendlyRoom)}</span><div class="rate-note">${RATES.taxNote}</div></td>
  <td>Call for price</td>
@@ -515,6 +544,7 @@ ${HERO_SLIDES.map((s, i) => {
  <p class="ftag">✦ Standard King</p>
  <h2 class="ftitle">Big, Bright &amp;<br>Beautifully Comfortable.</h2>
  <p class="fdesc">Sink into a plush king-size bed with crisp white linens and all the room you need to breathe. A cozy sitting area, work desk, and warm lighting make this your personal retreat after every long day.</p>
+  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/studio-king" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Studio King — Full Details →</a></p>
  <div class="tags">
  <span class="t">🛏️ King Bed</span><span class="t">🛋️ Sitting Area</span>
  <span class="t">💼 Work Desk</span><span class="t">❄️ A/C &amp; Heat</span><span class="t">📺 Flat-Screen TV</span>
@@ -549,6 +579,7 @@ ${HERO_SLIDES.map((s, i) => {
  <p class="ftag">✦ Double Queen Rooms</p>
  <h2 class="ftitle">Room for Everyone<br>You Love.</h2>
  <p class="fdesc">Two plush queen beds dressed in Best Western signature linens — perfect for families, road-trip crews, or anyone who likes a little extra room to stretch. Spacious, clean, and genuinely welcoming.</p>
+  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/studio-two-queen" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Studio Two Queen — Full Details →</a></p>
  <div class="tags">
  <span class="t">👨‍👩‍👧 Family Friendly</span><span class="t">🛏️ Two Queens</span>
  <span class="t">🛋️ Lounge Chair</span><span class="t">💼 Desk &amp; Chair</span>
@@ -726,6 +757,7 @@ ${HERO_SLIDES.map((s, i) => {
  <p class="ftag">✦ Pet Friendly · King Room</p>
  <h2 class="ftitle">Bring the Whole Family.<br><em>Fur Included.</em></h2>
  <p class="fdesc">Our ground-floor pet friendly king rooms feature beautiful hardwood-style floors — easy to clean and comfortable for your four-legged companions. Direct outdoor access, a plush king bed, and a warm welcome for everyone in your crew.</p>
+  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/pet-friendly-studio-two-queen" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Pet-Friendly Studio Two Queen — Full Details →</a><a href="/rooms/pet-friendly-room" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Pet-Friendly Room — Full Details →</a></p>
  <div class="tags">
  <span class="t">🐾 Pet Friendly</span><span class="t">🛏️ King Bed</span>
  <span class="t">🪵 Wood Floors</span><span class="t">🚪 Ground Floor</span><span class="t">📶 Free WiFi</span>
@@ -761,6 +793,7 @@ ${HERO_SLIDES.map((s, i) => {
  <p class="ftag">✦ ADA Accessible Room</p>
  <h2 class="ftitle">Comfortable for Everyone.<br><em>No Exceptions.</em></h2>
  <p class="fdesc">Our ADA accessible king rooms are designed with care — wide doorways, roll-in shower, lowered fixtures, and all the space needed for a safe, comfortable, and dignified stay. Every guest deserves the same warm welcome.</p>
+  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/accessible-studio-king" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Handicap / Accessible Studio King — Full Details →</a></p>
  <div class="tags">
  <span class="t">♿ ADA Accessible</span><span class="t">🛏️ King Bed</span>
  <span class="t">🚿 Roll-In Shower</span><span class="t">🚪 Wide Doorways</span><span class="t">📶 Free WiFi</span>
