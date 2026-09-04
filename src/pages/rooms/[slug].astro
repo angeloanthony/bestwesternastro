@@ -37,8 +37,13 @@ if (heroSlides.length === 0) heroSlides.push(room.hero);
 
 /** Milliseconds a hero slide holds before the next one crosses in.
  *  Deliberately brisker than the homepage reel's 6000ms — a room page has one
- *  room to show and a guest scrolls past the hero quickly. */
-const HERO_MS = 3200;
+ *  room to show and a guest scrolls past the hero quickly. At 2200 with the
+ *  500ms cross-fade in rooms.css, the seven-slide pet-friendly hero completes a
+ *  full pass in about 15s instead of 22s, so a guest who pauses on the hero
+ *  sees every angle of the room rather than the first three.
+ *  Change this and the `.rm-hero-img` transition together — they are one
+ *  effect split across two files. */
+const HERO_MS = 2200;
 
 const abs = (src: string) => `${BUSINESS.site.domain}/${src}`;
 const tel = `tel:${BUSINESS.phoneTel}`;
