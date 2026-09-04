@@ -9,6 +9,16 @@
  */
 
 /* ── HERO ─────────────────────────────────────────────────────────────────── */
+/* TREATMENT: the photograph is the hero and is left close to its natural
+ * brightness. Legibility comes from a soft frosted "cloud" behind the text
+ * block (.rm-hero-cnt::before) rather than from darkening the whole frame —
+ * the earlier full-image navy scrim made every room look like it was shot at
+ * dusk. Type is navy with a deep-gold price, not white on dark.
+ *
+ * CONTRAST: the cloud's core sits at ~0.90 alpha, so even over the darkest
+ * slide the effective background stays near #E9E6E0. Against that,
+ * navy #1a2e52 measures ~9.8:1 and --rm-gold-ink ~4:1 — the gold is used only
+ * for the price, which is large text (AA needs 3:1). Small copy is navy. */
 .rm-hero {
   position: relative;
   min-height: 72vh;
@@ -16,6 +26,14 @@
   align-items: flex-end;
   padding: 120px 24px 56px;
   overflow: hidden;
+
+  /* Warm white for the cloud — cooler whites read as fog over a warm room. */
+  --rm-cloud: 255, 252, 246;
+  --rm-cloud-core: 0.88;
+  --rm-cloud-mid: 0.62;
+  /* Gold dark enough to hold AA as text on that cloud, still unmistakably the
+     brand gold. --gold itself measures 2.2:1 on cream and cannot be type. */
+  --rm-gold-ink: #8a6a1c;
 }
 /* Slideshow stage: every frame stacked, only `.is-on` visible. The slow scale
  * is a Ken Burns drift so a held frame never looks like a frozen page. */
@@ -23,8 +41,9 @@
   position: absolute;
   inset: 0;
   /* Carried on the stage, not the slides: a solid colour on each slide would
-     darken the moment of the cross-fade, when two of them are half-opaque. */
-  background: var(--navy-dark);
+     darken the moment of the cross-fade, when two of them are half-opaque.
+     Warm and light, so a slow-loading slide reads as daylight, not a void. */
+  background: #e8e0d4;
 }
 .rm-hero-img {
   position: absolute;
@@ -34,6 +53,10 @@
   transform: scale(1.04);
   opacity: 0;
   transition: opacity 0.7s ease-in-out;
+  /* A genuine lift on the photograph itself rather than a lighter veil over it:
+     the rooms were shot under warm tungsten and sit a stop dark straight out of
+     the camera. Small numbers on purpose — this is a correction, not a look. */
+  filter: brightness(1.09) saturate(1.06) contrast(0.98);
 }
 .rm-hero-img.is-on {
   opacity: 1;
@@ -55,24 +78,28 @@
   margin-top: 26px;
   align-items: center;
 }
+/* Navy rather than white: these sit at the lower feather of the cloud, where
+   the background can be either the light panel or the photograph itself. A
+   pale ring keeps them visible if they land on a dark part of a slide. */
 .rm-hero-dot {
   width: 30px;
   height: 4px;
   padding: 0;
   border: 0;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(var(--navy-rgb), 0.32);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
   cursor: pointer;
   transition:
     background var(--t),
     width var(--t);
 }
 .rm-hero-dot.is-on {
-  background: var(--gold);
+  background: var(--rm-gold-ink);
   width: 46px;
 }
 .rm-hero-dot:hover {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(var(--navy-rgb), 0.6);
 }
 .rm-hero-dot:focus-visible {
   outline: 2px solid var(--gold);
@@ -87,37 +114,126 @@
     animation: none;
   }
 }
-/* The scrim is weighted to the LEFT, where the text column sits, so the right
- * of the frame stays a clear photograph instead of a wash. A flat top-to-bottom
- * gradient dark enough for white type over any slide made every room look like
- * it was shot at dusk. On phones the text spans the full width, so the vertical
- * version comes back — see the mobile block at the foot of this file. */
+/* What is left of the old scrim: a warm LIGHTENING veil, not a darkening one.
+ * It lifts the left third where the cloud sits so the two blend, and lays the
+ * faintest warm floor at the very bottom so the hero meets the cream page
+ * below without a hard seam. Nothing here darkens the photograph. */
 .rm-hero-ov {
   position: absolute;
   inset: 0;
   background:
+    /* The one dark thing left, and it is not for the room: the site's fixed nav
+       is white type with a transparent background, and on a bright photograph
+       it disappears. This fades out by 170px, well above the room itself. */
     linear-gradient(
-      100deg,
-      rgba(var(--navy-dark-rgb), 0.9) 0%,
-      rgba(var(--navy-dark-rgb), 0.74) 30%,
-      rgba(var(--navy-dark-rgb), 0.34) 58%,
-      rgba(var(--navy-dark-rgb), 0.1) 100%
+      to bottom,
+      rgba(var(--navy-dark-rgb), 0.66) 0,
+      rgba(var(--navy-dark-rgb), 0.34) 78px,
+      rgba(var(--navy-dark-rgb), 0) 168px
     ),
-    linear-gradient(to top, rgba(var(--navy-dark-rgb), 0.5) 0%, rgba(var(--navy-dark-rgb), 0) 45%);
+    linear-gradient(
+      104deg,
+      rgba(var(--rm-cloud), 0.3) 0%,
+      rgba(var(--rm-cloud), 0.13) 38%,
+      rgba(var(--rm-cloud), 0) 66%
+    ),
+    linear-gradient(to top, rgba(var(--rm-cloud), 0.2) 0%, rgba(var(--rm-cloud), 0) 26%);
 }
 .rm-hero-cnt {
   position: relative;
+  /* Own stacking context so the cloud pseudo-element can sit at z-index -1:
+     behind this block's text, but still above .rm-hero-ov and the slides. */
+  z-index: 1;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  color: #fff;
+  color: var(--navy);
 }
+
+/* THE CLOUD — deliberately TWO layers.
+ *
+ * ::before is the FILL. A plain radial-gradient whose own alpha feathers the
+ * edges. It carries all of the contrast, and it is plain CSS painting that
+ * cannot fail.
+ *
+ * ::after is the FROST — backdrop-filter plus a mask, purely decorative, and
+ * stacked beneath the fill so the blur happens first and the warm tint lands on
+ * top of it. Combining the two on one element is what a first cut did, and it
+ * is a trap: backdrop-filter with a mask is the flakiest pair in CSS, and when
+ * a compositor declines to paint it the text loses its entire backdrop and
+ * lands navy-on-photograph. Split like this, a dropped frost costs nothing but
+ * the blur.
+ *
+ * Both are sized by the text block rather than by a fixed rectangle, so the
+ * cloud grows with a long room name instead of being overrun by it. */
+.rm-hero-cnt::before,
+.rm-hero-cnt::after {
+  content: '';
+  position: absolute;
+  /* Sized to the TEXT, not to the 1100px container. Stretched the full width it
+     stopped being a cloud and became a card across the whole frame, and the
+     blur smeared whatever it happened to cover on the right.
+     The ellipse below is taller than this box so its solid core still covers
+     the eyebrow at the very top of the block: at a 92% vertical radius the top
+     edge thinned out and the eyebrow fell onto the dark accent wall. */
+  top: -52px;
+  bottom: -34px;
+  left: -64px;
+  right: auto;
+  /* The BOX is wider than the visible cloud on purpose. Both gradients below
+     reach zero at ~91% of it, so nothing is ever cut off by the element's own
+     edge — a mask that is still opaque where its box ends produces a hard
+     vertical seam through the photograph, which is what a narrower box did. */
+  width: min(96%, 900px);
+  border-radius: 48px;
+  pointer-events: none;
+}
+
+/* Layer 1 — the fill. Carries the contrast; feathers on its own alpha. */
+.rm-hero-cnt::before {
+  z-index: -1;
+  background: radial-gradient(
+    58% 118% at 33% 50%,
+    rgba(var(--rm-cloud), var(--rm-cloud-core)) 0%,
+    rgba(var(--rm-cloud), var(--rm-cloud-core)) 62%,
+    rgba(var(--rm-cloud), var(--rm-cloud-mid)) 84%,
+    rgba(var(--rm-cloud), 0) 100%
+  );
+}
+
+/* Layer 2 — the frost, beneath the fill. Decorative: if a compositor skips it,
+   only the blur is lost. Desaturated rather than saturated, because a strong
+   colour behind the panel — the blue bolster on the two-queen beds — otherwise
+   bleeds through as a coloured streak across the heading. */
+.rm-hero-cnt::after {
+  z-index: -2;
+  -webkit-backdrop-filter: blur(22px) saturate(0.9) brightness(1.06);
+  backdrop-filter: blur(22px) saturate(0.9) brightness(1.06);
+  -webkit-mask-image: radial-gradient(
+    58% 118% at 33% 50%,
+    #000 0%,
+    #000 60%,
+    rgba(0, 0, 0, 0.5) 84%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    58% 118% at 33% 50%,
+    #000 0%,
+    #000 60%,
+    rgba(0, 0, 0, 0.5) 84%,
+    transparent 100%
+  );
+}
+
 .rm-eyebrow {
   font-size: 0.78rem;
   letter-spacing: 3px;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--gold);
+  /* Navy, not gold: at this size gold-on-cloud cannot reach AA. Gold is spent
+     where it reads — the price, the pill's rule, the booking button. */
+  color: var(--navy);
+  opacity: 0.78;
   margin: 0 0 14px;
 }
 .rm-hero h1 {
@@ -126,6 +242,10 @@
   font-weight: 700;
   line-height: 1.08;
   margin: 0 0 22px;
+  /* Wraps the long names — "Handicap / Accessible Studio King" — onto a second
+     line so the heading stays inside the cloud rather than running out onto the
+     photograph. Short names still fit on one line. */
+  max-width: min(100%, 560px);
 }
 
 /* Price block — shared by the hero and the pricing section. */
@@ -205,6 +325,42 @@
 .rm-btn-s:hover,
 .rm-btn-s:focus-visible {
   background: rgba(255, 255, 255, 0.14);
+}
+
+/* ── HERO TYPE ON THE CLOUD ───────────────────────────────────────────────
+ * The price, weekly pill and button rules above are shared with the pricing
+ * band further down the page, which is navy and wants white and gold. These
+ * overrides are scoped to the hero alone so both keep their own palette. */
+.rm-hero .rm-price-amt {
+  color: var(--rm-gold-ink);
+}
+.rm-hero .rm-price-per {
+  color: var(--navy);
+}
+.rm-hero .rm-price-tax,
+.rm-hero .rm-foot {
+  color: var(--navy);
+  opacity: 0.66;
+}
+.rm-hero .rm-weekly {
+  color: var(--navy);
+  border-color: rgba(var(--gold-rgb), 0.85);
+  background: rgba(255, 255, 255, 0.5);
+}
+.rm-hero .rm-btn-p {
+  box-shadow: 0 6px 18px rgba(var(--navy-rgb), 0.22);
+}
+/* White-on-white would vanish here: the outline button goes navy on a light
+   fill, which also keeps it legible if it drifts past the cloud's soft edge. */
+.rm-hero .rm-btn-s {
+  border-color: rgba(var(--navy-rgb), 0.7);
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.55);
+}
+.rm-hero .rm-btn-s:hover,
+.rm-hero .rm-btn-s:focus-visible {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: var(--navy);
 }
 
 /* ── SECTION SHELL ────────────────────────────────────────────────────────── */
@@ -522,14 +678,42 @@
        at 100px the eyebrow line slid under the strip. */
     padding: 132px 20px 40px;
   }
-  /* Text runs the full width here, so the left-weighted scrim cannot carry it —
-     back to a vertical one, kept as light as legibility allows. */
+  /* The text block occupies most of the frame on a phone, so the cloud is
+     firmed up rather than the photograph darkened — the picture above and
+     below it stays exactly as bright as it is on desktop. */
+  .rm-hero {
+    --rm-cloud-core: 0.94;
+    --rm-cloud-mid: 0.82;
+  }
+  /* Geometry belongs to both layers; the mask belongs to the frost alone. */
+  .rm-hero-cnt::before,
+  .rm-hero-cnt::after {
+    top: -26px;
+    bottom: -22px;
+    left: -22px;
+    right: -22px;
+    width: auto;
+    border-radius: 32px;
+  }
+  .rm-hero-cnt::before {
+    background: radial-gradient(
+      126% 120% at 50% 50%,
+      rgba(var(--rm-cloud), var(--rm-cloud-core)) 0%,
+      rgba(var(--rm-cloud), var(--rm-cloud-core)) 62%,
+      rgba(var(--rm-cloud), var(--rm-cloud-mid)) 82%,
+      rgba(var(--rm-cloud), 0) 100%
+    );
+  }
+  .rm-hero-cnt::after {
+    -webkit-mask-image: radial-gradient(52% 118% at 50% 50%, #000 0%, #000 56%, transparent 100%);
+    mask-image: radial-gradient(52% 118% at 50% 50%, #000 0%, #000 56%, transparent 100%);
+  }
+  /* Centred, not left-weighted: there is no left column at this width. */
   .rm-hero-ov {
     background: linear-gradient(
       to top,
-      rgba(var(--navy-dark-rgb), 0.93) 0%,
-      rgba(var(--navy-dark-rgb), 0.7) 46%,
-      rgba(var(--navy-dark-rgb), 0.3) 100%
+      rgba(var(--rm-cloud), 0.2) 0%,
+      rgba(var(--rm-cloud), 0) 30%
     );
   }
   .rm-hero-dot {
