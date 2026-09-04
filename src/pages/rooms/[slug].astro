@@ -29,6 +29,17 @@ interface Props {
 const { room } = Astro.props;
 
 const canonical = roomUrl(room.slug);
+
+// Hero slideshow. The wide, room-level frames flagged `heroSlide` in rooms.ts,
+// falling back to the single lead image where a room has none of them.
+const heroSlides = room.gallery.filter((p) => p.heroSlide);
+if (heroSlides.length === 0) heroSlides.push(room.hero);
+
+/** Milliseconds a hero slide holds before the next one crosses in.
+ *  Deliberately brisker than the homepage reel's 6000ms — a room page has one
+ *  room to show and a guest scrolls past the hero quickly. */
+const HERO_MS = 3200;
+
 const abs = (src: string) => `${BUSINESS.site.domain}/${src}`;
 const tel = `tel:${BUSINESS.phoneTel}`;
 const bookLabel = `${BUSINESS.directBooking.ctaLabel} ${BUSINESS.directBooking.discountPercent}%`;
@@ -109,8 +120,26 @@ const roomNode = {
   </Fragment>
 
   <!-- ═══ 1. ROOM HERO ═══════════════════════════════════════════════════ -->
+  <!-- The backdrop is a slideshow of this room's wide, room-level frames (the
+       `heroSlide` photos in rooms.ts), so the top of the page shows the space
+       from several angles rather than one. Only the first slide's image is set
+       in the markup; the rest carry `data-bg` and are promoted to real
+       background-images after load, so the hero paints on one download instead
+       of seven. A room with no photographs (the $135 Pet-Friendly Room) falls
+       back to a single still — there is nothing to cycle. -->
   <section class="rm-hero">
-    <div class="rm-hero-img" style={`background-image:url('/${room.hero.src}')`} role="img" aria-label={room.hero.alt}></div>
+    <div class="rm-hero-stage" id="rm-hero-stage" data-ms={HERO_MS}>
+      {heroSlides.map((p, i) => (
+        <div
+          class:list={['rm-hero-img', { 'is-on': i === 0 }]}
+          style={i === 0 ? `background-image:url('/${p.src}')` : undefined}
+          data-bg={i === 0 ? undefined : `/${p.src}`}
+          role="img"
+          aria-label={p.alt}
+          aria-hidden={i === 0 ? undefined : 'true'}
+        ></div>
+      ))}
+    </div>
     <div class="rm-hero-ov"></div>
     <div class="rm-hero-cnt">
       <p class="rm-eyebrow">{room.eyebrow}</p>
@@ -132,6 +161,21 @@ const roomNode = {
         </a>
         <a href="#rm-pricing" class="rm-btn rm-btn-s">Check Availability</a>
       </div>
+
+      {heroSlides.length > 1 && (
+        <div class="rm-hero-dots" id="rm-hero-dots" role="tablist" aria-label={`${room.name} photographs`}>
+          {heroSlides.map((p, i) => (
+            <button
+              type="button"
+              role="tab"
+              class:list={['rm-hero-dot', { 'is-on': i === 0 }]}
+              data-i={i}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              aria-label={`View ${i + 1} of ${heroSlides.length}: ${p.alt}`}
+            ></button>
+          ))}
+        </div>
+      )}
     </div>
   </section>
 
@@ -283,6 +327,76 @@ const roomNode = {
   )}
 
   <script slot="scripts" is:inline>
+    // Hero slideshow. Cross-fades the room's wide frames behind the price card.
+    // Pauses while the tab is hidden, while a pointer is over the hero, and for
+    // anyone who has asked their system for reduced motion — in that last case
+    // the first frame simply stays put.
+    (function () {
+      var stage = document.getElementById('rm-hero-stage');
+      if (!stage) return;
+      var slides = stage.querySelectorAll('.rm-hero-img');
+      if (slides.length < 2) return;
+
+      var dots = document.querySelectorAll('.rm-hero-dot');
+      var ms = parseInt(stage.getAttribute('data-ms'), 10) || 3200;
+      var i = 0;
+      var timer = null;
+
+      // Promote the deferred backgrounds once the page has settled, so the
+      // first paint only ever pays for slide one.
+      function hydrate() {
+        for (var n = 0; n < slides.length; n++) {
+          var bg = slides[n].getAttribute('data-bg');
+          if (bg) {
+            slides[n].style.backgroundImage = "url('" + bg + "')";
+            slides[n].removeAttribute('data-bg');
+          }
+        }
+      }
+      if (document.readyState === 'complete') hydrate();
+      else window.addEventListener('load', hydrate);
+
+      function show(n) {
+        slides[i].classList.remove('is-on');
+        slides[i].setAttribute('aria-hidden', 'true');
+        if (dots[i]) {
+          dots[i].classList.remove('is-on');
+          dots[i].setAttribute('aria-selected', 'false');
+        }
+        i = (n + slides.length) % slides.length;
+        slides[i].classList.add('is-on');
+        slides[i].removeAttribute('aria-hidden');
+        if (dots[i]) {
+          dots[i].classList.add('is-on');
+          dots[i].setAttribute('aria-selected', 'true');
+        }
+      }
+
+      var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function start() {
+        if (!timer && !still && !document.hidden) timer = setInterval(function () { show(i + 1); }, ms);
+      }
+      function stop() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+
+      for (var d = 0; d < dots.length; d++) {
+        dots[d].addEventListener('click', function () {
+          show(parseInt(this.getAttribute('data-i'), 10));
+          stop();
+          start();
+        });
+      }
+
+      stage.parentNode.addEventListener('mouseenter', stop);
+      stage.parentNode.addEventListener('mouseleave', start);
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop();
+        else start();
+      });
+      start();
+    })();
+
     // Gallery lightbox. No framework, no dependencies — it reads the tile
     // buttons the page already rendered, so the markup stays the single source
     // of what is in the gallery. Keyboard: ← → to move, Esc to close.

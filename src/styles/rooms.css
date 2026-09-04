@@ -17,22 +17,93 @@
   padding: 120px 24px 56px;
   overflow: hidden;
 }
+/* Slideshow stage: every frame stacked, only `.is-on` visible. The slow scale
+ * is a Ken Burns drift so a held frame never looks like a frozen page. */
+.rm-hero-stage {
+  position: absolute;
+  inset: 0;
+  /* Carried on the stage, not the slides: a solid colour on each slide would
+     darken the moment of the cross-fade, when two of them are half-opaque. */
+  background: var(--navy-dark);
+}
 .rm-hero-img {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   transform: scale(1.04);
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
 }
+.rm-hero-img.is-on {
+  opacity: 1;
+  animation: rm-kb 9s ease-out forwards;
+}
+@keyframes rm-kb {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.11);
+  }
+}
+
+/* Slide indicators, under the hero buttons. */
+.rm-hero-dots {
+  display: flex;
+  gap: 9px;
+  margin-top: 26px;
+  align-items: center;
+}
+.rm-hero-dot {
+  width: 30px;
+  height: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition:
+    background var(--t),
+    width var(--t);
+}
+.rm-hero-dot.is-on {
+  background: var(--gold);
+  width: 46px;
+}
+.rm-hero-dot:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+.rm-hero-dot:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rm-hero-img {
+    transition: none;
+  }
+  .rm-hero-img.is-on {
+    animation: none;
+  }
+}
+/* The scrim is weighted to the LEFT, where the text column sits, so the right
+ * of the frame stays a clear photograph instead of a wash. A flat top-to-bottom
+ * gradient dark enough for white type over any slide made every room look like
+ * it was shot at dusk. On phones the text spans the full width, so the vertical
+ * version comes back — see the mobile block at the foot of this file. */
 .rm-hero-ov {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(var(--navy-dark-rgb), 0.94) 0%,
-    rgba(var(--navy-dark-rgb), 0.72) 38%,
-    rgba(var(--navy-dark-rgb), 0.34) 100%
-  );
+  background:
+    linear-gradient(
+      100deg,
+      rgba(var(--navy-dark-rgb), 0.9) 0%,
+      rgba(var(--navy-dark-rgb), 0.74) 30%,
+      rgba(var(--navy-dark-rgb), 0.34) 58%,
+      rgba(var(--navy-dark-rgb), 0.1) 100%
+    ),
+    linear-gradient(to top, rgba(var(--navy-dark-rgb), 0.5) 0%, rgba(var(--navy-dark-rgb), 0) 45%);
 }
 .rm-hero-cnt {
   position: relative;
@@ -447,7 +518,25 @@
 @media (max-width: 720px) {
   .rm-hero {
     min-height: 60vh;
-    padding: 100px 20px 40px;
+    /* Clears the fixed nav (72px) plus the live-conditions strip beneath it —
+       at 100px the eyebrow line slid under the strip. */
+    padding: 132px 20px 40px;
+  }
+  /* Text runs the full width here, so the left-weighted scrim cannot carry it —
+     back to a vertical one, kept as light as legibility allows. */
+  .rm-hero-ov {
+    background: linear-gradient(
+      to top,
+      rgba(var(--navy-dark-rgb), 0.93) 0%,
+      rgba(var(--navy-dark-rgb), 0.7) 46%,
+      rgba(var(--navy-dark-rgb), 0.3) 100%
+    );
+  }
+  .rm-hero-dot {
+    width: 22px;
+  }
+  .rm-hero-dot.is-on {
+    width: 34px;
   }
   .rm-sec {
     padding: 2.4rem 20px;
