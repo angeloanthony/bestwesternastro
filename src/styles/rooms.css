@@ -688,17 +688,56 @@
 /* ── MOBILE ───────────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .rm-hero {
-    min-height: 60vh;
+    /* Taller frame, shorter text block (see the strip below): between them the
+       photograph gets roughly the top half of the hero to itself instead of
+       being a sliver behind a full-height panel. */
+    min-height: 68vh;
     /* Clears the fixed nav (72px) plus the live-conditions strip beneath it —
        at 100px the eyebrow line slid under the strip. */
-    padding: 132px 20px 40px;
+    padding: 124px 20px 30px;
   }
-  /* The text block occupies most of the frame on a phone, so the cloud is
-     firmed up rather than the photograph darkened — the picture above and
-     below it stays exactly as bright as it is on desktop. */
+  /* Now that the cloud covers three short lines rather than eight, it can come
+     back down toward its desktop weight and let more of the room read through
+     its feathered edge. Navy on 0.90 over even the darkest slide is ~9:1. */
   .rm-hero {
-    --rm-cloud-core: 0.94;
-    --rm-cloud-mid: 0.82;
+    --rm-cloud-core: 0.9;
+    --rm-cloud-mid: 0.68;
+  }
+  /* "Show the room bright": on a phone the hero slideshow is the only look at
+     the room above the fold, and these were shot under warm tungsten a stop
+     dark. A firmer lift than the desktop 1.09 — still a correction, not a
+     blown-out look. */
+  .rm-hero-img {
+    filter: brightness(1.22) saturate(1.08) contrast(0.97);
+  }
+  /* THE STRIP — the phone hero carries the room's name, its price and Book Now,
+     and nothing else. Every line removed here is restated further down the same
+     page: the eyebrow's features in .rm-feats, the weekly line and the pet fee
+     in the pricing band, and "Check Availability" only ever scrolled to that
+     band anyway (the sticky bar keeps a booking action on screen throughout).
+     The h1 stays — it is the page's heading and what the price is attached to. */
+  .rm-eyebrow,
+  .rm-hero .rm-weekly,
+  .rm-hero .rm-foot--fee,
+  .rm-hero .rm-btn-s {
+    display: none;
+  }
+  .rm-hero h1 {
+    font-size: 1.5rem;
+    margin: 0 0 12px;
+    max-width: 100%;
+  }
+  .rm-hero .rm-price-amt {
+    font-size: 2.4rem;
+  }
+  .rm-hero .rm-btns {
+    margin-top: 16px;
+  }
+  .rm-hero .rm-btn-p {
+    padding: 13px 24px;
+  }
+  .rm-hero-dots {
+    margin-top: 16px;
   }
   /* Geometry belongs to both layers; the mask belongs to the frost alone. */
   .rm-hero-cnt::before,

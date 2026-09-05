@@ -156,9 +156,13 @@ const roomNode = {
         <span class="rm-price-tax">{room.nightly.note}</span>
       </p>
       <p class="rm-weekly">{room.weekly}</p>
-      {room.footnote && <p class="rm-foot">{room.footnote}</p>}
-      {/* Label the picture where it is not a photograph of this room type. */}
-      {room.gallery.length === 0 && <p class="rm-foot">{room.hero.caption}</p>}
+      {/* --fee is the room's own fine print (pet fee, deposit). It repeats in
+          full in the pricing band below, so the phone hero drops it. */}
+      {room.footnote && <p class="rm-foot rm-foot--fee">{room.footnote}</p>}
+      {/* Label the picture where it is not a photograph of this room type.
+          --cap is a disclosure about the photograph on screen and is repeated
+          nowhere else, so it stays at every width. */}
+      {room.gallery.length === 0 && <p class="rm-foot rm-foot--cap">{room.hero.caption}</p>}
 
       <div class="rm-btns">
         <a href={tel} class="rm-btn rm-btn-p" data-track="phone_call_room_hero">
