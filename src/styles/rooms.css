@@ -687,21 +687,32 @@
 
 /* ── MOBILE ───────────────────────────────────────────────────────────────── */
 @media (max-width: 720px) {
+  /* PHONE LAYOUT — the photograph and the labels stop competing for one
+     rectangle. The slideshow takes a band across the top and the room's name,
+     price and Book Now sit UNDERNEATH it on the page's own cream. Nothing is
+     laid over the room, so nothing has to be shrunk or dimmed to survive being
+     read against it: on desktop the cloud earns its keep because the text is on
+     the picture, and at this width it simply is not, so both of its layers are
+     switched off rather than tuned. */
   .rm-hero {
-    /* Taller frame, shorter text block (see the strip below): between them the
-       photograph gets roughly the top half of the hero to itself instead of
-       being a sliver behind a full-height panel. */
-    min-height: 68vh;
-    /* Clears the fixed nav (72px) plus the live-conditions strip beneath it —
-       at 100px the eyebrow line slid under the strip. */
-    padding: 124px 20px 30px;
+    /* One value, read by the stage, the scrim and the dots, so the three can
+       never drift out of alignment. */
+    --rm-stage-h: 52vh;
+    display: block;
+    min-height: 0;
+    /* No top padding to clear the fixed nav any more — the nav is meant to
+       float on the photograph here, which is what the scrim below is for. */
+    padding: 0 0 26px;
+    /* The hero no longer clips anything; the stage does. */
+    overflow: visible;
+    background: var(--cream);
   }
-  /* Now that the cloud covers three short lines rather than eight, it can come
-     back down toward its desktop weight and let more of the room read through
-     its feathered edge. Navy on 0.90 over even the darkest slide is ~9:1. */
-  .rm-hero {
-    --rm-cloud-core: 0.9;
-    --rm-cloud-mid: 0.68;
+  .rm-hero-stage {
+    position: relative;
+    height: var(--rm-stage-h);
+    /* Now the clipper: the Ken Burns scale(1.11) has to be contained by
+       something, and it is no longer the hero. */
+    overflow: hidden;
   }
   /* "Show the room bright": on a phone the hero slideshow is the only look at
      the room above the fold, and these were shot under warm tungsten a stop
@@ -722,59 +733,75 @@
   .rm-hero .rm-btn-s {
     display: none;
   }
+  /* The labels sit on cream at full width now, with no cloud to stay inside
+     and no photograph to shout over, so they can be quiet. */
   .rm-hero h1 {
-    font-size: 1.5rem;
-    margin: 0 0 12px;
+    font-size: 1.32rem;
+    margin: 0 0 10px;
     max-width: 100%;
   }
   .rm-hero .rm-price-amt {
-    font-size: 2.4rem;
+    font-size: 2.1rem;
   }
   .rm-hero .rm-btns {
     margin-top: 16px;
   }
+  /* Full-width tap target — there is no second button beside it at this width. */
   .rm-hero .rm-btn-p {
-    padding: 13px 24px;
+    flex: 1 1 auto;
+    padding: 14px 20px;
+    text-align: center;
   }
-  .rm-hero-dots {
-    margin-top: 16px;
-  }
-  /* Geometry belongs to both layers; the mask belongs to the frost alone. */
+  /* THE CLOUD IS OFF. Both layers, geometry and all: the text is no longer on
+     the picture, so a frosted panel behind it would just be a grey box on the
+     cream. This also retires the backdrop-filter on phones, where it was the
+     most expensive thing in the hero. */
   .rm-hero-cnt::before,
   .rm-hero-cnt::after {
-    top: -26px;
-    bottom: -22px;
-    left: -22px;
-    right: -22px;
-    width: auto;
-    border-radius: 32px;
+    display: none;
   }
-  .rm-hero-cnt::before {
-    background: radial-gradient(
-      126% 120% at 50% 50%,
-      rgba(var(--rm-cloud), var(--rm-cloud-core)) 0%,
-      rgba(var(--rm-cloud), var(--rm-cloud-core)) 62%,
-      rgba(var(--rm-cloud), var(--rm-cloud-mid)) 82%,
-      rgba(var(--rm-cloud), 0) 100%
-    );
+  /* static, so .rm-hero-dots below positions against .rm-hero rather than
+     against this block — the dots belong on the photograph, not under the
+     button. Nothing here overlaps any more, so the stacking context goes too. */
+  .rm-hero-cnt {
+    position: static;
+    max-width: none;
+    padding: 20px 20px 0;
   }
-  .rm-hero-cnt::after {
-    -webkit-mask-image: radial-gradient(52% 118% at 50% 50%, #000 0%, #000 56%, transparent 100%);
-    mask-image: radial-gradient(52% 118% at 50% 50%, #000 0%, #000 56%, transparent 100%);
-  }
-  /* Centred, not left-weighted: there is no left column at this width. */
+  /* #nav is fully transparent until it scrolls and its type is white, so the
+     top of the photograph has to carry its legibility. Bounded to the stage:
+     below it the labels are navy on cream and want no veil at all. */
   .rm-hero-ov {
+    inset: 0 0 auto;
+    height: var(--rm-stage-h);
     background: linear-gradient(
-      to top,
-      rgba(var(--rm-cloud), 0.2) 0%,
-      rgba(var(--rm-cloud), 0) 30%
+      to bottom,
+      rgba(var(--navy-dark-rgb), 0.58) 0,
+      rgba(var(--navy-dark-rgb), 0.26) 76px,
+      rgba(var(--navy-dark-rgb), 0) 168px
     );
+  }
+  /* Parked just inside the foot of the photograph. White-based rather than the
+     desktop navy: these now sit on the picture at every scroll position
+     instead of on the cloud's pale lower feather. */
+  .rm-hero-dots {
+    position: absolute;
+    top: calc(var(--rm-stage-h) - 24px);
+    left: 20px;
+    margin: 0;
+    z-index: 2;
   }
   .rm-hero-dot {
     width: 22px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 1px rgba(var(--navy-dark-rgb), 0.35);
   }
   .rm-hero-dot.is-on {
     width: 34px;
+    background: #fff;
+  }
+  .rm-hero-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
   }
   .rm-sec {
     padding: 2.4rem 20px;
