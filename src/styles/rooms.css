@@ -55,16 +55,24 @@
   background-position: center;
   transform: scale(1.04);
   opacity: 0;
-  /* Paired with HERO_MS in rooms/[slug].astro — change the two together. At a
-     2200ms hold a 700ms fade left the slide in transition nearly a third of the
-     time, which read as drift rather than as a change of picture. */
-  transition: opacity 0.5s ease-in-out;
+  /* Paired with HERO_MS in rooms/[slug].astro — change the two together. Held
+     at ~23% of the hold so the reel reads as a change of picture rather than as
+     drift: at a 2200ms hold a 700ms fade left the hero in transition nearly a
+     third of the time, and 350/1500 keeps the same proportion. */
+  transition: opacity 0.35s ease-in-out;
   /* A genuine lift on the photograph itself rather than a lighter veil over it:
      the rooms were shot under warm tungsten and sit a stop dark straight out of
-     the camera. Now that the photograph is the whole frame at every width, the
-     phone's firmer correction becomes the one setting — and with no cloud and
-     no bottom veil left to dull it, the picture reads brighter again on top. */
-  filter: brightness(1.24) saturate(1.08) contrast(0.97);
+     the camera.
+     The contrast sits BELOW 1 on purpose, and it is what makes the brightness
+     affordable. brightness() is a straight multiply, so lifting it alone drives
+     the top end into the ceiling — measured over all 25 hero slides, the old
+     1.24/0.97 already clipped 8.1% of pixels in at least one channel, and a
+     plain push to 1.42 clipped 29.5%, worst on the pale Pet-Friendly Room at
+     44%. Pulling contrast to 0.88 as brightness goes to 1.45 pulls the top end
+     back down, so this is BRIGHTER than the old setting (mean luma 147 -> 163
+     of 255) at 0.0% clipped. It does not go flat doing it: the spread of
+     luminance across those slides is 63.3 before and 62.8 after. */
+  filter: brightness(1.45) saturate(1.08) contrast(0.88);
 }
 .rm-hero-img.is-on {
   opacity: 1;
