@@ -35,7 +35,11 @@ const rateCell = (name: string): string => {
 
 const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates available — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
 
-const headExtras = `${ldScript(hotelNodeFull(hotelDescription))}
+const headExtras = `<!-- The reel's opening photograph is the largest thing above the fold and was
+     queueing behind 28 other images; measured on an 8 Mbps connection it did not
+     paint for 3.5s, so the hero sat blank while the reel counted down. -->
+<link rel="preload" as="image" href="${HERO_SLIDES[0].image}" fetchpriority="high">
+${ldScript(hotelNodeFull(hotelDescription))}
 <script type="application/ld+json">
  {
  "@context": "https://schema.org",
@@ -156,7 +160,7 @@ const bodyContent = `<!-- ══════════════════
      its rate laid over the photograph. Slides and rates both come from
      src/data/heroShowcase.ts → src/data/rates.ts; nothing is hardcoded here. -->
 <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Best Western Vernal Inn — rooms and rates">
-${HERO_SLIDES.map((s, i) => `<div class="hero-slide ${s.kb}${i === 0 ? ' active' : ''}" role="img" aria-label="${s.alt}"><div class="hero-kb" style="background-image:url('${s.image}')"></div></div>`).join('\n')}
+${HERO_SLIDES.map((s, i) => `<div class="hero-slide ${s.kb}${i === 0 ? ' active' : ''}" role="img" aria-label="${s.alt}"><div class="hero-kb"${i === 0 ? ` style="background-image:url('${s.image}')"` : ` data-bg="${s.image}"`}></div></div>`).join('\n')}
  <div class="hero-ov"></div>
  <div class="hero-cnt">
  <p class="eyebrow">Coming Soon in Vernal, Utah as</p>
@@ -1043,6 +1047,7 @@ const rooms   = document.querySelectorAll('.hroom');
 const heroEl  = document.getElementById('hero');
 const hlabels = ${JSON.stringify(HERO_SLIDES.map((s) => s.label))};
 const hstill  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hfirst  = ${JSON.stringify(HERO_SLIDES[0].image)};
 /* Milliseconds a hero slide holds. 6000 -> 4200 -> 3000: this reel opens on two
    property shots before it reaches a single room, so at 6s a guest waited 12s
    to see the first rate and now waits 6s. Still twice the room pages' 1500ms on
@@ -1089,6 +1094,10 @@ function hcard(n) {
 }
 
 function gs(n) {
+  /* The one being shown and the one after it: dots and arrows can jump
+     anywhere in the reel, not only forward one. */
+  hpromote(n);
+  hpromote((n + 1) % slides.length);
   slides[cs].classList.remove('active');
   dc.children[cs].classList.remove('active');
   dc.children[cs].setAttribute('aria-selected', 'false');
@@ -1104,6 +1113,20 @@ function gs(n) {
   kb.offsetHeight;
   kb.style.transition = 'transform ' + (HOME_KB_MS / 1000) + 's ease-out';
   kb.style.transform  = 'scale(1)';
+}
+
+/* Slides after the first carry their photograph in data-bg rather than in a
+   style attribute, so the browser does not open seven large downloads at once
+   and leave the opening frame — the only one on screen — competing with six
+   that are not. This turns one back into a real background-image. */
+function hpromote(n) {
+  const s = slides[n];
+  if (!s) return;
+  const kb = s.querySelector('.hero-kb');
+  if (!kb || !kb.dataset.bg) return;
+  const url = kb.dataset.bg;
+  kb.removeAttribute('data-bg');
+  kb.style.backgroundImage = "url('" + url + "')";
 }
 
 function hstep(d)  { gs((cs + d + slides.length) % slides.length); }
@@ -1122,10 +1145,34 @@ if (slides.length) {
     heroEl.addEventListener('focusout', hstart);
   }
   document.addEventListener('visibilitychange', () => { document.hidden ? hstop() : hstart(); });
-  hstart();
+
   const kb0 = slides[0].querySelector('.hero-kb');
-  kb0.style.transition = hstill ? 'none' : 'transform 8s ease-out';
+  /* Was a hardcoded 8s, left behind when the reel's timings became constants. */
+  kb0.style.transition = hstill ? 'none' : 'transform ' + (HOME_KB_MS / 1000) + 's ease-out';
   kb0.style.transform  = 'scale(1)';
+
+  /* Do not start counting until the opening photograph is actually on screen.
+     The timer was always exact — measured, it fired at 3269, 6270 and 9270ms —
+     but on anything slower than localhost the first two of those were spent on
+     a frame with no picture in it yet, so the reel appeared to sit still and
+     then race. A hold is meant to be 3s of a guest LOOKING at a room. */
+  let hbegun = false;
+  function hbegin() {
+    if (hbegun) return;
+    hbegun = true;
+    hpromote(1);            // ready the frame the first advance will show
+    hstart();
+    /* The rest once the page has settled — none is needed for 6s yet. */
+    const rest = () => { for (let i = 2; i < slides.length; i++) hpromote(i); };
+    if (document.readyState === 'complete') setTimeout(rest, 0);
+    else window.addEventListener('load', () => setTimeout(rest, 300), { once: true });
+  }
+  const probe = new Image();
+  probe.onload = hbegin;
+  probe.onerror = hbegin;   // a missing photograph must not stop the reel
+  probe.src = hfirst;
+  if (probe.complete) hbegin();
+  setTimeout(hbegin, 5000); // and neither must a slow one
 }
 
 // Room Tabs
