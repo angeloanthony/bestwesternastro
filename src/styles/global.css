@@ -1490,7 +1490,13 @@ footer a         { color: var(--gold); }
    ============================================================ */
 @media (max-width: 600px) {
   .gal-grid      { grid-template-columns: 1fr 1fr; }
-  .eyebrow       { font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 10px; }
+  /* The "Coming Soon in Vernal, Utah as" line was set LARGER on phones than on
+     desktop, so it wrapped to two tall gold lines and pushed the headline and
+     the rate card down over the room photograph. It is a kicker, not a
+     headline — set it back below the H1 and let it sit on one line. */
+  .eyebrow       { font-size: .68rem; letter-spacing: 2.4px; margin-bottom: 10px; }
+  .eyebrow::before,
+  .eyebrow::after { max-width: 26px; }
   .htitle        { font-size: 2.4rem; margin-bottom: 12px; }
   /* Phone hero: the sticky booking bar (.sbb) already pins Call + Book Direct
      to the bottom of every page, so the hero's own long subtitle, duplicate
@@ -1501,19 +1507,30 @@ footer a         { color: var(--gold); }
   /* !important: the element also carries an inline display:inline-block
      (index.astro), which otherwise outranks this stylesheet rule. */
   .hero .promo-callout { display: none !important; }
-  /* Phone hero budget: headline + photo + price + Book Now must all fit inside
-     one 100vh screen, so the card sheds its amenity chips (the perks bar
-     immediately below the hero repeats them anyway) and tightens up. The rate,
-     its qualifier fine print and the weekly line never go — a price without
-     "on a 7-night stay" next to it is the drift rates.ts exists to prevent. */
-  .hero          { gap: 14px; padding-bottom: calc(var(--hero-floor) + 62px); }
-  .hroom         { padding: 14px 16px 16px; border-radius: 12px; }
-  .hroom-feats   { display: none; }
-  .hroom-name    { font-size: 1.15rem; }
+  /* Phone hero budget: the rate card was eight stacked lines tall and covered
+     the room photograph it is supposed to be pricing. On phones it keeps only
+     what converts — the room's name on one line, the rate with its tax note,
+     and Book Now. The kicker, amenity chips, weekly line and "view room
+     details" link all still live on the room pages the reel links to, and the
+     tax note stays because a bare price is the drift rates.ts exists to
+     prevent. */
+  .hero          { gap: 12px; padding-bottom: calc(var(--hero-floor) + 62px); }
+  .hroom         { padding: 12px 14px 14px; border-radius: 12px; }
+  .hroom-feats,
+  .hroom-kicker,
+  .hroom-weekly,
+  .hroom-foot    { display: none; }
+  /* !important: .hroom-more carries an inline display:inline-block from
+     index.astro, which otherwise outranks this rule. */
+  .hroom-more    { display: none !important; }
+  .hroom-name    { font-size: .98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .hroom-amt     { font-size: 2rem; }
-  .hroom-price   { padding-top: 10px; margin-top: 10px; }
-  .hroom-act     { padding-top: 10px; margin-top: 10px; }
-  .hroom-cta     { margin-top: 9px; padding: 10px 14px; font-size: .72rem; }
+  .hroom-price   { padding-top: 9px; margin-top: 9px; }
+  .hroom-fine    { margin-top: 4px; font-size: .6rem; }
+  /* With the weekly line gone the action block holds the button alone, so its
+     divider would draw a second gold rule a few pixels under the price rule. */
+  .hroom-act     { padding-top: 11px; margin-top: 0; border-top: none; }
+  .hroom-cta     { margin-top: 0; padding: 11px 14px; font-size: .74rem; }
   .amen-grid     { grid-template-columns: 1fr 1fr; }
   .cta-btns      { flex-direction: column; align-items: center; }
   #lbprev        { left: 6px; }
@@ -1530,19 +1547,17 @@ footer a         { color: var(--gold); }
 
 /* Shortest phones (iPhone SE, 360 x 667): #ei-badge drops in over the top of
    the hero and the control row holds the bottom, leaving roughly 200px of clear
-   band for the rate card. Tighten it to fit rather than let the badge cover the
-   price. The rate, its "on a 7-night stay" qualifier and the weekly line still
-   never go. */
+   band for the rate card. Tighten it further on top of the phone rules above —
+   the rate and its tax note still never go. */
 @media (max-width: 600px) and (max-height: 700px) {
   .hero          { padding-bottom: calc(var(--hero-floor) + 42px); }
   .hero .hbtns   { display: none; }
-  .hroom-kicker  { display: none; }
-  .hroom         { padding: 12px 14px 14px; }
-  .hroom-name    { font-size: 1.05rem; }
+  .hroom         { padding: 10px 14px 12px; }
+  .hroom-name    { font-size: .92rem; }
   .hroom-amt     { font-size: 1.7rem; }
-  .hroom-price,
-  .hroom-act     { padding-top: 8px; margin-top: 8px; }
-  .hroom-cta     { margin-top: 7px; padding: 9px 12px; }
+  .hroom-price   { padding-top: 7px; margin-top: 7px; }
+  .hroom-act     { padding-top: 9px; }
+  .hroom-cta     { padding: 10px 12px; }
 }
 
 /* ============================================================
