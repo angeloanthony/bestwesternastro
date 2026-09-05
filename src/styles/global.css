@@ -1508,29 +1508,24 @@ footer a         { color: var(--gold); }
      (index.astro), which otherwise outranks this stylesheet rule. */
   .hero .promo-callout { display: none !important; }
   /* Phone hero budget: the rate card was eight stacked lines tall and covered
-     the room photograph it is supposed to be pricing. On phones it keeps only
-     what converts — the room's name on one line, the rate with its tax note,
-     and Book Now. The kicker, amenity chips, weekly line and "view room
-     details" link all still live on the room pages the reel links to, and the
-     tax note stays because a bare price is the drift rates.ts exists to
-     prevent. */
+     the room photograph it is supposed to be pricing. On phones it is reduced
+     to what only it can say — which room, and what that room costs. The kicker,
+     amenity chips, weekly line and "view room details" link all still live on
+     the room pages the reel links to, and the tax note stays because a bare
+     price is the drift rates.ts exists to prevent.
+     The whole .hroom-act block goes with them, Book Now included: .sbb is fixed
+     over the foot of this same screen and BOTH of its buttons are tel: links to
+     the same number, so the card's own button was the third dial action in one
+     viewport and the only one competing with the photograph. */
   .hero          { gap: 12px; padding-bottom: calc(var(--hero-floor) + 62px); }
   .hroom         { padding: 12px 14px 14px; border-radius: 12px; }
   .hroom-feats,
   .hroom-kicker,
-  .hroom-weekly,
-  .hroom-foot    { display: none; }
-  /* !important: .hroom-more carries an inline display:inline-block from
-     index.astro, which otherwise outranks this rule. */
-  .hroom-more    { display: none !important; }
+  .hroom-act     { display: none; }
   .hroom-name    { font-size: .98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .hroom-amt     { font-size: 2rem; }
   .hroom-price   { padding-top: 9px; margin-top: 9px; }
   .hroom-fine    { margin-top: 4px; font-size: .6rem; }
-  /* With the weekly line gone the action block holds the button alone, so its
-     divider would draw a second gold rule a few pixels under the price rule. */
-  .hroom-act     { padding-top: 11px; margin-top: 0; border-top: none; }
-  .hroom-cta     { margin-top: 0; padding: 11px 14px; font-size: .74rem; }
   .amen-grid     { grid-template-columns: 1fr 1fr; }
   .cta-btns      { flex-direction: column; align-items: center; }
   #lbprev        { left: 6px; }
@@ -1556,8 +1551,6 @@ footer a         { color: var(--gold); }
   .hroom-name    { font-size: .92rem; }
   .hroom-amt     { font-size: 1.7rem; }
   .hroom-price   { padding-top: 7px; margin-top: 7px; }
-  .hroom-act     { padding-top: 9px; }
-  .hroom-cta     { padding: 10px 12px; }
 }
 
 /* ============================================================
