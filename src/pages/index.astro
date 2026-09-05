@@ -1043,6 +1043,18 @@ const rooms   = document.querySelectorAll('.hroom');
 const heroEl  = document.getElementById('hero');
 const hlabels = ${JSON.stringify(HERO_SLIDES.map((s) => s.label))};
 const hstill  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* Milliseconds a hero slide holds. 6000 -> 4200: this reel opens on two
+   property shots before it reaches a single room, so at 6s a guest waited 12s
+   to see the first rate. Still slower than the room pages' 1500ms on purpose —
+   a slide here carries a rate card to read, not just a photograph.
+   Three things are paired to it and must move with it: the .hero-slide and
+   .hroom cross-fades in global.css, and HOME_KB_MS just below. */
+const HOME_HERO_MS = 4200;
+/* The Ken Burns drift is deliberately longer than the hold — it is a slow
+   push that gets interrupted by the next slide, never a move that finishes.
+   Scaled with the hold (8000 x 4200/6000) so each slide still shows the same
+   share of the drift as it did at 6s rather than visibly less of it. */
+const HOME_KB_MS = 5600;
 let cs = 0;
 let htimer = null;
 
@@ -1088,13 +1100,13 @@ function gs(n) {
   kb.style.transition = 'none';
   kb.style.transform  = 'scale(1.08)';
   kb.offsetHeight;
-  kb.style.transition = 'transform 8s ease-out';
+  kb.style.transition = 'transform ' + (HOME_KB_MS / 1000) + 's ease-out';
   kb.style.transform  = 'scale(1)';
 }
 
 function hstep(d)  { gs((cs + d + slides.length) % slides.length); }
 function hstop()   { clearInterval(htimer); htimer = null; }
-function hstart()  { if (!htimer && slides.length > 1) htimer = setInterval(() => hstep(1), 6000); }
+function hstart()  { if (!htimer && slides.length > 1) htimer = setInterval(() => hstep(1), HOME_HERO_MS); }
 function hrestart(){ hstop(); hstart(); }
 
 if (slides.length) {
