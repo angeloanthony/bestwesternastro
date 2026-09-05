@@ -186,8 +186,10 @@
   /* The BOX is wider than the visible cloud on purpose. Both gradients below
      reach zero at ~91% of it, so nothing is ever cut off by the element's own
      edge — a mask that is still opaque where its box ends produces a hard
-     vertical seam through the photograph, which is what a narrower box did. */
-  width: min(96%, 900px);
+     vertical seam through the photograph, which is what a narrower box did.
+     Down from 900px: with the heading capped at 2.5rem/520px the panel no
+     longer needs that reach, and every pixel it gives back is room on show. */
+  width: min(96%, 730px);
   border-radius: 48px;
   pointer-events: none;
 }
@@ -241,25 +243,30 @@
 }
 .rm-hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5.4vw, 3.6rem);
+  /* Was clamp(2rem, 5.4vw, 3.6rem). At 3.6rem inside a 560px column the long
+     names — "Handicap / Accessible Studio King" — broke over THREE lines, and
+     a three-line heading at that size is what set the height of the cloud and
+     took half the photograph with it. Capped at 2.5rem the same name is two
+     lines, which is what lets the panel shrink below. */
+  font-size: clamp(1.8rem, 2.6vw, 2.5rem);
   font-weight: 700;
-  line-height: 1.08;
-  margin: 0 0 22px;
-  /* Wraps the long names — "Handicap / Accessible Studio King" — onto a second
-     line so the heading stays inside the cloud rather than running out onto the
-     photograph. Short names still fit on one line.
-     This value is not free: the cloud's solid core reaches ~600px in from the
-     text column on a full-width desktop, and the heading has to stay inside it.
-     See the tablet override below, where the cloud is narrower. */
-  max-width: min(100%, 560px);
+  line-height: 1.1;
+  margin: 0 0 20px;
+  /* The heading has to stay inside the cloud's SOLID core, so this value and
+     the cloud's own width are one decision — see the ::before/::after box.
+     The core's right edge sits at 33% + 0.62 x 66% = 73.9% of that box, which
+     at 730px wide and a -64px offset lands 475px in from the text column.
+     Short names still fit on one line. */
+  max-width: min(100%, 470px);
 }
-/* Between the mobile breakpoint and a laptop the cloud is narrower than its
-   desktop cap, so the heading has to be too — measured at 768px the first line
-   of "Handicap / Accessible Studio King" ran past the solid core onto the
-   photograph at 1.38:1. */
+/* Between the mobile breakpoint and a laptop the cloud is 96% of a narrower
+   content column rather than its 730px cap, so the heading has to follow it
+   down — measured at 768px the first line of "Handicap / Accessible Studio
+   King" once ran past the solid core onto the photograph at 1.38:1. There the
+   box is 691px, putting the core's right edge at 0.739 x 691 - 64 = 447px. */
 @media (min-width: 721px) and (max-width: 1023px) {
   .rm-hero h1 {
-    max-width: min(100%, 390px);
+    max-width: min(100%, 430px);
   }
 }
 
