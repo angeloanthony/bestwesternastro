@@ -146,29 +146,36 @@ const roomNode = {
       ))}
     </div>
     <div class="rm-hero-ov"></div>
+    {/* The label band, underneath the photograph rather than over it. Two
+        groups so it can be one row on a wide screen and a stack on a phone:
+        --lede is what the room IS, --act is what you do about it. */}
     <div class="rm-hero-cnt">
-      <p class="rm-eyebrow">{room.eyebrow}</p>
-      <h1>{room.name}</h1>
+      <div class="rm-hero-lede">
+        <p class="rm-eyebrow">{room.eyebrow}</p>
+        <h1>{room.name}</h1>
 
-      <p class="rm-price">
-        <span class="rm-price-amt">{room.nightly.price}</span>
-        {room.nightly.published && <span class="rm-price-per">/ night</span>}
-        <span class="rm-price-tax">{room.nightly.note}</span>
-      </p>
-      <p class="rm-weekly">{room.weekly}</p>
-      {/* --fee is the room's own fine print (pet fee, deposit). It repeats in
-          full in the pricing band below, so the phone hero drops it. */}
-      {room.footnote && <p class="rm-foot rm-foot--fee">{room.footnote}</p>}
-      {/* Label the picture where it is not a photograph of this room type.
-          --cap is a disclosure about the photograph on screen and is repeated
-          nowhere else, so it stays at every width. */}
-      {room.gallery.length === 0 && <p class="rm-foot rm-foot--cap">{room.hero.caption}</p>}
+        <p class="rm-price">
+          <span class="rm-price-amt">{room.nightly.price}</span>
+          {room.nightly.published && <span class="rm-price-per">/ night</span>}
+          <span class="rm-price-tax">{room.nightly.note}</span>
+        </p>
+        {/* --fee is the room's own fine print (pet fee, deposit). It repeats in
+            full in the pricing band below, so the phone hero drops it. */}
+        {room.footnote && <p class="rm-foot rm-foot--fee">{room.footnote}</p>}
+        {/* Label the picture where it is not a photograph of this room type.
+            --cap is a disclosure about the photograph on screen and is repeated
+            nowhere else, so it stays at every width. */}
+        {room.gallery.length === 0 && <p class="rm-foot rm-foot--cap">{room.hero.caption}</p>}
+      </div>
 
-      <div class="rm-btns">
-        <a href={tel} class="rm-btn rm-btn-p" data-track="phone_call_room_hero">
-          Book Now · {BUSINESS.phoneDisplay}
-        </a>
-        <a href="#rm-pricing" class="rm-btn rm-btn-s">Check Availability</a>
+      <div class="rm-hero-act">
+        <p class="rm-weekly">{room.weekly}</p>
+        <div class="rm-btns">
+          <a href={tel} class="rm-btn rm-btn-p" data-track="phone_call_room_hero">
+            Book Now · {BUSINESS.phoneDisplay}
+          </a>
+          <a href="#rm-pricing" class="rm-btn rm-btn-s">Check Availability</a>
+        </div>
       </div>
 
       {heroSlides.length > 1 && (
