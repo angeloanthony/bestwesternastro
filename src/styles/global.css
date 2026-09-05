@@ -1554,14 +1554,51 @@ footer a         { color: var(--gold); }
      the same number, so the card's own button was the third dial action in one
      viewport and the only one competing with the photograph. */
   .hero          { gap: 12px; padding-bottom: calc(var(--hero-floor) + 62px); }
-  .hroom         { padding: 12px 14px 14px; border-radius: 12px; }
+
+  /* A PRICE BADGE, NOT A CARD. On a phone this element is competing with the
+     one thing it exists to sell, so it stops being a full-width panel: it
+     shrinks to its own contents, sits translucent over the photograph rather
+     than blocking it, and drops to two lines. The room name becomes a small
+     label — it says WHICH room the price is for and nothing more — and the
+     price is the only thing here allowed to be large. Everything else is on
+     the room page the reel links to, which is the page that exists to be
+     read. */
+  .hroom-layer   { width: auto; justify-items: center; }
+  .hroom {
+    display: inline-flex;
+    width: auto;
+    max-width: calc(100vw - 32px);
+    padding: 9px 20px 11px;
+    border-radius: 10px;
+    /* Translucent, and blurred rather than darkened: the photograph still
+       reads through it instead of being blanked out behind a solid panel. */
+    background: rgba(var(--navy-dark-rgb), .5);
+    backdrop-filter: blur(7px) saturate(1.05);
+    -webkit-backdrop-filter: blur(7px) saturate(1.05);
+    border-color: rgba(var(--gold-rgb), .45);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .34);
+  }
   .hroom-feats,
   .hroom-kicker,
   .hroom-act     { display: none; }
-  .hroom-name    { font-size: .98rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .hroom-amt     { font-size: 2rem; }
-  .hroom-price   { padding-top: 9px; margin-top: 9px; }
-  .hroom-fine    { margin-top: 4px; font-size: .6rem; }
+  /* Lato, not Playfair, and small — a label above a price, not a headline. */
+  .hroom-name {
+    font-family: 'Lato', sans-serif;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .82);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  /* No divider rule: two lines do not need to be separated from each other. */
+  .hroom-price   { padding-top: 2px; margin-top: 2px; border-top: none; }
+  .hroom-amt     { font-size: 2.3rem; }
+  .hroom-rate    { gap: 5px; }
+  .hroom-fine    { margin-top: 1px; font-size: .58rem; }
   .amen-grid     { grid-template-columns: 1fr 1fr; }
   .cta-btns      { flex-direction: column; align-items: center; }
   #lbprev        { left: 6px; }
@@ -1583,10 +1620,10 @@ footer a         { color: var(--gold); }
 @media (max-width: 600px) and (max-height: 700px) {
   .hero          { padding-bottom: calc(var(--hero-floor) + 42px); }
   .hero .hbtns   { display: none; }
-  .hroom         { padding: 10px 14px 12px; }
-  .hroom-name    { font-size: .92rem; }
-  .hroom-amt     { font-size: 1.7rem; }
-  .hroom-price   { padding-top: 7px; margin-top: 7px; }
+  .hroom         { padding: 7px 16px 9px; }
+  .hroom-name    { font-size: .64rem; letter-spacing: 1.5px; }
+  .hroom-amt     { font-size: 1.95rem; }
+  .hroom-price   { padding-top: 1px; margin-top: 1px; }
 }
 
 /* ============================================================
