@@ -287,7 +287,7 @@ body {
   /* Paired with HOME_HERO_MS in index.astro — change the two together. Held to
      roughly a fifth of the hold: much past that and the reel spends its time
      mid-dissolve, which reads as drift rather than as a change of picture. */
-  transition: opacity .9s ease;
+  transition: opacity .65s ease;
 }
 .hero-slide.active { opacity: 1; }
 
@@ -396,7 +396,7 @@ body {
   transform: translateY(12px);
   /* Slightly quicker than the .hero-slide fade it rides with, so the rate
      lands just before the photograph settles rather than trailing it. */
-  transition: opacity .55s ease, transform .55s ease, visibility .55s;
+  transition: opacity .4s ease, transform .4s ease, visibility .4s;
   display: flex;
   align-items: center;
   gap: 26px;
