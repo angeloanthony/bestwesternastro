@@ -78,7 +78,7 @@
 .rm-hero-dots {
   display: flex;
   gap: 9px;
-  margin-top: 26px;
+  margin-top: 18px;
   align-items: center;
 }
 /* Navy rather than white: these sit at the lower feather of the cloud, where
@@ -179,17 +179,21 @@
      The ellipse below is taller than this box so its solid core still covers
      the eyebrow at the very top of the block: at a 92% vertical radius the top
      edge thinned out and the eyebrow fell onto the dark accent wall. */
-  top: -52px;
-  bottom: -34px;
+  top: -38px;
+  bottom: -28px;
   left: -64px;
   right: auto;
   /* The BOX is wider than the visible cloud on purpose. Both gradients below
      reach zero at ~91% of it, so nothing is ever cut off by the element's own
      edge — a mask that is still opaque where its box ends produces a hard
      vertical seam through the photograph, which is what a narrower box did.
-     Down from 900px: with the heading capped at 2.5rem/520px the panel no
-     longer needs that reach, and every pixel it gives back is room on show. */
-  width: min(96%, 730px);
+     Down from 900px, then from 730px: the panel is sized by the type inside it,
+     and once the heading, price and buttons all came down (below) it had this
+     much slack to give back. Every pixel it gives back is room on show.
+     From 721px up this cap always wins — 96% of the content column only falls
+     under 600px below a ~694px viewport — so there is no separate tablet
+     geometry to keep in step any more. */
+  width: min(96%, 600px);
   border-radius: 48px;
   pointer-events: none;
 }
@@ -231,43 +235,33 @@
 }
 
 .rm-eyebrow {
-  font-size: 0.78rem;
-  letter-spacing: 3px;
+  font-size: 0.7rem;
+  letter-spacing: 2.4px;
   text-transform: uppercase;
   font-weight: 700;
   /* Navy, not gold: at this size gold-on-cloud cannot reach AA. Gold is spent
      where it reads — the price, the pill's rule, the booking button. */
   color: var(--navy);
   opacity: 0.78;
-  margin: 0 0 14px;
+  margin: 0 0 10px;
 }
 .rm-hero h1 {
   font-family: 'Playfair Display', serif;
-  /* Was clamp(2rem, 5.4vw, 3.6rem). At 3.6rem inside a 560px column the long
-     names — "Handicap / Accessible Studio King" — broke over THREE lines, and
-     a three-line heading at that size is what set the height of the cloud and
-     took half the photograph with it. Capped at 2.5rem the same name is two
-     lines, which is what lets the panel shrink below. */
-  font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+  /* Was clamp(2rem, 5.4vw, 3.6rem), then 2.5rem. At 3.6rem the long names —
+     "Handicap / Accessible Studio King" — broke over THREE lines, and a
+     three-line heading at 57px is what set the height of the cloud and took
+     half the photograph with it. This is a room page: the photograph is the
+     argument and the heading only has to name what is in it. */
+  font-size: clamp(1.55rem, 1.9vw, 1.9rem);
   font-weight: 700;
-  line-height: 1.1;
-  margin: 0 0 20px;
+  line-height: 1.14;
+  margin: 0 0 14px;
   /* The heading has to stay inside the cloud's SOLID core, so this value and
      the cloud's own width are one decision — see the ::before/::after box.
      The core's right edge sits at 33% + 0.62 x 66% = 73.9% of that box, which
-     at 730px wide and a -64px offset lands 475px in from the text column.
+     at 600px wide and a -64px offset lands 379px in from the text column.
      Short names still fit on one line. */
-  max-width: min(100%, 470px);
-}
-/* Between the mobile breakpoint and a laptop the cloud is 96% of a narrower
-   content column rather than its 730px cap, so the heading has to follow it
-   down — measured at 768px the first line of "Handicap / Accessible Studio
-   King" once ran past the solid core onto the photograph at 1.38:1. There the
-   box is 691px, putting the core's right edge at 0.739 x 691 - 64 = 447px. */
-@media (min-width: 721px) and (max-width: 1023px) {
-  .rm-hero h1 {
-    max-width: min(100%, 430px);
-  }
+  max-width: min(100%, 375px);
 }
 
 /* Price block — shared by the hero and the pricing section. */
@@ -353,8 +347,11 @@
  * The price, weekly pill and button rules above are shared with the pricing
  * band further down the page, which is navy and wants white and gold. These
  * overrides are scoped to the hero alone so both keep their own palette. */
+/* The hero's price is a label on a photograph; the pricing band's is the
+   headline of its own section and keeps the larger shared size. */
 .rm-hero .rm-price-amt {
   color: var(--rm-gold-ink);
+  font-size: clamp(1.8rem, 2.4vw, 2.2rem);
 }
 .rm-hero .rm-price-per {
   color: var(--navy);
@@ -368,16 +365,35 @@
   color: var(--navy);
   border-color: rgba(var(--gold-rgb), 0.85);
   background: rgba(255, 255, 255, 0.5);
+  margin-top: 12px;
+  padding: 7px 13px;
+  font-size: 0.74rem;
+  letter-spacing: 1.3px;
+}
+/* The button row is the widest thing in the panel and so the last constraint
+   on how narrow the panel can get. Trimmed here only — the booking CTA and the
+   pricing band keep the roomier shared size. */
+.rm-hero .rm-btns {
+  margin-top: 18px;
+  gap: 10px;
+}
+.rm-hero .rm-btn {
+  padding: 12px 20px;
+  font-size: 0.74rem;
+  letter-spacing: 1.1px;
 }
 .rm-hero .rm-btn-p {
   box-shadow: 0 6px 18px rgba(var(--navy-rgb), 0.22);
 }
 /* White-on-white would vanish here: the outline button goes navy on a light
-   fill, which also keeps it legible if it drifts past the cloud's soft edge. */
+   fill. Raised from 0.55 to 0.85 so it carries its own contrast rather than
+   borrowing the cloud's — the row measures 417px against a 464px cloud edge,
+   which is comfortable but is the tightest fit of anything in the panel. */
 .rm-hero .rm-btn-s {
   border-color: rgba(var(--navy-rgb), 0.7);
   color: var(--navy);
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 10px 18px;
 }
 .rm-hero .rm-btn-s:hover,
 .rm-hero .rm-btn-s:focus-visible {
