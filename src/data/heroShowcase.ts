@@ -46,6 +46,15 @@ export type HeroSlide = {
   kind: 'property' | 'room';
   /** Path relative to the site root, without the leading slash (matches legacy markup). */
   image: string;
+  /** PHONE version of `image`, cropped or shot to 9:16. Optional: a slide with
+   *  no portrait falls back to the landscape one, which is what the widest and
+   *  softest source (pet-friendly-room) does. Built by
+   *  scripts/make-portrait-heroes.mjs — regenerate rather than hand-crop, and
+   *  read the WHY at the top of it before changing a crop.
+   *
+   *  This exists because `background-size: cover` on a 100vh phone hero keeps
+   *  only 31-35% of a landscape photograph's width. */
+  portrait?: string;
   /** Ken Burns pan direction — classes already defined in global.css. */
   kb: 'kb-right' | 'kb-left' | 'kb-up' | 'kb-down';
   /** Alt text / accessible name for the slide. */
@@ -69,6 +78,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     id: 'property-night',
     kind: 'property',
     image: 'images/31a.webp',
+    portrait: 'images/portrait/31a.webp',
     kb: 'kb-right',
     alt: 'Best Western Vernal Inn at dusk — Vernal, Utah',
     label: 'The Inn',
@@ -77,6 +87,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     id: 'property-stars',
     kind: 'property',
     image: 'images/35.webp',
+    portrait: 'images/portrait/35.webp',
     kb: 'kb-left',
     alt: 'Best Western Vernal Inn under the stars — Vernal, Utah',
     label: 'Under the Stars',
@@ -132,6 +143,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     id: 'pet-friendly-studio-two-queen',
     kind: 'room',
     image: 'images/rooms/pet-friendly.webp',
+    portrait: 'images/portrait/pet-friendly.webp',
     kb: 'kb-up',
     alt: 'Pet-friendly Studio Two Queen bedroom with wood-style floors — Best Western Vernal Inn, Vernal Utah',
     label: 'Pet-Friendly Studio Two Queen',

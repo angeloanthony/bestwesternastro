@@ -38,7 +38,9 @@ const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Ni
 const headExtras = `<!-- The reel's opening photograph is the largest thing above the fold and was
      queueing behind 28 other images; measured on an 8 Mbps connection it did not
      paint for 3.5s, so the hero sat blank while the reel counted down. -->
-<link rel="preload" as="image" href="${HERO_SLIDES[0].image}" fetchpriority="high">
+<link rel="preload" as="image" href="${HERO_SLIDES[0].image}" media="(min-aspect-ratio: 3/4)" fetchpriority="high">${HERO_SLIDES[0].portrait ? `
+<link rel="preload" as="image" href="${HERO_SLIDES[0].portrait}" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
+<style>@media (max-aspect-ratio: 3/4){#hero .hero-slide:first-of-type .hero-kb{background-image:url('${HERO_SLIDES[0].portrait}')!important}}</style>` : ''}
 ${ldScript(hotelNodeFull(hotelDescription))}
 <script type="application/ld+json">
  {
@@ -160,7 +162,7 @@ const bodyContent = `<!-- ══════════════════
      its rate laid over the photograph. Slides and rates both come from
      src/data/heroShowcase.ts → src/data/rates.ts; nothing is hardcoded here. -->
 <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Best Western Vernal Inn — rooms and rates">
-${HERO_SLIDES.map((s, i) => `<div class="hero-slide ${s.kb}${i === 0 ? ' active' : ''}" role="img" aria-label="${s.alt}"><div class="hero-kb"${i === 0 ? ` style="background-image:url('${s.image}')"` : ` data-bg="${s.image}"`}></div></div>`).join('\n')}
+${HERO_SLIDES.map((s, i) => `<div class="hero-slide ${s.kb}${i === 0 ? ' active' : ''}" role="img" aria-label="${s.alt}"><div class="hero-kb"${i === 0 ? ` style="background-image:url('${s.image}')"` : ` data-bg="${s.image}"`}${s.portrait ? ` data-bg-portrait="${s.portrait}"` : ''}></div></div>`).join('\n')}
  <div class="hero-ov"></div>
  <div class="hero-cnt">
  <p class="eyebrow">Coming Soon in Vernal, Utah as</p>
@@ -1048,6 +1050,11 @@ const heroEl  = document.getElementById('hero');
 const hlabels = ${JSON.stringify(HERO_SLIDES.map((s) => s.label))};
 const hstill  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hfirst  = ${JSON.stringify(HERO_SLIDES[0].image)};
+/* A phone hero is a 100vh box at about 0.46:1 and cover-cropping a landscape
+   photograph into it keeps only ~a third of its width, so below 3:4 the reel
+   serves 9:16 versions instead. Slide 0 is switched by the <style> in the head
+   rather than here, so it needs no JavaScript to paint the right one. */
+const hportrait = window.matchMedia('(max-aspect-ratio: 3/4)');
 /* Milliseconds a hero slide holds. 6000 -> 4200 -> 3000: this reel opens on two
    property shots before it reaches a single room, so at 6s a guest waited 12s
    to see the first rate and now waits 6s. Still twice the room pages' 1500ms on
@@ -1124,8 +1131,12 @@ function hpromote(n) {
   if (!s) return;
   const kb = s.querySelector('.hero-kb');
   if (!kb || !kb.dataset.bg) return;
-  const url = kb.dataset.bg;
+  /* Read at promotion time rather than once at load, so a phone rotated into
+     landscape before the reel gets there still picks the wider frame. A slide
+     with no portrait falls back to its landscape one. */
+  const url = (hportrait.matches && kb.dataset.bgPortrait) || kb.dataset.bg;
   kb.removeAttribute('data-bg');
+  kb.removeAttribute('data-bg-portrait');
   kb.style.backgroundImage = "url('" + url + "')";
 }
 
@@ -1170,7 +1181,7 @@ if (slides.length) {
   const probe = new Image();
   probe.onload = hbegin;
   probe.onerror = hbegin;   // a missing photograph must not stop the reel
-  probe.src = hfirst;
+  probe.src = (hportrait.matches && ${JSON.stringify(HERO_SLIDES[0].portrait ?? '')}) || hfirst;
   if (probe.complete) hbegin();
   setTimeout(hbegin, 5000); // and neither must a slow one
 }
