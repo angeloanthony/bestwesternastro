@@ -114,10 +114,10 @@ export type RoomPhoto = {
   shared?: boolean;
   /**
    * PHONE version of `src`, shot (not cropped) at 9:16. Used only by the hero
-   * slideshow, where the stage on a phone is a 100vw × 52vh box that keeps
-   * about half of a landscape frame's width. A frame without one simply shows
-   * its landscape image at every width. The gallery tiles and the lightbox
-   * never read it — they are landscape at every size.
+   * slideshow, which on a phone held upright is a 3:4 stage showing three
+   * quarters of this frame's height (rooms.css). A frame without one simply
+   * shows its landscape image at every width. The gallery tiles and the
+   * lightbox never read it — they are landscape at every size.
    */
   portrait?: string;
   /**

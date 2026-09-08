@@ -130,15 +130,16 @@
   outline-offset: 3px;
 }
 
-/* Tall phones get the portrait twin. The stage is 100vw × 52vh there, so the
-   box is taller than it is wide once the viewport is narrower than 1:2 — a
-   390×844 phone makes it 0.89:1. Cover-fitting a 16:9 frame into that keeps
-   half its width; a 9:16 frame keeps two thirds of its height, and shows both
-   beds instead of the nightstand between them. The break-even for those two
-   shapes is a square box, which is exactly a 1:2 viewport at 52vh — so the
-   threshold is the arithmetic, not a taste. A frame with no portrait falls
-   back to its landscape one. */
-@media (max-aspect-ratio: 1/2) {
+/* A phone held upright gets the portrait twin. The condition is the page's own
+   phone breakpoint plus orientation, NOT a viewport aspect ratio: the first
+   version switched at (max-aspect-ratio: 1/2), which a bare 390×844 emulator
+   passes and no real phone does — Safari's and Chrome's toolbars leave the
+   layout viewport at about 390×664 (0.59) or 412×780 (0.53), so every actual
+   phone was still being served the landscape frame. Paired with the 3:4 stage
+   under the same breakpoint below, so the 9:16 photograph is shown as a
+   photograph rather than as a band cut from its middle. A frame with no
+   portrait falls back to its landscape one. */
+@media (max-width: 720px) and (orientation: portrait) {
   .rm-hero-img {
     background-image: var(--rm-bg-p, var(--rm-bg));
   }
@@ -673,9 +674,16 @@
   /* The stacked photo-then-labels layout is the base now, not a phone
      exception — what is left here is phone TUNING of it. */
   .rm-hero {
-    /* Shorter band: 62vh of a 844px phone would push the labels off the
-       bottom of the first screen, and the price has to be on it. */
-    --rm-stage-h: 52vh;
+    /* The stage is a 3:4 box on a phone, capped at 62vh so a short viewport
+       keeps the room name and price on the first screen. The rooms are now
+       photographed at 9:16 for phones, and the 52vh band this used to be
+       (about 390×345 with browser toolbars — wider than it is tall) showed
+       barely half of such a frame's height. A 3:4 box shows three quarters
+       of it, beds, headboards and window included. On a 390-wide phone that
+       is 520px, with the price still inside the first 664px. Landscape
+       orientation is excluded from the portrait switch above, and the box
+       falls to the cap there, which is the old behaviour. */
+    --rm-stage-h: min(calc(100vw * 4 / 3), 62vh);
     padding: 0 0 26px;
   }
   /* THE STRIP — the phone hero carries the room's name, its price and Book Now,
