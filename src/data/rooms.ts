@@ -34,6 +34,16 @@
 //     pet-friendly photograph shows two beds on wood-style plank flooring, so
 //     that file is a misfile. It is used ONLY on the Studio King page.
 //
+// RESHOOT, ROOM BY ROOM (started 2026-09-08 with the Studio Two Queen)
+//
+// The owner is re-photographing each room and delivering WebP straight into
+// its folder, in pairs: a 1672×941 landscape frame and a 941×1672 "Phoneview"
+// twin of the same angle for the phone hero. public/images/Double-Queen-Studio/
+// now holds ONLY that new set — every old JPEG in it was removed except
+// Double-Queen-Kitchenette.jpeg, which the Studio King page still borrows
+// (retire it when that room is reshot). The duplicate-group findings below
+// therefore no longer describe that folder; they still describe the others.
+//
 // The rule applied throughout: a photograph counts as evidence of a room when
 // the folder and what is visible in the frame agree. Where a file is shared, it
 // is marked `shared: true` and captioned for what it is (the standard bathroom,
@@ -102,6 +112,14 @@ export type RoomPhoto = {
    * but their captions never present them as unique to this room.
    */
   shared?: boolean;
+  /**
+   * PHONE version of `src`, shot (not cropped) at 9:16. Used only by the hero
+   * slideshow, where the stage on a phone is a 100vw × 52vh box that keeps
+   * about half of a landscape frame's width. A frame without one simply shows
+   * its landscape image at every width. The gallery tiles and the lightbox
+   * never read it — they are landscape at every size.
+   */
+  portrait?: string;
   /**
    * Include this frame in the hero slideshow at the top of the page.
    *
@@ -306,72 +324,113 @@ export const ROOMS: Room[] = [
     weekly: WEEKLY_CALL_LINE,
     sleeps: 'Sleeps 1–4',
     bestFor: 'Families, road trips',
+    // PHOTOGRAPHY (reshot 2026-09-08): every frame below is from the owner's
+    // new WebP set, and every one was opened and matched to what it shows
+    // rather than to its filename. The old JPEG gallery had eleven subjects;
+    // each has a new frame here, plus one new angle (Double-Queen7, the whole
+    // studio from the dining end) that the old set never had. The hero slides
+    // carry their Phoneview twin. Left out, on purpose: Double-Queen10 and its
+    // "(2)" copy (the beds and the Delicate Arch again — Double-Queen2 already
+    // shows that), Double-Queen-labeled (Double-Queen4 with a caption baked
+    // into the pixels), Bathroom1 (toilet and tub, covered by Bathroom4) and
+    // Bathroom2 (the vanity again, from a flatter angle than Bathroom5).
     hero: {
-      src: 'images/Double-Queen-Studio/Double-Queen1.jpeg',
+      src: 'images/Double-Queen-Studio/Double-Queen1.webp',
+      portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview1.webp',
       caption:
         'Two queen beds side by side, with the window and heating and cooling unit beyond.',
       alt: 'Studio Two Queen room with two queen beds — Best Western Vernal Inn, Vernal Utah',
     },
     gallery: [
       {
-        src: 'images/Double-Queen-Studio/Double-Queen1.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen1.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview1.webp',
         caption:
           'Two queen beds on light-wood platform frames, each with a panelled headboard, sharing a wall light and a nightstand between them. The window carries a roller shade, with a through-wall heating and cooling unit beneath it.',
         alt: 'Two queen beds with a window and through-wall heating and cooling unit — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Double-Queen-Studio/Double-Queen2.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen2.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview2.webp',
         caption:
           'The beds from the other side of the room, with a framed Delicate Arch print on the wall.',
         alt: 'Two queen beds with framed Utah landscape artwork — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Double-Queen-Studio/Double-Queen6.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen7.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview6.webp',
+        caption:
+          'The whole studio from the dining table: the desk and wall-mounted TV on the left, the open closet and a framed canyon print, the window with the heating and cooling unit beneath it, and the two queen beds against the navy accent wall.',
+        alt: 'Studio Two Queen seen from the dining table, with desk, TV, closet, window and two queen beds — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Double-Queen-Studio/Double-Queen5.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview4.webp',
         caption:
           'The full length of the studio from the bed: the entry door, the kitchenette with its dining table and two chairs, the armchair and ottoman, and the desk with the wall-mounted TV above it.',
         alt: 'Full view of a Studio Two Queen showing entrance, kitchenette, seating and desk — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Double-Queen-Studio/Double-Queen4.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen4.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview3.webp',
         caption:
-          'The working half of the room in one frame — kitchenette, dining table, armchair with ottoman, desk with an office chair, and the open closet with its hanging rail and drawers.',
+          'The working half of the room in one frame — kitchenette, dining table, armchair with ottoman, desk with an office chair, and the open closet with its hanging rail, drawers, iron and ironing board.',
         alt: 'Kitchenette, dining table, seating area, desk and closet in a Studio Two Queen — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Double-Queen-Studio/Double-Queen.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen9.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview.webp',
         caption:
           'The seating corner: an upholstered armchair with a matching ottoman under a floor lamp, next to the desk and the wall-mounted TV.',
         alt: 'Armchair, ottoman, floor lamp and wall-mounted TV in a guest room — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Double-Queen-Studio/Double-Queen7.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen6.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview5.webp',
         caption:
-          'The dining table and two upholstered chairs, with the full-height refrigerator and freezer beside them and tiled flooring underfoot at the kitchenette end.',
+          'The dining table and two upholstered chairs, with the full-height refrigerator and freezer beside them and tiled flooring underfoot at the kitchenette end, looking across to the desk, the closet and the beds.',
         alt: 'Dining table and full-height refrigerator in a studio room — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
-      KITCHENETTE('Double-Queen-Studio', 'Double-Queen-Kitchenette.jpeg'),
       {
-        src: 'images/Double-Queen-Studio/Double-Queen13.jpeg',
+        // The owner shot the kitchenette in portrait only. The gallery tile
+        // crops it to its middle band (cooktop, sink, refrigerator) and the
+        // lightbox shows the whole frame.
+        src: 'images/Double-Queen-Studio/Double-Queen-Kitchenette-Phoneview.webp',
         caption:
-          'The open closet: a full-width hanging rail with wooden hangers, two drawers below, a shelf above and a folding luggage rack stowed to one side.',
-        alt: 'Open closet with hanging rail, hangers, drawers and luggage rack — Best Western Vernal Inn, Vernal Utah',
-        shared: true,
+          'The kitchenette: a two-burner cooktop and a stainless single-basin sink set into the granite counter, cabinets above and below, a microwave and a coffee maker, and a full-height refrigerator with a freezer opposite, on tiled flooring.',
+        alt: 'Kitchenette with two-burner cooktop, sink, microwave, coffee maker and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
       },
       {
-        src: 'images/Double-Queen-Studio/Double-Queen-Bathroom.jpeg',
+        src: 'images/Double-Queen-Studio/Double-Queen8.webp',
         caption:
-          'The bathroom: the granite vanity ledge on the left, the toilet, towel racks and a towel shelf, and the tub at the far right.',
+          'The open closet beside the window: a hanging rail with wooden hangers, an iron on the shelf above, an ironing board stowed alongside and two drawers below. The heating and cooling unit sits under the window, with a framed city-skyline print on the wall by the armchair.',
+        alt: 'Open closet with hangers, iron and ironing board next to a window in a Studio Two Queen — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Double-Queen-Studio/Double-Queen-Bathroom4.webp',
+        caption:
+          'The bathroom: the granite vanity ledge on the left, the toilet, towel racks and a towel shelf, and the tub at the far right. This is the standard bathroom shared by our non-accessible rooms.',
         alt: 'Guest bathroom with vanity, toilet and towel racks — Best Western Vernal Inn, Vernal Utah',
-        shared: true,
       },
-      BATH_VANITY('Double-Queen-Studio', 'Double-Queen-Bathroom-Sink.jpeg'),
-      BATH_TUB('Double-Queen-Studio', 'Double-Queen-BathTub1.jpeg'),
+      {
+        src: 'images/Double-Queen-Studio/Double-Queen-Bathroom5.webp',
+        caption:
+          'The vanity: granite counter with a single basin and a backlit mirror, with towels and a hair dryer on the wall alongside. This is the standard bathroom shared by our non-accessible rooms.',
+        alt: 'Hotel bathroom vanity with granite counter and backlit mirror — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Double-Queen-Studio/Double-Queen-Bathroom3.webp',
+        caption:
+          'The bath: a full-size tub and shower combination with a curved curtain rod and chrome fixtures.',
+        alt: 'Bathtub and shower combination in a guest bathroom — Best Western Vernal Inn, Vernal Utah',
+      },
     ],
     about: [
       'The Studio Two Queen is the room to book when there are more than two of you. Two queen beds sit side by side on light-wood platform frames, sharing a wall light and a nightstand, and the homepage rate table lists it as sleeping one to four. It is a studio, so the beds, the kitchenette, the seating and the work area are all one open space rather than separate rooms.',

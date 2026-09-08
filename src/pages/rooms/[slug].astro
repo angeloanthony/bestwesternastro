@@ -132,14 +132,22 @@ const roomNode = {
        in the markup; the rest carry `data-bg` and are promoted to real
        background-images after load, so the hero paints on one download instead
        of seven. A room with no photographs (the $135 Pet-Friendly Room) falls
-       back to a single still — there is nothing to cycle. -->
+       back to a single still — there is nothing to cycle.
+       The image is carried as two custom properties rather than a
+       background-image so rooms.css can pick the frame's 9:16 `portrait` twin
+       on a tall phone viewport with no script and no second download. -->
   <section class="rm-hero">
     <div class="rm-hero-stage" id="rm-hero-stage" data-ms={HERO_MS}>
       {heroSlides.map((p, i) => (
         <div
           class:list={['rm-hero-img', { 'is-on': i === 0 }]}
-          style={i === 0 ? `background-image:url('/${p.src}')` : undefined}
+          style={
+            i === 0
+              ? `--rm-bg:url('/${p.src}')${p.portrait ? `;--rm-bg-p:url('/${p.portrait}')` : ''}`
+              : undefined
+          }
           data-bg={i === 0 ? undefined : `/${p.src}`}
+          data-bg-portrait={i === 0 || !p.portrait ? undefined : `/${p.portrait}`}
           role="img"
           aria-label={p.alt}
           aria-hidden={i === 0 ? undefined : 'true'}
@@ -365,8 +373,13 @@ const roomNode = {
         for (var n = 0; n < slides.length; n++) {
           var bg = slides[n].getAttribute('data-bg');
           if (bg) {
-            slides[n].style.backgroundImage = "url('" + bg + "')";
+            slides[n].style.setProperty('--rm-bg', "url('" + bg + "')");
             slides[n].removeAttribute('data-bg');
+          }
+          var bgp = slides[n].getAttribute('data-bg-portrait');
+          if (bgp) {
+            slides[n].style.setProperty('--rm-bg-p', "url('" + bgp + "')");
+            slides[n].removeAttribute('data-bg-portrait');
           }
         }
       }

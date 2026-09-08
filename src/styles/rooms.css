@@ -51,6 +51,11 @@
 .rm-hero-img {
   position: absolute;
   inset: 0;
+  /* The frame arrives as --rm-bg (landscape) and, where the room has one,
+     --rm-bg-p (its 9:16 Phoneview twin) — set inline on slide one and by the
+     hydrate script on the rest. Only the property that resolves here is ever
+     downloaded. */
+  background-image: var(--rm-bg);
   background-size: cover;
   background-position: center;
   transform: scale(1.04);
@@ -123,6 +128,20 @@
 .rm-hero-dot:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
+}
+
+/* Tall phones get the portrait twin. The stage is 100vw × 52vh there, so the
+   box is taller than it is wide once the viewport is narrower than 1:2 — a
+   390×844 phone makes it 0.89:1. Cover-fitting a 16:9 frame into that keeps
+   half its width; a 9:16 frame keeps two thirds of its height, and shows both
+   beds instead of the nightstand between them. The break-even for those two
+   shapes is a square box, which is exactly a 1:2 viewport at 52vh — so the
+   threshold is the arithmetic, not a taste. A frame with no portrait falls
+   back to its landscape one. */
+@media (max-aspect-ratio: 1/2) {
+  .rm-hero-img {
+    background-image: var(--rm-bg-p, var(--rm-bg));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
