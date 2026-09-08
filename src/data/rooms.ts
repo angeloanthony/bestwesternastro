@@ -38,11 +38,16 @@
 //
 // The owner is re-photographing each room and delivering WebP straight into
 // its folder, in pairs: a 1672×941 landscape frame and a 941×1672 "Phoneview"
-// twin of the same angle for the phone hero. public/images/Double-Queen-Studio/
-// now holds ONLY that new set — every old JPEG in it was removed except
-// Double-Queen-Kitchenette.jpeg, which the Studio King page still borrows
-// (retire it when that room is reshot). The duplicate-group findings below
-// therefore no longer describe that folder; they still describe the others.
+// twin of the same angle for the phone hero. Reshot so far:
+//
+//   • public/images/Double-Queen-Studio/ — holds ONLY the new set; every old
+//     JPEG was removed except Double-Queen-Kitchenette.jpeg, which the Studio
+//     King page still borrows (retire it when that room is reshot).
+//   • public/images/Handicaped-Studio/ (one "p" — the folder name as the owner
+//     supplied it) REPLACES public/images/Handicapped-Studio/, which is gone.
+//
+// The duplicate-group findings below no longer describe those two folders;
+// they still describe King-Studio and Pet-Friendly-Double-Queen.
 //
 // The rule applied throughout: a photograph counts as evidence of a room when
 // the folder and what is visible in the frame agree. Where a file is shared, it
@@ -480,75 +485,102 @@ export const ROOMS: Room[] = [
     weekly: WEEKLY_CALL_LINE,
     sleeps: 'Sleeps 1–2',
     bestFor: 'Guests needing ADA access',
+    // PHOTOGRAPHY (reshot 2026-09-08): the owner's new WebP set, delivered to
+    // public/images/Handicaped-Studio/ — one "p", the folder name as supplied.
+    // Every frame was opened and matched by what it shows. The old gallery's
+    // ten subjects each have a new frame, plus one new angle (studio6, the
+    // working half of the room from the foot of the bed). Two files are not
+    // what their names say: studio5 is a byte-for-byte copy of studio3, and
+    // bathroom-phoneview1 is a LANDSCAPE frame (the shower from the doorway)
+    // and is used as one. Left out, on purpose: studio2 and phoneview2 (the
+    // desk corner again, tighter than studio / phoneview), studio5 (the
+    // duplicate), the two files with a caption baked into the pixels
+    // ("$108" and "labeled"), and bathroom-phoneview / bathroom-phoneview2
+    // (bathrooms are never hero slides, so their portraits have no use).
     hero: {
-      src: 'images/Handicapped-Studio/Handicapped7.jpeg',
+      src: 'images/Handicaped-Studio/Handicapped-studio7.webp',
+      portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview6.webp',
       caption:
         'The king bed with clear floor space along both sides.',
       alt: 'Accessible Studio King room with king bed and wide clear floor space — Best Western Vernal Inn, Vernal Utah',
     },
     gallery: [
       {
-        src: 'images/Handicapped-Studio/Handicapped7.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio7.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview6.webp',
         caption:
-          'The king bed on a low platform frame, with wall-mounted reading lights, nightstands either side and open carpeted floor running the length of the bed.',
+          'The king bed on a low platform frame against the navy accent wall, with a wall-mounted reading light and a nightstand either side and open carpeted floor running the length of the bed. A framed Delicate Arch print hangs on the wall to the right.',
         alt: 'King bed with clear floor space in an accessible hotel room — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped-shower.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio-bathroom2.webp',
         caption:
           'The roll-in shower: a low-threshold shower pan with a textured non-slip floor, an angled grab bar along two walls and a fold-down teak seat.',
         alt: 'Roll-in shower with grab bar and fold-down seat — accessible room, Best Western Vernal Inn, Vernal Utah',
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped-shower1.jpeg',
+        // Landscape despite the "phoneview" in its name — see the note above.
+        src: 'images/Handicaped-Studio/Handicapped-studio-bathroom-phoneview1.webp',
         caption:
-          'The same shower from the doorway, showing the handheld sprayer on its slide bar and the single-lever mixer within reach of the seat.',
+          'The same shower from the doorway, showing the handheld sprayer on its slide bar and the single-lever mixer within reach of the seat, with towels on the shelf outside.',
         alt: 'Accessible shower with handheld sprayer, slide bar and fold-down seat — Best Western Vernal Inn, Vernal Utah',
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped-bathroom.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio-bathroom.webp',
         caption:
-          'The vanity is open underneath — a roll-under counter with no cabinet below it and insulated pipework — under a backlit mirror, with a grab bar on the wall behind the toilet.',
+          'The vanity is open underneath — a roll-under counter with no cabinet below it and insulated pipework — under a backlit mirror, with a grab bar on the wall behind the toilet and another on the wall beside it.',
         alt: 'Roll-under bathroom vanity and grab bar in an accessible hotel bathroom — Best Western Vernal Inn, Vernal Utah',
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped-bathroom2.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio-bathroom1.webp',
         caption:
           'The accessible bathroom in full: grab bars on two walls by the toilet with the paper holder set below the side bar, a towel shelf within reach, and open floor space between the vanity, the toilet and the shower.',
         alt: 'Accessible hotel bathroom with grab bars and open floor space between fixtures — Best Western Vernal Inn, Vernal Utah',
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped4.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio3.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview4.webp',
         caption:
-          'The king bed from the other side of the room, with the roller-shaded window and the heating and cooling unit beneath it.',
+          'The king bed from the other side of the room, with the roller-shaded window and the heating and cooling unit beneath it, and the phone and clock on the nightstand.',
         alt: 'King bed beside a shaded window and heating and cooling unit — Best Western Vernal Inn, Vernal Utah',
-        shared: true,
         heroSlide: true,
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped5.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio4.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview3.webp',
         caption:
-          'The studio in one frame from the bed: the kitchenette at the far end, the desk with the wall-mounted TV, and the closet with an ironing board stowed in it.',
+          'The studio in one frame from the bed: the framed Delicate Arch print, the kitchenette at the far end, the desk with the wall-mounted TV, the armchair and ottoman, and the closet with an iron on its shelf and an ironing board stowed in it.',
         alt: 'Studio room showing kitchenette, desk, TV and closet — Best Western Vernal Inn, Vernal Utah',
-        shared: true,
         heroSlide: true,
       },
-      KITCHENETTE('Handicapped-Studio', 'Handicapped-Kitchenette.jpeg'),
       {
-        src: 'images/Handicapped-Studio/Handicapped3.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio6.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview5.webp',
         caption:
-          'The desk and work area with an office chair and the wall-mounted TV, and the armchair and ottoman across the corner.',
+          'The working half of the room from the foot of the bed: the kitchenette through the opening on the left, the desk and wall-mounted TV, the armchair and ottoman, and the open closet with its hanging rail, hangers, drawers, iron and ironing board.',
+        alt: 'Kitchenette, desk, TV, armchair and open closet in an accessible studio — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Handicaped-Studio/Handicapped-studio-Kitchenette.webp',
+        caption:
+          'The kitchenette: a two-burner cooktop and a stainless single-basin sink set into the granite counter, cabinets above and below, a microwave and a coffee maker, and a full-height refrigerator with a freezer opposite, on tiled flooring.',
+        alt: 'Kitchenette with two-burner cooktop, sink, microwave, coffee maker and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Handicaped-Studio/Handicapped-studio.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview.webp',
+        caption:
+          'The desk and work area with an office chair and the wall-mounted TV, and the armchair and ottoman under a floor lamp across the corner, looking through to the window and the bed.',
         alt: 'Desk, office chair, TV and armchair in a guest room — Best Western Vernal Inn, Vernal Utah',
-        shared: true,
         heroSlide: true,
       },
       {
-        src: 'images/Handicapped-Studio/Handicapped6.jpeg',
+        src: 'images/Handicaped-Studio/Handicapped-studio1.webp',
         caption:
-          'The open closet: full-width hanging rail with hangers, drawers below, a shelf above and a folding luggage rack stowed beside it.',
-        alt: 'Open closet with hanging rail, drawers and luggage rack — Best Western Vernal Inn, Vernal Utah',
-        shared: true,
+          'The open closet beside the window: a hanging rail with wooden hangers, an iron on the shelf above, an ironing board stowed alongside and two drawers below. The window looks out over Vernal, with the heating and cooling unit beneath it.',
+        alt: 'Open closet with hangers, iron and ironing board beside a window — Best Western Vernal Inn, Vernal Utah',
       },
     ],
     about: [
