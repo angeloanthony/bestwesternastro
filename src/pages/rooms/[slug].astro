@@ -220,6 +220,7 @@ const roomNode = {
               class="rm-tile"
               data-rm-i={i}
               data-rm-src={`/${p.src}`}
+              data-rm-src-p={p.portrait ? `/${p.portrait}` : undefined}
               data-rm-cap={p.caption}
               aria-label={`Enlarge photograph ${i + 1} of ${room.gallery.length}: ${p.caption}`}
             >
@@ -440,14 +441,39 @@ const roomNode = {
       var i = 0;
       var opener = null;
 
+      // The lightbox stage is `object-fit: contain`, so on a phone held
+      // upright a 16:9 frame fits by WIDTH and letterboxes to about a third of
+      // the screen — the photograph ends up smaller here than it was in the
+      // tile the guest just tapped. Where the owner shot a 9:16 twin
+      // (`portrait` in rooms.ts) it is served instead and fills the stage.
+      // The tiles themselves stay landscape: a tile is a 1.27:1 box, and a
+      // 9:16 file dropped into it survives only as a narrow middle band.
+      //
+      // Gated on the page's own phone breakpoint plus orientation, NOT on an
+      // aspect-ratio threshold — real phones with browser toolbars sit around
+      // 0.53-0.68, so an aspect-ratio gate passes in an emulator and fails on
+      // every actual handset. Re-evaluated per open and on rotate.
+      var phone = window.matchMedia('(max-width: 720px) and (orientation: portrait)');
+
+      function srcFor(t) {
+        var p = t.getAttribute('data-rm-src-p');
+        return p && phone.matches ? p : t.getAttribute('data-rm-src');
+      }
+
       function show(n) {
         i = (n + tiles.length) % tiles.length;
         var t = tiles[i];
-        img.src = t.getAttribute('data-rm-src');
+        img.src = srcFor(t);
         img.alt = t.querySelector('img').alt;
         text.textContent = t.getAttribute('data-rm-cap');
         count.textContent = i + 1 + ' of ' + tiles.length;
       }
+
+      // Rotating the phone while the lightbox is open swaps the frame for the
+      // shape that now fits, rather than leaving a letterboxed portrait.
+      phone.addEventListener('change', function () {
+        if (lb.classList.contains('open')) img.src = srcFor(tiles[i]);
+      });
       function open(n) {
         opener = tiles[n];
         show(n);

@@ -42,10 +42,19 @@
 // flagged `shared` and captioned as the shared bathroom. It is never used on
 // the accessible page, which has its own bathroom and its own photographs.
 //
-// Every room folder also carries files that are never used: the frames with a
-// price or a room name baked into the pixels ("-$108", "-Labeled"), and the
-// bathroom Phoneviews (bathrooms are never hero slides, so their portraits
-// have no use). They are left in place, untracked, and not referenced.
+// EVERY Phoneview IS FOR A PHONE SCREEN, not just the hero's. A frame's
+// `portrait` twin is read in two places: the hero slideshow (flagged frames
+// only) and the gallery lightbox, which on a phone held upright would
+// otherwise letterbox a 16:9 frame to about a third of the screen. So a
+// gallery-only subject — a bathroom, a kitchenette, a closet — carries its
+// twin too, even though it will never be a hero slide. The tiles stay
+// landscape: a tile is a 1.27:1 box and a 9:16 file survives it only as a
+// narrow middle band.
+//
+// What each folder still holds unused: the frames with a price or a room name
+// baked into the pixels ("-$108", "-Labeled"), and the twins of landscape
+// frames that were themselves cut as near-duplicates. Left in place,
+// untracked, and not referenced.
 //
 // ─────────────────────────────────────────────────────────────────────────────
 // THE NUMBERED IMAGES ARE NOT PHOTOGRAPHS (reviewed 2026-09-03)
@@ -199,9 +208,15 @@ export function roomHref(slug: string): string {
 // reads them from its own folder so a folder can be cleared independently.
 // NEVER used on the accessible page: that room has its own bathroom and its
 // own photographs.
+//
+// Each frame carries its 9:16 Phoneview twin, matched by content — the numbers
+// do NOT correspond (Bathroom4 ↔ Phoneview3, Bathroom5 ↔ Phoneview4,
+// Bathroom3 ↔ Phoneview2). Bathrooms are never hero slides, but the lightbox
+// serves the portrait on a phone held upright.
 const STANDARD_BATHROOM = (dir: string, prefix: string): RoomPhoto[] => [
   {
     src: `images/${dir}/${prefix}-Bathroom4.webp`,
+    portrait: `images/${dir}/${prefix}-Bathroom-Phoneview3.webp`,
     caption:
       'The bathroom: the granite vanity ledge on the left, the toilet, towel racks and a towel shelf, and the tub at the far right. This is the standard bathroom shared by our non-accessible rooms.',
     alt: 'Guest bathroom with vanity, toilet and towel racks — Best Western Vernal Inn, Vernal Utah',
@@ -209,6 +224,7 @@ const STANDARD_BATHROOM = (dir: string, prefix: string): RoomPhoto[] => [
   },
   {
     src: `images/${dir}/${prefix}-Bathroom5.webp`,
+    portrait: `images/${dir}/${prefix}-Bathroom-Phoneview4.webp`,
     caption:
       'The vanity: granite counter with a single basin and a backlit mirror, with towels and a hair dryer on the wall alongside. This is the standard bathroom shared by our non-accessible rooms.',
     alt: 'Hotel bathroom vanity with granite counter and backlit mirror — Best Western Vernal Inn, Vernal Utah',
@@ -216,6 +232,7 @@ const STANDARD_BATHROOM = (dir: string, prefix: string): RoomPhoto[] => [
   },
   {
     src: `images/${dir}/${prefix}-Bathroom3.webp`,
+    portrait: `images/${dir}/${prefix}-Bathroom-Phoneview2.webp`,
     caption:
       'The bath: a full-size tub and shower combination with a curved curtain rod and chrome fixtures.',
     alt: 'Bathtub and shower combination in a guest bathroom — Best Western Vernal Inn, Vernal Utah',
@@ -318,6 +335,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/King-Studio/King-Studio12.webp',
+        portrait: 'images/King-Studio/King-Studio-phoneview12.webp',
         caption:
           'The kitchenette: a stainless single-basin sink set into the granite counter, cabinets above and below, a microwave and a coffee maker, and a full-height refrigerator with a freezer beside the dining table, on tiled flooring.',
         alt: 'Kitchenette with sink, microwave, coffee maker and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
@@ -459,6 +477,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/Double-Queen-Studio/Double-Queen8.webp',
+        portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview7.webp',
         caption:
           'The open closet beside the window: a hanging rail with wooden hangers, an iron on the shelf above, an ironing board stowed alongside and two drawers below. The heating and cooling unit sits under the window, with a framed city-skyline print on the wall by the armchair.',
         alt: 'Open closet with hangers, iron and ironing board next to a window in a Studio Two Queen — Best Western Vernal Inn, Vernal Utah',
@@ -543,6 +562,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/Handicaped-Studio/Handicapped-studio-bathroom2.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-bathroom-phoneview2.webp',
         caption:
           'The roll-in shower: a low-threshold shower pan with a textured non-slip floor, an angled grab bar along two walls and a fold-down teak seat.',
         alt: 'Roll-in shower with grab bar and fold-down seat — accessible room, Best Western Vernal Inn, Vernal Utah',
@@ -556,6 +576,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/Handicaped-Studio/Handicapped-studio-bathroom.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-bathroom-phoneview.webp',
         caption:
           'The vanity is open underneath — a roll-under counter with no cabinet below it and insulated pipework — under a backlit mirror, with a grab bar on the wall behind the toilet and another on the wall beside it.',
         alt: 'Roll-under bathroom vanity and grab bar in an accessible hotel bathroom — Best Western Vernal Inn, Vernal Utah',
@@ -592,6 +613,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/Handicaped-Studio/Handicapped-studio-Kitchenette.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-Kitchenette-phoneview.webp',
         caption:
           'The kitchenette: a two-burner cooktop and a stainless single-basin sink set into the granite counter, cabinets above and below, a microwave and a coffee maker, and a full-height refrigerator with a freezer opposite, on tiled flooring.',
         alt: 'Kitchenette with two-burner cooktop, sink, microwave, coffee maker and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
@@ -606,6 +628,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/Handicaped-Studio/Handicapped-studio1.webp',
+        portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview1.webp',
         caption:
           'The open closet beside the window: a hanging rail with wooden hangers, an iron on the shelf above, an ironing board stowed alongside and two drawers below. The window looks out over Vernal, with the heating and cooling unit beneath it.',
         alt: 'Open closet with hangers, iron and ironing board beside a window — Best Western Vernal Inn, Vernal Utah',
@@ -740,6 +763,7 @@ export const ROOMS: Room[] = [
       },
       {
         src: 'images/Pet-Friendly-Double-Queen/Pet-Friendly-Double-Queen-Room12.webp',
+        portrait: 'images/Pet-Friendly-Double-Queen/Pet-Friendly-Double-Queen-Room-phoneview4.webp',
         caption:
           'The closet unit, with a full-length mirror on one side — the window and its heating and cooling unit reflected in it — an open hanging bay, two drawers and an ironing board stowed to the right.',
         alt: 'Closet unit with full-length mirror, hanging bay, drawers and ironing board — Best Western Vernal Inn, Vernal Utah',
