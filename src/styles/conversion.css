@@ -109,19 +109,59 @@ body {
   bottom: calc(var(--sbb-h) + 1rem) !important;
 }
 
-/* Phones: drop the claims line, make Call/Book full-width tap targets. */
-@media (max-width: 640px) {
+/* Phones and small tablets: drop the claims line, make Call/Book full-width
+ * tap targets.
+ *
+ * The cut-off is 879px, not 640px, because of a second fault this uncovered.
+ * The claims are a wrapping flex row, and between 641px and 879px they wrap
+ * without fitting: 4 lines at 760-840px and 7 lines at 641-700px, which grew
+ * the bar to 86px and 135px against a 76px reservation. The bar then sat over
+ * the last 59px of the footer. The claims first fit inside the reservation at
+ * 880px, so the compact layout now runs to exactly there.
+ *
+ * Both buttons carry `white-space: nowrap`, and a flex item's default
+ * `min-width: auto` refuses to shrink below its own text. So the pair kept
+ * their intrinsic widths (171px + 202px) whatever the viewport, and the Book
+ * button ran off the right-hand edge — measured 3px past it at 390px, 33px at
+ * 360px and 73px at 320px. `flex: 1` could not help: it distributes free
+ * space, and there was none to distribute.
+ *
+ * `min-width: 0` lets them share the row, and the Book label may wrap, so it
+ * gives way by folding onto a second line rather than being cut off. The
+ * phone NUMBER keeps `nowrap` — a number must never break across lines — so
+ * Call holds its intrinsic width and Book takes what is left. On a wide phone
+ * the label still fits on one line; it only wraps where it has to.
+ * `align-items: stretch` keeps both buttons the same height when it does.
+ *
+ * --sbb-h is the space `body` reserves so the fixed bar never covers the
+ * footer, so it has to allow for the two-line CTA: the bar measures 63px with
+ * the label on one line and 79px with it on two. */
+@media (max-width: 879px) {
+  :root {
+    --sbb-h: 88px;
+  }
   .sbb-claims {
     display: none;
   }
   .sbb-actions {
     width: 100%;
+    align-items: stretch;
   }
   .sbb-call,
   .sbb-book {
-    flex: 1;
+    min-width: 0;
     justify-content: center;
+    text-align: center;
+    padding-inline: 0.5rem;
     padding-block: 0.7rem;
+  }
+  .sbb-call {
+    flex: 0 1 auto;
+  }
+  .sbb-book {
+    flex: 1 1 auto;
+    white-space: normal;
+    line-height: 1.2;
   }
 }
 
