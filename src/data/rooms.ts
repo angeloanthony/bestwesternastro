@@ -823,38 +823,124 @@ export const ROOMS: Room[] = [
     sleeps: '',
     bestFor: 'Guests with dogs (up to 80 lbs)',
     footnote: 'Pet fee $30/day + $100 refundable deposit',
-    // ⚠️ STAND-IN RENDER, NOT A PHOTOGRAPH. Same image the homepage hero reel
-    // uses: a crop of 53.webp. Re-checked 2026-09-03 — 53.webp is CGI, and the
-    // caption baked into it reads "Standard KING — Pet Friendly", so it depicts
-    // a KING configuration. The rate card's "Pet-Friendly Room" has no
-    // confirmed bed type, which is exactly why none is claimed on this page and
-    // why the caption below calls the picture what it is.
+    // PHOTOGRAPHED AT LAST (2026-09-09). This page stood for months on a CGI
+    // render with a "we have not photographed this room" notice, because no
+    // photograph of the $135 room existed. One does now:
+    // public/images/Pet-Friendly-King-Suite/.
     //
-    // It must NOT be swapped for anything from
-    // public/images/Pet-Friendly-Double-Queen/ — every file in that folder is
-    // the Pet-Friendly Studio Two Queen, a different room at a different price
-    // ($155). See the note at the top of heroShowcase.ts.
+    // THE EVIDENCE THAT THE FOLDER IS THIS ROOM is the hotel's own, not an
+    // inference from the pictures. The folder ships a labelled copy reading
+    // "Pet friendly King Suite — $135/night", and $135 is exactly
+    // RATES.nightly.petFriendlyRoom. The owner priced and named it themselves.
+    //
+    // So the bed type IS now confirmed, by that label and by every frame: one
+    // king bed. It is published here and in seo.bedType, replacing the old
+    // "no confirmed bed type" note. OCCUPANCY IS STILL NOT: the homepage rate
+    // table's "Sleeps" cell for this room is an em dash, so `sleeps` stays
+    // empty and seo.occupancy is still omitted. One fact arriving does not
+    // license the others.
+    //
+    // Frames matched to their 9:16 twins by content — the numbers do not
+    // correspond. Suite7 and Suite5 have no twin in the delivered set and show
+    // their landscape frame on a phone. Left out: Suite4 (the entry and
+    // kitchenette again, wider than Suite5), Bathroom2 (the bathroom from the
+    // doorway, covered by Bathroom1), Suite-phoneview5 (a portrait whose
+    // landscape angle was not delivered) and the two "-Labeled" files.
     hero: {
-      src: 'images/rooms/pet-friendly-room.webp',
-      caption:
-        'This is an illustration of a pet-friendly room, not a photograph of this one — see below.',
-      alt: 'Illustration of a pet-friendly room with kitchenette and wood-style floors — Best Western Vernal Inn, Vernal Utah',
+      src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite6.webp',
+      portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview6.webp',
+      caption: 'The king bed on wood-style plank flooring.',
+      alt: 'Pet-Friendly Room with a king bed and wood-style floors — Best Western Vernal Inn, Vernal Utah',
     },
-    gallery: [],
-    galleryNotice:
-      'We have not photographed this room type yet, and we would rather show you nothing than show you a different room. The picture at the top of this page is a computer-generated illustration, not a photograph of this room — every photograph on our other room pages is of that room specifically. If you would like to see this one before you book, call the front desk on (435) 789-6625 and ask: they can tell you exactly what is in it and, if you are already in Vernal, show you.',
+    gallery: [
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite6.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview6.webp',
+        caption:
+          'The king bed head-on against the navy accent wall, on a light-wood platform frame with a panelled headboard, a wall-mounted reading light and a nightstand either side. A framed Delicate Arch print hangs to the left, and wood-style plank flooring runs under the bed.',
+        alt: 'King bed with panelled headboard and wall reading lights on wood-style flooring — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite7.webp',
+        caption:
+          'The bed from the window side, with the roller-shaded window looking out over Vernal, the heating and cooling unit beneath it and the room phone on the nightstand.',
+        alt: 'King bed beside a window with a view over Vernal — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite3.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview3.webp',
+        caption:
+          'The room in one frame from the entrance: the desk with the wall-mounted TV, the dining table and two upholstered chairs, the window with the heating and cooling unit beneath it, and the foot of the bed on the right — all on continuous wood-style plank flooring.',
+        alt: 'Pet-friendly king room showing desk, TV, dining table, window and bed — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite5.webp',
+        caption:
+          'The entrance end: the kitchenette with a sink in the counter, cabinets above and below, a microwave and a coffee maker, and the dining table with two upholstered chairs beside the door.',
+        alt: 'Kitchenette with microwave, coffee maker and dining table beside the entry door — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite1.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview1.webp',
+        caption:
+          'The desk with a leather office chair, a reading lamp and the wall-mounted TV above it.',
+        alt: 'Desk with leather office chair and wall-mounted TV — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview.webp',
+        caption:
+          'The open closet beside the desk: a full-width hanging rail, an ironing board stowed upright, two drawers below and an open shelf alongside.',
+        alt: 'Open closet with hanging rail, drawers and stowed ironing board — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Bathroom1.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-bathroom-phoneview2.webp',
+        caption:
+          'The bathroom: a granite vanity with a single basin under a backlit mirror, towels on the rail and shelf, the toilet, and the tub and shower beyond. Tiled floor throughout.',
+        alt: 'Guest bathroom with granite vanity, backlit mirror, toilet and tub — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-bathroom.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Bathroom-phoneview1.webp',
+        caption:
+          'The bath: a full-size tub and shower combination with a curved curtain rod, chrome fixtures and a towel rack above the toilet.',
+        alt: 'Bathtub and shower combination with curved curtain rod — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite2.webp',
+        portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview2.webp',
+        caption:
+          'The vanity and backlit mirror, with the tub and shower reflected behind and towels within reach.',
+        alt: 'Bathroom vanity and backlit mirror reflecting the shower — Best Western Vernal Inn, Vernal Utah',
+      },
+    ],
     about: [
-      'The Pet-Friendly Room is the second of our two dog-friendly room types, at $135 a night. It sits between the Studio Two Queen and the Pet-Friendly Studio Two Queen on the rate card.',
-      'What the site can confirm about it: dogs are welcome, it has wood-style floors, and ground-floor pet rooms are available so you can take a dog straight outside without stairs or an elevator. The pet policy is the hotel\'s published one — up to two dogs per room, an 80 lb limit per dog, a $30 per day pet fee and a $100 refundable damage deposit at check-in. Free hot breakfast, free WiFi, free parking and a 24-hour front desk come with the room.',
-      'What the site will not do is guess at the rest. The bed configuration, the occupancy and the in-room appliances for this room type have not been confirmed by the hotel, so they are not listed below. Call the front desk and they will tell you exactly what is in it.',
+      'The Pet-Friendly Room is the lower-priced of our two dog-friendly room types, at $135 a night. It sits between the Studio Two Queen and the Pet-Friendly Studio Two Queen on the rate card, and it is the one to book when the dog is coming and there are two of you rather than four.',
+      'It is a king room laid on wood-style plank flooring rather than carpet — which is the point of it. Wet paws, shed hair and the occasional accident come off a plank floor in a way they do not come out of carpet. The bed sits on a light-wood platform frame against a navy accent wall, with a wall-mounted reading light and a nightstand on each side, and the window looks out over Vernal.',
+      'The room has a kitchenette at the entrance end — a sink in the counter, cabinets, a microwave and a coffee maker — with a dining table and two upholstered chairs beside it. There is a desk with a leather office chair under a wall-mounted TV, and an open closet with a hanging rail, drawers and an ironing board. The bathroom is the property standard: a granite vanity with a backlit mirror, a full-size tub and shower combination, and a tiled floor.',
+      'The pet policy is the hotel\'s published one — up to two dogs per room, an 80 lb limit per dog, a $30 per day pet fee and a $100 refundable damage deposit taken at check-in. Ground-floor pet rooms are available so you can take a dog straight outside without stairs or a lift. Free hot breakfast, free WiFi, free parking and a 24-hour front desk come with the room. How many people this room sleeps is the one thing we have not had confirmed, so we do not publish it — call the front desk and ask.',
     ],
     difference:
-      'The lower-priced of our two dog-friendly room types at $135, with wood-style floors and ground-floor access.',
+      'The lower-priced of our two dog-friendly room types at $135: one king bed on wood-style plank flooring, where the $155 Pet-Friendly Studio Two Queen gives you two queens.',
     features: [
       { label: 'Dogs welcome — up to two per room, 80 lb limit each', source: 'site' },
       { label: 'Pet fee $30/day + $100 refundable deposit', source: 'site' },
-      { label: 'Wood-style floors', source: 'site' },
+      { label: 'One king bed', source: 'photo' },
+      { label: 'Wood-style plank flooring throughout', source: 'photo' },
       { label: 'Ground-floor pet rooms available', source: 'site' },
+      { label: 'Kitchenette — sink, cabinets, microwave and coffee maker', source: 'photo' },
+      { label: 'Dining table with two chairs', source: 'photo' },
+      { label: 'Desk with leather office chair', source: 'photo' },
+      { label: 'Wall-mounted flat-screen TV', source: 'photo' },
+      { label: 'Open closet with hanging rail, drawers and ironing board', source: 'photo' },
+      { label: 'In-room heating and cooling unit', source: 'photo' },
+      { label: 'Tub and shower combination', source: 'photo' },
+      { label: 'Granite vanity with backlit mirror', source: 'photo' },
       { label: 'Free WiFi', source: 'site' },
       { label: 'Free hot breakfast', source: 'site' },
       { label: 'Free parking', source: 'site' },
@@ -862,9 +948,10 @@ export const ROOMS: Room[] = [
     ],
     seo: {
       title:
-        'Pet-Friendly Room — $135/Night | Best Western Vernal Inn, Vernal Utah',
+        'Pet-Friendly King Room — $135/Night | Best Western Vernal Inn, Vernal Utah',
       description:
-        'Pet-friendly room in Vernal, Utah with wood-style floors and ground-floor access. Up to two dogs, 80 lb limit, $30/day pet fee. $135 per night + tax. Weekly rates — call for price.',
+        'Pet-friendly king room in Vernal, Utah: one king bed, wood-style floors, kitchenette and ground-floor access. Up to two dogs, 80 lb limit, $30/day pet fee. $135 per night + tax.',
+      bedType: 'King',
     },
   },
 ];

@@ -12,16 +12,13 @@
 // A portrait crop cannot invent room that was never in the frame; it only
 // decides WHICH part survives instead of letting the browser take the middle.
 // Cropping to 9:16 raises what a phone sees from about a third of the width to
-// about 42% of it, and puts the bed rather than the furniture beside it in the
-// middle of the frame. The real fix for the four room types that have no
-// portrait photography at all is a reshoot — see the report this prints.
+// about 42% of it. The real fix was always a reshoot, and it has happened.
 //
-// SOURCES
-// Where a genuine portrait photograph of the room exists it is used instead of
-// a crop. Only Pet-Friendly Studio Two Queen has any: public/images/
-// Pet-Friendly-Double-Queen/ holds twelve portrait room shots. (That folder is
-// the Pet-Friendly Studio TWO QUEEN at $155, not the $135 Pet-Friendly Room —
-// see the warning in src/data/heroShowcase.ts before reusing anything in it.)
+// SOURCES — ONLY THE TWO EXTERIORS ARE BUILT HERE NOW (2026-09-09)
+// The owner re-photographed every room and delivered a 9:16 "Phoneview" twin
+// alongside each landscape frame, so all five room slides in heroShowcase.ts
+// point at real portrait photographs and none is cropped here any more. The
+// exteriors are the only slides with no portrait original.
 //
 // Run: node scripts/make-portrait-heroes.mjs
 // Output: public/images/portrait/*.webp, referenced from heroShowcase.ts.
@@ -44,42 +41,19 @@ const SLIDES = [
   // own centre crop throws away half of each. These gain the most.
   { id: 'exterior-day', src: 'public/images/31a.webp', out: '31a.webp', crop: 'attention' },
   { id: 'exterior-dusk', src: 'public/images/35.webp', out: '35.webp', crop: 'attention' },
-  {
-    // The one slide backed by a real portrait photograph rather than a crop,
-    // and the only room type that has any: twelve of them, in a folder that is
-    // the Pet-Friendly Studio TWO QUEEN at $155, NOT the $135 Pet-Friendly
-    // Room — see the warning in heroShowcase.ts before reusing anything there.
-    id: 'pet-friendly-studio-two-queen',
-    // Since the 2026-09-09 reshoot the source is the owner's 9:16 "Phoneview"
-    // twin of the beds-head-on frame (Room13), already the target shape.
-    src: 'public/images/Pet-Friendly-Double-Queen/Pet-Friendly-Double-Queen-Room-phoneview5.webp',
-    out: 'pet-friendly.webp',
-    crop: 'attention',
-    note: 'genuine portrait photograph, not a crop',
-  },
-
-  // DELIBERATELY ABSENT, and this is the finding worth keeping:
+  // NO ROOM SLIDE IS BUILT HERE ANY MORE (2026-09-09).
   //
-  //   studio-king, studio-two-queen, accessible-studio-king
+  // This script existed because four of the five room types had no portrait
+  // photography at all and the fifth had only landscape frames to crop. The
+  // owner's reshoot delivered a 9:16 "Phoneview" twin alongside every
+  // landscape frame, for all five, so heroShowcase.ts now points at those
+  // files directly. A photograph SHOT for a phone beats any crop of a wide
+  // one: a crop cannot invent the room that was never in the frame, it only
+  // decides which part survives.
   //
-  // Cropping them to portrait made them WORSE, measured by rendering each one
-  // through an actual 390x844 cover-crop and comparing. Their sources are 4:3,
-  // not wide, and all three are shot with the bed centred — so the browser's
-  // own centre crop already lands on the bed, keeps the full height, and gets
-  // the headboard, lamps and framed art in frame. Feeding it a 9:16 asset just
-  // means it crops a second time, to a tighter view that loses the lamps and
-  // reads as a mattress. A portrait asset only helps where the source is wide
-  // (the exteriors) or where a real portrait photograph exists.
-  //
-  //   pet-friendly-room
-  //
-  // Its landscape source is itself a temporary stand-in render (heroShowcase.ts)
-  // at 1920x918; a 9:16 crop is 516px wide, too soft for a phone, and frames a
-  // desk rather than the room.
-  //
-  // All four fall back to their landscape image on phones, which the markup
-  // supports per-slide. Give any of them a real portrait photograph and it can
-  // be added here.
+  // The two exteriors above stay. They are the only slides with no portrait
+  // original, and at 1.50:1 they are the widest sources in the reel — the ones
+  // a phone's centre crop punishes hardest.
 ];
 
 mkdirSync(OUT, { recursive: true });
@@ -117,5 +91,6 @@ for (const r of rows) {
   );
 }
 console.log(
-  '\n  pet-friendly-room.webp: no portrait version — falls back to its landscape image.\n'
+  "\n  Room slides are not built here — they use the owner's own 9:16 Phoneview\n" +
+    '  photographs, wired directly in src/data/heroShowcase.ts.\n'
 );

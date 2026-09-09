@@ -131,8 +131,8 @@ const roomNode = {
        from several angles rather than one. Only the first slide's image is set
        in the markup; the rest carry `data-bg` and are promoted to real
        background-images after load, so the hero paints on one download instead
-       of seven. A room with no photographs (the $135 Pet-Friendly Room) falls
-       back to a single still — there is nothing to cycle.
+       of seven. A room with fewer than two flagged frames falls back to a
+       single still — there is nothing to cycle.
        The image is carried as two custom properties rather than a
        background-image so rooms.css can pick the frame's 9:16 `portrait` twin
        on a tall phone viewport with no script and no second download. -->

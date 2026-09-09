@@ -16,27 +16,24 @@
 // such room, which also matches the asset set (it was the one slide with no real
 // photograph behind it). Do not add it back to make the count even.
 //
-// PHOTOGRAPHY: public/images/rooms/*.webp are built from the owner-supplied room
-// photographs in public/images/<Room-Type>/. Two caveats before swapping any:
-//   • The owner's room folders share files across room types (the same bathroom
-//     photo appears under King, Double Queen and Pet Friendly), so only images
-//     unique to a folder were treated as evidence of that room type.
-//   • pet-friendly-room.webp is TEMPORARY — see the slide itself.
-
-/* ⚠️ TEMPORARY IMAGE — Pet-Friendly Room ($135)
- *
- * images/rooms/pet-friendly-room.webp is the site's existing "Standard King —
- * Pet Friendly" render (53.webp) with its baked-in caption cropped off. It is
- * the only slide in the reel not backed by a photograph, and it is a stand-in:
- * no photograph of the $135 Pet-Friendly Room exists in the asset set yet.
- *
- * REPLACE IT as soon as the hotel supplies one — swap the `image` path on the
- * 'pet-friendly-room' slide and delete this note. Nothing else needs to change.
- *
- * It must NOT be swapped for anything from public/images/Pet-Friendly-Double-Queen/:
- * every file in that folder is the Pet-Friendly Studio Two Queen, a DIFFERENT
- * room type at a different price ($155). Pairing that photograph with the $135
- * rate would advertise one room and charge for another. */
+// PHOTOGRAPHY (repointed 2026-09-09). Every room slide now reads the owner's
+// reshoot straight out of public/images/<Room-Type>/. The old built crops in
+// public/images/rooms/ are gone, and so is the stand-in render that stood in
+// for the $135 Pet-Friendly Room — that room has real photography now too.
+//
+// Each slide carries the owner's own 9:16 "Phoneview" twin as `portrait`, so a
+// phone gets a photograph SHOT for a phone rather than a crop of a wide one.
+// The twins were matched to their landscape frame by content, not by filename:
+// the numbering does not correspond. Frames are the wide, establishing views
+// of each room rather than a bed close-up, because the reel lays a price card
+// over the lower half.
+//
+// NO "-Labeled" FILE BELONGS IN THIS REEL. Each folder also holds a copy with
+// the room name, and another with the nightly rate, baked into the pixels.
+// Both are the wrong choice here for the same reason the header above gives:
+// this reel renders its own price card from rates.ts, so a baked-in rate would
+// state the price twice and could contradict the rates table the moment a rate
+// changes. A photograph must carry no price.
 
 import { RATES, nightlyQuote, WEEKLY_CALL_LINE, type NightlyQuote } from './rates.ts';
 
@@ -95,7 +92,8 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'studio-king',
     kind: 'room',
-    image: 'images/rooms/king.webp',
+    image: 'images/King-Studio/King-Studio5.webp',
+    portrait: 'images/King-Studio/King-Studio-phoneview5.webp',
     kb: 'kb-up',
     alt: 'Studio King bedroom with platform bed and reading lights — Best Western Vernal Inn, Vernal Utah',
     label: 'Studio King',
@@ -110,7 +108,8 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'studio-two-queen',
     kind: 'room',
-    image: 'images/rooms/double-queen.webp',
+    image: 'images/Double-Queen-Studio/Double-Queen5.webp',
+    portrait: 'images/Double-Queen-Studio/Double-Queen-Phoneview4.webp',
     kb: 'kb-left',
     alt: 'Studio Two Queen bedroom with two queen beds — Best Western Vernal Inn, Vernal Utah',
     label: 'Studio Two Queen',
@@ -125,9 +124,8 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'accessible-studio-king',
     kind: 'room',
-    // The rooms section still shows 47.webp here behind a "replace with the
-    // actual handicap room image" TODO. This is that actual photograph.
-    image: 'images/rooms/accessible.webp',
+    image: 'images/Handicaped-Studio/Handicapped-studio4.webp',
+    portrait: 'images/Handicaped-Studio/Handicapped-studio-phoneview3.webp',
     kb: 'kb-down',
     alt: 'Accessible Studio King bedroom with wide turning space — Best Western Vernal Inn, Vernal Utah',
     label: 'Accessible Studio King',
@@ -142,8 +140,8 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'pet-friendly-studio-two-queen',
     kind: 'room',
-    image: 'images/rooms/pet-friendly.webp',
-    portrait: 'images/portrait/pet-friendly.webp',
+    image: 'images/Pet-Friendly-Double-Queen/Pet-Friendly-Double-Queen-Room2.webp',
+    portrait: 'images/Pet-Friendly-Double-Queen/Pet-Friendly-Double-Queen-Room-phoneview1.webp',
     kb: 'kb-up',
     alt: 'Pet-friendly Studio Two Queen bedroom with wood-style floors — Best Western Vernal Inn, Vernal Utah',
     label: 'Pet-Friendly Studio Two Queen',
@@ -159,10 +157,16 @@ export const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'pet-friendly-room',
     kind: 'room',
-    // ⚠️ TEMPORARY stand-in render — see the note at the top of this file.
-    image: 'images/rooms/pet-friendly-room.webp',
+    // Real photography at last, from public/images/Pet-Friendly-King-Suite/.
+    // That folder is this room on the hotel's OWN evidence: its labelled copy
+    // reads "Pet friendly King Suite — $135/night", and $135 is exactly
+    // RATES.nightly.petFriendlyRoom. The render that used to stand in here is
+    // gone. The clean frame is used, never the labelled one — the price card
+    // over this slide is rendered from rates.ts.
+    image: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite3.webp',
+    portrait: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-phoneview3.webp',
     kb: 'kb-right',
-    alt: 'Pet-friendly room with kitchenette and wood-style floors — Best Western Vernal Inn, Vernal Utah',
+    alt: 'Pet-friendly king room with desk, dining table and wood-style floors — Best Western Vernal Inn, Vernal Utah',
     label: 'Pet-Friendly Room',
     room: {
       name: 'Pet-Friendly Room',
