@@ -50,10 +50,11 @@ const SLIDES = [
     // the Pet-Friendly Studio TWO QUEEN at $155, NOT the $135 Pet-Friendly
     // Room — see the warning in heroShowcase.ts before reusing anything there.
     id: 'pet-friendly-studio-two-queen',
-    src: 'public/images/Pet-Friendly-Double-Queen/PetFriendly-Double-Queen1.jpeg',
+    // Since the 2026-09-09 reshoot the source is the owner's 9:16 "Phoneview"
+    // twin of the beds-head-on frame (Room13), already the target shape.
+    src: 'public/images/Pet-Friendly-Double-Queen/Pet-Friendly-Double-Queen-Room-phoneview5.webp',
     out: 'pet-friendly.webp',
     crop: 'attention',
-    heightScale: 0.9,
     note: 'genuine portrait photograph, not a crop',
   },
 
