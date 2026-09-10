@@ -1122,42 +1122,53 @@ body {
    the owner's photograph of the dining room it buried the picture — the room
    was barely readable through it.
 
-   It is now split in two, because one gradient cannot do both jobs. Any
-   banner-wide gradient dark enough for the 0.72rem gold eyebrow is also dark
-   enough to bury the room, and every attempt to tune one shape for both ends
-   the same way: either the photograph goes flat, or the eyebrow ends up on a
-   cream wall and the body copy on a white tabletop.
+   It is now a horizontal BAND, and the shape is the whole trick. Two other
+   shapes were tried and both fail for the same reason — the copy is a wide,
+   short block, and a round pool is thinnest exactly where the line ends are:
 
-   So this layer is now a light tint ONLY — it keeps the navy cast that ties the
-   banner to the section above it, and otherwise leaves the photograph alone.
-   The ground the text actually needs is on .bkcnt below, where it is sized by
-   the text block itself rather than guessed at in percentages of the banner.
-   Add darkness here and you are dimming the room again. */
+     • A banner-wide wash at any opacity dark enough for the 0.72rem gold
+       eyebrow also buries the room. That is what this was before.
+     • A radial pool, whether on the banner or on .bkcnt itself, is densest at
+       the headline in the middle and already fading by the eyebrow above it and
+       the last line of body copy below. Widening it to reach the line ends
+       pushes the fade past the element edge, which cuts a hard rectangle into
+       the photograph.
+
+   A band matches the copy: uniform across the full width, so there are no
+   horizontal edges and no weak line ends, and feathered top and bottom, where
+   this particular photograph happens to keep its best material — the ring
+   pendants above, the yellow chairs and marble tables below. Both run at close
+   to the raw frame. The band is deliberately wider than the copy (18%–82% of a
+   520px banner, against copy occupying roughly 26%–73%) so a headline that
+   wraps to three lines on a narrow viewport still lands inside it — checked at
+   390px, where the body copy runs to three lines and its last one sits at 68%.
+
+   .72 IS THE FLOOR, and it is set by the gold eyebrow, not by the white text.
+   Sampled off the rendered page against this photograph: headline 10.0:1, body
+   copy 9.0:1 and 11.8:1 — but ✦ EVERY MORNING, ON US is #c9a24a at 0.72rem,
+   which lands at exactly 4.50:1, WCAG AA for small text with nothing to spare.
+   Every step down from .72 takes the eyebrow below AA while the white text is
+   still comfortable, so re-measure the gold before lightening this. */
 .bkov {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(10,20,45,.24), rgba(10,20,45,.10));
+  background: linear-gradient(to bottom,
+    rgba(10,20,45,.14) 0%,
+    rgba(10,20,45,.20) 6%,
+    rgba(10,20,45,.72) 18%,
+    rgba(10,20,45,.72) 82%,
+    rgba(10,20,45,.20) 94%,
+    rgba(10,20,45,.14) 100%);
 }
-/* The copy carries its own ground. Because the scrim is a background of the
-   text block, it is always exactly as tall as the copy and always centred on
-   it — an eyebrow, a two-line headline and two lines of body text at any
-   viewport width — instead of being a fixed percentage of a 520px banner that
-   the copy may or may not sit inside. It feathers to nothing at 78%, inside the
-   padding, so there is no visible edge against the photograph.
-
-   Composited with the .24 tint above, white text sits on about .79 navy: ~12:1
-   over the darkest part of the frame and ~8:1 over the brightest. */
+/* The text-shadow is the margin for a bright highlight in the photograph
+   drifting under a descender; the ground itself is the band on .bkov. */
 .bkcnt {
   position: relative;
   color: #fff;
   text-align: center;
-  padding: 44px 60px;
+  padding: 20px;
   max-width: 640px;
   text-shadow: 0 1px 12px rgba(10,20,45,.55);
-  background: radial-gradient(ellipse at center,
-    rgba(10,20,45,.72) 0%,
-    rgba(10,20,45,.60) 50%,
-    rgba(10,20,45,0) 78%);
 }
 .bkcnt .tag {
   color: var(--gold);
