@@ -191,10 +191,15 @@ export function hotelNodeFull(description: string) {
   return {
     ...hotelNode(),
     description,
+    // The two night exteriors, then the dining room. The third slot used to be
+    // images/59.webp, which is the dining room AS IT WAS BEFORE THE RENOVATION
+    // — old chairs, dark granite tables. This array is what Google reads for a
+    // rich result, so it was offering searchers a picture of the hotel the
+    // owner spent a year replacing. Breakfast-Room.webp is the same room now.
     image: [
       `${BUSINESS.site.domain}/images/35.webp`,
       `${BUSINESS.site.domain}/images/61.webp`,
-      `${BUSINESS.site.domain}/images/59.webp`,
+      `${BUSINESS.site.domain}/images/Breakfast-Room.webp`,
     ],
     starRating: { '@type': 'Rating', ratingValue: '3' },
     // Carried over verbatim from the homepage's existing block. NOT verified
