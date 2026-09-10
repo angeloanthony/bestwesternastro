@@ -17,6 +17,10 @@ import { HOME_GALLERY } from '../data/homeGallery.ts';
 // Detailed room pages (/rooms/*). Slugs live in rooms.ts, so the links below
 // and the pages themselves can never drift apart.
 import { roomBySlideId, roomHref, ROOMS } from '../data/rooms.ts';
+// The "Every Room Feels Like Home" tabs. This section used to be ~320 lines of
+// hand-written markup showing CGI renders of rooms the hotel does not sell —
+// see the header of the file for what had gone wrong with it.
+import { ROOM_TABS } from '../data/homeRoomTabs.ts';
 
 /** Root-relative link to a room's detail page, by its hero-reel slide id. */
 const slideRoomHref = (slideId: string): string | null => {
@@ -36,6 +40,20 @@ const rateCell = (name: string): string => {
     ? `<a href="${href}" style="color:var(--navy);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(var(--gold-rgb),.65);">${name}</a>`
     : `<strong>${name}</strong>`;
 };
+
+/* ── Escaping, for the room-tab copy in src/data/homeRoomTabs.ts ───────────────
+ * That file holds prose, not markup: a pill reads "Fridge & Freezer" and a
+ * caption may contain an apostrophe. Three small helpers put it into HTML.   */
+
+/** Bare "&" → "&amp;", leaving existing entities and the `<br>`/`<em>` in the
+ *  headlines alone. */
+const amp = (s: string): string => s.replace(/&(?![a-zA-Z#][a-zA-Z0-9]*;)/g, '&amp;');
+/** For an attribute value delimited by double quotes. */
+const attr = (s: string): string => amp(s).replace(/"/g, '&quot;');
+/** For a single-quoted JS string argument inside a double-quoted onclick — the
+ *  lightbox captions are full sentences and several contain an apostrophe. */
+const jsArg = (s: string): string =>
+  attr(s.replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
 
 const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates available — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
 
@@ -506,317 +524,30 @@ ${HERO_SLIDES.map((s, i) => {
  <p>From cozy queen rooms to full kitchen suites with jacuzzi tubs — the perfect space for every kind of stay, whether it's one night or one month.</p>
  </div>
  <div class="tabnav rv">
- <button class="tbtn active" onclick="st(this,'queen')">Standard Queen</button>
- <button class="tbtn" onclick="st(this,'king')">Standard King</button>
- <button class="tbtn" onclick="st(this,'queens')">Double Queen</button>
- <button class="tbtn" onclick="st(this,'kingsuite')">King Suite</button>
- <button class="tbtn" onclick="st(this,'jacuzzi')">Jacuzzi Suites</button>
- <button class="tbtn" onclick="st(this,'pet')">Pet Friendly</button>
- <button class="tbtn" onclick="st(this,'handicap')">Accessible Room</button>
+ ${ROOM_TABS.map((tab, i) => `<button class="tbtn${i === 0 ? ' active' : ''}" onclick="st(this,'${tab.id}')">${amp(tab.label)}</button>`).join('\n ')}
  </div>
 
- <!-- STANDARD QUEEN -->
- <div class="tpanel active" id="t-queen">
- <div class="feat">
- <div class="fi" onclick="ol('images/41.webp','Standard Queen Room')">
- <img src="images/41.webp" alt="Standard Queen Room — Best Western Vernal Inn">
+${ROOM_TABS.map((tab, ti) => ` <!-- ${tab.label.toUpperCase()} -->
+ <div class="tpanel${ti === 0 ? ' active' : ''}" id="t-${tab.id}">
+${tab.panels
+  .map(
+    (p, pi) => ` <div class="feat${pi % 2 ? ' rev' : ''}">
+ <div class="fi" onclick="ol('${p.src}','${jsArg(p.caption)}')">
+ <img src="${p.src}" alt="${attr(p.alt)}" loading="lazy" decoding="async">
  <div class="fiz">🔍</div>
  </div>
  <div class="ft">
- <p class="ftag">✦ Standard Queen</p>
- <h2 class="ftitle">Comfortable, Clean &amp;<br>All Yours.</h2>
- <p class="fdesc">A plush queen bed with crisp white linens, warm lighting, and everything you need for a great night's rest. Simple, spotless, and genuinely comfortable — exactly what a good room should be.</p>
- <div class="tags">
- <span class="t">🛏️ Queen Bed</span><span class="t">📺 Flat-Screen TV</span>
- <span class="t">❄️ A/C &amp; Heat</span><span class="t">📶 Free WiFi</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/48.webp','Standard Queen Room — Full View')">
- <img src="images/48.webp" alt="Standard Queen Room full view — extended stay hotel Vernal Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Well-Appointed &amp; Relaxing</p>
- <h2 class="ftitle">Drop Your Bags.<br><em>You're Home.</em></h2>
- <p class="fdesc">Every detail taken care of — fresh linens, a quiet room, and a warm welcome waiting. Whether you're passing through or settling in for a few nights, this room is ready for you.</p>
- <div class="tags">
- <span class="t">🛁 Full Bathroom</span><span class="t">💼 Work Desk</span>
- <span class="t">🏨 BW Standards</span><span class="t">☕ Coffee Maker</span>
- </div>
- </div>
- </div>
- </div>
-
- <!-- STANDARD KING -->
- <div class="tpanel" id="t-king">
- <div class="feat">
- <div class="fi" onclick="ol('images/40.webp','Standard King Room')">
- <img src="images/40.webp" alt="Standard King Room — Best Western Vernal Inn">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Standard King</p>
- <h2 class="ftitle">Big, Bright &amp;<br>Beautifully Comfortable.</h2>
- <p class="fdesc">Sink into a plush king-size bed with crisp white linens and all the room you need to breathe. A cozy sitting area, work desk, and warm lighting make this your personal retreat after every long day.</p>
-  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/studio-king" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Studio King — Full Details →</a></p>
- <div class="tags">
- <span class="t">🛏️ King Bed</span><span class="t">🛋️ Sitting Area</span>
- <span class="t">💼 Work Desk</span><span class="t">❄️ A/C &amp; Heat</span><span class="t">📺 Flat-Screen TV</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/47.webp','Standard King Room — Full View')">
- <img src="images/47.webp" alt="Standard King Room full view — extended stay hotel Vernal Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Long-Stay Ready</p>
- <h2 class="ftitle">Unpack. Settle In.<br>You Belong Here.</h2>
- <p class="fdesc">Our king rooms come with full storage space, open closet, and all the room you need for a longer visit. Here a few nights or a few weeks — this room is yours to make your own.</p>
- <div class="tags">
- <span class="t">🚪 Full Closet</span><span class="t">🗃️ Dresser</span>
- <span class="t">💡 Warm Lighting</span><span class="t">📶 Free WiFi</span>
- </div>
- </div>
- </div>
- </div>
-
- <!-- STANDARD DOUBLE QUEEN -->
- <div class="tpanel" id="t-queens">
- <div class="feat">
- <div class="fi" onclick="ol('images/38.webp','Double Queen Room')">
- <img src="images/38.webp" alt="Double Queen Room — family-friendly extended stay Vernal Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Double Queen Rooms</p>
- <h2 class="ftitle">Room for Everyone<br>You Love.</h2>
- <p class="fdesc">Two plush queen beds dressed in Best Western signature linens — perfect for families, road-trip crews, or anyone who likes a little extra room to stretch. Spacious, clean, and genuinely welcoming.</p>
-  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/studio-two-queen" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Studio Two Queen — Full Details →</a></p>
- <div class="tags">
- <span class="t">👨‍👩‍👧 Family Friendly</span><span class="t">🛏️ Two Queens</span>
- <span class="t">🛋️ Lounge Chair</span><span class="t">💼 Desk &amp; Chair</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/42.webp','Double Queen Room — View 2')">
- <img src="images/42.webp" alt="Double Queen Room view 2 — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Spotlessly Clean</p>
- <h2 class="ftitle">Clean, Fresh &amp;<br>Ready for You.</h2>
- <p class="fdesc">Every room is cleaned to Best Western standards before you arrive. Fluffy pillows, crisp linens, and a room that looks as good in person as it does in the photos — every single time.</p>
- <div class="tags">
- <span class="t">🏨 BW Standards</span><span class="t">🛏️ Fresh Linens</span>
- <span class="t">📺 Flat-Screen TV</span><span class="t">📶 Free WiFi</span>
- </div>
- </div>
- </div>
- <div class="feat">
- <div class="fi" onclick="ol('images/45.webp','Double Queen Room — View 3')">
- <img src="images/45.webp" alt="Double Queen Room spacious layout — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Extra Space, Extra Comfort</p>
- <h2 class="ftitle">Plenty of Room.<br><em>For All of You.</em></h2>
- <p class="fdesc">Whether it's a family getaway or a working trip with a colleague, our double queen rooms give everyone the space they need. Stretch out, relax, and enjoy your stay at Best Western.</p>
- <div class="tags">
- <span class="t">🛏️ Two Queens</span><span class="t">❄️ A/C &amp; Heat</span>
- <span class="t">☕ Coffee Maker</span><span class="t">🛁 Full Bathroom</span>
- </div>
- </div>
- </div>
- </div>
-
- <!-- KING SUITE -->
- <div class="tpanel" id="t-kingsuite">
- <div class="feat">
- <div class="fi" onclick="ol('images/39.webp','King Suite Room')">
- <img src="images/39.webp" alt="King Suite with full kitchenette — extended stay Vernal Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Studio King Suite</p>
- <h2 class="ftitle">More Space.<br>More Comfort.</h2>
- <p class="fdesc">Our studio king suites offer more of everything — a full king bed, separate living area, full kitchenette, and all the space you need to truly unwind. Perfect for extended visits or anyone who wants more room to breathe.</p>
- <div class="tags">
- <span class="t">🛏️ King Bed</span><span class="t">🛋️ Living Area</span>
- <span class="t">🍳 Kitchenette</span><span class="t">🧊 Full Fridge</span><span class="t">☕ Coffee Maker</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/43.webp','King Suite Room — View 2')">
- <img src="images/43.webp" alt="King Suite work desk and living area — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Work Hard, Rest Even Harder</p>
- <h2 class="ftitle">Unpack for Real.<br><em>You've Earned It.</em></h2>
- <p class="fdesc">Large desk, ergonomic seating, fast WiFi, full kitchen, and a king bed waiting for you at the end of the day. Everything the working traveler or long-stay guest actually needs — in one beautiful room.</p>
- <div class="tags">
- <span class="t">💻 Work Desk</span><span class="t">📶 Fast WiFi</span>
- <span class="t">📺 Smart TV</span><span class="t">🚪 Full Closet</span>
- </div>
- </div>
- </div>
- <div class="feat">
- <div class="fi" onclick="ol('images/46.webp','King Suite Room — View 3')">
- <img src="images/46.webp" alt="King Suite dining and storage area — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Built for Longer Stays</p>
- <h2 class="ftitle">Settle In.<br><em>Stay a While.</em></h2>
- <p class="fdesc">Our king suites are purpose-built for guests who need more than just a bed. A fully equipped kitchenette, dining space, and comfortable living area make it easy to feel right at home from day one.</p>
- <div class="tags">
- <span class="t">🍽️ Dining Area</span><span class="t">🧺 In-Room Storage</span>
- <span class="t">💡 Warm Lighting</span><span class="t">🏨 BW Standards</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/51.webp','King Suite Room — View 4')">
- <img src="images/51.webp" alt="King Suite move-in ready — Best Western Vernal Inn">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Clean &amp; Move-In Ready</p>
- <h2 class="ftitle">Everything You Need.<br><em>Nothing Missing.</em></h2>
- <p class="fdesc">Fresh linens, clean surfaces, a fully stocked kitchenette, and a quiet king suite waiting for you. Whether you're here for a week or a month, this room is ready to become your home away from home.</p>
- <div class="tags">
- <span class="t">🛏️ King Bed</span><span class="t">🍳 Full Kitchenette</span>
- <span class="t">📶 Free WiFi</span><span class="t">🅿️ Free Parking</span>
- </div>
- </div>
- </div>
- </div>
-
- <!-- JACUZZI SUITES -->
- <div class="tpanel" id="t-jacuzzi">
- <div class="feat">
- <div class="fi" onclick="ol('images/37.webp','King Jacuzzi Suite')">
- <img src="images/37.webp" alt="King Jacuzzi Suite with private in-room soaking tub — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ King Jacuzzi Suite</p>
- <h2 class="ftitle">You Deserve<br>a Little Luxury.</h2>
- <p class="fdesc">Imagine soaking in a private in-room jacuzzi tub after a day on the trails. Our king jacuzzi suites pair a plush king bed with a beautiful soaking tub right in the room — your own private escape, no extra travel required.</p>
- <div class="tags">
- <span class="t">🛁 In-Room Jacuzzi</span><span class="t">🛏️ King Bed</span>
- <span class="t">🛋️ Sitting Area</span><span class="t">🪟 Bright Windows</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/49.webp','King Jacuzzi Suite — View 2')">
- <img src="images/49.webp" alt="King Jacuzzi Suite soak and sleep — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Soak. Sleep. Repeat.</p>
- <h2 class="ftitle">Your Own Retreat.<br><em>Every Single Night.</em></h2>
- <p class="fdesc">A warm jacuzzi, crisp king bed, and a quiet room all to yourself. Our king jacuzzi suites are the perfect upgrade for a romantic getaway, a special occasion, or simply because you've earned it.</p>
- <div class="tags">
- <span class="t">🛁 Soaking Tub</span><span class="t">🛏️ King Bed</span>
- <span class="t">☕ Coffee Maker</span><span class="t">📺 Wall TV</span>
- </div>
- </div>
- </div>
- <div class="feat">
- <div class="fi" onclick="ol('images/44.webp','Jacuzzi Double Queen Suite')">
- <img src="images/44.webp" alt="Jacuzzi Double Queen Suite two beds and in-room jacuzzi — Vernal Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Jacuzzi Double Queen Suite</p>
- <h2 class="ftitle">Two Beds. One Jacuzzi.<br><em>All the Luxury.</em></h2>
- <p class="fdesc">The best of both worlds — two plush queen beds AND an in-room jacuzzi tub. Perfect for families or groups who want a little extra indulgence. Everyone gets their space, and everyone gets to soak.</p>
- <div class="tags">
- <span class="t">🛁 In-Room Jacuzzi</span><span class="t">🛏️ Two Queens</span>
- <span class="t">👨‍👩‍👧 Family Friendly</span><span class="t">📺 Flat-Screen TV</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/53.webp','Jacuzzi Double Queen Suite — View 2')">
- <img src="images/53.webp" alt="Jacuzzi Double Queen Suite with kitchenette — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Cook. Soak. Relax.</p>
- <h2 class="ftitle">Everything You Need.<br><em>Just Like Home.</em></h2>
- <p class="fdesc">Spacious, beautifully appointed, and fully loaded. These suites come with a kitchenette AND a jacuzzi — making them as practical as they are luxurious. Whether it's one night or one week, this is the room you'll remember.</p>
- <div class="tags">
- <span class="t">🛁 Soaking Tub</span><span class="t">🍳 Kitchenette</span>
- <span class="t">🧊 Full Fridge</span><span class="t">☕ Coffee Maker</span>
- </div>
- </div>
- </div>
- </div>
-
- <!-- PET FRIENDLY — GROUND FLOOR, WOOD FLOORS -->
- <div class="tpanel" id="t-pet">
- <div class="feat">
- <div class="fi" onclick="ol('images/53.webp','Pet Friendly King Room')">
- <img src="images/53.webp" alt="Pet-friendly King Room with hardwood floors — Best Western Vernal Inn">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Pet Friendly · King Room</p>
- <h2 class="ftitle">Bring the Whole Family.<br><em>Fur Included.</em></h2>
- <p class="fdesc">Our ground-floor pet friendly king rooms feature beautiful hardwood-style floors — easy to clean and comfortable for your four-legged companions. Direct outdoor access, a plush king bed, and a warm welcome for everyone in your crew.</p>
-  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/pet-friendly-studio-two-queen" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Pet-Friendly Studio Two Queen — Full Details →</a><a href="/rooms/pet-friendly-room" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Pet-Friendly Room — Full Details →</a></p>
- <div class="tags">
- <span class="t">🐾 Pet Friendly</span><span class="t">🛏️ King Bed</span>
- <span class="t">🪵 Wood Floors</span><span class="t">🚪 Ground Floor</span><span class="t">📶 Free WiFi</span>
- </div>
- </div>
- </div>
- <div class="feat rev">
- <div class="fi" onclick="ol('images/54.webp','Pet Friendly Double Queen Room')">
- <img src="images/54.webp" alt="Pet-friendly Double Queen Room ground floor — Best Western Vernal Inn Utah">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ Pet Friendly · Double Queen</p>
- <h2 class="ftitle">Two Beds. Wood Floors.<br><em>Everyone Welcome.</em></h2>
- <p class="fdesc">Ground floor, two queen beds, and beautiful hardwood-style flooring — our pet friendly double queen rooms are designed to make the whole family comfortable. Spacious, easy to navigate, and right outside your door.</p>
- <div class="tags">
- <span class="t">🐾 Pet Friendly</span><span class="t">🛏️ Two Queens</span>
- <span class="t">🪵 Wood Floors</span><span class="t">🚪 Ground Floor Access</span>
- </div>
- </div>
- </div>
- </div>
-
- <!-- ADA ACCESSIBLE -->
- <!-- ⚠️ TODO: Replace with actual handicap room image number -->
- <div class="tpanel" id="t-handicap">
- <div class="feat">
- <div class="fi" onclick="ol('images/47.webp','ADA Accessible King Room')">
- <img src="images/47.webp" alt="ADA Accessible King Room with roll-in shower — Best Western Vernal Inn">
- <div class="fiz">🔍</div>
- </div>
- <div class="ft">
- <p class="ftag">✦ ADA Accessible Room</p>
- <h2 class="ftitle">Comfortable for Everyone.<br><em>No Exceptions.</em></h2>
- <p class="fdesc">Our ADA accessible king rooms are designed with care — wide doorways, roll-in shower, lowered fixtures, and all the space needed for a safe, comfortable, and dignified stay. Every guest deserves the same warm welcome.</p>
-  <p class="room-detail-links" style="margin:0 0 4px;display:flex;gap:18px;flex-wrap:wrap;"><a href="/rooms/accessible-studio-king" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">Handicap / Accessible Studio King — Full Details →</a></p>
- <div class="tags">
- <span class="t">♿ ADA Accessible</span><span class="t">🛏️ King Bed</span>
- <span class="t">🚿 Roll-In Shower</span><span class="t">🚪 Wide Doorways</span><span class="t">📶 Free WiFi</span>
- </div>
- </div>
- </div>
- </div>
+ <p class="ftag">${amp(p.tag)}</p>
+ <h2 class="ftitle">${amp(p.title)}</h2>
+ <p class="fdesc">${amp(p.desc)}</p>
+${p.link ? ` <p class="room-detail-links" style="margin:0 0 4px;"><a href="${p.link.href}" style="display:inline-block;margin:2px 0 14px;color:var(--navy);font-weight:900;font-size:.78rem;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:3px;">${amp(p.link.label)}</a></p>\n` : ''} <div class="tags">
+ ${p.pills.map((pill) => `<span class="t">${amp(pill)}</span>`).join('')}
+ </div>
+ </div>
+ </div>`
+  )
+  .join('\n')}
+ </div>`).join('\n\n')}
 
 </section>
 

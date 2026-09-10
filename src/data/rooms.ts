@@ -488,7 +488,10 @@ export const ROOMS: Room[] = [
       'Free hot breakfast, free WiFi and free parking come with every stay, and the front desk is staffed around the clock. Staying a week or longer? Weekly rates are quoted by phone — call the front desk and ask.',
     ],
     difference:
-      'One king bed instead of two queens, and the lowest published nightly rate on the rate card — $12 a night below the Studio Two Queen.',
+      // NOT "the lowest published nightly rate on the rate card" any more: that
+      // was written when $108 was the floor, and the $95 Queen Suite added on
+      // 2026-09-09 sits below it. Compare against the Studio Two Queen only.
+      'One king bed instead of two queens, at $108 a night — $12 below the Studio Two Queen.',
     features: [
       { label: 'One king bed', source: 'photo' },
       { label: 'Studio layout', source: 'site' },
