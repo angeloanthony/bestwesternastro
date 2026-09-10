@@ -15,8 +15,10 @@
 // This is the same publication gate as BUSINESS.bookDirect[].confirmed: we would
 // rather say "call" than publish a number nobody has confirmed.
 //
-// CURRENT STATE (hotel instruction, 2026-09-03):
-//   nightly — CONFIRMED, published, five room types, $108 to $155.
+// CURRENT STATE (hotel instruction, 2026-09-03; extended 2026-09-09):
+//   nightly — CONFIRMED, published, SIX room types, $95 to $155. The Queen
+//             Suite at $95 was added on 2026-09-09 and is now the lowest
+//             published rate on the card; see the key's own note below.
 //   weekly  — WITHDRAWN. Quoted by phone only. Every customer-facing weekly
 //             dollar amount has been removed from the site; the copy is
 //             WEEKLY_CALL_LINE. Do not restore $588 / $660 / $700.
@@ -52,6 +54,13 @@ export const RATES = {
    *  a derived number has to carry. Keys are the hotel's own room names.
    *  A null here is still the publication gate: it renders as callForPricing. */
   nightly: {
+    /** Added 2026-09-09 on the owner's instruction. The rate is the hotel's
+     *  own: public/images/Queen-Suite/ ships a labelled frame reading
+     *  "Queen Suite" over a "$95/night" badge, and the owner confirmed it in
+     *  writing when asking for the page. This is the lowest published rate on
+     *  the card — below the two $108 studios — so it is the number a guest
+     *  comparing Vernal hotels sees first. */
+    queenSuite: 95 as number | null,
     studioKing: 108 as number | null,
     studioTwoQueen: 120 as number | null,
     accessibleStudioKing: 108 as number | null,

@@ -243,6 +243,145 @@ const STANDARD_BATHROOM = (dir: string, prefix: string): RoomPhoto[] => [
 export const ROOMS: Room[] = [
   // ───────────────────────────────────────────────────────────────────────────
   {
+    slug: 'queen-suite',
+    name: 'Queen Suite',
+    shortName: 'Queen Suite',
+    heroSlideId: 'queen-suite',
+    eyebrow: 'One Queen Bed · Sofa · Kitchenette',
+    nightly: nightlyQuote(RATES.nightly.queenSuite),
+    weekly: WEEKLY_CALL_LINE,
+    // The homepage rate table has never carried a row for this room, so there
+    // is no previously published occupancy to reuse. A queen bed plus a sofa
+    // is not evidence that the sofa converts, so nothing is claimed: `sleeps`
+    // stays empty until the front desk confirms it, exactly as the $135
+    // Pet-Friendly Room does.
+    sleeps: '',
+    bestFor: 'Couples, solo travelers, longer stays',
+    // ADDED 2026-09-09, on the owner's instruction and with the owner's own
+    // photography in public/images/Queen-Suite/.
+    //
+    // THIS ROOM WAS DELIBERATELY ABSENT BEFORE, and the reason is worth
+    // keeping: heroShowcase.ts carried the note "a plain Queen slide used to
+    // sit between King and Double Queen; the rate card has no such room, which
+    // also matches the asset set (it was the one slide with no real photograph
+    // behind it). Do not add it back to make the count even." Both conditions
+    // have now changed — the owner supplied a full photographic set AND named
+    // the rate — so the instruction is satisfied rather than overridden. It
+    // was never "no Queen room exists"; it was "do not invent one".
+    //
+    // The name and the rate are the hotel's own: the folder ships a labelled
+    // frame reading "Queen Suite" and another with a "$95/night" badge.
+    //
+    // The bathroom is the property standard, byte-for-byte identical to the
+    // King, Two Queen and Pet-Friendly copies, so it comes from the shared
+    // helper and is flagged `shared` like the others.
+    //
+    // The ten room Phoneviews were delivered as ~2.5 MB PNGs, the only room
+    // folder that was not WebP; they were converted at quality 82 and land at
+    // 134-287 KB, the same band as every other room's twins. In this set the
+    // landscape and Phoneview numbers DO correspond. Left out, on purpose:
+    // Queen-Suite2 and Queen-Suite3 (the bed again, between the angles kept in
+    // Queen-Suite1 and Queen-Suite9), Queen-Suite8 (the desk and closet again,
+    // covered by Queen-Suite6 and Queen-Suite4) and the two "-Labeled" files.
+    hero: {
+      src: 'images/Queen-Suite/Queen-Suite.webp',
+      portrait: 'images/Queen-Suite/Queen-Suite-phoneview.webp',
+      caption: 'The queen bed with the sofa and the window beyond.',
+      alt: 'Queen Suite with a queen bed and a sofa — Best Western Vernal Inn, Vernal Utah',
+    },
+    gallery: [
+      {
+        src: 'images/Queen-Suite/Queen-Suite.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview.webp',
+        caption:
+          'The queen bed on a light-wood platform frame against the navy accent wall, with a wall-mounted reading light and a nightstand either side. Beyond it a two-seat sofa sits under the window with a floor lamp beside it, and a framed print of the Flaming Gorge bridge hangs on the far wall.',
+        alt: 'Queen bed with a two-seat sofa under the window — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Queen-Suite/Queen-Suite1.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview1.webp',
+        caption:
+          'The bed head-on, with a panelled headboard, a wall light and a nightstand on each side, the room phone and clock within reach, and a framed waterfall print on the wall to the left.',
+        alt: 'Queen bed with panelled headboard and wall reading lights — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Queen-Suite/Queen-Suite9.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview9.webp',
+        caption:
+          'The bed from the window side, with the roller-shaded window looking out over Vernal, the heating and cooling unit beneath it and a framed Delicate Arch print on the accent wall.',
+        alt: 'Queen bed beside a shaded window and heating and cooling unit — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Queen-Suite/Queen-Suite5.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview5.webp',
+        caption:
+          'The entrance end: the kitchenette with a sink in the counter, cabinets above and below, a microwave and a coffee maker, and a dining table with two upholstered chairs beside the door.',
+        alt: 'Kitchenette with microwave and coffee maker beside a dining table and entry door — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Queen-Suite/Queen-Suite6.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview6.webp',
+        caption:
+          'The working half of the room: a desk with an office chair and a reading lamp under the wall-mounted TV, the open closet beside it, and the window with the heating and cooling unit beneath it.',
+        alt: 'Desk, office chair, wall-mounted TV and open closet beside a window — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Queen-Suite/Queen-Suite4.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview4.webp',
+        caption:
+          'The closet in full: a hanging rail with wooden hangers, an iron and an ironing board stowed alongside, open shelving and two drawers below, next to the desk and the wall-mounted TV.',
+        alt: 'Open closet with hangers, iron and ironing board beside a desk — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Queen-Suite/Queen-Suite7.webp',
+        portrait: 'images/Queen-Suite/Queen-Suite-phoneview7.webp',
+        caption:
+          'The kitchenette: a stainless single-basin sink and a two-burner cooktop set into the granite counter, a microwave and a coffee maker above, and a full-height refrigerator with a freezer alongside, on tiled flooring.',
+        alt: 'Kitchenette with sink, two-burner cooktop, microwave and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
+      },
+      ...STANDARD_BATHROOM('Queen-Suite', 'Queen'),
+    ],
+    about: [
+      'The Queen Suite is the lowest published rate on our card at $95 a night — below both of our $108 studios — and it is the room to book when there are two of you and you would rather spend the difference on the rest of the trip.',
+      'One queen bed sits on a light-wood platform frame against the navy accent wall, with a wall-mounted reading light and a nightstand on each side. What separates this room from the studios is the sofa: a two-seat sofa under the window with a floor lamp beside it, so there is somewhere to sit that is not the bed or the desk chair.',
+      'It has the same kitchenette as the rest of the property — a sink and a two-burner cooktop in the counter, cabinets, a microwave, a coffee maker and a full-height refrigerator with a freezer — with a dining table and two upholstered chairs by the entrance. There is a desk with an office chair under a wall-mounted TV, and an open closet with a hanging rail, an iron and an ironing board. The bathroom is the property standard: a granite vanity with a backlit mirror, a full-size tub and shower combination, and a tiled floor.',
+      'Free hot breakfast, free WiFi and free parking come with every stay, and the front desk is staffed around the clock. How many people this room sleeps is the one thing we have not had confirmed, so we do not publish it — call the front desk and ask. Weekly rates are quoted by phone.',
+    ],
+    difference:
+      'The lowest published nightly rate we have at $95, and the only room we have photographed with a sofa in it.',
+    features: [
+      { label: 'One queen bed', source: 'photo' },
+      { label: 'Two-seat sofa with floor lamp', source: 'photo' },
+      { label: 'Kitchenette — two-burner cooktop, sink, microwave, coffee maker', source: 'photo' },
+      { label: 'Full-height refrigerator with freezer', source: 'photo' },
+      { label: 'Dining table with two chairs', source: 'photo' },
+      { label: 'Desk with office chair', source: 'photo' },
+      { label: 'Wall-mounted flat-screen TV', source: 'photo' },
+      { label: 'Open closet with hanging rail, iron and ironing board', source: 'photo' },
+      { label: 'In-room heating and cooling unit', source: 'photo' },
+      { label: 'Tub and shower combination', source: 'photo' },
+      { label: 'Granite vanity with backlit mirror', source: 'photo' },
+      { label: 'Carpeted floor, tiled at the kitchenette', source: 'photo' },
+      { label: 'Free WiFi', source: 'site' },
+      { label: 'Free hot breakfast', source: 'site' },
+      { label: 'Free parking', source: 'site' },
+      { label: '24-hour front desk', source: 'site' },
+    ],
+    seo: {
+      title: 'Queen Suite — $95/Night | Best Western Vernal Inn, Vernal Utah',
+      description:
+        'Queen Suite at Best Western Vernal Inn: one queen bed, a sofa, a full kitchenette, free hot breakfast and free WiFi. $95 per night + tax — our lowest published rate. Weekly rates — call for price.',
+      bedType: 'Queen',
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  {
     slug: 'studio-king',
     name: 'Studio King',
     shortName: 'Studio King',

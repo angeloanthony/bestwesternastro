@@ -34,7 +34,7 @@ const bodyContent = `<section class="page-hero">
 </section>
 <div class="distance-bar">💰 NIGHTLY FROM ${LOWEST_NIGHTLY} · ${WEEKLY_CALL_LINE.toUpperCase()} · BREAKFAST INCLUDED</div>
 <div class="content-wrap">
-<div class="intro-pull"><strong>Staying in Vernal for a week or more?</strong> Best Western Vernal Inn's weekly rates are designed for guests who need more than a night — oilfield crews, contractors, extended family visits, and recreational travelers exploring Dinosaur National Monument, Flaming Gorge, and the Uinta Mountains. The weekly price is not published here: it is set by the front desk against your dates and room type, so call ${BUSINESS.phoneDisplay} and ask. What is published is the nightly card — a Studio King at ${usd(RATES.nightly.studioKing)} ${RATES.taxNote}, a Studio Two Queen at ${usd(RATES.nightly.studioTwoQueen)} — which gives you a firm ceiling to compare the weekly quote against.</div>
+<div class="intro-pull"><strong>Staying in Vernal for a week or more?</strong> Best Western Vernal Inn's weekly rates are designed for guests who need more than a night — oilfield crews, contractors, extended family visits, and recreational travelers exploring Dinosaur National Monument, Flaming Gorge, and the Uinta Mountains. The weekly price is not published here: it is set by the front desk against your dates and room type, so call ${BUSINESS.phoneDisplay} and ask. What is published is the nightly card — a Queen Suite at ${usd(RATES.nightly.queenSuite)} ${RATES.taxNote}, a Studio King at ${usd(RATES.nightly.studioKing)}, a Studio Two Queen at ${usd(RATES.nightly.studioTwoQueen)} — which gives you a firm ceiling to compare the weekly quote against.</div>
 <div class="content-section">
  <h2>Weekly Rate Breakdown</h2>
 <div style="overflow-x:auto;margin:1.2rem 0;">
@@ -45,8 +45,9 @@ const bodyContent = `<section class="page-hero">
 <th style="padding:12px 16px;text-align:center;">Weekly Rate (7 Nights)</th>
 </tr></thead>
 <tbody>
-<tr style="background:#f5f4f0;"><td style="padding:11px 16px;font-weight:700;">Studio King</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.studioKing)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
-<tr><td style="padding:11px 16px;font-weight:700;">Studio Two Queen</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.studioTwoQueen)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
+<tr style="background:#f5f4f0;"><td style="padding:11px 16px;font-weight:700;">Queen Suite</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.queenSuite)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
+<tr><td style="padding:11px 16px;font-weight:700;">Studio King</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.studioKing)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
+<tr style="background:#f5f4f0;"><td style="padding:11px 16px;font-weight:700;">Studio Two Queen</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.studioTwoQueen)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
 <tr style="background:#f5f4f0;"><td style="padding:11px 16px;font-weight:700;">Handicap / Accessible Studio King</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.accessibleStudioKing)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
 <tr><td style="padding:11px 16px;font-weight:700;">Pet-Friendly Studio Two Queen</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.petFriendlyStudioTwoQueen)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
 <tr style="background:#f5f4f0;"><td style="padding:11px 16px;font-weight:700;">Pet-Friendly Room</td><td style="padding:11px 16px;text-align:center;font-weight:900;color:var(--navy);font-size:1.05rem;">${usd(RATES.nightly.petFriendlyRoom)}</td><td style="padding:11px 16px;text-align:center;">Call for price</td></tr>
@@ -66,6 +67,7 @@ const bodyContent = `<section class="page-hero">
 <div class="content-section">
  <h2>Which Room Type Fits a Week</h2>
 <ul class="feat-list">
+ <li><strong>Queen Suite.</strong> ${usd(RATES.nightly.queenSuite)}/night ${RATES.taxNote} — our lowest published rate. A queen bed, a kitchenette and a sofa, which is the one to ask about for a long solo stay where you want somewhere to sit that is not the bed.</li>
  <li><strong>Studio King — sleeps 1–2.</strong> ${usd(RATES.nightly.studioKing)}/night ${RATES.taxNote}. The default for a solo contractor or a couple; ask for the weekly price when you call.</li>
  <li><strong>Studio Two Queen — sleeps 1–4.</strong> ${usd(RATES.nightly.studioTwoQueen)}/night ${RATES.taxNote}. Two beds, so it also works for two crew members sharing rather than booking two rooms — which is the single biggest lever on a weekly lodging bill.</li>
  <li><strong>Handicap / Accessible Studio King — sleeps 1–2.</strong> ${usd(RATES.nightly.accessibleStudioKing)}/night ${RATES.taxNote}. Roll-in shower and wide doorways, at the same rate as the Studio King.</li>
@@ -107,7 +109,7 @@ const bodyContent = `<section class="page-hero">
  <h2>Frequently Asked Questions</h2>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
   <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">What are your weekly hotel rates?</summary>
-  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Weekly rates are quoted by the front desk rather than published — call ${BUSINESS.phoneDisplay} with your dates and room type for the current weekly price. Published nightly rates: Studio King ${usd(RATES.nightly.studioKing)}, Studio Two Queen ${usd(RATES.nightly.studioTwoQueen)}, Handicap / Accessible Studio King ${usd(RATES.nightly.accessibleStudioKing)}, Pet-Friendly Studio Two Queen ${usd(RATES.nightly.petFriendlyStudioTwoQueen)}, Pet-Friendly Room ${usd(RATES.nightly.petFriendlyRoom)}. All rates are ${RATES.taxNote} and include free breakfast, WiFi, parking and laundry access.</p>
+  <p style="margin-top:.7rem;color:var(--muted);line-height:1.8;font-weight:300;">Weekly rates are quoted by the front desk rather than published — call ${BUSINESS.phoneDisplay} with your dates and room type for the current weekly price. Published nightly rates: Queen Suite ${usd(RATES.nightly.queenSuite)}, Studio King ${usd(RATES.nightly.studioKing)}, Studio Two Queen ${usd(RATES.nightly.studioTwoQueen)}, Handicap / Accessible Studio King ${usd(RATES.nightly.accessibleStudioKing)}, Pet-Friendly Studio Two Queen ${usd(RATES.nightly.petFriendlyStudioTwoQueen)}, Pet-Friendly Room ${usd(RATES.nightly.petFriendlyRoom)}. All rates are ${RATES.taxNote} and include free breakfast, WiFi, parking and laundry access.</p>
  </details>
  <details style="border-bottom:1px solid #e8e4dc;padding:1rem 0;">
   <summary style="font-weight:700;color:var(--navy);cursor:pointer;font-size:1.02rem;">Do weekly rates include breakfast?</summary>

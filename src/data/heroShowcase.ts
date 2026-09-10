@@ -9,12 +9,23 @@
 // a one-line edit in one file and can never drift from the rates table further
 // down the same page.
 //
-// ROOM SET: the five slides below are the hotel's own confirmed rate card
-// (2026-09-03). Every weekly line is the fixed WEEKLY_CALL_LINE — no weekly
-// dollar amount is published anywhere on this site, by instruction. A plain
-// Queen slide used to sit between King and Double Queen; the rate card has no
-// such room, which also matches the asset set (it was the one slide with no real
-// photograph behind it). Do not add it back to make the count even.
+// ROOM SET: the six slides below are the hotel's own confirmed rate card
+// (2026-09-03, extended 2026-09-09). Every weekly line is the fixed
+// WEEKLY_CALL_LINE — no weekly dollar amount is published anywhere on this
+// site, by instruction.
+//
+// THE QUEEN SLIDE IS BACK, and the note that removed it is satisfied rather
+// than overridden. It used to read: "a plain Queen slide used to sit between
+// King and Double Queen; the rate card has no such room, which also matches
+// the asset set (it was the one slide with no real photograph behind it). Do
+// not add it back to make the count even." Both of its conditions have since
+// changed. The owner delivered a full photographic set in
+// public/images/Queen-Suite/ — including a labelled frame reading "Queen
+// Suite" over a "$95/night" badge — and named the rate when asking for the
+// page. The old bar was "do not invent a room to balance the reel", not "this
+// room does not exist", and it is cleared by evidence, not by preference.
+//
+// It leads the room run because $95 is now the lowest rate on the card.
 //
 // PHOTOGRAPHY (repointed 2026-09-09). Every room slide now reads the owner's
 // reshoot straight out of public/images/<Room-Type>/. The old built crops in
@@ -88,6 +99,25 @@ export const HERO_SLIDES: HeroSlide[] = [
     kb: 'kb-left',
     alt: 'Best Western Vernal Inn under the stars — Vernal, Utah',
     label: 'Under the Stars',
+  },
+  {
+    id: 'queen-suite',
+    kind: 'room',
+    image: 'images/Queen-Suite/Queen-Suite.webp',
+    portrait: 'images/Queen-Suite/Queen-Suite-phoneview.webp',
+    kb: 'kb-right',
+    alt: 'Queen Suite with a queen bed and a two-seat sofa under the window — Best Western Vernal Inn, Vernal Utah',
+    label: 'Queen Suite',
+    room: {
+      name: 'Queen Suite',
+      // No occupancy claimed: this room has never had a row in the homepage
+      // rate table, so there is no published figure to reuse, and a sofa is
+      // not evidence that it converts. The room page says the same.
+      sleeps: 'Our lowest rate',
+      features: ['Queen bed', 'Sofa', 'Kitchenette'],
+      nightly: nightlyQuote(RATES.nightly.queenSuite),
+      weekly: WEEKLY_CALL_LINE,
+    },
   },
   {
     id: 'studio-king',
