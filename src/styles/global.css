@@ -2146,7 +2146,12 @@ body.video-page { background: #000; }
    to be fixed at page load, and a page opened wide then narrowed kept landscape
    frames on slides 2–8. This default rule must stay ABOVE the media query:
    same specificity, so whichever comes later wins. Slide 0 is unaffected — its
-   frame is an inline style, switched by the <style> in index.astro's head. */
+   frame is an inline style, switched by the <style> in index.astro's head.
+
+   The values in --hbg / --hbg-p MUST be root-absolute (url('/images/…')). A
+   relative url() in a custom property resolves against THIS stylesheet, which
+   is served from /_astro/, so "images/x.webp" becomes /_astro/images/x.webp
+   and 404s. That shipped once and blanked slides 2–8. */
 .hero-kb { background-image: var(--hbg, none); }
 
 @media (max-aspect-ratio: 3/4) {

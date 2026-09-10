@@ -883,9 +883,15 @@ function hpromote(n) {
      Nothing extra downloads: a browser fetches only the background-image that
      applies at the current viewport, and the other only if the viewport
      actually changes. A slide with no portrait falls back to its landscape
-     frame in the CSS. */
-  kb.style.setProperty('--hbg', "url('" + kb.dataset.bg + "')");
-  if (kb.dataset.bgPortrait) kb.style.setProperty('--hbg-p', "url('" + kb.dataset.bgPortrait + "')");
+     frame in the CSS.
+     THE LEADING SLASH IS LOAD-BEARING. A relative url() inside a custom
+     property is resolved against the STYLESHEET that consumes it via var() —
+     global.css, served from /_astro/ — not against this page. Without the "/"
+     every slide after the first requested /_astro/images/… and 404'd to a
+     blank grey stage. rooms/[slug].astro sets its --rm-bg the same way for the
+     same reason. */
+  kb.style.setProperty('--hbg', "url('/" + kb.dataset.bg + "')");
+  if (kb.dataset.bgPortrait) kb.style.setProperty('--hbg-p', "url('/" + kb.dataset.bgPortrait + "')");
   kb.removeAttribute('data-bg');
   kb.removeAttribute('data-bg-portrait');
 }
