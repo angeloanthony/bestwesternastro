@@ -10,6 +10,10 @@ import { hotelNodeFull, hotelRef, ldScript } from '../data/schema.ts';
 import { RATES, usd, LOWEST_NIGHTLY, WEEKLY_CALL_LINE } from '../data/rates.ts';
 import { BUSINESS } from '../data/business.ts';
 import { HERO_SLIDES } from '../data/heroShowcase.ts';
+// The gallery grid AND its lightbox both render from this one array. They used
+// to be two hand-kept lists linked by index, and the indices no longer agreed —
+// every room tile opened a different photograph. See the note in the file.
+import { HOME_GALLERY } from '../data/homeGallery.ts';
 // Detailed room pages (/rooms/*). Slugs live in rooms.ts, so the links below
 // and the pages themselves can never drift apart.
 import { roomBySlideId, roomHref, ROOMS } from '../data/rooms.ts';
@@ -843,20 +847,7 @@ ${HERO_SLIDES.map((s, i) => {
  <p>Every corner of this hotel has been beautifully refreshed. Browse the photos — then come experience it in person.</p>
  </div>
  <div class="gal-grid rv" id="galgrid">
- <div class="gi wide" onclick="ola(0)"><img src="images/61.webp" alt="Best Western Vernal Inn — Hotel Exterior at Night"><div class="gi-ov"><span class="gi-label">Hotel Exterior</span></div></div>
- <div class="gi" onclick="ola(1)"><img src="images/35.webp" alt="Best Western Vernal Inn — Night Sky View"><div class="gi-ov"><span class="gi-label">Under the Stars</span></div></div>
- <div class="gi" onclick="ola(2)"><img src="images/41.webp" alt="Standard Queen Room at Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">Standard Queen</span></div></div>
- <div class="gi" onclick="ola(3)"><img src="images/40.webp" alt="Standard King Room at Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">Standard King</span></div></div>
- <div class="gi" onclick="ola(4)"><img src="images/38.webp" alt="Double Queen Room — family-friendly extended stay Vernal Utah"><div class="gi-ov"><span class="gi-label">Double Queen</span></div></div>
- <div class="gi" onclick="ola(5)"><img src="images/39.webp" alt="King Suite with full kitchenette at Best Western Vernal Inn Utah"><div class="gi-ov"><span class="gi-label">King Suite</span></div></div>
- <div class="gi" onclick="ola(6)"><img src="images/37.webp" alt="King Jacuzzi Suite with in-room soaking tub — Best Western Vernal Inn Utah"><div class="gi-ov"><span class="gi-label">King Jacuzzi Suite</span></div></div>
- <div class="gi" onclick="ola(7)"><img src="images/44.webp" alt="Jacuzzi Double Queen Suite — two beds and in-room jacuzzi Vernal Utah"><div class="gi-ov"><span class="gi-label">Jacuzzi Double Queen</span></div></div>
- <div class="gi" onclick="ola(8)"><img src="images/43.webp" alt="King Suite interior detail — Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">King Suite — Detail</span></div></div>
- <div class="gi" onclick="ola(9)"><img src="images/53.webp" alt="Pet-friendly King Room with hardwood floors — Best Western Vernal Inn Utah"><div class="gi-ov"><span class="gi-label">Pet Friendly King</span></div></div>
- <div class="gi" onclick="ola(10)"><img src="images/54.webp" alt="Pet-friendly Double Queen Room ground floor — Best Western Vernal Inn Utah"><div class="gi-ov"><span class="gi-label">Pet Friendly Queen</span></div></div>
- <div class="gi wide" onclick="ola(11)"><img src="images/35.webp" alt="Best Western Vernal Inn — Exterior Wide View"><div class="gi-ov"><span class="gi-label">Best Western Vernal Inn</span></div></div>
- <div class="gi" onclick="ola(12)"><img src="images/59.webp" alt="Free hot breakfast dining room with heated floors — Best Western Vernal Inn Utah"><div class="gi-ov"><span class="gi-label">Breakfast Dining Room</span></div></div>
- <div class="gi" onclick="ola(13)"><img src="images/2.webp" alt="Free hot breakfast — included daily at Best Western Vernal Inn"><div class="gi-ov"><span class="gi-label">Breakfast Area</span></div></div>
+ ${HOME_GALLERY.map((t, i) => `<div class="gi${t.wide ? ' wide' : ''}" onclick="ola(${i})"><img src="${t.src}" alt="${t.alt}" loading="${i < 3 ? 'eager' : 'lazy'}" decoding="async"><div class="gi-ov"><span class="gi-label">${t.label}</span></div></div>`).join('\n ')}
  </div>
 </section>
 
@@ -1201,40 +1192,29 @@ function st(btn,id){
   btn.classList.add('active');
 }
 
-// Lightbox
-const imgs=[
-  {s:'images/61.webp',  c:'Hotel Exterior — Night'},
-  {s:'images/35.webp',  c:'Hotel Under the Stars'},
-  {s:'images/61.webp',  c:'Best Western — Vernal, Utah'},
-  {s:'images/41.webp',  c:'Standard Queen Room'},
-  {s:'images/48.webp',  c:'Standard Queen Suite Room'},
-  {s:'images/40.webp',  c:'Standard King Room'},
-  {s:'images/47.webp',  c:'Standard King Suite Room'},
-  {s:'images/38.webp',  c:'Standard Double Queen Room'},
-  {s:'images/42.webp',  c:'Standard Double Queen Room — View 2'},
-  {s:'images/45.webp',  c:'Double Queen Suite Room'},
-  {s:'images/50.webp',  c:'Standard Double Queen Room — View 3'},
-  {s:'images/39.webp',  c:'King Suite Room'},
-  {s:'images/43.webp',  c:'Standard King Suite Room'},
-  {s:'images/46.webp',  c:'King Suite Room — Living Area'},
-  {s:'images/51.webp',  c:'King Suite Room — View 4'},
-  {s:'images/37.webp',  c:'Jacuzzi King Suite Room'},
-  {s:'images/49.webp',  c:'Jacuzzi King Suite Room — View 2'},
-  {s:'images/44.webp',  c:'Jacuzzi Double Queen Suite Room'},
-  {s:'images/53.webp',  c:'Standard King — Pet Friendly'},
-  {s:'images/54.webp',  c:'Standard Queen — Pet Friendly'},
-  {s:'images/59.webp',  c:'Breakfast Dining Room'},
-  {s:'images/1.webp',    c:'Free Breakfast Area'},
-];
+// Lightbox. The array is emitted from HOME_GALLERY, the same list the grid
+// above renders, so a tile's ola(i) and imgs[i] are the same picture by
+// construction. They were two hand-kept lists and had drifted: every room tile
+// opened a different photograph. Do not re-inline this.
+const imgs=${JSON.stringify(HOME_GALLERY.map((t) => ({ s: t.src, c: t.label })))};
 let li=0;
-function ola(i){li=i;sl();document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
-function ol(s,c){const i=imgs.findIndex(x=>x.s===s);li=i>=0?i:0;sl();document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
+/* solo holds a picture opened from somewhere OTHER than the gallery grid — the
+   room tabs in #rooms call ol() with their own files, which are not in imgs.
+   ol() used to findIndex and fall back to index 0 on a miss, so any such card
+   opened the FIRST GALLERY PICTURE instead of the room you clicked. Now a miss
+   shows the picture it was actually given, with the counter and the arrows
+   stood down because a single picture has no sequence to step through. */
+let solo=null;
+function lbopen(){document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
+function ola(i){solo=null;li=i;sl();lbopen();}
+function ol(s,c){const i=imgs.findIndex(x=>x.s===s);if(i>=0){solo=null;li=i;}else{solo={s:s,c:c};}sl();lbopen();}
 function sl(){
   const img=document.getElementById('lb-img');
+  const it=solo||imgs[li];
   img.style.opacity=0;
-  setTimeout(()=>{img.src=imgs[li].s;document.getElementById('lb-cap').textContent=imgs[li].c;document.getElementById('lbc').textContent=(li+1)+' / '+imgs.length;img.style.opacity=1;},150);
+  setTimeout(()=>{img.src=it.s;document.getElementById('lb-cap').textContent=it.c;document.getElementById('lbc').textContent=solo?'':(li+1)+' / '+imgs.length;img.style.opacity=1;},150);
 }
-function ln(d){li=(li+d+imgs.length)%imgs.length;sl();}
+function ln(d){if(solo)return;li=(li+d+imgs.length)%imgs.length;sl();}
 function cl(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('lb')?.addEventListener('click',function(e){if(e.target===this)cl();});
 document.addEventListener('keydown',e=>{

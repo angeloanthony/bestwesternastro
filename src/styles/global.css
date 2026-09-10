@@ -1060,7 +1060,11 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
 }
-.gi.wide { grid-column: span 2; }
+/* A wide tile is two columns across. It also needs to be twice as wide FOR THE
+ * SAME HEIGHT — inheriting .gi's 4/3 made it double-width and double-height, so
+ * its row grew to fit it and every ordinary tile beside it sat in the top half
+ * of a row twice its size, leaving a band of empty page under each one. */
+.gi.wide { grid-column: span 2; aspect-ratio: 8 / 3; }
 
 /* ============================================================
    PULL QUOTE BANNER
