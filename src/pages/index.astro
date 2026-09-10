@@ -789,6 +789,12 @@ const hfirst  = ${JSON.stringify(HERO_SLIDES[0].image)};
    serves 9:16 versions instead. Slide 0 is switched by the <style> in the head
    rather than here, so it needs no JavaScript to paint the right one. */
 const hportrait = window.matchMedia('(max-aspect-ratio: 3/4)');
+/* The scale a slide starts its Ken Burns from. Below 3:4 the stage is sized to
+   the 9:16 frames themselves (global.css), so the photograph fits it exactly
+   and ANY scale above 1 is the side-crop coming straight back — 8% of it, on a
+   frame that was chosen for this shape. Read at slide time, not once at load,
+   so a rotation mid-reel gets the right one. */
+const hkbFrom = () => (hportrait.matches ? 1 : 1.08);
 /* Milliseconds a hero slide holds. 6000 -> 4200 -> 3000: this reel opens on two
    property shots before it reaches a single room, so at 6s a guest waited 12s
    to see the first rate and now waits 6s. Still twice the room pages' 1500ms on
@@ -850,7 +856,7 @@ function gs(n) {
   const kb = slides[cs].querySelector('.hero-kb');
   if (hstill) { kb.style.transition = 'none'; kb.style.transform = 'scale(1)'; return; }
   kb.style.transition = 'none';
-  kb.style.transform  = 'scale(1.08)';
+  kb.style.transform  = 'scale(' + hkbFrom() + ')';
   kb.offsetHeight;
   kb.style.transition = 'transform ' + (HOME_KB_MS / 1000) + 's ease-out';
   kb.style.transform  = 'scale(1)';

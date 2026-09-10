@@ -2105,6 +2105,52 @@ body.video-page { background: #000; }
 .hero-slide.kb-up    .hero-kb { transform-origin: center bottom; }
 .hero-slide.kb-down  .hero-kb { transform-origin: center top; }
 
+/* ── THE PHONE FRAMES ARE 9:16. THE STAGE HAD TO BE TOO. ─────────────────────
+   The reel already served the owner's 9:16 "Phoneview" exports below 3:4 (see
+   hportrait in index.astro) — but serving the right file is only half of it.
+   The stage was `height: 100vh`, and a modern phone viewport is about 0.46:1,
+   not 0.5625:1. A 941x1672 frame cover-cropped into 390x844 loses 17.9% of its
+   width before anything else happens, and the Ken Burns scale took it to 24.0%
+   of the width and 7.4% of the height. A fifth of every photograph the owner
+   shot for this slot was being thrown away off the sides.
+
+   Worse, it never recovered: HOME_KB_MS is 4000ms and a slide holds 3000ms, so
+   a phone slide is replaced while still mid-zoom and NEVER reaches scale(1).
+   The 24% was not a transient — it was most of what a guest actually saw.
+
+   So below 3:4 the stage takes the frames' own ratio, capped so it can never
+   exceed the viewport (a portrait tablet at exactly 3:4 keeps today's 100vh),
+   and the zoom is switched off — index.astro starts these slides at scale(1)
+   rather than 1.08, because at a matched aspect ratio any scale above 1 is
+   just the crop coming back. The reel still cross-fades between slides.
+
+   EVERY PIECE OF HERO FURNITURE IS MEASURED UP FROM --hero-floor, and that
+   variable means "the height of the fixed .sbb bar, because it covers the foot
+   of this stage" (see the block above .hero). Once the stage stops short of the
+   viewport that stops being true — .sbb floats over the SECTION BELOW it and
+   overlaps nothing in the hero — and left at 76px+14 it reserves a strip of
+   photograph for a bar that is not there, dropping .hctrls straight onto the
+   Explore Rooms button and the rate card.
+
+   It is not a constant either way, because how much of the bar lands on the
+   stage depends on the aspect ratio: none at 0.46 (a phone), all of it at
+   exactly 9:16 or 3:4, where min() returns 100vh and the stage still reaches
+   the foot of the screen. So --hero-floor is now DERIVED — the part of .sbb
+   that actually overlaps, plus the same 14px margin as before. It is correct at
+   every ratio without a second breakpoint to keep in step, and it moves the
+   arrows, dots, copy and card together because all four are expressed in terms
+   of it. */
+@media (max-aspect-ratio: 3/4) {
+  .hero {
+    height: min(100vh, calc(100vw * 16 / 9));
+    min-height: 0;
+    --hero-floor: calc(
+      max(0px, var(--sbb-h, 76px) - (100vh - min(100vh, 100vw * 16 / 9))) + 14px
+    );
+  }
+  .hero-kb { transform: scale(1); }
+}
+
 /* ============================================================
    OWNER STORY SECTION
    ============================================================ */
