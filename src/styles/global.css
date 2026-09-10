@@ -2140,6 +2140,15 @@ body.video-page { background: #000; }
    every ratio without a second breakpoint to keep in step, and it moves the
    arrows, dots, copy and card together because all four are expressed in terms
    of it. */
+/* WHICH FRAME A SLIDE SHOWS IS DECIDED HERE, not in JavaScript. hpromote() in
+   index.astro sets --hbg (landscape) and --hbg-p (9:16) on each slide after the
+   first; these two rules pick, so the choice follows the viewport live. It used
+   to be fixed at page load, and a page opened wide then narrowed kept landscape
+   frames on slides 2–8. This default rule must stay ABOVE the media query:
+   same specificity, so whichever comes later wins. Slide 0 is unaffected — its
+   frame is an inline style, switched by the <style> in index.astro's head. */
+.hero-kb { background-image: var(--hbg, none); }
+
 @media (max-aspect-ratio: 3/4) {
   .hero {
     height: min(100vh, calc(100vw * 16 / 9));
@@ -2148,7 +2157,10 @@ body.video-page { background: #000; }
       max(0px, var(--sbb-h, 76px) - (100vh - min(100vh, 100vw * 16 / 9))) + 14px
     );
   }
-  .hero-kb { transform: scale(1); }
+  .hero-kb {
+    transform: scale(1);
+    background-image: var(--hbg-p, var(--hbg, none));
+  }
 }
 
 /* ============================================================

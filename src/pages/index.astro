@@ -871,13 +871,23 @@ function hpromote(n) {
   if (!s) return;
   const kb = s.querySelector('.hero-kb');
   if (!kb || !kb.dataset.bg) return;
-  /* Read at promotion time rather than once at load, so a phone rotated into
-     landscape before the reel gets there still picks the wider frame. A slide
-     with no portrait falls back to its landscape one. */
-  const url = (hportrait.matches && kb.dataset.bgPortrait) || kb.dataset.bg;
+  /* Hands BOTH frames to CSS, which picks between them by media query
+     (global.css, beside .hero-kb). This used to pick here, once — "at promotion
+     time" — and then delete the other option. But slide 1 is promoted the
+     moment the page loads and the rest on idle, so in practice the choice was
+     made at load and never revisited: a page opened wide and then narrowed
+     (a resized window, DevTools device mode, a phone turned upright) kept the
+     landscape frame on every slide after the first, cover-cropped into a 9:16
+     stage. Slide 0 never had the problem because the head <style> already let
+     CSS choose. Now every slide works the way slide 0 does.
+     Nothing extra downloads: a browser fetches only the background-image that
+     applies at the current viewport, and the other only if the viewport
+     actually changes. A slide with no portrait falls back to its landscape
+     frame in the CSS. */
+  kb.style.setProperty('--hbg', "url('" + kb.dataset.bg + "')");
+  if (kb.dataset.bgPortrait) kb.style.setProperty('--hbg-p', "url('" + kb.dataset.bgPortrait + "')");
   kb.removeAttribute('data-bg');
   kb.removeAttribute('data-bg-portrait');
-  kb.style.backgroundImage = "url('" + url + "')";
 }
 
 function hstep(d)  { gs((cs + d + slides.length) % slides.length); }
