@@ -134,12 +134,13 @@ body {
   transition: color var(--t);
   white-space: nowrap;
 }
-.nav-drop-wrap:hover .nav-drop-trigger { color: var(--gold); }
+.nav-drop-wrap:hover .nav-drop-trigger,
+.nav-drop-wrap:focus-within .nav-drop-trigger { color: var(--gold); }
 
 .nav-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 14px);
+  top: calc(100% + var(--nav-drop-gap));
   left: 50%;
   transform: translateX(-50%);
   background: rgba(var(--navy-dark-rgb), 0.97);
@@ -147,15 +148,37 @@ body {
   border: 1px solid color-mix(in srgb, var(--gold), transparent 80%);
   border-radius: 8px;
   list-style: none;
-  min-width: 175px;
+  min-width: 264px;
   padding: 8px 0;
   box-shadow: 0 16px 40px rgba(0,0,0,.45);
   z-index: 2000;
   animation: dropFade .22s ease both;
 }
+
+/* THE GAP USED TO CLOSE THE MENU BEFORE YOU COULD CLICK IT.
+ * The panel is offset below the trigger, and the menu is shown by
+ * `.nav-drop-wrap:hover`. The wrap's box ends at the bottom of the nav link,
+ * so the offset was dead space: moving the pointer down toward the panel took
+ * it off the wrap, :hover stopped matching, and the panel vanished mid-reach.
+ * Nothing was wrong with the links — they were never reachable.
+ *
+ * This bridge is a transparent strip spanning exactly the gap. It belongs to
+ * the panel, so while the pointer crosses it the wrap is still being hovered
+ * through a descendant and the menu stays open. The gap is a variable so the
+ * bridge cannot drift out of step with the offset it has to cover. */
+:root { --nav-drop-gap: 14px; }
+.nav-dropdown::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-1 * var(--nav-drop-gap));
+  height: var(--nav-drop-gap);
+}
 .nav-dropdown::before {
   content: '';
   position: absolute;
+  z-index: 1;
   top: -6px;
   left: 50%;
   transform: translateX(-50%);
@@ -167,7 +190,10 @@ body {
   from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-.nav-drop-wrap:hover .nav-dropdown { display: block; }
+/* Keyboard reaches it too: without :focus-within the panel was mouse-only, so
+ * the room pages had no keyboard route out of the nav at all. */
+.nav-drop-wrap:hover .nav-dropdown,
+.nav-drop-wrap:focus-within .nav-dropdown { display: block; }
 
 .nav-dropdown li a {
   display: block;
@@ -181,11 +207,46 @@ body {
   border-radius: 4px;
   margin: 0 6px;
 }
-.nav-dropdown li a:hover {
+.nav-dropdown li a:hover,
+.nav-dropdown li a:focus-visible {
   background: rgba(201,168,76,.12);
   color: var(--gold) !important;
   padding-left: 26px;
 }
+
+/* ── The room list inside the Home dropdown ── */
+.nav-drop-sep {
+  margin: 9px 14px 5px;
+  padding-top: 9px;
+  border-top: 1px solid color-mix(in srgb, var(--gold), transparent 82%);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(var(--white-rgb), .42);
+}
+/* Room names are sentence case, not the uppercase the section links use: they
+ * are proper names and they have to sit on one line beside a price. */
+.nav-dropdown li a.nav-drop-room {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 9px 20px;
+  font-size: .82rem !important;
+  letter-spacing: .4px;
+  text-transform: none;
+}
+.nav-drop-name { white-space: nowrap; }
+.nav-drop-rate {
+  color: var(--gold);
+  font-weight: 900;
+  font-size: .78rem;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+.nav-dropdown li a.nav-drop-room:hover .nav-drop-rate,
+.nav-dropdown li a.nav-drop-room:focus-visible .nav-drop-rate { color: var(--gold-light, #e0bb5a); }
 
 .nav-cta {
   background: var(--gold);
@@ -228,6 +289,11 @@ body {
 .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* Mobile menu */
+/* The menu gained the six room links, so it can now be taller than a phone
+ * screen. It scrolls, and it starts at the top rather than centring: a centred
+ * flex column that overflows pushes its first items above the scroll origin,
+ * where they cannot be reached. `auto` margins keep it optically centred while
+ * it still fits. */
 .mmenu {
   display: none;
   position: fixed;
@@ -237,10 +303,48 @@ body {
   z-index: 999;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 32px;
+  justify-content: flex-start;
+  gap: 26px;
+  padding: 30px 20px calc(30px + env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .mmenu.open { display: flex; }
+.mmenu > :first-child { margin-top: auto; }
+.mmenu > :last-child { margin-bottom: auto; }
+
+.mmenu-rooms {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  width: min(320px, 100%);
+  margin: -8px 0;
+  padding: 12px 0;
+  border-top: 1px solid color-mix(in srgb, var(--gold), transparent 84%);
+  border-bottom: 1px solid color-mix(in srgb, var(--gold), transparent 84%);
+}
+/* `.mmenu a` below sets uppercase at 1.2rem and ties this rule on specificity,
+ * so these need the extra class to win: room names are proper names, and at
+ * 1.2rem uppercase the longer ones wrapped onto two lines beside their price. */
+.mmenu .mmenu-rooms a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 12px;
+  font-size: .84rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  text-transform: none;
+  border-radius: 5px;
+}
+.mmenu .mmenu-rooms a span {
+  color: var(--gold);
+  font-weight: 900;
+  font-size: .82rem;
+}
+.mmenu .mmenu-rooms a:active { background: rgba(201,168,76,.14); }
 .mmenu a {
   color: #fff;
   font-size: 1.2rem;

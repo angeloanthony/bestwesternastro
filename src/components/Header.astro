@@ -6,7 +6,14 @@
 // subpages link the logo and Home to index.html. The isHome prop
 // reproduces that exactly.
 import { BUSINESS } from '../data/business.ts';
+import { ROOMS, roomHref } from '../data/rooms.ts';
 
+// The dropdown lists every room from ROOMS, in that file's order — which is
+// the same order the homepage rate table prints, cheapest first. Adding a room
+// there puts it in the nav on the next build; there is no second list to keep
+// in step. The rate comes from the same NightlyQuote the room page shows, and
+// is only rendered when it is actually published, so an unpriced room would
+// appear as a name alone rather than as a blank or a guess.
 interface Props {
   isHome?: boolean;
 }
@@ -35,6 +42,15 @@ const homeClass = isHome ? 'nav-drop-trigger nav-active' : 'nav-drop-trigger';
         <li><a href="/#gallery">🖼️ Gallery</a></li>
         <li><a href="/#amenities">✨ Amenities</a></li>
         <li><a href="/#location">📍 Location</a></li>
+        <li class="nav-drop-sep" aria-hidden="true">Our Rooms</li>
+        {ROOMS.map((r) => (
+          <li>
+            <a class="nav-drop-room" href={roomHref(r.slug)}>
+              <span class="nav-drop-name">{r.shortName}</span>
+              {r.nightly.published && <span class="nav-drop-rate">{r.nightly.price}</span>}
+            </a>
+          </li>
+        ))}
       </ul>
     </li>
     <li><a href="/explore">Explore Vernal</a></li>
@@ -51,6 +67,16 @@ const homeClass = isHome ? 'nav-drop-trigger nav-active' : 'nav-drop-trigger';
 <div class="mmenu" id="mm">
   <a href="/" onclick="cm()">Home</a>
   <a href="/#rooms" onclick="cm()">Rooms</a>
+  {/* The same six rooms as the desktop dropdown — a phone had no way to reach
+      a room page from the menu at all, because the dropdown is hover-only. */}
+  <div class="mmenu-rooms">
+    {ROOMS.map((r) => (
+      <a href={roomHref(r.slug)} onclick="cm()">
+        {r.shortName}
+        {r.nightly.published && <span>{r.nightly.price}</span>}
+      </a>
+    ))}
+  </div>
   <a href="/explore" onclick="cm()">Explore Vernal</a>
   <a href="/things-to-do-vernal-utah" onclick="cm()">Things to Do</a>
   <a href="/faq" style="color:var(--gold)">FAQ</a>
