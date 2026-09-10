@@ -54,14 +54,15 @@ export type HeroSlide = {
   kind: 'property' | 'room';
   /** Path relative to the site root, without the leading slash (matches legacy markup). */
   image: string;
-  /** PHONE version of `image`, cropped or shot to 9:16. Optional: a slide with
-   *  no portrait falls back to the landscape one, which is what the widest and
-   *  softest source (pet-friendly-room) does. Built by
-   *  scripts/make-portrait-heroes.mjs — regenerate rather than hand-crop, and
-   *  read the WHY at the top of it before changing a crop.
+  /** PHONE version of `image`, at 9:16. Optional: a slide with no portrait
+   *  falls back to the landscape one. Since 2026-09-10 every slide's portrait
+   *  is the owner's own export, delivered alongside the landscape frame — none
+   *  is cropped by scripts/make-portrait-heroes.mjs any more.
    *
-   *  This exists because `background-size: cover` on a 100vh phone hero keeps
-   *  only 31-35% of a landscape photograph's width. */
+   *  It must be 9:16 (0.5625), not merely "tall": below 3:4 the hero stage is
+   *  sized to exactly that ratio (global.css, next to .hero-kb), so a portrait
+   *  of any other shape is cover-cropped again. A landscape frame in the same
+   *  stage keeps only about a third of its width. */
   portrait?: string;
   /** Ken Burns pan direction — classes already defined in global.css. */
   kb: 'kb-right' | 'kb-left' | 'kb-up' | 'kb-down';
@@ -82,22 +83,36 @@ export type HeroSlide = {
 };
 
 export const HERO_SLIDES: HeroSlide[] = [
+  // THE TWO EXTERIORS (repointed 2026-09-10) — the owner's own 16:9 + 9:16
+  // pairs, the same way every room slide below is delivered.
+  //
+  // The day slide used to be images/31a.webp. It was the same view of the
+  // building with a stock golden-retriever puppy, a "PET FRIENDLY" sign and a
+  // Best Western watermark composited into the parking lot, captioned "at
+  // dusk" over a midday sky — and at 2.5 MB it was the file the head preloads
+  // as the page's LCP image. Hotel-DayTime.webp is that view without the
+  // additions, at 117 KB.
+  //
+  // Both phone versions used to be sharp's `attention` crops of the landscape
+  // files (scripts/make-portrait-heroes.mjs), cut down to 576x1024. These are
+  // the owner's own 940x1672 portrait exports instead. "NithtTime" is the
+  // filename as delivered.
   {
-    id: 'property-night',
+    id: 'property-day',
     kind: 'property',
-    image: 'images/31a.webp',
-    portrait: 'images/portrait/31a.webp',
+    image: 'images/Hotel-DayTime.webp',
+    portrait: 'images/Hotel-DayTime-phoneview.webp',
     kb: 'kb-right',
-    alt: 'Best Western Vernal Inn at dusk — Vernal, Utah',
+    alt: 'Best Western Vernal Inn in daylight, with the Best Western sign on the tower above the covered entrance — Vernal, Utah',
     label: 'The Inn',
   },
   {
     id: 'property-stars',
     kind: 'property',
-    image: 'images/35.webp',
-    portrait: 'images/portrait/35.webp',
+    image: 'images/Hotel-NithtTime.webp',
+    portrait: 'images/Hotel-NithtTime-phoneview.webp',
     kb: 'kb-left',
-    alt: 'Best Western Vernal Inn under the stars — Vernal, Utah',
+    alt: 'Best Western Vernal Inn lit up at night under a starry sky — Vernal, Utah',
     label: 'Under the Stars',
   },
   {

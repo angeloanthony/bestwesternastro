@@ -37,10 +37,17 @@ const OUT = 'public/images/portrait';
  *  centred and attention drifts toward a lamp or a window. Chosen per image by
  *  looking at the output, not by rule. */
 const SLIDES = [
-  // The two exterior shots are the widest sources at 1.50:1, so the browser's
-  // own centre crop throws away half of each. These gain the most.
-  { id: 'exterior-day', src: 'public/images/31a.webp', out: '31a.webp', crop: 'attention' },
-  { id: 'exterior-dusk', src: 'public/images/35.webp', out: '35.webp', crop: 'attention' },
+  // NOTHING IS BUILT HERE ANY MORE (2026-09-10).
+  //
+  // The two exteriors were the last entries: 31a.webp and 35.webp, cropped by
+  // `attention` to 576x1024. The owner has since delivered real 940x1672
+  // portrait exports of both (public/images/Hotel-DayTime-phoneview.webp and
+  // Hotel-NithtTime-phoneview.webp), and heroShowcase.ts points at those. Every
+  // slide in the reel now has a photograph shot or exported for a phone, so
+  // running this would only regenerate public/images/portrait/31a.webp and
+  // 35.webp, which nothing references. Kept, empty, so the reasoning above
+  // survives if a slide ever arrives without a portrait original again.
+  //
   // NO ROOM SLIDE IS BUILT HERE ANY MORE (2026-09-09).
   //
   // This script existed because four of the five room types had no portrait
