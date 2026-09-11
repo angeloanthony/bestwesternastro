@@ -804,6 +804,18 @@ const hkbFrom = () => (hportrait.matches ? 1 : 1.08);
    Three things are paired to it and must move with it: the .hero-slide and
    .hroom cross-fades in global.css, and HOME_KB_MS just below. */
 const HOME_HERO_MS = 3000;
+/* The OPENING slide's hold, counted from the moment its photograph is on screen
+   (hbegin below). Shorter than HOME_HERO_MS because the reason for that 3000ms
+   floor — reading a rate card before it is replaced — does not apply: slide 0
+   is a property shot with no price on it.
+   Measured before this existed, the first change came 3.7s after opening on a
+   normal connection and 6.3s (phone) to 8.0s (desktop) on Slow 4G, because it
+   was photo-arrival + the full 3000. That read as a page that had not started,
+   and on a phone it read as frozen outright: the Ken Burns zoom is off below
+   3:4 (a matched 9:16 stage turns any zoom back into crop), so nothing on the
+   opening slide moves at all until the reel does. Every later slide still
+   holds HOME_HERO_MS. */
+const HOME_FIRST_HOLD_MS = 1500;
 /* The Ken Burns drift is deliberately longer than the hold — it is a slow
    push that gets interrupted by the next slide, never a move that finishes.
    Scaled with the hold (8000 x 3000/6000) so each slide still shows the same
@@ -928,7 +940,14 @@ if (slides.length) {
     if (hbegun) return;
     hbegun = true;
     hpromote(1);            // ready the frame the first advance will show
-    hstart();
+    /* First advance after HOME_FIRST_HOLD_MS, then the normal HOME_HERO_MS
+       rhythm. The one-shot lives in htimer, so hover, focus and a hidden tab
+       still cancel it through hstop() — clearInterval clears a setTimeout id
+       too (the HTML spec keeps one timer list for both) — and hstart()'s
+       !htimer guard then resumes at the normal hold. */
+    if (!htimer && slides.length > 1) {
+      htimer = setTimeout(() => { htimer = null; hstep(1); hstart(); }, HOME_FIRST_HOLD_MS);
+    }
     /* The rest once the page has settled — none is needed for 6s yet. */
     const rest = () => { for (let i = 2; i < slides.length; i++) hpromote(i); };
     if (document.readyState === 'complete') setTimeout(rest, 0);
