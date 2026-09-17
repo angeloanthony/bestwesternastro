@@ -1122,22 +1122,23 @@ export const ROOMS: Room[] = [
 
   // ───────────────────────────────────────────────────────────────────────────
   {
-    slug: 'jacuzzi-studio-king',
-    // Labelled "Jacuzzi King Suite" on the folder's own export, and listed as
-    // "King Jacuzzi Suite" in the old homepage rate table. RENAMED 2026-09-16
-    // on the owner's instruction — "use only Studio, not Suite" — following the
-    // rate card's pattern (Studio Queen, Studio King, Studio Two Queen). The
-    // labelled exports keep the old name in their pixels until re-exported.
-    name: 'Jacuzzi Studio King',
-    shortName: 'Jacuzzi Studio King',
-    heroSlideId: 'jacuzzi-studio-king',
+    slug: 'studio-jacuzzi-king',
+    // THE NAME IS THE OWNER'S OWN, off the labelled export. It has moved twice:
+    // "Jacuzzi King Suite" (the original export) → "Jacuzzi Studio King" (my
+    // reading of "use only Studio, not Suite", 2026-09-16) → "Studio Jacuzzi
+    // King", which is what the owner's re-exported label actually reads
+    // (2026-09-17, public/images/Jacuzzi-Studio/Jacuzzi-Studio-Labeled-$149.webp).
+    // Neither earlier slug was ever deployed, so no redirect is needed.
+    name: 'Studio Jacuzzi King',
+    shortName: 'Studio Jacuzzi King',
+    heroSlideId: 'studio-jacuzzi-king',
     eyebrow: 'In-Room Jacuzzi · One King Bed · Kitchenette',
-    // RATES.nightly.jacuzziStudioKing is null pending the owner's confirmation of
+    // RATES.nightly.studioJacuzziKing is null pending the owner's confirmation of
     // the $149 on the labelled export — see its note in rates.ts. Nothing below
     // states a price, so confirming it is a one-line change there. When it is,
     // add the price to seo.title and seo.description, the way every other room
     // carries its own.
-    nightly: nightlyQuote(RATES.nightly.jacuzziStudioKing),
+    nightly: nightlyQuote(RATES.nightly.studioJacuzziKing),
     weekly: WEEKLY_CALL_LINE,
     // Both reused verbatim from the homepage rate table's "King Jacuzzi Suite"
     // row, which has published them for this room since before this page.
@@ -1162,7 +1163,7 @@ export const ROOMS: Room[] = [
       src: 'images/Jacuzzi-Studio/Jacuzzi-Suite1.webp',
       portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview1.webp',
       caption: 'The corner jacuzzi in the room itself, beside the desk and the window.',
-      alt: 'Jacuzzi Studio King with a corner jacuzzi in the room beside the desk — Best Western Vernal Inn, Vernal Utah',
+      alt: 'Studio Jacuzzi King with a corner jacuzzi in the room beside the desk — Best Western Vernal Inn, Vernal Utah',
     },
     gallery: [
       {
@@ -1229,7 +1230,7 @@ export const ROOMS: Room[] = [
       ...STANDARD_BATHROOM('Jacuzzi-Studio', 'Jacuzzi'),
     ],
     about: [
-      'The Jacuzzi Studio King is the room with the tub in it. A corner jacuzzi sits in a tiled surround in the main room — not behind the bathroom door — beside the desk and the window, so a long soak is part of the room rather than an afterthought. The homepage rate table lists it for romance and special occasions, and that is exactly what it is for.',
+      'The Studio Jacuzzi King is the room with the tub in it. A corner jacuzzi sits in a tiled surround in the main room — not behind the bathroom door — beside the desk and the window, so a long soak is part of the room rather than an afterthought. The homepage rate table lists it for romance and special occasions, and that is exactly what it is for.',
       'One king bed sits on a light-wood platform frame against the navy accent wall, with a panelled headboard, a wall-mounted reading light and a nightstand on each side. Beside it a two-seat sofa and a floor lamp sit by the window, which looks out over Vernal.',
       'It has the same kitchenette as the rest of the property — a sink and a two-burner cooktop in the counter, cabinets, a microwave, a coffee maker and a full-height refrigerator with a freezer — on a tiled floor. There is a desk with a leather office chair and a reading lamp under a wall-mounted TV, a table with two upholstered chairs by the door, and an open closet with a hanging rail, an iron and an ironing board. The bathroom is the property standard: a granite vanity with a backlit mirror, a full-size tub and shower combination, and a tiled floor.',
       'Free hot breakfast, free WiFi and free parking come with every stay, and the front desk is staffed around the clock. The homepage rate table lists this room as sleeping one to two. Weekly rates are quoted by phone.',
@@ -1257,9 +1258,9 @@ export const ROOMS: Room[] = [
       { label: '24-hour front desk', source: 'site' },
     ],
     seo: {
-      title: 'Jacuzzi Studio King — In-Room Jacuzzi | Best Western Vernal Inn, Vernal Utah',
+      title: 'Studio Jacuzzi King — In-Room Jacuzzi | Best Western Vernal Inn, Vernal Utah',
       description:
-        'Jacuzzi Studio King at Best Western Vernal Inn in Vernal, Utah: a corner jacuzzi in the room, one king bed, a sofa and a full kitchenette. Free hot breakfast, WiFi and parking. Weekly rates — call for price.',
+        'Studio Jacuzzi King at Best Western Vernal Inn in Vernal, Utah: a corner jacuzzi in the room, one king bed, a sofa and a full kitchenette. Free hot breakfast, WiFi and parking. Weekly rates — call for price.',
       bedType: 'King',
       // The rate table's "1–2" for this room, the same licence Studio King's
       // occupancy of 2 rests on.

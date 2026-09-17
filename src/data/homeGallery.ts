@@ -117,16 +117,17 @@ export const HOME_GALLERY: GalleryTile[] = [
     rateKey: 'petFriendlyStudioTwoQueen',
   },
 
-  // The Jacuzzi Studio King is DELIBERATELY ABSENT, although it has had a room
-  // page since 2026-09-16. public/images/Jacuzzi-Studio/ holds a labelled export
-  // reading "$149/night", but RATES.nightly.jacuzziStudioKing is still null
-  // pending the owner's confirmation, and the homepage table prints "Call for
-  // rate" for it. Putting that picture here would advertise $149 a few hundred
-  // pixels above a table that declines to quote a price, which is the
-  // contradiction this file's guard exists to prevent. That export also still
-  // reads "Jacuzzi King Suite" — the room's old name — so it needs re-exporting
-  // as well. Once both are done it can join with
-  // `rateKey: 'jacuzziStudioKing'`, on the same terms as the room tiles above.
+  // The Studio Jacuzzi King is DELIBERATELY ABSENT, and only one thing is now
+  // missing. Its picture is ready: the owner re-exported
+  // images/Jacuzzi-Studio/Jacuzzi-Studio-Labeled-$149.webp on 2026-09-17,
+  // correctly labelled "Studio Jacuzzi King" over "$149/night". But
+  // RATES.nightly.studioJacuzziKing is still null — the owner has not confirmed
+  // that rate in writing — so the homepage table prints "Call for rate", and a
+  // tile advertising $149 a few hundred pixels above it is exactly the
+  // contradiction this file's guard exists to prevent (the guard would reject
+  // it anyway: a printed price against a null rate). Confirm the rate in
+  // rates.ts and add the tile here with `rateKey: 'studioJacuzziKing'`, on the
+  // same terms as the room tiles above.
 
   // ── Breakfast ──────────────────────────────────────────────────────────────
   {

@@ -19,7 +19,7 @@
 //   nightly — CONFIRMED, published, SIX room types, $95 to $155. The Studio
 //             Queen (then "Queen Suite") at $95 was added on 2026-09-09 and is
 //             the lowest published rate on the card; see the key's own note.
-//             A seventh key, the Jacuzzi Studio King, is null (unconfirmed).
+//             A seventh key, the Studio Jacuzzi King, is null (unconfirmed).
 //   weekly  — WITHDRAWN. Quoted by phone only. Every customer-facing weekly
 //             dollar amount has been removed from the site; the copy is
 //             WEEKLY_CALL_LINE. Do not restore $588 / $660 / $700.
@@ -89,7 +89,7 @@ export const RATES = {
      *  "Call for pricing" — what the rate table already said for this room.
      *  Confirm it and change null to 149 here: every one of those, and the
      *  room page's JSON-LD Offer, follows on the next build. */
-    jacuzziStudioKing: null as number | null,
+    studioJacuzziKing: null as number | null,
   },
 
   /** Monthly rates. All null: the site currently ranks for "monthly hotels vernal

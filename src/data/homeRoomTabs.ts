@@ -29,7 +29,7 @@
 // there fixes the homepage in the same edit. A filename that does not resolve
 // fails the build rather than shipping a broken tile.
 //
-// EVERY TAB IS DRIVEN BY ROOMS, the Jacuzzi Studio King's included. Until
+// EVERY TAB IS DRIVEN BY ROOMS, the Studio Jacuzzi King's included. Until
 // 2026-09-16 that one was written out by hand here, because the room had
 // photographs but no page. It has a page now; its nightly rate is still null
 // pending confirmation, which priceTag() renders as "Call for rate" without any
@@ -96,7 +96,7 @@ function frame(room: Room, file: string): RoomPhoto {
   return hit;
 }
 
-/** "Studio Queen · $95 a night", or "Jacuzzi Studio King · Call for rate". */
+/** "Studio Queen · $95 a night", or "Studio Jacuzzi King · Call for rate". */
 function priceTag(room: Room): string {
   return room.nightly.published
     ? `✦ ${room.shortName} · ${room.nightly.price} a night`
@@ -156,7 +156,7 @@ const studioTwoQueen = roomBySlug('studio-two-queen');
 const accessibleStudioKing = roomBySlug('accessible-studio-king');
 const petFriendlyStudioTwoQueen = roomBySlug('pet-friendly-studio-two-queen');
 const petFriendlyRoom = roomBySlug('pet-friendly-room');
-const jacuzziStudioKing = roomBySlug('jacuzzi-studio-king');
+const studioJacuzziKing = roomBySlug('studio-jacuzzi-king');
 
 export const ROOM_TABS: RoomTab[] = [
   {
@@ -318,27 +318,27 @@ export const ROOM_TABS: RoomTab[] = [
 
   // Driven by ROOMS like the others since 2026-09-16, when the room got its
   // page; it used to be written out by hand here. Its tag reads "Call for rate"
-  // through priceTag() while RATES.nightly.jacuzziStudioKing is null, and turns
+  // through priceTag() while RATES.nightly.studioJacuzziKing is null, and turns
   // into the price by itself once that is confirmed.
   {
-    id: 'jacuzzi-studio-king',
-    label: jacuzziStudioKing.shortName,
+    id: 'studio-jacuzzi-king',
+    label: studioJacuzziKing.shortName,
     panels: [
       leadPanel(
-        jacuzziStudioKing,
+        studioJacuzziKing,
         'Jacuzzi-Suite1.webp',
         'A Corner Jacuzzi,<br><em>Right There in the Room.</em>',
         ['🛁 In-Room Corner Jacuzzi', '🛏️ King Bed', '🛋️ Two-Seat Sofa', '🍳 Kitchenette', '📶 Free WiFi']
       ),
       detailPanel(
-        jacuzziStudioKing,
+        studioJacuzziKing,
         'Jacuzzi-Suite9.webp',
         'The Bed and the Sofa',
         'A King Bed,<br><em>and Somewhere Else to Sit.</em>',
         ['🛏️ King Bed', '🛋️ Two-Seat Sofa', '💡 Wall Reading Lights', '❄️ In-Room Heat & A/C']
       ),
       detailPanel(
-        jacuzziStudioKing,
+        studioJacuzziKing,
         'Jacuzzi-Suite6.webp',
         'The Working End',
         'Desk, TV,<br><em>and the Kitchenette Beside It.</em>',

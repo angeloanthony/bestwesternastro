@@ -34,7 +34,7 @@ const nameRoomHref = (name: string): string | null => {
 };
 /** Rate-table room-name cell: a link where a detail page exists, plain text
  *  otherwise (a room type with no page of its own, e.g. the Studio King
- *  (Kitchenette) and Jacuzzi Studio Two Queen rows). */
+ *  (Kitchenette) and Studio Jacuzzi Two Queen rows). */
 const rateCell = (name: string): string => {
   const href = nameRoomHref(name);
   return href
@@ -393,14 +393,14 @@ ${HERO_SLIDES.map((s, i) => {
  <td>Extended stays, contractors</td>
  </tr>
  <tr>
- <td>${rateCell('Jacuzzi Studio King')}</td>
+ <td>${rateCell('Studio Jacuzzi King')}</td>
  <td>1–2</td>
- <td>${RATES.nightly.jacuzziStudioKing === null ? 'Call for rate' : `<span class="rate-price">${usd(RATES.nightly.jacuzziStudioKing)}</span><div class="rate-note">${RATES.taxNote}</div>`}</td>
+ <td>${RATES.nightly.studioJacuzziKing === null ? 'Call for rate' : `<span class="rate-price">${usd(RATES.nightly.studioJacuzziKing)}</span><div class="rate-note">${RATES.taxNote}</div>`}</td>
  <td>Call for price</td>
  <td>Romance, special occasions</td>
  </tr>
  <tr>
- <td><strong>Jacuzzi Studio Two Queen</strong></td>
+ <td><strong>Studio Jacuzzi Two Queen</strong></td>
  <td>1–4</td>
  <td>Call for rate</td>
  <td>Call for price</td>
