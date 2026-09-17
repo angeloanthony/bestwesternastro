@@ -20,12 +20,16 @@
 // the asset set (it was the one slide with no real photograph behind it). Do
 // not add it back to make the count even." Both of its conditions have since
 // changed. The owner delivered a full photographic set in
-// public/images/Queen-Suite/ — including a labelled frame reading "Queen
+// public/images/Queen-Studio/ — including a labelled frame reading "Queen
 // Suite" over a "$95/night" badge — and named the rate when asking for the
 // page. The old bar was "do not invent a room to balance the reel", not "this
 // room does not exist", and it is cleared by evidence, not by preference.
 //
 // It leads the room run because $95 is now the lowest rate on the card.
+//
+// RENAMED 2026-09-16: that room is now the STUDIO QUEEN. The owner: "they are
+// not suites". The labelled frames in its folder still read "Queen Suite"; the
+// name everywhere on the site comes from rooms.ts, not from those pixels.
 //
 // PHOTOGRAPHY (repointed 2026-09-09). Every room slide now reads the owner's
 // reshoot straight out of public/images/<Room-Type>/. The old built crops in
@@ -116,21 +120,22 @@ export const HERO_SLIDES: HeroSlide[] = [
     label: 'Under the Stars',
   },
   {
-    id: 'queen-suite',
+    // "Queen Suite" until 2026-09-16 — renamed by the owner, see rooms.ts.
+    id: 'studio-queen',
     kind: 'room',
-    image: 'images/Queen-Suite/Queen-Suite.webp',
-    portrait: 'images/Queen-Suite/Queen-Suite-phoneview.webp',
+    image: 'images/Queen-Studio/Queen-Suite.webp',
+    portrait: 'images/Queen-Studio/Queen-Suite-phoneview.webp',
     kb: 'kb-right',
-    alt: 'Queen Suite with a queen bed and a two-seat sofa under the window — Best Western Vernal Inn, Vernal Utah',
-    label: 'Queen Suite',
+    alt: 'Studio Queen with a queen bed and a two-seat sofa under the window — Best Western Vernal Inn, Vernal Utah',
+    label: 'Studio Queen',
     room: {
-      name: 'Queen Suite',
+      name: 'Studio Queen',
       // No occupancy claimed: this room has never had a row in the homepage
       // rate table, so there is no published figure to reuse, and a sofa is
       // not evidence that it converts. The room page says the same.
       sleeps: 'Our lowest rate',
       features: ['Queen bed', 'Sofa', 'Kitchenette'],
-      nightly: nightlyQuote(RATES.nightly.queenSuite),
+      nightly: nightlyQuote(RATES.nightly.studioQueen),
       weekly: WEEKLY_CALL_LINE,
     },
   },

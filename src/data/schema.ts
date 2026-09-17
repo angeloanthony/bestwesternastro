@@ -58,7 +58,7 @@ const AMENITIES: readonly string[] = [
   'Free Parking',
   'Pet Friendly',
   'Kitchenette',
-  'Jacuzzi Suite',
+  'Jacuzzi Studio',
   '24-Hour Front Desk',
   'Laundry Service',
   'Business Center',

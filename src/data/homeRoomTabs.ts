@@ -29,15 +29,11 @@
 // there fixes the homepage in the same edit. A filename that does not resolve
 // fails the build rather than shipping a broken tile.
 //
-// THE JACUZZI TAB IS THE ONE ENTRY NOT DRIVEN BY ROOMS. The hotel sells jacuzzi
-// suites — the rate table has carried a "King Jacuzzi Suite" row for as long as
-// the page has existed — and public/images/Jacuzzi-Suite/ holds a full set of
-// real photographs of one. What it has not got is a confirmed nightly rate, so rooms.ts
-// gives it no page and homeGallery.ts leaves it out of the gallery (a labelled
-// "$149/night" export sits unused in that folder). None of that is a reason to
-// hide the room: a tab with photographs, no price and "call the front desk" is
-// exactly what the rate table already says. Give it a rate and it becomes a
-// Room like the other six, and this hand-written entry goes away.
+// EVERY TAB IS DRIVEN BY ROOMS, the Jacuzzi Studio King's included. Until
+// 2026-09-16 that one was written out by hand here, because the room had
+// photographs but no page. It has a page now; its nightly rate is still null
+// pending confirmation, which priceTag() renders as "Call for rate" without any
+// special case.
 //
 // WHAT THE COPY MAY SAY. The panel prose is the room's own `about[0]` and the
 // frame's own `caption` from rooms.ts, both already held to that file's
@@ -47,7 +43,6 @@
 // Pet-Friendly Room's kitchenette has a sink, microwave and coffee maker but no
 // cooktop in its feature list, and its pill says so.
 
-import { BUSINESS } from './business.ts';
 import { ROOMS, roomHref, type Room, type RoomPhoto } from './rooms.ts';
 
 export type RoomTabPanel = {
@@ -101,7 +96,7 @@ function frame(room: Room, file: string): RoomPhoto {
   return hit;
 }
 
-/** "Queen Suite · $95 a night", or "Queen Suite · Call for rate". */
+/** "Studio Queen · $95 a night", or "Jacuzzi Studio King · Call for rate". */
 function priceTag(room: Room): string {
   return room.nightly.published
     ? `✦ ${room.shortName} · ${room.nightly.price} a night`
@@ -149,22 +144,23 @@ function detailPanel(
   };
 }
 
-// ── The six rooms on the rate card ───────────────────────────────────────────
+// ── Every room with a page ───────────────────────────────────────────────────
 // In ROOMS order, which is the order the rate table and the nav dropdown use.
 // Three frames each: the beds, the living or working half, and the kitchenette
 // — chosen so a guest flicking through the tabs sees three different things per
 // room rather than the same bed from three angles.
 
-const queenSuite = roomBySlug('queen-suite');
+const queenSuite = roomBySlug('studio-queen'); // the Studio Queen, "Queen Suite" until 2026-09-16
 const studioKing = roomBySlug('studio-king');
 const studioTwoQueen = roomBySlug('studio-two-queen');
 const accessibleStudioKing = roomBySlug('accessible-studio-king');
 const petFriendlyStudioTwoQueen = roomBySlug('pet-friendly-studio-two-queen');
 const petFriendlyRoom = roomBySlug('pet-friendly-room');
+const jacuzziStudioKing = roomBySlug('jacuzzi-studio-king');
 
 export const ROOM_TABS: RoomTab[] = [
   {
-    id: 'queen-suite',
+    id: 'studio-queen',
     label: queenSuite.shortName,
     panels: [
       leadPanel(
@@ -262,7 +258,7 @@ export const ROOM_TABS: RoomTab[] = [
         accessibleStudioKing,
         'Handicapped-studio4.webp',
         'The Same Studio',
-        'Same Kitchenette.<br><em>Same Rate as the Studio King.</em>',
+        'Same Kitchenette.<br><em>Same Studio Layout.</em>',
         ['🍳 Kitchenette', '🧊 Fridge & Freezer', '💼 Desk & Wall TV', '🛋️ Armchair & Ottoman']
       ),
     ],
@@ -320,46 +316,34 @@ export const ROOM_TABS: RoomTab[] = [
     ],
   },
 
-  // ── The jacuzzi suite ──────────────────────────────────────────────────────
-  // Photographed, sold, and deliberately unpriced. See the header. Everything
-  // below is what the three cited frames show; the only claim not visible in a
-  // photograph is "call the front desk", which is what the rate table above
-  // this section already says for both jacuzzi rows.
+  // Driven by ROOMS like the others since 2026-09-16, when the room got its
+  // page; it used to be written out by hand here. Its tag reads "Call for rate"
+  // through priceTag() while RATES.nightly.jacuzziStudioKing is null, and turns
+  // into the price by itself once that is confirmed.
   {
-    id: 'jacuzzi-suite',
-    label: 'Jacuzzi Suite',
+    id: 'jacuzzi-studio-king',
+    label: jacuzziStudioKing.shortName,
     panels: [
-      {
-        src: 'images/Jacuzzi-Suite/Jacuzzi-Suite1.webp',
-        alt: 'Jacuzzi suite with a corner soaking tub set in a tiled surround beside the desk — Best Western Vernal Inn, Vernal Utah',
-        caption:
-          'The corner jacuzzi tub set into a tiled surround in the room itself, with the desk, office chair and wall-mounted TV alongside it and the window looking out over Vernal.',
-        tag: '✦ Jacuzzi Suite · Call for rate',
-        title: 'A Corner Jacuzzi,<br><em>Right There in the Room.</em>',
-        desc: 'The tub is a corner jacuzzi set into a tiled surround — in the room itself, not the bathroom — with the desk and the wall-mounted TV beside it and a window over Vernal. It is the one room type we have not published a nightly rate for: the rate table above says call, and it means it. Ring the front desk and ask what is open.',
-        pills: ['🛁 In-Room Corner Jacuzzi', '🛏️ King Bed', '🍳 Kitchenette', '💼 Desk & Wall TV', '📞 Call for Rate'],
-        link: { href: `tel:${BUSINESS.phoneTel}`, label: `Call ${BUSINESS.phoneDisplay} →` },
-      },
-      {
-        src: 'images/Jacuzzi-Suite/Jacuzzi-Suite10.webp',
-        alt: 'King bed on a light-wood platform frame against a navy accent wall with wall reading lights — Best Western Vernal Inn, Vernal Utah',
-        caption:
-          'The king bed on a light-wood platform frame against the navy accent wall, with a panelled headboard, a wall-mounted reading light and a nightstand either side, and a framed waterfall print alongside.',
-        tag: '✦ The Bed',
-        title: 'A King Bed<br><em>on the Navy Wall.</em>',
-        desc: 'The king bed sits on a light-wood platform frame against the navy accent wall, with a panelled headboard, a wall-mounted reading light and a nightstand on each side — the room phone within reach on one, the clock on the other.',
-        pills: ['🛏️ King Bed', '💡 Wall Reading Lights', '🕐 Clock & Room Phone', '🖼️ Framed Prints'],
-      },
-      {
-        src: 'images/Jacuzzi-Suite/Jacuzzi-Suite5.webp',
-        alt: 'Kitchenette with sink, two-burner cooktop, microwave and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
-        caption:
-          'The kitchenette: a stainless sink and a two-burner cooktop set into the counter, cabinets above and below, a microwave, a coffee maker and a full-height refrigerator with a freezer alongside.',
-        tag: '✦ The Kitchenette',
-        title: 'Sink, Cooktop,<br><em>Microwave, Coffee.</em>',
-        desc: 'The same kitchenette as the rest of the property — a stainless sink and a two-burner cooktop in the counter, cabinets above and below, a microwave, a coffee maker, and a full-height refrigerator with a freezer beside it.',
-        pills: ['🍳 Two-Burner Cooktop', '🔥 Microwave', '☕ Coffee Maker', '🧊 Full-Height Fridge'],
-      },
+      leadPanel(
+        jacuzziStudioKing,
+        'Jacuzzi-Suite1.webp',
+        'A Corner Jacuzzi,<br><em>Right There in the Room.</em>',
+        ['🛁 In-Room Corner Jacuzzi', '🛏️ King Bed', '🛋️ Two-Seat Sofa', '🍳 Kitchenette', '📶 Free WiFi']
+      ),
+      detailPanel(
+        jacuzziStudioKing,
+        'Jacuzzi-Suite9.webp',
+        'The Bed and the Sofa',
+        'A King Bed,<br><em>and Somewhere Else to Sit.</em>',
+        ['🛏️ King Bed', '🛋️ Two-Seat Sofa', '💡 Wall Reading Lights', '❄️ In-Room Heat & A/C']
+      ),
+      detailPanel(
+        jacuzziStudioKing,
+        'Jacuzzi-Suite6.webp',
+        'The Working End',
+        'Desk, TV,<br><em>and the Kitchenette Beside It.</em>',
+        ['💼 Desk & Leather Chair', '📺 Wall-Mounted TV', '🍳 Two-Burner Cooktop', '🧊 Full-Height Fridge']
+      ),
     ],
   },
 ];

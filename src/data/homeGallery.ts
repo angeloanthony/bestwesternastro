@@ -72,10 +72,14 @@ export const HOME_GALLERY: GalleryTile[] = [
 
   // ── The rooms ──────────────────────────────────────────────────────────────
   {
-    src: 'images/Queen-Suite/Queen-Suite-Labeled-$95.webp',
-    label: 'Queen Suite',
-    alt: 'Queen Suite with a queen bed and a two-seat sofa — $95 a night at Best Western Vernal Inn, Vernal Utah',
-    rateKey: 'queenSuite',
+    // Re-exported by the owner 2026-09-17: the picture now reads "Studio Queen"
+    // over "$95/night" (it said "Queen Suite" until then). The folder was
+    // renamed Queen-Suite/ → Queen-Studio/ the same day; the filename kept its
+    // old wording, which guests never see.
+    src: 'images/Queen-Studio/Queen-Suite-Labeled-$95.webp',
+    label: 'Studio Queen',
+    alt: 'Studio Queen with a queen bed and a two-seat sofa — $95 a night at Best Western Vernal Inn, Vernal Utah',
+    rateKey: 'studioQueen',
   },
   {
     src: 'images/King-Studio/King-Studio-$108.webp',
@@ -84,16 +88,21 @@ export const HOME_GALLERY: GalleryTile[] = [
     rateKey: 'studioKing',
   },
   {
-    src: 'images/Handicaped-Studio/Handicapped-studio-$108.webp',
-    label: 'Accessible Studio King',
-    alt: 'Accessible Studio King with a king bed, desk and open closet — $108 a night at Best Western Vernal Inn, Vernal Utah',
-    rateKey: 'accessibleStudioKing',
-  },
-  {
     src: 'images/Double-Queen-Studio/Double-Queen-Studio-$120.webp',
     label: 'Studio Two Queen',
     alt: 'Studio Two Queen with a kitchenette, dining table, desk and armchair — $120 a night at Best Western Vernal Inn, Vernal Utah',
     rateKey: 'studioTwoQueen',
+  },
+  {
+    // Re-exported by the owner at $120 on 2026-09-17, the day the rate moved
+    // from $108 — the old Handicapped-studio-$108.webp tile was withdrawn in
+    // between. After the Studio Two Queen because the two now share $120 and
+    // ROOMS lists it right after that room. Its label already reads
+    // "Accessible Studio King".
+    src: 'images/Handicaped-Studio/Handicapped-studio-$120.webp',
+    label: 'Accessible Studio King',
+    alt: 'Accessible Studio King with a king bed, kitchenette, desk, armchair and open closet — $120 a night at Best Western Vernal Inn, Vernal Utah',
+    rateKey: 'accessibleStudioKing',
   },
   {
     src: 'images/Pet-Friendly-King-Suite/Pet-Friendly-King-Suite-Labeled-$135.webp',
@@ -108,14 +117,16 @@ export const HOME_GALLERY: GalleryTile[] = [
     rateKey: 'petFriendlyStudioTwoQueen',
   },
 
-  // The Jacuzzi Suite is DELIBERATELY ABSENT. public/images/Jacuzzi-Suite/
-  // holds a labelled export reading "$149/night", but there is no jacuzzi rate
-  // on the rate card — the homepage table prints "Call for rate" for both
-  // jacuzzi rooms — and no room page. Putting that picture here would
-  // advertise $149 a few hundred pixels above a table that declines to quote a
-  // price, which is the contradiction this file's guard exists to prevent. Add
-  // `jacuzziSuite` to RATES.nightly and it can join, on the same terms as the
-  // six above.
+  // The Jacuzzi Studio King is DELIBERATELY ABSENT, although it has had a room
+  // page since 2026-09-16. public/images/Jacuzzi-Studio/ holds a labelled export
+  // reading "$149/night", but RATES.nightly.jacuzziStudioKing is still null
+  // pending the owner's confirmation, and the homepage table prints "Call for
+  // rate" for it. Putting that picture here would advertise $149 a few hundred
+  // pixels above a table that declines to quote a price, which is the
+  // contradiction this file's guard exists to prevent. That export also still
+  // reads "Jacuzzi King Suite" — the room's old name — so it needs re-exporting
+  // as well. Once both are done it can join with
+  // `rateKey: 'jacuzziStudioKing'`, on the same terms as the room tiles above.
 
   // ── Breakfast ──────────────────────────────────────────────────────────────
   {

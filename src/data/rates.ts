@@ -16,9 +16,10 @@
 // rather say "call" than publish a number nobody has confirmed.
 //
 // CURRENT STATE (hotel instruction, 2026-09-03; extended 2026-09-09):
-//   nightly — CONFIRMED, published, SIX room types, $95 to $155. The Queen
-//             Suite at $95 was added on 2026-09-09 and is now the lowest
-//             published rate on the card; see the key's own note below.
+//   nightly — CONFIRMED, published, SIX room types, $95 to $155. The Studio
+//             Queen (then "Queen Suite") at $95 was added on 2026-09-09 and is
+//             the lowest published rate on the card; see the key's own note.
+//             A seventh key, the Jacuzzi Studio King, is null (unconfirmed).
 //   weekly  — WITHDRAWN. Quoted by phone only. Every customer-facing weekly
 //             dollar amount has been removed from the site; the copy is
 //             WEEKLY_CALL_LINE. Do not restore $588 / $660 / $700.
@@ -54,18 +55,41 @@ export const RATES = {
    *  a derived number has to carry. Keys are the hotel's own room names.
    *  A null here is still the publication gate: it renders as callForPricing. */
   nightly: {
-    /** Added 2026-09-09 on the owner's instruction. The rate is the hotel's
-     *  own: public/images/Queen-Suite/ ships a labelled frame reading
-     *  "Queen Suite" over a "$95/night" badge, and the owner confirmed it in
-     *  writing when asking for the page. This is the lowest published rate on
-     *  the card — below the two $108 studios — so it is the number a guest
-     *  comparing Vernal hotels sees first. */
-    queenSuite: 95 as number | null,
+    /** The Studio Queen — named "Queen Suite" until 2026-09-16, when the owner
+     *  renamed it ("they are not suites") and confirmed the rate again in
+     *  writing: "$95 a night for the Studio Queen". First added 2026-09-09 from
+     *  a labelled frame reading "Queen Suite" over a "$95/night" badge; the
+     *  photos are in public/images/Queen-Studio/ (Queen-Suite/ until the
+     *  owner renamed the folder on 2026-09-17). This is the
+     *  lowest published rate on the card — below the $108 Studio King — so
+     *  it is the number a guest comparing Vernal hotels sees first. */
+    studioQueen: 95 as number | null,
     studioKing: 108 as number | null,
     studioTwoQueen: 120 as number | null,
-    accessibleStudioKing: 108 as number | null,
+    /** $120 from 2026-09-17, on the owner's instruction ("the Studio handicap
+     *  king needs to be changed to $120 a night"). It was $108 — the same as the
+     *  standard Studio King — and several pages said so in prose ("the same
+     *  rate as the Studio King", "not a premium"); those sentences were removed
+     *  in the same change. The homepage gallery's labelled tile for this room
+     *  had "$108" baked into its pixels; the owner re-exported it the same day
+     *  as Handicapped-studio-$120.webp, and homeGallery.ts's build guard now
+     *  checks it against this number. */
+    accessibleStudioKing: 120 as number | null,
     petFriendlyStudioTwoQueen: 155 as number | null,
     petFriendlyRoom: 135 as number | null,
+    /** The Jacuzzi Studio King — added 2026-09-16, when the owner asked for its
+     *  page, and renamed from "Jacuzzi King Suite" the same day ("use only
+     *  Studio, not Suite").
+     *  NULL ON PURPOSE — PENDING THE OWNER'S CONFIRMATION. The folder ships the
+     *  hotel's own labelled export reading "Jacuzzi King Suite" over a
+     *  "$149/night" badge, which is exactly how the Studio Queen's $95 arrived.
+     *  But the Studio Queen's rate went live only once the owner confirmed it in
+     *  writing, and this one has not been confirmed. Until it is, the room
+     *  page, the nav, the homepage rate table and the homepage tab all read
+     *  "Call for pricing" — what the rate table already said for this room.
+     *  Confirm it and change null to 149 here: every one of those, and the
+     *  room page's JSON-LD Offer, follows on the next build. */
+    jacuzziStudioKing: null as number | null,
   },
 
   /** Monthly rates. All null: the site currently ranks for "monthly hotels vernal

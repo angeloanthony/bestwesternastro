@@ -1,7 +1,7 @@
 ---
 // src/pages/rooms/[slug].astro
 //
-// ONE template, five pages. Every room fact — name, price, photographs,
+// ONE template, one page per entry in ROOMS. Every room fact — name, price, photographs,
 // captions, features, copy and SEO metadata — comes from src/data/rooms.ts.
 // Nothing about any individual room is written here, so this file never has to
 // change when a rate moves or a photograph is added.
@@ -278,10 +278,22 @@ const roomNode = {
           <p class="rm-weekly">{room.weekly}</p>
         </div>
       </div>
-      <p>
-        {room.nightly.price} is the hotel's confirmed nightly rate for the {room.name} — not a
-        starting price and not an average. It is quoted before tax, and tax is added at check-in.
-      </p>
+      {/* Two states, because a room can be on this site before its rate is.
+          Without the else, an unpriced room read "Call for pricing is the
+          hotel's confirmed nightly rate for the …". */}
+      {room.nightly.published ? (
+        <p>
+          {room.nightly.price} is the hotel's confirmed nightly rate for the {room.name} — not a
+          starting price and not an average. It is quoted before tax, and tax is added at check-in.
+        </p>
+      ) : (
+        <p>
+          We have not published a nightly rate for the {room.name} yet, so we would rather you
+          heard it from the front desk than read a number here that might not be tonight's. Call
+          <a href={tel} style="color:var(--gold);font-weight:700;"> {BUSINESS.phoneDisplay}</a> and
+          ask for the {room.name}.
+        </p>
+      )}
       <p>
         Staying a week or longer? We publish no weekly figure for any room type — the answer is
         {' '}{WEEKLY_CALL_PHRASE}. Call
@@ -306,8 +318,10 @@ const roomNode = {
   {/* The site-wide booking block carries the actual buttons — call, email and
       the promo code. It is given the room's own heading so the page does not
       say "Ready to Book" twice in a row. */}
+  {/* "+ tax" rides with the "/ night" — an unpriced room has neither, or the
+      banner would read "Call for pricing + tax". */}
   <CTA
-    heading={`${room.name} · ${room.nightly.price}${room.nightly.published ? ' / night' : ''} ${RATES.taxNote}`}
+    heading={`${room.name} · ${room.nightly.price}${room.nightly.published ? ` / night ${RATES.taxNote}` : ''}`}
     tagline={`${bookLabel} — mention code ${BUSINESS.directBooking.promoCode} · ${room.weekly} · Free hot breakfast · Free WiFi · Free parking`}
   />
 
@@ -316,7 +330,7 @@ const roomNode = {
     <section class="rm-sec">
       <h2>Looking for a Different Room?</h2>
       <p class="rm-sec-note">
-        Every room type on the hotel's rate card, with its confirmed nightly rate.
+        Every room type we have a page for, with its nightly rate wherever the hotel has published one.
       </p>
       <div class="rm-cards">
         {others.map((r) => (
@@ -325,7 +339,7 @@ const roomNode = {
             <div class="rm-card-b">
               <p class="rm-card-n">{r.name}</p>
               <p class="rm-card-p">
-                <strong>{r.nightly.price}</strong>{r.nightly.published ? ' / night' : ''} {RATES.taxNote}
+                <strong>{r.nightly.price}</strong>{r.nightly.published ? ` / night ${RATES.taxNote}` : ''}
                 {r.sleeps ? ` · ${r.sleeps}` : ''}
               </p>
             </div>

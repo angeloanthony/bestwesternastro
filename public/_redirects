@@ -20,5 +20,9 @@
 /vernal-utah-hotel        /    301
 /vernal-utah-hotel.html   /    301
 
+# Room renamed 2026-09-16: "Queen Suite" → "Studio Queen" (owner: "they are not suites").
+/rooms/queen-suite        /rooms/studio-queen    301
+/rooms/queen-suite.html   /rooms/studio-queen    301
+
 # Pretty URL fallback: serve .html when extensionless URL is requested
 # (Netlify does this by default for files in publish dir; included for clarity)

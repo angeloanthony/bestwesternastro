@@ -33,7 +33,8 @@ const nameRoomHref = (name: string): string | null => {
   return r ? roomHref(r.slug) : null;
 };
 /** Rate-table room-name cell: a link where a detail page exists, plain text
- *  otherwise (the suites have no confirmed rate and so no page). */
+ *  otherwise (a room type with no page of its own, e.g. the Studio King
+ *  (Kitchenette) and Jacuzzi Studio Two Queen rows). */
 const rateCell = (name: string): string => {
   const href = nameRoomHref(name);
   return href
@@ -55,7 +56,7 @@ const attr = (s: string): string => amp(s).replace(/"/g, '&quot;');
 const jsArg = (s: string): string =>
   attr(s.replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
 
-const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates available — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, and heated floors in the dining room.`;
+const hotelDescription = `Newly transformed Best Western Inn in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates available — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi studios, pet friendly rooms, and heated floors in the dining room.`;
 
 const headExtras = `<!-- The reel's opening photograph is the largest thing above the fold and was
      queueing behind 28 other images; measured on an 8 Mbps connection it did not
@@ -173,7 +174,7 @@ const bodyContent = `<!-- ══════════════════
 
 <!-- PAGE SUMMARY BAR — AI-extractable content, visible to all crawlers -->
 <div class="page-summary-bar" role="complementary" aria-label="Quick summary">
- <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax (Studio King). Weekly rates — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
+ <strong>Best Western Vernal Inn</strong> — Extended stay hotel in Vernal, Utah. Nightly rates from ${LOWEST_NIGHTLY} + tax (Studio King). Weekly rates — call for price. Free hot breakfast daily, full kitchenettes, jacuzzi studios, pet friendly rooms, free WiFi and free parking. Located at 1935 South 1500 East, Vernal, UT 84078 — 0.6 miles from Vernal Regional Airport, near Dinosaur National Monument. Call <strong>(435) 789-6625</strong> and mention code ROCCO to save 10%.
 </div>
 
 <!-- NAV -->
@@ -343,9 +344,9 @@ ${HERO_SLIDES.map((s, i) => {
  </thead>
  <tbody>
  <tr>
- <td>${rateCell('Queen Suite')}</td>
+ <td>${rateCell('Studio Queen')}</td>
  <td>—</td>
- <td><span class="rate-price">${usd(RATES.nightly.queenSuite)}</span><div class="rate-note">${RATES.taxNote}</div></td>
+ <td><span class="rate-price">${usd(RATES.nightly.studioQueen)}</span><div class="rate-note">${RATES.taxNote}</div></td>
  <td>Call for price</td>
  <td>Couples, solo travelers, longer stays</td>
  </tr>
@@ -385,21 +386,21 @@ ${HERO_SLIDES.map((s, i) => {
  <td>Guests with dogs (up to 80 lbs)</td>
  </tr>
  <tr>
- <td><strong>King Suite (Kitchenette)</strong></td>
+ <td><strong>Studio King (Kitchenette)</strong></td>
  <td>1–2</td>
  <td>Call for rate</td>
  <td>Call for price</td>
  <td>Extended stays, contractors</td>
  </tr>
  <tr>
- <td><strong>King Jacuzzi Suite</strong></td>
+ <td>${rateCell('Jacuzzi Studio King')}</td>
  <td>1–2</td>
- <td>Call for rate</td>
+ <td>${RATES.nightly.jacuzziStudioKing === null ? 'Call for rate' : `<span class="rate-price">${usd(RATES.nightly.jacuzziStudioKing)}</span><div class="rate-note">${RATES.taxNote}</div>`}</td>
  <td>Call for price</td>
  <td>Romance, special occasions</td>
  </tr>
  <tr>
- <td><strong>Jacuzzi Double Queen Suite</strong></td>
+ <td><strong>Jacuzzi Studio Two Queen</strong></td>
  <td>1–4</td>
  <td>Call for rate</td>
  <td>Call for price</td>
@@ -521,7 +522,7 @@ ${HERO_SLIDES.map((s, i) => {
  <p class="tag">✦ Our Rooms</p>
  <h2>Every Room Feels Like Home</h2>
  <div class="gline"></div>
- <p>From cozy queen rooms to full kitchen suites with jacuzzi tubs — the perfect space for every kind of stay, whether it's one night or one month.</p>
+ <p>From cozy queen rooms to full kitchen studios with jacuzzi tubs — the perfect space for every kind of stay, whether it's one night or one month.</p>
  </div>
  <div class="tabnav rv">
  ${ROOM_TABS.map((tab, i) => `<button class="tbtn${i === 0 ? ' active' : ''}" onclick="st(this,'${tab.id}')">${amp(tab.label)}</button>`).join('\n ')}
@@ -1036,13 +1037,13 @@ if (ownerOverlay && ownerIframe) {
 
 <BaseLayout
   title=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn — Rooms from ${LOWEST_NIGHTLY}/night`
-  description=`Best Western Inn in Vernal, Utah — nightly rates from ${LOWEST_NIGHTLY} + tax, weekly rates by phone, free hot breakfast daily, full kitchenettes, jacuzzi suites, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
+  description=`Best Western Inn in Vernal, Utah — nightly rates from ${LOWEST_NIGHTLY} + tax, weekly rates by phone, free hot breakfast daily, full kitchenettes, jacuzzi studios, pet friendly, free WiFi & parking. 0.6 miles from Vernal Regional Airport. Call (435) 789-6625.`
   canonical=`https://bestwesternvernalinn.com/`
   ogTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
-  ogDescription=`Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast, full kitchenettes, jacuzzi suites, pet friendly. 0.6 miles from Vernal Regional Airport.`
+  ogDescription=`Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast, full kitchenettes, jacuzzi studios, pet friendly. 0.6 miles from Vernal Regional Airport.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterTitle=`Extended Stay Hotel in Vernal, UT | Best Western Vernal Inn`
-  twitterDescription=`Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast, kitchenettes, jacuzzi suites, pet friendly. Near Dinosaur National Monument.`
+  twitterDescription=`Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast, kitchenettes, jacuzzi studios, pet friendly. Near Dinosaur National Monument.`
   twitterImage=`https://bestwesternvernalinn.com/images/35.webp`
   hreflang=`https://bestwesternvernalinn.com/`
   isHome={true}

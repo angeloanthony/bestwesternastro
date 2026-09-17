@@ -1,8 +1,18 @@
 // src/data/rooms.ts
 //
-// SINGLE SOURCE OF TRUTH for the five detailed room pages under /rooms/.
+// SINGLE SOURCE OF TRUTH for every detailed room page under /rooms/.
 //
-// One entry per room on the hotel's September 2026 rate card. The page template
+// One entry per room on the hotel's September 2026 rate card, plus the Jacuzzi
+// Studio King (2026-09-16), which is photographed and sold but whose nightly
+// rate is not yet confirmed — see its entry and rates.ts.
+//
+// NAMING (owner, 2026-09-16): "use only Studio, not Suite". No room is called
+// a suite anywhere guest-facing. On 2026-09-17 the owner renamed the folders
+// Queen-Suite/ → Queen-Studio/ and Jacuzzi-Suite/ → Jacuzzi-Studio/ (the files
+// inside kept their names) and re-exported the Studio Queen's labelled photo.
+// Still carrying the old word: the Pet-Friendly-King-Suite/ folder, and the
+// "Pet friendly King Suite" and "Jacuzzi King Suite" labelled exports. Names on
+// the site come from this file, never from folder names or those pixels. The page template
 // (src/pages/rooms/[slug].astro) renders these verbatim — it contains no room
 // facts of its own, so a correction here fixes the page, the hero reel link, the
 // homepage rate table link, the related-room lists and the JSON-LD at once.
@@ -34,11 +44,12 @@
 //                                             the folder name as supplied)
 //   • public/images/King-Studio/              Studio King
 //   • public/images/Pet-Friendly-Double-Queen/ Pet-Friendly Studio Two Queen
+//   • public/images/Jacuzzi-Studio/            Jacuzzi King Suite (2026-09-16)
 //
 // THE STANDARD BATHROOM. The new bathroom set (Bathroom1–5 and their five
 // Phoneviews) is byte-for-byte identical under King-Studio, Double-Queen-Studio
-// and Pet-Friendly-Double-Queen: one property-standard bathroom, photographed
-// once, filed three times. Each of those pages shows it from its own folder,
+// and Pet-Friendly-Double-Queen — and Queen-Suite and Jacuzzi-Suite since: one
+// property-standard bathroom, photographed once, filed several times. Each of those pages shows it from its own folder,
 // flagged `shared` and captioned as the shared bathroom. It is never used on
 // the accessible page, which has its own bathroom and its own photographs.
 //
@@ -78,10 +89,13 @@
 // Room" on the same page while its own baked caption reads "Standard KING —
 // Pet Friendly". Only the baked caption and the visible contents were trusted.
 //
-// JACUZZI SUITE: renders only — 37.webp and 49.webp ("Jacuzzi King Suite
-// Room"), 44.webp ("Jacuzzi Double Queen Suite Room"), 49a.webp (same, with a
-// person). No real photograph of a jacuzzi suite exists in the asset set, and
-// RATES has no confirmed nightly rate for it, so it gets no page here.
+// JACUZZI SUITE: as of the 2026-09-03 review, renders only — 37.webp and 49.webp
+// ("Jacuzzi King Suite Room"), 44.webp ("Jacuzzi Double Queen Suite Room"),
+// 49a.webp (same, with a person). That is no longer the whole story: the owner
+// has since photographed the Jacuzzi King Suite (public/images/Jacuzzi-Studio/),
+// and it has a page below as of 2026-09-16 — with its nightly rate still null
+// pending confirmation (rates.ts). The renders above remain unusable. The
+// Jacuzzi Double Queen Suite has no photographs and no page.
 //
 // CURATION (2026-09-03): the galleries below were cut from 50 candidate files
 // to 37. Near-duplicate frames, the weaker of two shots of the same fixture,
@@ -175,7 +189,7 @@ export type Room = {
   galleryNotice?: string;
   /** "About this room" — 2-3 paragraphs, unique to each room. */
   about: string[];
-  /** One sentence on what separates this room from the other four. */
+  /** One sentence on what separates this room from the others. */
   difference: string;
   features: RoomFeature[];
   /** Extra fine print under the price (the pet fee). */
@@ -243,12 +257,17 @@ const STANDARD_BATHROOM = (dir: string, prefix: string): RoomPhoto[] => [
 export const ROOMS: Room[] = [
   // ───────────────────────────────────────────────────────────────────────────
   {
-    slug: 'queen-suite',
-    name: 'Queen Suite',
-    shortName: 'Queen Suite',
-    heroSlideId: 'queen-suite',
+    // RENAMED 2026-09-16 from "Queen Suite", on the owner's instruction: "they
+    // are not suites". The old URL /rooms/queen-suite 301s here
+    // (public/_redirects). The photos are in public/images/Queen-Studio/ — the
+    // owner renamed that folder from Queen-Suite/ on 2026-09-17; the filenames
+    // inside it (Queen-Suite1.webp …) kept their old wording.
+    slug: 'studio-queen',
+    name: 'Studio Queen',
+    shortName: 'Studio Queen',
+    heroSlideId: 'studio-queen',
     eyebrow: 'One Queen Bed · Sofa · Kitchenette',
-    nightly: nightlyQuote(RATES.nightly.queenSuite),
+    nightly: nightlyQuote(RATES.nightly.studioQueen),
     weekly: WEEKLY_CALL_LINE,
     // The homepage rate table has never carried a row for this room, so there
     // is no previously published occupancy to reuse. A queen bed plus a sofa
@@ -258,7 +277,7 @@ export const ROOMS: Room[] = [
     sleeps: '',
     bestFor: 'Couples, solo travelers, longer stays',
     // ADDED 2026-09-09, on the owner's instruction and with the owner's own
-    // photography in public/images/Queen-Suite/.
+    // photography in public/images/Queen-Studio/.
     //
     // THIS ROOM WAS DELIBERATELY ABSENT BEFORE, and the reason is worth
     // keeping: heroShowcase.ts carried the note "a plain Queen slide used to
@@ -269,8 +288,12 @@ export const ROOMS: Room[] = [
     // the rate — so the instruction is satisfied rather than overridden. It
     // was never "no Queen room exists"; it was "do not invent one".
     //
-    // The name and the rate are the hotel's own: the folder ships a labelled
-    // frame reading "Queen Suite" and another with a "$95/night" badge.
+    // The rate is the hotel's own: the folder ships a labelled frame reading
+    // "Queen Suite" and another with a "$95/night" badge, and the owner
+    // confirmed "$95 a night for the Studio Queen" in writing on 2026-09-16.
+    // The NAME on those labelled frames is out of date — the owner renamed the
+    // room that day because "they are not suites" — so the labels are evidence
+    // of the rate and the room, not of what to call it.
     //
     // The bathroom is the property standard, byte-for-byte identical to the
     // King, Two Queen and Pet-Friendly copies, so it comes from the shared
@@ -284,71 +307,71 @@ export const ROOMS: Room[] = [
     // Queen-Suite1 and Queen-Suite9), Queen-Suite8 (the desk and closet again,
     // covered by Queen-Suite6 and Queen-Suite4) and the two "-Labeled" files.
     hero: {
-      src: 'images/Queen-Suite/Queen-Suite.webp',
-      portrait: 'images/Queen-Suite/Queen-Suite-phoneview.webp',
+      src: 'images/Queen-Studio/Queen-Suite.webp',
+      portrait: 'images/Queen-Studio/Queen-Suite-phoneview.webp',
       caption: 'The queen bed with the sofa and the window beyond.',
-      alt: 'Queen Suite with a queen bed and a sofa — Best Western Vernal Inn, Vernal Utah',
+      alt: 'Studio Queen with a queen bed and a sofa — Best Western Vernal Inn, Vernal Utah',
     },
     gallery: [
       {
-        src: 'images/Queen-Suite/Queen-Suite.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview.webp',
+        src: 'images/Queen-Studio/Queen-Suite.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview.webp',
         caption:
           'The queen bed on a light-wood platform frame against the navy accent wall, with a wall-mounted reading light and a nightstand either side. Beyond it a two-seat sofa sits under the window with a floor lamp beside it, and a framed print of the Flaming Gorge bridge hangs on the far wall.',
         alt: 'Queen bed with a two-seat sofa under the window — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Queen-Suite/Queen-Suite1.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview1.webp',
+        src: 'images/Queen-Studio/Queen-Suite1.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview1.webp',
         caption:
           'The bed head-on, with a panelled headboard, a wall light and a nightstand on each side, the room phone and clock within reach, and a framed waterfall print on the wall to the left.',
         alt: 'Queen bed with panelled headboard and wall reading lights — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Queen-Suite/Queen-Suite9.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview9.webp',
+        src: 'images/Queen-Studio/Queen-Suite9.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview9.webp',
         caption:
           'The bed from the window side, with the roller-shaded window looking out over Vernal, the heating and cooling unit beneath it and a framed Delicate Arch print on the accent wall.',
         alt: 'Queen bed beside a shaded window and heating and cooling unit — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Queen-Suite/Queen-Suite5.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview5.webp',
+        src: 'images/Queen-Studio/Queen-Suite5.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview5.webp',
         caption:
           'The entrance end: the kitchenette with a sink in the counter, cabinets above and below, a microwave and a coffee maker, and a dining table with two upholstered chairs beside the door.',
         alt: 'Kitchenette with microwave and coffee maker beside a dining table and entry door — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Queen-Suite/Queen-Suite6.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview6.webp',
+        src: 'images/Queen-Studio/Queen-Suite6.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview6.webp',
         caption:
           'The working half of the room: a desk with an office chair and a reading lamp under the wall-mounted TV, the open closet beside it, and the window with the heating and cooling unit beneath it.',
         alt: 'Desk, office chair, wall-mounted TV and open closet beside a window — Best Western Vernal Inn, Vernal Utah',
         heroSlide: true,
       },
       {
-        src: 'images/Queen-Suite/Queen-Suite4.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview4.webp',
+        src: 'images/Queen-Studio/Queen-Suite4.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview4.webp',
         caption:
           'The closet in full: a hanging rail with wooden hangers, an iron and an ironing board stowed alongside, open shelving and two drawers below, next to the desk and the wall-mounted TV.',
         alt: 'Open closet with hangers, iron and ironing board beside a desk — Best Western Vernal Inn, Vernal Utah',
       },
       {
-        src: 'images/Queen-Suite/Queen-Suite7.webp',
-        portrait: 'images/Queen-Suite/Queen-Suite-phoneview7.webp',
+        src: 'images/Queen-Studio/Queen-Suite7.webp',
+        portrait: 'images/Queen-Studio/Queen-Suite-phoneview7.webp',
         caption:
           'The kitchenette: a stainless single-basin sink and a two-burner cooktop set into the granite counter, a microwave and a coffee maker above, and a full-height refrigerator with a freezer alongside, on tiled flooring.',
         alt: 'Kitchenette with sink, two-burner cooktop, microwave and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
       },
-      ...STANDARD_BATHROOM('Queen-Suite', 'Queen'),
+      ...STANDARD_BATHROOM('Queen-Studio', 'Queen'),
     ],
     about: [
-      'The Queen Suite is the lowest published rate on our card at $95 a night — below both of our $108 studios — and it is the room to book when there are two of you and you would rather spend the difference on the rest of the trip.',
-      'One queen bed sits on a light-wood platform frame against the navy accent wall, with a wall-mounted reading light and a nightstand on each side. What separates this room from the studios is the sofa: a two-seat sofa under the window with a floor lamp beside it, so there is somewhere to sit that is not the bed or the desk chair.',
+      'The Studio Queen is the lowest published rate on our card at $95 a night — below the $108 Studio King — and it is the room to book when there are two of you and you would rather spend the difference on the rest of the trip.',
+      'One queen bed sits on a light-wood platform frame against the navy accent wall, with a wall-mounted reading light and a nightstand on each side. What separates it from our other studios is the sofa: a two-seat sofa under the window with a floor lamp beside it, so there is somewhere to sit that is not the bed or the desk chair.',
       'It has the same kitchenette as the rest of the property — a sink and a two-burner cooktop in the counter, cabinets, a microwave, a coffee maker and a full-height refrigerator with a freezer — with a dining table and two upholstered chairs by the entrance. There is a desk with an office chair under a wall-mounted TV, and an open closet with a hanging rail, an iron and an ironing board. The bathroom is the property standard: a granite vanity with a backlit mirror, a full-size tub and shower combination, and a tiled floor.',
       'Free hot breakfast, free WiFi and free parking come with every stay, and the front desk is staffed around the clock. How many people this room sleeps is the one thing we have not had confirmed, so we do not publish it — call the front desk and ask. Weekly rates are quoted by phone.',
     ],
@@ -373,9 +396,9 @@ export const ROOMS: Room[] = [
       { label: '24-hour front desk', source: 'site' },
     ],
     seo: {
-      title: 'Queen Suite — $95/Night | Best Western Vernal Inn, Vernal Utah',
+      title: 'Studio Queen — $95/Night | Best Western Vernal Inn, Vernal Utah',
       description:
-        'Queen Suite at Best Western Vernal Inn: one queen bed, a sofa, a full kitchenette, free hot breakfast and free WiFi. $95 per night + tax — our lowest published rate. Weekly rates — call for price.',
+        'Studio Queen at Best Western Vernal Inn: one queen bed, a sofa, a full kitchenette, free hot breakfast and free WiFi. $95 per night + tax — our lowest published rate. Weekly rates — call for price.',
       bedType: 'Queen',
     },
   },
@@ -482,14 +505,14 @@ export const ROOMS: Room[] = [
       ...STANDARD_BATHROOM('King-Studio', 'King'),
     ],
     about: [
-      'The Studio King is our one-king-bed studio, and at $108 a night it shares the lowest published rate on the property with the Handicap / Accessible Studio King. The bed sits on a light-wood platform frame against a navy accent wall, with a wall-mounted reading light and a nightstand on each side — so two people can read, charge a phone and answer the room phone without reaching across each other.',
+      'The Studio King is our one-king-bed studio, and at $108 a night it is the lowest-priced king room on the card. The bed sits on a light-wood platform frame against a navy accent wall, with a wall-mounted reading light and a nightstand on each side — so two people can read, charge a phone and answer the room phone without reaching across each other.',
       'Like our other rooms it has a kitchenette, and it is the same configuration throughout: a cooking stove, a sink, cabinets, a microwave, a coffee maker and a full-height refrigerator with a freezer, with a dining table and two chairs alongside on tiled flooring. Along the far wall there is a desk with an office chair and a wall-mounted TV, an armchair with an ottoman under a floor lamp, and an open closet with a hanging rail, drawers and an ironing board.',
       'The bathroom is the property standard: a granite vanity with a single basin under a backlit mirror, a full-size tub and shower combination behind a curved curtain rod, and a tiled floor. Towels, a towel shelf and a hair dryer are on the wall by the vanity.',
       'Free hot breakfast, free WiFi and free parking come with every stay, and the front desk is staffed around the clock. Staying a week or longer? Weekly rates are quoted by phone — call the front desk and ask.',
     ],
     difference:
       // NOT "the lowest published nightly rate on the rate card" any more: that
-      // was written when $108 was the floor, and the $95 Queen Suite added on
+      // was written when $108 was the floor, and the $95 Studio Queen (then "Queen Suite") added on
       // 2026-09-09 sits below it. Compare against the Studio Two Queen only.
       'One king bed instead of two queens, at $108 a night — $12 below the Studio Two Queen.',
     features: [
@@ -777,13 +800,13 @@ export const ROOMS: Room[] = [
       },
     ],
     about: [
-      'The Handicap / Accessible Studio King is a one-king-bed studio built around the bathroom. It is priced at $108 a night — the same as the standard Studio King, not a premium — and the accessibility features are real fixtures, not a designation on a booking sheet.',
+      'The Handicap / Accessible Studio King is a one-king-bed studio built around the bathroom. It is priced at $120 a night, and the accessibility features are real fixtures, not a designation on a booking sheet.',
       'The shower is a roll-in: a low-threshold pan with a textured non-slip floor, an angled grab bar running along two walls, a fold-down teak seat, and a handheld sprayer on a slide bar with a single-lever mixer set within reach of the seat. The vanity is a roll-under counter — open underneath with no cabinet below and insulated pipework — under a backlit mirror. There are grab bars on both walls beside the toilet, with the paper holder set below the side bar, and open floor space between the vanity, the toilet and the shower.',
       'The bedroom itself is the same studio the rest of the property uses: king bed on a low platform frame with reading lights and nightstands, a kitchenette with a cooktop, sink, microwave, coffee maker and full-height refrigerator, a desk with a wall-mounted TV, an armchair and ottoman, and an open closet with a hanging rail, drawers, an iron and ironing board. There is clear carpeted floor along both sides of the bed. Free hot breakfast, free WiFi, free parking and a 24-hour front desk are included.',
       'If you have a specific access requirement — bed height, doorway width, or where in the building the room sits — call the front desk before you book. Rather than publish a measurement we have not verified, we would rather someone check it for you.',
     ],
     difference:
-      'The only room type with a roll-in shower, a fold-down shower seat, a roll-under vanity and grab bars — at the same $108 nightly rate as the standard Studio King.',
+      'The only room type with a roll-in shower, a fold-down shower seat, a roll-under vanity and grab bars.',
     features: [
       { label: 'One king bed', source: 'photo' },
       { label: 'Sleeps 1–2', source: 'site' },
@@ -807,9 +830,9 @@ export const ROOMS: Room[] = [
     ],
     seo: {
       title:
-        'Accessible Studio King — Roll-In Shower, $108/Night | Best Western Vernal Inn',
+        'Accessible Studio King — Roll-In Shower, $120/Night | Best Western Vernal Inn',
       description:
-        'Accessible hotel room in Vernal, Utah: king bed, roll-in shower with fold-down seat, grab bars and a roll-under vanity. $108 per night + tax — the same rate as our standard Studio King. Weekly rates — call for price.',
+        'Accessible hotel room in Vernal, Utah: king bed, roll-in shower with fold-down seat, grab bars and a roll-under vanity. $120 per night + tax. Weekly rates — call for price.',
       bedType: 'King',
       occupancy: 2,
     },
@@ -1094,6 +1117,153 @@ export const ROOMS: Room[] = [
       description:
         'Pet-friendly king room in Vernal, Utah: one king bed, wood-style floors, kitchenette and ground-floor access. Up to two dogs, 80 lb limit, $30/day pet fee. $135 per night + tax.',
       bedType: 'King',
+    },
+  },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    slug: 'jacuzzi-studio-king',
+    // Labelled "Jacuzzi King Suite" on the folder's own export, and listed as
+    // "King Jacuzzi Suite" in the old homepage rate table. RENAMED 2026-09-16
+    // on the owner's instruction — "use only Studio, not Suite" — following the
+    // rate card's pattern (Studio Queen, Studio King, Studio Two Queen). The
+    // labelled exports keep the old name in their pixels until re-exported.
+    name: 'Jacuzzi Studio King',
+    shortName: 'Jacuzzi Studio King',
+    heroSlideId: 'jacuzzi-studio-king',
+    eyebrow: 'In-Room Jacuzzi · One King Bed · Kitchenette',
+    // RATES.nightly.jacuzziStudioKing is null pending the owner's confirmation of
+    // the $149 on the labelled export — see its note in rates.ts. Nothing below
+    // states a price, so confirming it is a one-line change there. When it is,
+    // add the price to seo.title and seo.description, the way every other room
+    // carries its own.
+    nightly: nightlyQuote(RATES.nightly.jacuzziStudioKing),
+    weekly: WEEKLY_CALL_LINE,
+    // Both reused verbatim from the homepage rate table's "King Jacuzzi Suite"
+    // row, which has published them for this room since before this page.
+    sleeps: 'Sleeps 1–2',
+    bestFor: 'Romance, special occasions',
+    // PHOTOGRAPHY (added 2026-09-16): public/images/Jacuzzi-Studio/, the owner's
+    // own WebP set, delivered like every other room — 1672×941 landscape frames
+    // with 940×1672 Phoneview twins. Every frame below was opened full size, and
+    // each twin was matched by content. In this set the numbers DO correspond
+    // (Suite9 ↔ phoneview9, and so on); the unnumbered pair is Suite ↔ phoneview.
+    //
+    // Left out as near-duplicates: Suite4 (the jacuzzi again, between the angles
+    // kept in Suite and Suite1), Suite3 (the bed head-on again, covered by
+    // Suite10), Suite2 (the sofa corner again, covered by Suite9) and Suite11
+    // (the bed from the corner, no Phoneview twin), plus both "-Labeled" files.
+    //
+    // THE BATHROOM IS THE PROPERTY STANDARD. Jacuzzi-Bathroom3–5 and their five
+    // Phoneviews are byte-for-byte identical to the King-Studio set (checked by
+    // hash), so they come from STANDARD_BATHROOM like every other shared copy.
+    // The jacuzzi itself is in the main room, not in that bathroom.
+    hero: {
+      src: 'images/Jacuzzi-Studio/Jacuzzi-Suite1.webp',
+      portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview1.webp',
+      caption: 'The corner jacuzzi in the room itself, beside the desk and the window.',
+      alt: 'Jacuzzi Studio King with a corner jacuzzi in the room beside the desk — Best Western Vernal Inn, Vernal Utah',
+    },
+    gallery: [
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite1.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview1.webp',
+        caption:
+          'The corner jacuzzi set into a tiled surround in the main room, with the desk, a leather office chair and the wall-mounted TV beside it, and a roller-shaded window looking out over Vernal with the heating and cooling unit beneath.',
+        alt: 'Corner jacuzzi in a tiled surround beside a desk and wall-mounted TV — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview.webp',
+        caption:
+          'The jacuzzi up close: a corner tub with chrome fixtures and a towel on its tiled ledge, standing on a tiled floor set into the carpet.',
+        alt: 'Corner jacuzzi tub with chrome fixtures and a tiled surround — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite10.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview10.webp',
+        caption:
+          'The king bed head-on against the navy accent wall, on a light-wood platform frame with a panelled headboard, a wall-mounted reading light and a nightstand either side — the room phone on one, the clock on the other — and a framed waterfall print to the left.',
+        alt: 'King bed with panelled headboard and wall reading lights against a navy wall — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite9.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview9.webp',
+        caption:
+          'The bed from the desk side, with a two-seat sofa and a floor lamp beside the roller-shaded window, the view out over Vernal, and a framed canyon print on the far wall.',
+        alt: 'King bed beside a two-seat sofa and a window over Vernal — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite7.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview7.webp',
+        caption:
+          'The room from the entry door: a table with two upholstered chairs against the wall, the bed beyond it, and the sofa and floor lamp by the window.',
+        alt: 'Table with two upholstered chairs, king bed and sofa seen from the door — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite6.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview6.webp',
+        caption:
+          'The working end of the room: a desk with a leather office chair and a reading lamp under the wall-mounted TV, and the kitchenette beside it on a tiled floor, with the edge of the jacuzzi surround in the corner.',
+        alt: 'Desk with leather office chair and wall-mounted TV beside the kitchenette — Best Western Vernal Inn, Vernal Utah',
+        heroSlide: true,
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite5.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview5.webp',
+        caption:
+          'The kitchenette: a stainless single-basin sink and a two-burner cooktop set into the counter, cabinets above and below, a microwave and a coffee maker, and a full-height refrigerator with a freezer alongside, on tiled flooring.',
+        alt: 'Kitchenette with sink, two-burner cooktop, microwave and full-height refrigerator — Best Western Vernal Inn, Vernal Utah',
+      },
+      {
+        src: 'images/Jacuzzi-Studio/Jacuzzi-Suite8.webp',
+        portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview8.webp',
+        caption:
+          'The open closet by the door: a hanging rail with wooden hangers, an iron on the shelf and an ironing board stowed alongside, with the table and chairs in front.',
+        alt: 'Open closet with hangers, iron and ironing board beside a table and chairs — Best Western Vernal Inn, Vernal Utah',
+      },
+      ...STANDARD_BATHROOM('Jacuzzi-Studio', 'Jacuzzi'),
+    ],
+    about: [
+      'The Jacuzzi Studio King is the room with the tub in it. A corner jacuzzi sits in a tiled surround in the main room — not behind the bathroom door — beside the desk and the window, so a long soak is part of the room rather than an afterthought. The homepage rate table lists it for romance and special occasions, and that is exactly what it is for.',
+      'One king bed sits on a light-wood platform frame against the navy accent wall, with a panelled headboard, a wall-mounted reading light and a nightstand on each side. Beside it a two-seat sofa and a floor lamp sit by the window, which looks out over Vernal.',
+      'It has the same kitchenette as the rest of the property — a sink and a two-burner cooktop in the counter, cabinets, a microwave, a coffee maker and a full-height refrigerator with a freezer — on a tiled floor. There is a desk with a leather office chair and a reading lamp under a wall-mounted TV, a table with two upholstered chairs by the door, and an open closet with a hanging rail, an iron and an ironing board. The bathroom is the property standard: a granite vanity with a backlit mirror, a full-size tub and shower combination, and a tiled floor.',
+      'Free hot breakfast, free WiFi and free parking come with every stay, and the front desk is staffed around the clock. The homepage rate table lists this room as sleeping one to two. Weekly rates are quoted by phone.',
+    ],
+    difference:
+      'A corner jacuzzi in the main room itself, with a king bed, a two-seat sofa and a full kitchenette around it.',
+    features: [
+      { label: 'In-room corner jacuzzi in a tiled surround', source: 'photo' },
+      { label: 'One king bed', source: 'photo' },
+      { label: 'Sleeps 1–2', source: 'site' },
+      { label: 'Two-seat sofa with floor lamp', source: 'photo' },
+      { label: 'Kitchenette — two-burner cooktop, sink, microwave, coffee maker', source: 'photo' },
+      { label: 'Full-height refrigerator with freezer', source: 'photo' },
+      { label: 'Table with two upholstered chairs', source: 'photo' },
+      { label: 'Desk with leather office chair and wall-mounted TV', source: 'photo' },
+      { label: 'Wall-mounted reading lights and two nightstands', source: 'photo' },
+      { label: 'Open closet with hanging rail, iron and ironing board', source: 'photo' },
+      { label: 'In-room heating and cooling unit', source: 'photo' },
+      { label: 'Tub and shower combination', source: 'photo' },
+      { label: 'Granite vanity with backlit mirror', source: 'photo' },
+      { label: 'Carpeted floor, tiled at the jacuzzi and kitchenette', source: 'photo' },
+      { label: 'Free WiFi', source: 'site' },
+      { label: 'Free hot breakfast', source: 'site' },
+      { label: 'Free parking', source: 'site' },
+      { label: '24-hour front desk', source: 'site' },
+    ],
+    seo: {
+      title: 'Jacuzzi Studio King — In-Room Jacuzzi | Best Western Vernal Inn, Vernal Utah',
+      description:
+        'Jacuzzi Studio King at Best Western Vernal Inn in Vernal, Utah: a corner jacuzzi in the room, one king bed, a sofa and a full kitchenette. Free hot breakfast, WiFi and parking. Weekly rates — call for price.',
+      bedType: 'King',
+      // The rate table's "1–2" for this room, the same licence Studio King's
+      // occupancy of 2 rests on.
+      occupancy: 2,
     },
   },
 ];

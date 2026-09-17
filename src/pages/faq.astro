@@ -31,7 +31,7 @@ const headExtras = `${ldScript(hotelNode())}
       { "@type": "Question", "name": "Do the rooms have kitchenettes?", "acceptedAnswer": { "@type": "Answer", "text": "Most rooms at Best Western Vernal Inn include a full kitchenette with a stovetop, microwave, full-size refrigerator, and coffee maker." }},
       { "@type": "Question", "name": "Is WiFi free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, fast free WiFi is available throughout the entire hotel and in every guest room." }},
       { "@type": "Question", "name": "Is parking free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, complimentary parking is available for all guests including trucks and work vehicles. Pull right up to your room — no fees, ever." }},
-      { "@type": "Question", "name": "Do you have jacuzzi suites?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Best Western Vernal Inn offers King Jacuzzi Suites and Jacuzzi Double Queen Suites, each featuring a private in-room soaking tub." }},
+      { "@type": "Question", "name": "Do you have jacuzzi studios?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Best Western Vernal Inn offers the Jacuzzi Studio King and the Jacuzzi Studio Two Queen, each featuring a private in-room jacuzzi." }},
       { "@type": "Question", "name": "Are ADA accessible rooms available?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, ADA accessible king rooms are available with wide doorways, roll-in showers, lowered fixtures, and ground-floor access." }},
       { "@type": "Question", "name": "Do you offer monthly rates or long-term housing for contractors and oil field workers?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, monthly rates and long-term stays are available for contractors, oil field workers, and corporate guests in the Uintah Basin. Call (435) 789-6625 for pricing." }},
       { "@type": "Question", "name": "Do you have parking for trucks and work vehicles?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, free parking is available for all vehicles including trucks and work vehicles." }},
@@ -65,7 +65,7 @@ const headExtras = `${ldScript(hotelNode())}
     }
   </style>`;
 const bodyContent = `<div class="page-summary-bar" role="complementary" aria-label="Quick summary">
-  <strong>FAQ — Best Western Vernal Inn.</strong> Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast daily. Pet friendly (2 dogs, 80 lb limit, $30/day + $100 refundable deposit). Check-in 3:00 PM · Check-out 11:00 AM. Full kitchenettes, jacuzzi suites, ADA accessible rooms, free WiFi, free parking. Monthly rates and contractor housing available. Located at 1935 South 1500 East, Vernal, UT 84078. Call <strong>(435) 789-6625</strong>.
+  <strong>FAQ — Best Western Vernal Inn.</strong> Nightly rates from ${LOWEST_NIGHTLY} + tax; weekly rates — call for price. Free hot breakfast daily. Pet friendly (2 dogs, 80 lb limit, $30/day + $100 refundable deposit). Check-in 3:00 PM · Check-out 11:00 AM. Full kitchenettes, jacuzzi studios, ADA accessible rooms, free WiFi, free parking. Monthly rates and contractor housing available. Located at 1935 South 1500 East, Vernal, UT 84078. Call <strong>(435) 789-6625</strong>.
 </div>
 
 
@@ -161,7 +161,7 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
     </div>
 
     <div>
-      <h2 class="faq-cat-title">🛏️ Rooms &amp; Suites</h2>
+      <h2 class="faq-cat-title">🛏️ Rooms &amp; Studios</h2>
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-q">Do the rooms have kitchenettes? <span class="faq-arrow">▼</span></button>
@@ -170,9 +170,9 @@ const bodyContent = `<div class="page-summary-bar" role="complementary" aria-lab
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-q">Do you have jacuzzi suites? <span class="faq-arrow">▼</span></button>
+          <button class="faq-q">Do you have jacuzzi studios? <span class="faq-arrow">▼</span></button>
           <div class="faq-a">
-            Yes! We offer both King Jacuzzi Suites and Jacuzzi Double Queen Suites — featuring a private in-room soaking tub. Call us to check availability: <a href="tel:4357896625">(435) 789-6625</a>.
+            Yes! We offer both the <a href="/rooms/jacuzzi-studio-king">Jacuzzi Studio King</a> and the Jacuzzi Studio Two Queen — each with a private in-room jacuzzi. Call us to check availability: <a href="tel:4357896625">(435) 789-6625</a>.
           </div>
         </div>
         <div class="faq-item">
@@ -271,10 +271,10 @@ const pageScripts = ``;
 
 <BaseLayout
   title=`FAQ — Extended Stay Hotel Vernal UT | Best Western Vernal Inn Questions Answered`
-  description=`Answers to the most common questions about Best Western Inn in Vernal, Utah. Weekly rates, pet policy, breakfast, check-in times, kitchenettes, jacuzzi suites, and more.`
+  description=`Answers to the most common questions about Best Western Inn in Vernal, Utah. Weekly rates, pet policy, breakfast, check-in times, kitchenettes, jacuzzi studios, and more.`
   canonical=`https://bestwesternvernalinn.com/faq`
   ogTitle=`FAQ — Best Western Vernal Inn`
-  ogDescription=`Everything you need to know: nightly rates from ${LOWEST_NIGHTLY}, weekly rates by phone, free hot breakfast, pet policy, check-in times, jacuzzi suites, kitchenettes, and monthly rates. Call (435) 789-6625.`
+  ogDescription=`Everything you need to know: nightly rates from ${LOWEST_NIGHTLY}, weekly rates by phone, free hot breakfast, pet policy, check-in times, jacuzzi studios, kitchenettes, and monthly rates. Call (435) 789-6625.`
   ogImage=`https://bestwesternvernalinn.com/images/35.webp`
   twitterTitle=`FAQ — Best Western Vernal Inn`
   twitterDescription=`Nightly rates from ${LOWEST_NIGHTLY}, weekly rates by phone, pet policy, free breakfast, check-in times, kitchenettes. Call (435) 789-6625.`
