@@ -295,11 +295,13 @@ Room names are the hotel's own, taken from the September 2026 rate card. They di
 
 | Rate type | Peak season | Off season | Minimum stay | Confidence |
 |---|---|---|---|---|
-| Nightly | *(no confirmed number)* — the owner's labelled export for the **Studio Jacuzzi King** (labelled with its old name, "Jacuzzi King Suite") reads **$149/night** | | | Pending |
+| Nightly | **Studio Jacuzzi King: $149** — confirmed in writing by the owner 2026-09-17 ("confirm 149"), matching its labelled export. *Studio Jacuzzi Two Queen and Studio King (Kitchenette): no number.* | | | GM Approved (Studio Jacuzzi King) |
 | Weekly (7 nights) | *Not published — call for price* | *Not published — call for price* | | GM Approved |
 | Monthly | | | | |
 | Typical negotiated corporate | | | | |
 
+> **2026-09-17 — RATE CONFIRMED: $149.** The owner confirmed it in writing ("confirm 149"). It is now published everywhere the other rates are, and the labelled export is in the homepage gallery. The note below is the record of the day before.
+>
 > **2026-09-16:** the Studio Jacuzzi King (first built as "Jacuzzi King Suite", renamed the same day — the owner: "use only Studio, not Suite") now has a room page (`/rooms/jacuzzi-studio-king`), built from the owner's photographs. Its nightly rate is **not** published — `RATES.nightly.jacuzziStudioKing` is `null`, so every surface reads "Call for pricing". The $149 on the labelled export is recorded here as the owner's figure, pending confirmation, exactly as the Studio Queen's $95 (then called the Queen Suite) was before it went live. Confirm it and it becomes "GM Approved", then one line in `rates.ts`. The Jacuzzi Double Queen Suite has neither photographs nor a page.
 
 #### Withdrawn rates — historical only, do not restore
@@ -343,7 +345,7 @@ Kept as a record of what the website used to publish, so that a future reader wh
 
 Five rules, agreed with the hotel. They exist because breaking the last two is exactly how the retired "$84/night" ended up on ten pages and in structured data.
 
-1. **The nightly rates in §2.2 are confirmed** and are published: $95 Studio Queen (added 2026-09-09) / $108 Studio King / $120 Studio Two Queen / $120 Handicap / Accessible Studio King (was $108 until 2026-09-17) / $155 Pet-Friendly Studio Two Queen / $135 Pet-Friendly Room. The Studio Jacuzzi King's is not — see its note in §2.2.
+1. **The nightly rates in §2.2 are confirmed** and are published: $95 Studio Queen (added 2026-09-09) / $108 Studio King / $120 Studio Two Queen / $120 Handicap / Accessible Studio King (was $108 until 2026-09-17) / $155 Pet-Friendly Studio Two Queen / $135 Pet-Friendly Room / $149 Studio Jacuzzi King (confirmed 2026-09-17).
 2. **Weekly rates are not published.** No weekly dollar amount appears anywhere customer-facing — not in body copy, page titles, meta descriptions, FAQ answers, rate tables, or JSON-LD.
 3. **Guests call for weekly pricing.** The published wording is exactly **"Weekly Rates — Call for Price"**, held once in code as `WEEKLY_CALL_LINE` in `src/data/rates.ts`.
 4. **Never calculate a weekly rate from a nightly rate.** Multiplying $108 by seven is not the weekly price and must never be presented as one.
@@ -374,7 +376,7 @@ The code enforces rules 4 and 5 structurally rather than by convention: `RATES.w
 | Handicap / Accessible Studio King | Yes — incl. accessible bathroom | `Handicapped-Studio/` | 10 |
 | Pet-Friendly Studio Two Queen | Yes — full coverage | `Pet-Friendly-Double-Queen/` | 11 |
 | **Pet-Friendly Room ($135)** | **No — none exist** | — | 0 (page says so) |
-| **Jacuzzi Suite** | **No — CGI renders only** *(superseded 2026-09-16: the owner photographed the **Studio Jacuzzi King**, first named Jacuzzi King Suite — `Jacuzzi-Studio/`, full coverage; the Studio Jacuzzi Two Queen is still unphotographed)* | `37/44/49/49a.webp` → `Jacuzzi-Studio/` | 11, page live, rate pending |
+| **Jacuzzi Suite** | **No — CGI renders only** *(superseded 2026-09-16: the owner photographed the **Studio Jacuzzi King**, first named Jacuzzi King Suite — `Jacuzzi-Studio/`, full coverage; the Studio Jacuzzi Two Queen is still unphotographed)* | `37/44/49/49a.webp` → `Jacuzzi-Studio/` | 11, page live, $149 (confirmed 2026-09-17) |
 
 **Three findings that change what the website may say:**
 
@@ -390,7 +392,7 @@ The code enforces rules 4 and 5 structurally rather than by convention: `RATES.w
 |---|---|
 | Photograph the **$135 Pet-Friendly Room** | Its page currently carries no gallery at all. It is the only priced room with no photography. |
 | Photograph the **Studio King kitchenette** | The King folder has the bed and the bathroom only. Its kitchenette photograph is borrowed from another studio and labelled as such. |
-| ~~Photograph a **Jacuzzi Suite**~~ | **Done 2026-09-16** for the Studio Jacuzzi King (first named Jacuzzi King Suite); its page is live. Still needed: a confirmed nightly rate (§2.2 — the label reads $149), re-exports of the labelled photos with "Studio" names and current prices, and photographs of the Studio Jacuzzi Two Queen if it is to have a page. |
+| ~~Photograph a **Jacuzzi Suite**~~ | **Done 2026-09-16** for the Studio Jacuzzi King (first named Jacuzzi King Suite); its page is live. Rate confirmed at $149 on 2026-09-17 (§2.2). Still needed: re-exports of the remaining labelled photos with "Studio" names and current prices, and photographs of the Studio Jacuzzi Two Queen if it is to have a page. |
 | Re-shoot `39a.webp` / `26.webp` **without a person in frame** | Both are real and usable otherwise. |
 
 ---

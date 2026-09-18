@@ -31,9 +31,9 @@
 //
 // EVERY TAB IS DRIVEN BY ROOMS, the Studio Jacuzzi King's included. Until
 // 2026-09-16 that one was written out by hand here, because the room had
-// photographs but no page. It has a page now; its nightly rate is still null
-// pending confirmation, which priceTag() renders as "Call for rate" without any
-// special case.
+// photographs but no page. It has a page now, and since 2026-09-17 a
+// confirmed $149 rate. A room with no published rate would still work here:
+// priceTag() renders it as "Call for rate" without any special case.
 //
 // WHAT THE COPY MAY SAY. The panel prose is the room's own `about[0]` and the
 // frame's own `caption` from rooms.ts, both already held to that file's
@@ -96,7 +96,8 @@ function frame(room: Room, file: string): RoomPhoto {
   return hit;
 }
 
-/** "Studio Queen · $95 a night", or "Studio Jacuzzi King · Call for rate". */
+/** "Studio Queen · $95 a night" — or "<room> · Call for rate" for a room with
+ *  no published rate. */
 function priceTag(room: Room): string {
   return room.nightly.published
     ? `✦ ${room.shortName} · ${room.nightly.price} a night`
@@ -317,9 +318,9 @@ export const ROOM_TABS: RoomTab[] = [
   },
 
   // Driven by ROOMS like the others since 2026-09-16, when the room got its
-  // page; it used to be written out by hand here. Its tag reads "Call for rate"
-  // through priceTag() while RATES.nightly.studioJacuzziKing is null, and turns
-  // into the price by itself once that is confirmed.
+  // page; it used to be written out by hand here. Its tag read "Call for rate"
+  // through priceTag() while RATES.nightly.studioJacuzziKing was null, and has
+  // read "$149 a night" since the owner confirmed the rate on 2026-09-17.
   {
     id: 'studio-jacuzzi-king',
     label: studioJacuzziKing.shortName,

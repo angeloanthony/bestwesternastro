@@ -16,10 +16,11 @@
 // rather say "call" than publish a number nobody has confirmed.
 //
 // CURRENT STATE (hotel instruction, 2026-09-03; extended 2026-09-09):
-//   nightly — CONFIRMED, published, SIX room types, $95 to $155. The Studio
+//   nightly — CONFIRMED, published, SEVEN room types, $95 to $155. The Studio
 //             Queen (then "Queen Suite") at $95 was added on 2026-09-09 and is
 //             the lowest published rate on the card; see the key's own note.
-//             A seventh key, the Studio Jacuzzi King, is null (unconfirmed).
+//             The Studio Jacuzzi King at $149 is the seventh, confirmed by the
+//             owner on 2026-09-17.
 //   weekly  — WITHDRAWN. Quoted by phone only. Every customer-facing weekly
 //             dollar amount has been removed from the site; the copy is
 //             WEEKLY_CALL_LINE. Do not restore $588 / $660 / $700.
@@ -77,19 +78,17 @@ export const RATES = {
     accessibleStudioKing: 120 as number | null,
     petFriendlyStudioTwoQueen: 155 as number | null,
     petFriendlyRoom: 135 as number | null,
-    /** The Jacuzzi Studio King — added 2026-09-16, when the owner asked for its
-     *  page, and renamed from "Jacuzzi King Suite" the same day ("use only
-     *  Studio, not Suite").
-     *  NULL ON PURPOSE — PENDING THE OWNER'S CONFIRMATION. The folder ships the
-     *  hotel's own labelled export reading "Jacuzzi King Suite" over a
-     *  "$149/night" badge, which is exactly how the Studio Queen's $95 arrived.
-     *  But the Studio Queen's rate went live only once the owner confirmed it in
-     *  writing, and this one has not been confirmed. Until it is, the room
-     *  page, the nav, the homepage rate table and the homepage tab all read
-     *  "Call for pricing" — what the rate table already said for this room.
-     *  Confirm it and change null to 149 here: every one of those, and the
-     *  room page's JSON-LD Offer, follows on the next build. */
-    studioJacuzziKing: null as number | null,
+    /** The Studio Jacuzzi King — added 2026-09-16 as "Jacuzzi King Suite", when
+     *  the owner asked for its page; named as on the owner's re-exported label
+     *  on 2026-09-17 ("use only Studio, not Suite").
+     *  $149 — CONFIRMED BY THE OWNER IN WRITING on 2026-09-17 ("confirm 149").
+     *  It sat at null for a day on purpose: the only evidence was the price
+     *  badge on the owner's labelled export, and the Studio Queen's $95 had
+     *  likewise gone live only once confirmed in writing. The room page, nav,
+     *  homepage rate table, hero card, room tab, weekly-rates page and the room
+     *  page's JSON-LD Offer all read this number; the homepage gallery's
+     *  labelled tile prints it too and is guarded against it. */
+    studioJacuzziKing: 149 as number | null,
   },
 
   /** Monthly rates. All null: the site currently ranks for "monthly hotels vernal

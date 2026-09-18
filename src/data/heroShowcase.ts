@@ -9,8 +9,10 @@
 // a one-line edit in one file and can never drift from the rates table further
 // down the same page.
 //
-// ROOM SET: the six slides below are the hotel's own confirmed rate card
-// (2026-09-03, extended 2026-09-09). Every weekly line is the fixed
+// ROOM SET: seven room slides. The first six are the hotel's own confirmed
+// rate card (2026-09-03, extended 2026-09-09); the seventh, the Studio Jacuzzi
+// King (added 2026-09-17 at the owner's request), joined the rate card at $149
+// the same day. Every weekly line is the fixed
 // WEEKLY_CALL_LINE — no weekly dollar amount is published anywhere on this
 // site, by instruction.
 //
@@ -228,6 +230,33 @@ export const HERO_SLIDES: HeroSlide[] = [
       nightly: nightlyQuote(RATES.nightly.petFriendlyRoom),
       weekly: WEEKLY_CALL_LINE,
       footnote: 'Pet fee $30/day + $100 refundable deposit',
+    },
+  },
+  {
+    // ADDED 2026-09-17 on the owner's instruction ("I need the jacuzzi … in the
+    // hero section in the slide"). It went in showing "Call for pricing" and
+    // switched to $149 by itself the same day, when the owner confirmed the
+    // rate and RATES.nightly.studioJacuzziKing went from null to 149.
+    //
+    // The id matches rooms.ts's heroSlideId, so "View room details" links to
+    // /rooms/studio-jacuzzi-king. The frame is the clean wide shot of the
+    // jacuzzi beside the desk — never the "-Labeled-$149" export, for the same
+    // reason no slide uses a labelled file (see the header). Its 9:16 twin was
+    // matched by content: Jacuzzi-Suite1 ↔ Jacuzzi-Suite-phoneview1.
+    id: 'studio-jacuzzi-king',
+    kind: 'room',
+    image: 'images/Jacuzzi-Studio/Jacuzzi-Suite1.webp',
+    portrait: 'images/Jacuzzi-Studio/Jacuzzi-Suite-phoneview1.webp',
+    kb: 'kb-left',
+    alt: 'Studio Jacuzzi King with a corner jacuzzi in the room beside the desk and wall-mounted TV — Best Western Vernal Inn, Vernal Utah',
+    label: 'Studio Jacuzzi King',
+    room: {
+      name: 'Studio Jacuzzi King',
+      // "1–2" is what the homepage rate table has always published for this room.
+      sleeps: 'Sleeps 1–2',
+      features: ['King bed', 'In-room jacuzzi', 'Kitchenette'],
+      nightly: nightlyQuote(RATES.nightly.studioJacuzziKing),
+      weekly: WEEKLY_CALL_LINE,
     },
   },
 ];

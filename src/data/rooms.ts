@@ -2,9 +2,9 @@
 //
 // SINGLE SOURCE OF TRUTH for every detailed room page under /rooms/.
 //
-// One entry per room on the hotel's September 2026 rate card, plus the Jacuzzi
-// Studio King (2026-09-16), which is photographed and sold but whose nightly
-// rate is not yet confirmed — see its entry and rates.ts.
+// One entry per room on the hotel's September 2026 rate card — seven since the
+// Studio Jacuzzi King joined at $149 on 2026-09-17 (see its entry and
+// rates.ts).
 //
 // NAMING (owner, 2026-09-16): "use only Studio, not Suite". No room is called
 // a suite anywhere guest-facing. On 2026-09-17 the owner renamed the folders
@@ -93,8 +93,8 @@
 // ("Jacuzzi King Suite Room"), 44.webp ("Jacuzzi Double Queen Suite Room"),
 // 49a.webp (same, with a person). That is no longer the whole story: the owner
 // has since photographed the Jacuzzi King Suite (public/images/Jacuzzi-Studio/),
-// and it has a page below as of 2026-09-16 — with its nightly rate still null
-// pending confirmation (rates.ts). The renders above remain unusable. The
+// and it has a page below as of 2026-09-16 — at $149 a night since the owner
+// confirmed it on 2026-09-17 (rates.ts). The renders above remain unusable. The
 // Jacuzzi Double Queen Suite has no photographs and no page.
 //
 // CURATION (2026-09-03): the galleries below were cut from 50 candidate files
@@ -1133,11 +1133,9 @@ export const ROOMS: Room[] = [
     shortName: 'Studio Jacuzzi King',
     heroSlideId: 'studio-jacuzzi-king',
     eyebrow: 'In-Room Jacuzzi · One King Bed · Kitchenette',
-    // RATES.nightly.studioJacuzziKing is null pending the owner's confirmation of
-    // the $149 on the labelled export — see its note in rates.ts. Nothing below
-    // states a price, so confirming it is a one-line change there. When it is,
-    // add the price to seo.title and seo.description, the way every other room
-    // carries its own.
+    // $149, confirmed by the owner in writing on 2026-09-17 — see the note on
+    // RATES.nightly.studioJacuzziKing. The price lives there; seo.title and
+    // seo.description repeat it the way every other room's do.
     nightly: nightlyQuote(RATES.nightly.studioJacuzziKing),
     weekly: WEEKLY_CALL_LINE,
     // Both reused verbatim from the homepage rate table's "King Jacuzzi Suite"
@@ -1258,9 +1256,9 @@ export const ROOMS: Room[] = [
       { label: '24-hour front desk', source: 'site' },
     ],
     seo: {
-      title: 'Studio Jacuzzi King — In-Room Jacuzzi | Best Western Vernal Inn, Vernal Utah',
+      title: 'Studio Jacuzzi King — $149/Night, In-Room Jacuzzi | Best Western Vernal Inn',
       description:
-        'Studio Jacuzzi King at Best Western Vernal Inn in Vernal, Utah: a corner jacuzzi in the room, one king bed, a sofa and a full kitchenette. Free hot breakfast, WiFi and parking. Weekly rates — call for price.',
+        'Studio Jacuzzi King at Best Western Vernal Inn in Vernal, Utah: a corner jacuzzi in the room, one king bed, a sofa and a full kitchenette. $149 per night + tax. Free hot breakfast, WiFi and parking. Weekly rates — call for price.',
       bedType: 'King',
       // The rate table's "1–2" for this room, the same licence Studio King's
       // occupancy of 2 rests on.
